@@ -65,7 +65,9 @@
     "link": "Link teilen",
     "size": "{{bits}} Bit · {{chars}} Zeichen",
     "download": "PNG herunterladen",
-    "ifc": "IFC herunterladen"
+    "ifc": "IFC herunterladen",
+    "pdf": "PDF-Datenblatt",
+    "pdfBusy": "PDF wird erstellt…"
   },
   "scan": {
     "title": "QR-Code scannen",
@@ -101,5 +103,11 @@
     "apply": "Anwenden",
     "download": "Herunterladen",
     "dense": "Schema als densing-String"
+  },
+  "pdf": {
+    "title": "Datenblatt",
+    "scan": "Scannen, um den Datensatz zu öffnen",
+    "schema": "Schema {{name}} · Version {{v}}",
+    "created": "Erstellt am {{date}}"
   }
 }

@@ -65,7 +65,9 @@
     "link": "Deellink",
     "size": "{{bits}} bits · {{chars}} tekens",
     "download": "PNG downloaden",
-    "ifc": "IFC downloaden"
+    "ifc": "IFC downloaden",
+    "pdf": "PDF-factsheet",
+    "pdfBusy": "PDF wordt gemaakt…"
   },
   "scan": {
     "title": "QR-code scannen",
@@ -101,5 +103,11 @@
     "apply": "Toepassen",
     "download": "Downloaden",
     "dense": "Schema als densing-string"
+  },
+  "pdf": {
+    "title": "Factsheet",
+    "scan": "Scan om het record te openen",
+    "schema": "Schema {{name}} · versie {{v}}",
+    "created": "Gemaakt op {{date}}"
   }
 }

@@ -65,7 +65,9 @@
     "link": "Delningslänk",
     "size": "{{bits}} bitar · {{chars}} tecken",
     "download": "Ladda ner PNG",
-    "ifc": "Ladda ner IFC"
+    "ifc": "Ladda ner IFC",
+    "pdf": "PDF-faktablad",
+    "pdfBusy": "Skapar PDF…"
   },
   "scan": {
     "title": "Skanna QR-kod",
@@ -101,5 +103,11 @@
     "apply": "Tillämpa",
     "download": "Ladda ner",
     "dense": "Schema som densing-sträng"
+  },
+  "pdf": {
+    "title": "Faktablad",
+    "scan": "Skanna för att öppna posten",
+    "schema": "Schema {{name}} · version {{v}}",
+    "created": "Skapad {{date}}"
   }
 }

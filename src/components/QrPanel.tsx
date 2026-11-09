@@ -3,7 +3,7 @@ import QRCode from "qrcode";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { URL_SAFE, encodeRecord } from "../schema/codec";
-import { downloadIfc, fileBase } from "../export/download";
+import { downloadFactSheet, downloadIfc, fileBase } from "../export/download";
 import type { Labels } from "../schema/labels";
 import { recordLink } from "../schema/links";
 
@@ -15,7 +15,8 @@ export const shareLink = (slug: string, urlPayload: string, qr = false) => recor
 type Encoded = { qr: string; link: string; bits: number } | { error: string };
 
 export function QrPanel({ slug, schema, record, labels }: { slug: string; schema: DenseSchema; record: any; labels: Labels }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const [pdfBusy, setPdfBusy] = useState(false);
   const canvas = useRef<HTMLCanvasElement>(null);
   const [copied, setCopied] = useState(false);
   const encoded = useMemo((): Encoded => {
@@ -76,6 +77,20 @@ export function QrPanel({ slug, schema, record, labels }: { slug: string; schema
         <div className="exports">
           <button type="button" onClick={download}>
             {t("qr.download")}
+          </button>
+          <button
+            type="button"
+            disabled={pdfBusy}
+            onClick={async () => {
+              setPdfBusy(true);
+              try {
+                await downloadFactSheet({ slug, schema, record, labels, qrContent: encoded.qr, link: encoded.link, lng: i18n.resolvedLanguage ?? "en", t });
+              } finally {
+                setPdfBusy(false);
+              }
+            }}
+          >
+            {pdfBusy ? t("qr.pdfBusy") : t("qr.pdf")}
           </button>
           <button type="button" onClick={() => downloadIfc(slug, schema, record, labels)}>
             {t("qr.ifc")}

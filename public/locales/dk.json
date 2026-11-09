@@ -65,7 +65,9 @@
     "link": "Delingslink",
     "size": "{{bits}} bit · {{chars}} tegn",
     "download": "Download PNG",
-    "ifc": "Download IFC"
+    "ifc": "Download IFC",
+    "pdf": "PDF-datablad",
+    "pdfBusy": "Opretter PDF…"
   },
   "scan": {
     "title": "Scan QR-kode",
@@ -101,5 +103,11 @@
     "apply": "Anvend",
     "download": "Download",
     "dense": "Skema som densing-streng"
+  },
+  "pdf": {
+    "title": "Datablad",
+    "scan": "Scan for at åbne posten",
+    "schema": "Skema {{name}} · version {{v}}",
+    "created": "Oprettet {{date}}"
   }
 }

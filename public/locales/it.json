@@ -65,7 +65,9 @@
     "link": "Link di condivisione",
     "size": "{{bits}} bit · {{chars}} caratteri",
     "download": "Scarica PNG",
-    "ifc": "Scarica IFC"
+    "ifc": "Scarica IFC",
+    "pdf": "Scheda PDF",
+    "pdfBusy": "Creazione del PDF…"
   },
   "scan": {
     "title": "Scansiona codice QR",
@@ -101,5 +103,11 @@
     "apply": "Applica",
     "download": "Scarica",
     "dense": "Schema come stringa densing"
+  },
+  "pdf": {
+    "title": "Scheda tecnica",
+    "scan": "Scansiona per aprire la scheda",
+    "schema": "Schema {{name}} · versione {{v}}",
+    "created": "Creato il {{date}}"
   }
 }

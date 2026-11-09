@@ -65,7 +65,9 @@
     "link": "Lien de partage",
     "size": "{{bits}} bits · {{chars}} caractères",
     "download": "Télécharger PNG",
-    "ifc": "Télécharger IFC"
+    "ifc": "Télécharger IFC",
+    "pdf": "Fiche PDF",
+    "pdfBusy": "Création du PDF…"
   },
   "scan": {
     "title": "Scanner un code QR",
@@ -101,5 +103,11 @@
     "apply": "Appliquer",
     "download": "Télécharger",
     "dense": "Schéma en chaîne densing"
+  },
+  "pdf": {
+    "title": "Fiche technique",
+    "scan": "Scanner pour ouvrir la fiche",
+    "schema": "Schéma {{name}} · version {{v}}",
+    "created": "Créé le {{date}}"
   }
 }
