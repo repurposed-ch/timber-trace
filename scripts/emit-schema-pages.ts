@@ -1,5 +1,5 @@
 // Give every schema its own static path (dist/<slug>/index.html) so GitHub Pages serves
-// /timber-trace/<slug>/ directly, without a SPA fallback.
+// /<slug>/ directly, without a SPA fallback.
 import { copyFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 

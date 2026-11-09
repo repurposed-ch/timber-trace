@@ -12,7 +12,7 @@ describe("scan input", () => {
   });
 
   test("decodes a share link", () => {
-    const link = `https://repurposed.ch/timber-trace/hello-world/#${encodeRecord(schema, fullRecord, URL_SAFE)}`;
+    const link = `https://timber-trace.repurposed.ch/hello-world/#${encodeRecord(schema, fullRecord, URL_SAFE)}`;
     expect(decodeInput(loaded, link).data).toEqual(fullRecord);
   });
 

@@ -1,6 +1,6 @@
 const base = import.meta.env.BASE_URL;
 
-/** "/timber-trace/hello-world/" -> "hello-world"; null on the schema list */
+/** "/hello-world/" -> "hello-world"; null on the schema list */
 export function currentSlug(pathname = location.pathname): string | null {
   const rest = pathname.startsWith(base) ? pathname.slice(base.length) : pathname.replace(/^\//, "");
   const slug = rest.split("/")[0];
