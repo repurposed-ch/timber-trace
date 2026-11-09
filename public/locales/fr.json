@@ -32,7 +32,9 @@
   },
   "viewer": {
     "title": "Aperçu 3D",
-    "unknownDims": "Dimensions inconnues affichées à une taille par défaut"
+    "unknownDims": "Dimensions inconnues affichées à une taille par défaut",
+    "hide": "Masquer la 3D",
+    "show": "Afficher la 3D"
   },
   "qr": {
     "title": "Code QR",

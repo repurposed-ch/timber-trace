@@ -32,7 +32,9 @@
   },
   "viewer": {
     "title": "3D-visning",
-    "unknownDims": "Ukendte mål vist i standardstørrelse"
+    "unknownDims": "Ukendte mål vist i standardstørrelse",
+    "hide": "Skjul 3D",
+    "show": "Vis 3D"
   },
   "qr": {
     "title": "QR-kode",

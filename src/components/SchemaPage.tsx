@@ -32,6 +32,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setTabState(next);
   };
   const dense = schema.versions.get(schema.latest)!;
+  const [showViewer, setShowViewer] = useStoredFlag("timber-trace.viewer", true);
   // the record that was scanned or opened from a link, checked for newer versions
   const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
   const [record, setRecord] = useState(() => loaded?.data ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
@@ -113,22 +114,31 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         </div>
       )}
       {tab === "record" && (
-        <div className="layout">
-          <div className="card">
-            <h3>{t("form.title", { ns: "ui" })}</h3>
-            <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
-          </div>
-          <div className="side">
-            <div className="card">
+        <>
+          <div className="card viewer-card">
+            <div className="card-head">
               <h3>{t("viewer.title", { ns: "ui" })}</h3>
-              <BeamViewer record={record} />
+              <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer} aria-controls="viewer">
+                {showViewer ? t("viewer.hide", { ns: "ui" }) : t("viewer.show", { ns: "ui" })}
+              </button>
             </div>
+            {showViewer && (
+              <div id="viewer">
+                <BeamViewer record={record} />
+              </div>
+            )}
+          </div>
+          <div className="layout">
             <div className="card">
+              <h3>{t("form.title", { ns: "ui" })}</h3>
+              <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
+            </div>
+            <div className="card side">
               <h3>{t("qr.title", { ns: "ui" })}</h3>
               <QrPanel slug={slug} schema={dense} record={record} />
             </div>
           </div>
-        </div>
+        </>
       )}
     </section>
   );
@@ -144,4 +154,23 @@ function fromLocation(schema: LoadedSchema): Loaded {
   } catch {
     return null;
   }
+}
+
+/** a boolean remembered per browser; storage can be unavailable (private mode), so it is best effort */
+function useStoredFlag(key: string, fallback: boolean): [boolean, (v: boolean) => void] {
+  const [value, setValue] = useState(() => {
+    try {
+      const v = localStorage.getItem(key);
+      return v === null ? fallback : v === "1";
+    } catch {
+      return fallback;
+    }
+  });
+  const set = (v: boolean) => {
+    setValue(v);
+    try {
+      localStorage.setItem(key, v ? "1" : "0");
+    } catch {}
+  };
+  return [value, set];
 }

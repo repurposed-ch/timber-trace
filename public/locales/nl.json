@@ -32,7 +32,9 @@
   },
   "viewer": {
     "title": "3D-voorbeeld",
-    "unknownDims": "Onbekende afmetingen op standaardformaat weergegeven"
+    "unknownDims": "Onbekende afmetingen op standaardformaat weergegeven",
+    "hide": "3D verbergen",
+    "show": "3D tonen"
   },
   "qr": {
     "title": "QR-code",
