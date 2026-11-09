@@ -1,4 +1,9 @@
+import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
-// Isolate from the parent repo's PostCSS/Tailwind config.
-export default defineConfig({ css: { postcss: {} } });
+export default defineConfig({
+  base: "/timber-trace/",
+  plugins: [react()],
+  // Isolate from the parent repo's PostCSS/Tailwind config.
+  css: { postcss: {} },
+});

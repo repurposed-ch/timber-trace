@@ -5,17 +5,31 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && bun scripts/emit-schema-pages.ts",
     "preview": "vite preview",
     "test": "bun test"
   },
   "dependencies": {
-    "qrcode": "^1.5.4"
+    "@react-three/drei": "^10.7.4",
+    "@react-three/fiber": "^9.3.0",
+    "densing": "0.5.0",
+    "i18next": "24.2.2",
+    "i18next-http-backend": "^3.0.2",
+    "jsqr": "^1.4.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-i18next": "^15.4.0",
+    "three": "^0.180.0"
   },
   "devDependencies": {
     "@types/bun": "^1.1.0",
-    "@types/qrcode": "^1.5.5",
-    "typescript": "^5.6.0",
+    "@types/qrcode": "^1.5.6",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@types/three": "^0.180.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.9.2",
     "vite": "^5.4.0"
   }
 }
