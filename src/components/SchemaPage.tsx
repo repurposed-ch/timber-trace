@@ -3,22 +3,26 @@ import { useTranslation } from "react-i18next";
 import { staticRecordSource } from "../records/source";
 import { useLatest } from "../records/useLatest";
 import { BASE45, URL_SAFE, decodeRecord, encodeRecord, randomId } from "../schema/codec";
+import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
 import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
+import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { UpdateBanner } from "./UpdateBanner";
 
-const TABS = ["record", "scan"] as const;
+const TABS = ["record", "scan", "schema"] as const;
 // swap for a database-backed source later; the UI only sees RecordSource
 const records = staticRecordSource(read);
 type Loaded = { payload: string; data: any } | null;
 type Tab = (typeof TABS)[number];
 
-export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchema }) {
+export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
+  // dev mode can replace the latest version in memory from the schema editor
+  const [schema, setSchema] = useState(served);
   const { t } = useTranslation(slug); // suspends until this schema's labels are fetched
   const labels = useLabels(slug, schema.meta.countryEnums);
   const [tab, setTab] = useState<Tab>("record");
@@ -69,6 +73,25 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
             onDecoded={(r) => {
               load({ payload: encodeRecord(r.schema, r.data, BASE45), data: r.data });
               setTab("record");
+            }}
+          />
+        </div>
+      )}
+      {tab === "schema" && (
+        <div className="card">
+          <SchemaInspector
+            key={schema.sources.get(schema.latest)}
+            slug={slug}
+            schema={schema}
+            labels={labels}
+            onApply={(json) => {
+              const next = { ...schema, versions: new Map(schema.versions), sources: new Map(schema.sources) };
+              const dense = schemaFromJson(json);
+              next.versions.set(schema.latest, dense);
+              next.sources.set(schema.latest, json);
+              setSchema(next);
+              setLoaded(null);
+              setRecord({ ...defaultRecord(dense), version: schema.latest, id: record.id });
             }}
           />
         </div>

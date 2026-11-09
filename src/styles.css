@@ -71,3 +71,18 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .banner table { border-collapse: collapse; font-size: .85rem; }
 .banner th, .banner td { text-align: left; padding: 2px 10px 2px 0; border-bottom: 1px solid var(--warn-line); }
 .banner button { justify-self: start; }
+.inspector { display: grid; gap: 10px; }
+.inspector-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.table-wrap { overflow-x: auto; }
+.schema-table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+.schema-table th, .schema-table td { text-align: left; padding: 3px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.schema-table tr.disc td { color: var(--muted); }
+.options { margin: 4px 0; padding-left: 16px; max-height: 220px; overflow: auto; columns: 2; }
+.dense { display: block; background: var(--bg); padding: 6px; border-radius: 6px; margin-top: 6px; font-size: .75rem; }
+.dev { border: 1px dashed var(--accent); border-radius: 8px; padding: 8px 10px; }
+.dev-grid { display: grid; gap: 8px; grid-template-columns: 1fr; margin-top: 8px; }
+@media (min-width: 960px) { .dev-grid { grid-template-columns: 1fr 1fr; } }
+.dev-grid label { display: grid; gap: 4px; font-size: .85rem; }
+.dev-grid textarea { width: 100%; font-size: .75rem; }
+.dev-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+.ok { color: #2e7d32; }
