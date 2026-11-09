@@ -4,6 +4,7 @@ import { randomId } from "../schema/codec";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
 import { useLabels } from "../state/useSchema";
+import { BeamViewer } from "./BeamViewer";
 import { RecordForm } from "./RecordForm";
 
 export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchema }) {
@@ -19,6 +20,12 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
         <div className="card">
           <h3>{t("form.title", { ns: "ui" })}</h3>
           <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
+        </div>
+        <div className="side">
+          <div className="card">
+            <h3>{t("viewer.title", { ns: "ui" })}</h3>
+            <BeamViewer record={record} />
+          </div>
         </div>
       </div>
     </section>
