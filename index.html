@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Timber Trace</title>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; }
+      fieldset { display: grid; grid-template-columns: max-content 1fr; gap: .5rem 1rem; }
+      textarea { width: 100%; font-family: monospace; }
+      .error { color: #b00020; }
+    </style>
+  </head>
+  <body>
+    <h1>Timber Trace</h1>
+    <p>Inscribe wooden beam geometry into a QR code, and decode it back.</p>
+
+    <form id="encode">
+      <fieldset>
+        <legend>Beam</legend>
+        <label for="id">ID</label><input id="id" name="id" value="B-0001" required />
+        <label for="species">Species</label><input id="species" name="species" value="spruce" required />
+        <label for="length">Length (mm)</label><input id="length" name="length" type="number" value="4200" required />
+        <label for="width">Width (mm)</label><input id="width" name="width" type="number" value="120" required />
+        <label for="height">Height (mm)</label><input id="height" name="height" type="number" value="240" required />
+        <label for="holes">Holes (x,y,d; …)</label><input id="holes" name="holes" placeholder="600,120,20; 3600,120,20" />
+      </fieldset>
+      <button type="submit">Generate QR</button>
+    </form>
+    <canvas id="qr"></canvas>
+    <p><code id="payload"></code></p>
+
+    <h2>Decode</h2>
+    <textarea id="decode-input" rows="3" placeholder="Paste a TT1 payload"></textarea>
+    <pre id="decode-output"></pre>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
