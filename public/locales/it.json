@@ -17,7 +17,8 @@
   "nav": {
     "record": "Scheda",
     "scan": "Scansiona",
-    "schema": "Schema"
+    "schema": "Schema",
+    "breadcrumb": "Percorso di navigazione"
   },
   "form": {
     "title": "Scheda dell'elemento",

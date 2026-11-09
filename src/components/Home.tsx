@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { listSchemas } from "../schema/loader";
 import { schemaUrl } from "../state/route";
 import { read } from "../state/useSchema";
+import { Header } from "./Header";
 
 export function Home() {
   const { t } = useTranslation();
@@ -11,6 +12,8 @@ export function Home() {
     listSchemas(read).then(setSlugs, () => setSlugs([]));
   }, []);
   return (
+    <>
+    <Header />
     <section className="card">
       <h2>{t("home.title")}</h2>
       {slugs === null ? (
@@ -25,5 +28,6 @@ export function Home() {
         </ul>
       )}
     </section>
+    </>
   );
 }

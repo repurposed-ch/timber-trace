@@ -4,30 +4,33 @@ import { staticRecordSource } from "../records/source";
 import { useLatest } from "../records/useLatest";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
 import { decodeInput } from "../schema/links";
-import { currentPayload, schemaUrl } from "../state/route";
+import { TABS, currentPayload, currentTab, pushTab, schemaUrl, type Tab } from "../state/route";
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
 import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
+import { Header } from "./Header";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { UpdateBanner } from "./UpdateBanner";
 
-const TABS = ["record", "scan", "schema"] as const;
 // swap for a database-backed source later; the UI only sees RecordSource
 const records = staticRecordSource(read);
 type Loaded = { payload: string; data: any } | null;
-type Tab = (typeof TABS)[number];
 
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
   // dev mode can replace the latest version in memory from the schema editor
   const [schema, setSchema] = useState(served);
   const { t } = useTranslation(slug); // suspends until this schema's labels are fetched
   const labels = useLabels(slug, schema.meta.countryEnums);
-  const [tab, setTab] = useState<Tab>("record");
+  const [tab, setTabState] = useState<Tab>(() => currentTab());
+  const setTab = (next: Tab) => {
+    if (next !== tab) pushTab(next);
+    setTabState(next);
+  };
   const dense = schema.versions.get(schema.latest)!;
   // the record that was scanned or opened from a link, checked for newer versions
   const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
@@ -47,6 +50,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
 
   useEffect(() => {
     const onNav = () => {
+      setTabState(currentTab());
       const r = fromLocation(schema);
       if (r) load(r);
     };
@@ -59,6 +63,12 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   }, [schema]);
   return (
     <section>
+      <Header
+        crumbs={[
+          { label: labels.raw.title ?? slug, href: schemaUrl(slug), onClick: () => setTab("record") },
+          { label: t(`nav.${tab}`, { ns: "ui" }) },
+        ]}
+      />
       <h2>{labels.raw.title ?? slug}</h2>
       <p className="muted">{labels.raw.description}</p>
       <nav className="tabs" role="tablist">

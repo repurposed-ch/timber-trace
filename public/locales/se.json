@@ -17,7 +17,8 @@
   "nav": {
     "record": "Post",
     "scan": "Skanna",
-    "schema": "Schema"
+    "schema": "Schema",
+    "breadcrumb": "Sökväg"
   },
   "form": {
     "title": "Komponentpost",
