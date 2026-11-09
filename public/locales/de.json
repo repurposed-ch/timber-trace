@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Holzbauteile per QR-Code nachverfolgen."
+  },
+  "lang": {
+    "label": "Sprache"
+  },
+  "loading": "Wird geladen…",
+  "error": {
+    "load": "Schema konnte nicht geladen werden"
+  },
+  "home": {
+    "title": "Schemas",
+    "open": "Öffnen"
+  },
+  "nav": {
+    "record": "Datensatz",
+    "scan": "Scannen",
+    "schema": "Schema"
+  },
+  "form": {
+    "title": "Bauteildatensatz",
+    "unknown": "Unbekannt",
+    "generate": "Erzeugen",
+    "add": "Hinzufügen",
+    "remove": "Entfernen",
+    "charset": "Nur Buchstaben und Ziffern, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 Hex-Zeichen"
+  },
+  "viewer": {
+    "title": "3D-Vorschau",
+    "unknownDims": "Unbekannte Abmessungen in Standardgrösse dargestellt"
+  },
+  "qr": {
+    "title": "QR-Code",
+    "payload": "Base45-Inhalt",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "link": "Link teilen",
+    "size": "{{bits}} Bit · {{chars}} Zeichen",
+    "download": "PNG herunterladen"
+  },
+  "scan": {
+    "title": "QR-Code scannen",
+    "start": "Kamera starten",
+    "stop": "Kamera stoppen",
+    "unsupported": "Kamera nicht verfügbar",
+    "paste": "Oder Base45-Inhalt einfügen",
+    "decode": "Dekodieren",
+    "invalid": "Kein gültiger Inhalt für dieses Schema"
+  },
+  "update": {
+    "title": "Es gibt eine neuere Version dieses Datensatzes",
+    "updated": "Aktualisiert am {{date}}",
+    "show": "Neueste anzeigen",
+    "field": "Feld",
+    "before": "Dieser Code",
+    "after": "Neueste"
+  },
+  "schema": {
+    "version": "Version {{v}}",
+    "path": "Pfad",
+    "type": "Typ",
+    "range": "Bereich / Optionen",
+    "bits": "Bit",
+    "label": "Bezeichnung",
+    "total": "Total: {{min}}–{{max}} Bit",
+    "options": "{{count}} Optionen",
+    "dev": "Bearbeiten (Dev-Modus)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Bezeichnungen JSON ({{lng}})",
+    "valid": "Gültig",
+    "missingLabels": "Fehlende Bezeichnungen",
+    "apply": "Anwenden",
+    "download": "Herunterladen",
+    "dense": "Schema als densing-String"
+  }
+}

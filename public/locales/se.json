@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Spåra träkomponenter med en QR-kod."
+  },
+  "lang": {
+    "label": "Språk"
+  },
+  "loading": "Laddar…",
+  "error": {
+    "load": "Kunde inte läsa in schemat"
+  },
+  "home": {
+    "title": "Scheman",
+    "open": "Öppna"
+  },
+  "nav": {
+    "record": "Post",
+    "scan": "Skanna",
+    "schema": "Schema"
+  },
+  "form": {
+    "title": "Komponentpost",
+    "unknown": "Okänd",
+    "generate": "Generera",
+    "add": "Lägg till",
+    "remove": "Ta bort",
+    "charset": "Endast bokstäver och siffror, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 hextecken"
+  },
+  "viewer": {
+    "title": "3D-förhandsvisning",
+    "unknownDims": "Okända mått visas i standardstorlek"
+  },
+  "qr": {
+    "title": "QR-kod",
+    "payload": "Base45-innehåll",
+    "copy": "Kopiera",
+    "copied": "Kopierad",
+    "link": "Delningslänk",
+    "size": "{{bits}} bitar · {{chars}} tecken",
+    "download": "Ladda ner PNG"
+  },
+  "scan": {
+    "title": "Skanna QR-kod",
+    "start": "Starta kamera",
+    "stop": "Stoppa kamera",
+    "unsupported": "Kameran är inte tillgänglig",
+    "paste": "Eller klistra in base45-innehåll",
+    "decode": "Avkoda",
+    "invalid": "Inte giltigt innehåll för detta schema"
+  },
+  "update": {
+    "title": "Det finns en nyare version av denna post",
+    "updated": "Uppdaterad {{date}}",
+    "show": "Visa senaste",
+    "field": "Fält",
+    "before": "Denna kod",
+    "after": "Senaste"
+  },
+  "schema": {
+    "version": "Version {{v}}",
+    "path": "Sökväg",
+    "type": "Typ",
+    "range": "Intervall / alternativ",
+    "bits": "Bitar",
+    "label": "Etikett",
+    "total": "Totalt: {{min}}–{{max}} bitar",
+    "options": "{{count}} alternativ",
+    "dev": "Redigera (dev-läge)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Etiketter JSON ({{lng}})",
+    "valid": "Giltig",
+    "missingLabels": "Saknade etiketter",
+    "apply": "Tillämpa",
+    "download": "Ladda ner",
+    "dense": "Schema som densing-sträng"
+  }
+}

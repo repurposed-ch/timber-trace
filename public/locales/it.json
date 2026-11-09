@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Tracciare gli elementi in legno con un codice QR."
+  },
+  "lang": {
+    "label": "Lingua"
+  },
+  "loading": "Caricamento…",
+  "error": {
+    "load": "Impossibile caricare lo schema"
+  },
+  "home": {
+    "title": "Schemi",
+    "open": "Apri"
+  },
+  "nav": {
+    "record": "Scheda",
+    "scan": "Scansiona",
+    "schema": "Schema"
+  },
+  "form": {
+    "title": "Scheda dell'elemento",
+    "unknown": "Sconosciuto",
+    "generate": "Genera",
+    "add": "Aggiungi",
+    "remove": "Rimuovi",
+    "charset": "Solo lettere e cifre, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 caratteri esadecimali"
+  },
+  "viewer": {
+    "title": "Anteprima 3D",
+    "unknownDims": "Dimensioni sconosciute mostrate con misura predefinita"
+  },
+  "qr": {
+    "title": "Codice QR",
+    "payload": "Contenuto base45",
+    "copy": "Copia",
+    "copied": "Copiato",
+    "link": "Link di condivisione",
+    "size": "{{bits}} bit · {{chars}} caratteri",
+    "download": "Scarica PNG"
+  },
+  "scan": {
+    "title": "Scansiona codice QR",
+    "start": "Avvia fotocamera",
+    "stop": "Ferma fotocamera",
+    "unsupported": "Fotocamera non disponibile",
+    "paste": "Oppure incolla un contenuto base45",
+    "decode": "Decodifica",
+    "invalid": "Contenuto non valido per questo schema"
+  },
+  "update": {
+    "title": "Esiste una versione più recente di questa scheda",
+    "updated": "Aggiornato il {{date}}",
+    "show": "Mostra la più recente",
+    "field": "Campo",
+    "before": "Questo codice",
+    "after": "Più recente"
+  },
+  "schema": {
+    "version": "Versione {{v}}",
+    "path": "Percorso",
+    "type": "Tipo",
+    "range": "Intervallo / opzioni",
+    "bits": "Bit",
+    "label": "Etichetta",
+    "total": "Totale: {{min}}–{{max}} bit",
+    "options": "{{count}} opzioni",
+    "dev": "Modifica (modalità dev)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Etichette JSON ({{lng}})",
+    "valid": "Valido",
+    "missingLabels": "Etichette mancanti",
+    "apply": "Applica",
+    "download": "Scarica",
+    "dense": "Schema come stringa densing"
+  }
+}

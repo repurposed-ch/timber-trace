@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Houten componenten traceren met een QR-code."
+  },
+  "lang": {
+    "label": "Taal"
+  },
+  "loading": "Laden…",
+  "error": {
+    "load": "Schema kon niet worden geladen"
+  },
+  "home": {
+    "title": "Schema's",
+    "open": "Openen"
+  },
+  "nav": {
+    "record": "Record",
+    "scan": "Scannen",
+    "schema": "Schema"
+  },
+  "form": {
+    "title": "Componentrecord",
+    "unknown": "Onbekend",
+    "generate": "Genereren",
+    "add": "Toevoegen",
+    "remove": "Verwijderen",
+    "charset": "Alleen letters en cijfers, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 hexadecimale tekens"
+  },
+  "viewer": {
+    "title": "3D-voorbeeld",
+    "unknownDims": "Onbekende afmetingen op standaardformaat weergegeven"
+  },
+  "qr": {
+    "title": "QR-code",
+    "payload": "Base45-inhoud",
+    "copy": "Kopiëren",
+    "copied": "Gekopieerd",
+    "link": "Deellink",
+    "size": "{{bits}} bits · {{chars}} tekens",
+    "download": "PNG downloaden"
+  },
+  "scan": {
+    "title": "QR-code scannen",
+    "start": "Camera starten",
+    "stop": "Camera stoppen",
+    "unsupported": "Camera niet beschikbaar",
+    "paste": "Of plak een base45-inhoud",
+    "decode": "Decoderen",
+    "invalid": "Geen geldige inhoud voor dit schema"
+  },
+  "update": {
+    "title": "Er bestaat een nieuwere versie van dit record",
+    "updated": "Bijgewerkt op {{date}}",
+    "show": "Nieuwste tonen",
+    "field": "Veld",
+    "before": "Deze code",
+    "after": "Nieuwste"
+  },
+  "schema": {
+    "version": "Versie {{v}}",
+    "path": "Pad",
+    "type": "Type",
+    "range": "Bereik / opties",
+    "bits": "Bits",
+    "label": "Label",
+    "total": "Totaal: {{min}}–{{max}} bits",
+    "options": "{{count}} opties",
+    "dev": "Bewerken (dev-modus)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Labels JSON ({{lng}})",
+    "valid": "Geldig",
+    "missingLabels": "Ontbrekende labels",
+    "apply": "Toepassen",
+    "download": "Downloaden",
+    "dense": "Schema als densing-string"
+  }
+}

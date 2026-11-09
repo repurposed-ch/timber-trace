@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Spor trækomponenter med en QR-kode."
+  },
+  "lang": {
+    "label": "Sprog"
+  },
+  "loading": "Indlæser…",
+  "error": {
+    "load": "Kunne ikke indlæse skema"
+  },
+  "home": {
+    "title": "Skemaer",
+    "open": "Åbn"
+  },
+  "nav": {
+    "record": "Post",
+    "scan": "Scan",
+    "schema": "Skema"
+  },
+  "form": {
+    "title": "Komponentpost",
+    "unknown": "Ukendt",
+    "generate": "Generér",
+    "add": "Tilføj",
+    "remove": "Fjern",
+    "charset": "Kun bogstaver og tal, maks. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 hex-tegn"
+  },
+  "viewer": {
+    "title": "3D-visning",
+    "unknownDims": "Ukendte mål vist i standardstørrelse"
+  },
+  "qr": {
+    "title": "QR-kode",
+    "payload": "Base45-indhold",
+    "copy": "Kopiér",
+    "copied": "Kopieret",
+    "link": "Delingslink",
+    "size": "{{bits}} bit · {{chars}} tegn",
+    "download": "Download PNG"
+  },
+  "scan": {
+    "title": "Scan QR-kode",
+    "start": "Start kamera",
+    "stop": "Stop kamera",
+    "unsupported": "Kamera ikke tilgængeligt",
+    "paste": "Eller indsæt base45-indhold",
+    "decode": "Afkod",
+    "invalid": "Ikke gyldigt indhold for dette skema"
+  },
+  "update": {
+    "title": "Der findes en nyere version af denne post",
+    "updated": "Opdateret {{date}}",
+    "show": "Vis nyeste",
+    "field": "Felt",
+    "before": "Denne kode",
+    "after": "Nyeste"
+  },
+  "schema": {
+    "version": "Version {{v}}",
+    "path": "Sti",
+    "type": "Type",
+    "range": "Område / valg",
+    "bits": "Bit",
+    "label": "Etiket",
+    "total": "I alt: {{min}}–{{max}} bit",
+    "options": "{{count}} valg",
+    "dev": "Redigér (dev-tilstand)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Etiketter JSON ({{lng}})",
+    "valid": "Gyldig",
+    "missingLabels": "Manglende etiketter",
+    "apply": "Anvend",
+    "download": "Download",
+    "dense": "Skema som densing-streng"
+  }
+}

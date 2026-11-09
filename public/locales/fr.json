@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Tracer les éléments en bois par code QR."
+  },
+  "lang": {
+    "label": "Langue"
+  },
+  "loading": "Chargement…",
+  "error": {
+    "load": "Impossible de charger le schéma"
+  },
+  "home": {
+    "title": "Schémas",
+    "open": "Ouvrir"
+  },
+  "nav": {
+    "record": "Fiche",
+    "scan": "Scanner",
+    "schema": "Schéma"
+  },
+  "form": {
+    "title": "Fiche de l'élément",
+    "unknown": "Inconnu",
+    "generate": "Générer",
+    "add": "Ajouter",
+    "remove": "Supprimer",
+    "charset": "Lettres et chiffres uniquement, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 caractères hexadécimaux"
+  },
+  "viewer": {
+    "title": "Aperçu 3D",
+    "unknownDims": "Dimensions inconnues affichées à une taille par défaut"
+  },
+  "qr": {
+    "title": "Code QR",
+    "payload": "Contenu base45",
+    "copy": "Copier",
+    "copied": "Copié",
+    "link": "Lien de partage",
+    "size": "{{bits}} bits · {{chars}} caractères",
+    "download": "Télécharger PNG"
+  },
+  "scan": {
+    "title": "Scanner un code QR",
+    "start": "Démarrer la caméra",
+    "stop": "Arrêter la caméra",
+    "unsupported": "Caméra indisponible",
+    "paste": "Ou collez un contenu base45",
+    "decode": "Décoder",
+    "invalid": "Contenu non valide pour ce schéma"
+  },
+  "update": {
+    "title": "Une version plus récente de cette fiche existe",
+    "updated": "Mis à jour le {{date}}",
+    "show": "Afficher la plus récente",
+    "field": "Champ",
+    "before": "Ce code",
+    "after": "Plus récente"
+  },
+  "schema": {
+    "version": "Version {{v}}",
+    "path": "Chemin",
+    "type": "Type",
+    "range": "Plage / options",
+    "bits": "Bits",
+    "label": "Libellé",
+    "total": "Total : {{min}}–{{max}} bits",
+    "options": "{{count}} options",
+    "dev": "Modifier (mode dev)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Libellés JSON ({{lng}})",
+    "valid": "Valide",
+    "missingLabels": "Libellés manquants",
+    "apply": "Appliquer",
+    "download": "Télécharger",
+    "dense": "Schéma en chaîne densing"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "Timber Trace",
+    "tagline": "Trace timber components with a QR code."
+  },
+  "lang": {
+    "label": "Language"
+  },
+  "loading": "Loading…",
+  "error": {
+    "load": "Could not load schema"
+  },
+  "home": {
+    "title": "Schemas",
+    "open": "Open"
+  },
+  "nav": {
+    "record": "Record",
+    "scan": "Scan",
+    "schema": "Schema"
+  },
+  "form": {
+    "title": "Component record",
+    "unknown": "Unknown",
+    "generate": "Generate",
+    "add": "Add",
+    "remove": "Remove",
+    "charset": "Letters and digits only, max. {{max}}",
+    "range": "{{min}}–{{max}}",
+    "idInvalid": "32 hex characters"
+  },
+  "viewer": {
+    "title": "3D preview",
+    "unknownDims": "Unknown dimensions shown at a default size"
+  },
+  "qr": {
+    "title": "QR code",
+    "payload": "Base45 payload",
+    "copy": "Copy",
+    "copied": "Copied",
+    "link": "Share link",
+    "size": "{{bits}} bits · {{chars}} characters",
+    "download": "Download PNG"
+  },
+  "scan": {
+    "title": "Scan QR code",
+    "start": "Start camera",
+    "stop": "Stop camera",
+    "unsupported": "Camera not available",
+    "paste": "Or paste a base45 payload",
+    "decode": "Decode",
+    "invalid": "Not a valid payload for this schema"
+  },
+  "update": {
+    "title": "A newer version of this record exists",
+    "updated": "Updated {{date}}",
+    "show": "Show latest",
+    "field": "Field",
+    "before": "This code",
+    "after": "Latest"
+  },
+  "schema": {
+    "version": "Version {{v}}",
+    "path": "Path",
+    "type": "Type",
+    "range": "Range / options",
+    "bits": "Bits",
+    "label": "Label",
+    "total": "Total: {{min}}–{{max}} bits",
+    "options": "{{count}} options",
+    "dev": "Edit (dev mode)",
+    "schemaJson": "Schema JSON",
+    "labelsJson": "Labels JSON ({{lng}})",
+    "valid": "Valid",
+    "missingLabels": "Missing labels",
+    "apply": "Apply",
+    "download": "Download",
+    "dense": "Schema as densing string"
+  }
+}

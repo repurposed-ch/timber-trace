@@ -24,3 +24,6 @@ input, select, textarea { border: 1px solid var(--line); border-radius: 6px; pad
 .muted { color: var(--muted); }
 .error { color: var(--error); }
 code, .mono { font-family: ui-monospace, Menlo, monospace; word-break: break-all; }
+.top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 12px; }
+.top p { margin: 4px 0 0; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
