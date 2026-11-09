@@ -2,14 +2,15 @@ import { calculateDenseDataSize, type DenseSchema } from "densing";
 import QRCode from "qrcode";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { BASE45, URL_SAFE, encodeRecord } from "../schema/codec";
-import { schemaUrl } from "../state/route";
+import { URL_SAFE, encodeRecord } from "../schema/codec";
+import { recordLink } from "../schema/links";
 
-export function shareLink(slug: string, urlPayload: string) {
-  return `${location.origin}${schemaUrl(slug)}#${urlPayload}`;
-}
+const base = import.meta.env.BASE_URL;
 
-type Encoded = { base45: string; url: string; bits: number } | { error: string };
+/** link for sharing and the QR; `qr` gives the upper-cased, QR alphanumeric form */
+export const shareLink = (slug: string, urlPayload: string, qr = false) => recordLink(location.origin, base, slug, urlPayload, qr);
+
+type Encoded = { qr: string; link: string; bits: number } | { error: string };
 
 export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseSchema; record: any }) {
   const { t } = useTranslation();
@@ -17,30 +18,30 @@ export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseS
   const [copied, setCopied] = useState(false);
   const encoded = useMemo((): Encoded => {
     try {
+      const payload = encodeRecord(schema, record, URL_SAFE);
       return {
-        base45: encodeRecord(schema, record, BASE45),
-        url: encodeRecord(schema, record, URL_SAFE),
+        qr: shareLink(slug, payload, true),
+        link: shareLink(slug, payload),
         bits: calculateDenseDataSize(schema, record).totalBits,
       };
     } catch (err) {
       return { error: (err as Error).message };
     }
-  }, [schema, record]);
+  }, [slug, schema, record]);
   const [qrVersion, setQrVersion] = useState<number | null>(null);
 
   useEffect(() => {
     if ("error" in encoded || !canvas.current) return;
-    // alphanumeric mode: base45 is exactly the QR alphanumeric charset
-    const segments = [{ data: encoded.base45, mode: "alphanumeric" as const }];
+    // one alphanumeric segment: the upper-cased link uses only 0-9A-Z-./: (no "#", no lowercase)
+    const segments = [{ data: encoded.qr, mode: "alphanumeric" as const }];
     QRCode.toCanvas(canvas.current, segments, { errorCorrectionLevel: "Q", width: 240, margin: 2 });
     setQrVersion(QRCode.create(segments, { errorCorrectionLevel: "Q" }).version);
   }, [encoded]);
 
   if ("error" in encoded) return <p className="error">{encoded.error}</p>;
 
-  const link = shareLink(slug, encoded.url);
   const copy = async () => {
-    await navigator.clipboard?.writeText(encoded.base45);
+    await navigator.clipboard?.writeText(encoded.link);
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);
   };
@@ -57,18 +58,18 @@ export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseS
       <div className="qr-info">
         <label>{t("qr.payload")}</label>
         <div className="payload">
-          <code data-testid="payload">{encoded.base45}</code>
+          <code data-testid="payload">{encoded.qr}</code>
           <button type="button" onClick={copy}>
             {copied ? t("qr.copied") : t("qr.copy")}
           </button>
         </div>
         <small className="muted">
-          {t("qr.size", { bits: encoded.bits, chars: encoded.base45.length })}
+          {t("qr.size", { bits: encoded.bits, chars: encoded.qr.length })}
           {qrVersion && ` · QR v${qrVersion}`}
         </small>
         <label>{t("qr.link")}</label>
-        <a href={link} className="mono" data-testid="share-link">
-          {link}
+        <a href={encoded.link} className="mono" data-testid="share-link">
+          {encoded.link}
         </a>
         <button type="button" onClick={download}>
           {t("qr.download")}

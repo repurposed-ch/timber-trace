@@ -2,7 +2,9 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { staticRecordSource } from "../records/source";
 import { useLatest } from "../records/useLatest";
-import { BASE45, URL_SAFE, decodeRecord, encodeRecord, randomId } from "../schema/codec";
+import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
+import { decodeInput } from "../schema/links";
+import { currentPayload, schemaUrl } from "../state/route";
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
@@ -28,7 +30,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const [tab, setTab] = useState<Tab>("record");
   const dense = schema.versions.get(schema.latest)!;
   // the record that was scanned or opened from a link, checked for newer versions
-  const [loaded, setLoaded] = useState<Loaded>(() => fromHash(schema));
+  const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
   const [record, setRecord] = useState(() => loaded?.data ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
   const newer = useLatest(records, slug, schema, loaded);
   const load = (l: NonNullable<Loaded>) => {
@@ -36,20 +38,24 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setRecord(l.data);
   };
 
-  // keep the share link in the address bar in sync with the record
+  // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug
   useEffect(() => {
     try {
-      history.replaceState(null, "", `#${encodeRecord(dense, record, URL_SAFE)}`);
+      history.replaceState(null, "", `${schemaUrl(slug)}${encodeRecord(dense, record, URL_SAFE)}${location.search}`);
     } catch {}
-  }, [dense, record]);
+  }, [slug, dense, record]);
 
   useEffect(() => {
-    const onHash = () => {
-      const r = fromHash(schema);
+    const onNav = () => {
+      const r = fromLocation(schema);
       if (r) load(r);
     };
-    addEventListener("hashchange", onHash);
-    return () => removeEventListener("hashchange", onHash);
+    addEventListener("popstate", onNav);
+    addEventListener("hashchange", onNav);
+    return () => {
+      removeEventListener("popstate", onNav);
+      removeEventListener("hashchange", onNav);
+    };
   }, [schema]);
   return (
     <section>
@@ -71,7 +77,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
           <Scanner
             schema={schema}
             onDecoded={(r) => {
-              load({ payload: encodeRecord(r.schema, r.data, BASE45), data: r.data });
+              load({ payload: r.payload, data: r.data });
               setTab("record");
             }}
           />
@@ -118,12 +124,13 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   );
 }
 
-function fromHash(schema: LoadedSchema) {
-  const payload = decodeURIComponent(location.hash.slice(1));
+/** the record in the address bar: /<slug>/<payload>, or an old /<slug>/#<payload> link */
+function fromLocation(schema: LoadedSchema): Loaded {
+  const payload = currentPayload() ?? decodeURIComponent(location.hash.slice(1));
   if (!payload) return null;
   try {
-    const r = decodeRecord(schema, payload, URL_SAFE);
-    return { payload: encodeRecord(r.schema, r.data, BASE45), data: r.data };
+    const r = decodeInput(schema, payload);
+    return { payload: r.payload, data: r.data };
   } catch {
     return null;
   }

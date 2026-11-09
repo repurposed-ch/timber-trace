@@ -1,5 +1,5 @@
-// Give every schema its own static path (dist/<slug>/index.html) so GitHub Pages serves
-// /<slug>/ directly, without a SPA fallback.
+// Give every schema its own static path (dist/<slug>/index.html) so GitHub Pages serves /<slug>/
+// directly, and a 404.html fallback so record links (/<slug>/<payload>, any case) load the app too.
 import { copyFileSync, existsSync, mkdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
@@ -12,3 +12,5 @@ for (const slug of slugs) {
   copyFileSync(join(dist, "index.html"), join(dir, "index.html"));
   console.log(`emitted ${slug}/index.html`);
 }
+copyFileSync(join(dist, "index.html"), join(dist, "404.html"));
+console.log("emitted 404.html");

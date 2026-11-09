@@ -35,7 +35,7 @@
   },
   "qr": {
     "title": "QR-kode",
-    "payload": "Base45-indhold",
+    "payload": "QR-indhold",
     "copy": "Kopiér",
     "copied": "Kopieret",
     "link": "Delingslink",

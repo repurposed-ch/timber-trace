@@ -1,23 +1,12 @@
 import jsQR from "jsqr";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { BASE45, URL_SAFE, decodeRecord, type DecodedRecord } from "../schema/codec";
+import { decodeInput, type DecodedInput } from "../schema/links";
 import type { LoadedSchema } from "../schema/loader";
-
-/** what the QR (or a pasted string) holds: a raw base45 payload, or a share link */
-export function decodeInput(schema: LoadedSchema, text: string): DecodedRecord & { payload: string } {
-  const s = text.trim();
-  const hash = s.match(/^https?:\/\/[^#]+#(.+)$/i);
-  if (hash) {
-    const payload = decodeURIComponent(hash[1]);
-    return { ...decodeRecord(schema, payload, URL_SAFE), payload };
-  }
-  return { ...decodeRecord(schema, s, BASE45), payload: s };
-}
 
 type Detector = { detect: (src: CanvasImageSource) => Promise<{ rawValue: string }[]> };
 
-export function Scanner({ schema, onDecoded }: { schema: LoadedSchema; onDecoded: (r: ReturnType<typeof decodeInput>) => void }) {
+export function Scanner({ schema, onDecoded }: { schema: LoadedSchema; onDecoded: (r: DecodedInput) => void }) {
   const { t } = useTranslation();
   const [text, setText] = useState("");
   const [error, setError] = useState<string | null>(null);

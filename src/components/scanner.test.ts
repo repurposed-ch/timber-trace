@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { BASE45, URL_SAFE, encodeRecord } from "../schema/codec";
 import { fullRecord, loadHelloWorld } from "../schema/testing";
-import { decodeInput } from "./Scanner";
+import { decodeInput } from "../schema/links";
 
 const loaded = await loadHelloWorld();
 const schema = loaded.versions.get(1)!;

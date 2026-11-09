@@ -35,7 +35,7 @@
   },
   "qr": {
     "title": "QR-kod",
-    "payload": "Base45-innehåll",
+    "payload": "QR-innehåll",
     "copy": "Kopiera",
     "copied": "Kopierad",
     "link": "Delningslänk",

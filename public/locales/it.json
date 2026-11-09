@@ -35,7 +35,7 @@
   },
   "qr": {
     "title": "Codice QR",
-    "payload": "Contenuto base45",
+    "payload": "Contenuto del codice QR",
     "copy": "Copia",
     "copied": "Copiato",
     "link": "Link di condivisione",
