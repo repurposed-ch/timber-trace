@@ -1,15 +1,21 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { URL_SAFE, decodeRecord, encodeRecord, randomId } from "../schema/codec";
+import { staticRecordSource } from "../records/source";
+import { useLatest } from "../records/useLatest";
+import { BASE45, URL_SAFE, decodeRecord, encodeRecord, randomId } from "../schema/codec";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
-import { useLabels } from "../state/useSchema";
+import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
 import { Scanner } from "./Scanner";
+import { UpdateBanner } from "./UpdateBanner";
 
 const TABS = ["record", "scan"] as const;
+// swap for a database-backed source later; the UI only sees RecordSource
+const records = staticRecordSource(read);
+type Loaded = { payload: string; data: any } | null;
 type Tab = (typeof TABS)[number];
 
 export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchema }) {
@@ -17,7 +23,14 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
   const labels = useLabels(slug, schema.meta.countryEnums);
   const [tab, setTab] = useState<Tab>("record");
   const dense = schema.versions.get(schema.latest)!;
-  const [record, setRecord] = useState(() => fromHash(schema) ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
+  // the record that was scanned or opened from a link, checked for newer versions
+  const [loaded, setLoaded] = useState<Loaded>(() => fromHash(schema));
+  const [record, setRecord] = useState(() => loaded?.data ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
+  const newer = useLatest(records, slug, schema, loaded);
+  const load = (l: NonNullable<Loaded>) => {
+    setLoaded(l);
+    setRecord(l.data);
+  };
 
   // keep the share link in the address bar in sync with the record
   useEffect(() => {
@@ -29,7 +42,7 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
   useEffect(() => {
     const onHash = () => {
       const r = fromHash(schema);
-      if (r) setRecord(r);
+      if (r) load(r);
     };
     addEventListener("hashchange", onHash);
     return () => removeEventListener("hashchange", onHash);
@@ -45,13 +58,16 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
           </button>
         ))}
       </nav>
+      {newer && loaded && (
+        <UpdateBanner current={loaded.data} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
+      )}
       {tab === "scan" && (
         <div className="card">
           <h3>{t("scan.title", { ns: "ui" })}</h3>
           <Scanner
             schema={schema}
             onDecoded={(r) => {
-              setRecord(r.data);
+              load({ payload: encodeRecord(r.schema, r.data, BASE45), data: r.data });
               setTab("record");
             }}
           />
@@ -83,7 +99,8 @@ function fromHash(schema: LoadedSchema) {
   const payload = decodeURIComponent(location.hash.slice(1));
   if (!payload) return null;
   try {
-    return decodeRecord(schema, payload, URL_SAFE).data;
+    const r = decodeRecord(schema, payload, URL_SAFE);
+    return { payload: encodeRecord(r.schema, r.data, BASE45), data: r.data };
   } catch {
     return null;
   }
