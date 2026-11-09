@@ -135,7 +135,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             </div>
             <div className="card side">
               <h3>{t("qr.title", { ns: "ui" })}</h3>
-              <QrPanel slug={slug} schema={dense} record={record} />
+              <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
             </div>
           </div>
         </>

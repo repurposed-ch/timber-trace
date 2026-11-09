@@ -64,7 +64,8 @@
     "copied": "Gekopieerd",
     "link": "Deellink",
     "size": "{{bits}} bits · {{chars}} tekens",
-    "download": "PNG downloaden"
+    "download": "PNG downloaden",
+    "ifc": "IFC downloaden"
   },
   "scan": {
     "title": "QR-code scannen",

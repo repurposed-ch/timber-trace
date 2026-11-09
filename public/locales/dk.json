@@ -64,7 +64,8 @@
     "copied": "Kopieret",
     "link": "Delingslink",
     "size": "{{bits}} bit · {{chars}} tegn",
-    "download": "Download PNG"
+    "download": "Download PNG",
+    "ifc": "Download IFC"
   },
   "scan": {
     "title": "Scan QR-kode",

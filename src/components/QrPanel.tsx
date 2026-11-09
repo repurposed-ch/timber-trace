@@ -3,6 +3,8 @@ import QRCode from "qrcode";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { URL_SAFE, encodeRecord } from "../schema/codec";
+import { downloadIfc, fileBase } from "../export/download";
+import type { Labels } from "../schema/labels";
 import { recordLink } from "../schema/links";
 
 const base = import.meta.env.BASE_URL;
@@ -12,7 +14,7 @@ export const shareLink = (slug: string, urlPayload: string, qr = false) => recor
 
 type Encoded = { qr: string; link: string; bits: number } | { error: string };
 
-export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseSchema; record: any }) {
+export function QrPanel({ slug, schema, record, labels }: { slug: string; schema: DenseSchema; record: any; labels: Labels }) {
   const { t } = useTranslation();
   const canvas = useRef<HTMLCanvasElement>(null);
   const [copied, setCopied] = useState(false);
@@ -48,7 +50,7 @@ export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseS
   const download = () => {
     const a = document.createElement("a");
     a.href = canvas.current!.toDataURL("image/png");
-    a.download = `${slug}-${record.id?.map((n: number) => n.toString(16).padStart(8, "0")).join("")}.png`;
+    a.download = `${fileBase(slug, record)}.png`;
     a.click();
   };
 
@@ -71,9 +73,14 @@ export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseS
         <a href={encoded.link} className="mono" data-testid="share-link">
           {encoded.link}
         </a>
-        <button type="button" onClick={download}>
-          {t("qr.download")}
-        </button>
+        <div className="exports">
+          <button type="button" onClick={download}>
+            {t("qr.download")}
+          </button>
+          <button type="button" onClick={() => downloadIfc(slug, schema, record, labels)}>
+            {t("qr.ifc")}
+          </button>
+        </div>
       </div>
     </div>
   );

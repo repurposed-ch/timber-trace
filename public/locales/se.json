@@ -64,7 +64,8 @@
     "copied": "Kopierad",
     "link": "Delningslänk",
     "size": "{{bits}} bitar · {{chars}} tecken",
-    "download": "Ladda ner PNG"
+    "download": "Ladda ner PNG",
+    "ifc": "Ladda ner IFC"
   },
   "scan": {
     "title": "Skanna QR-kod",
