@@ -111,9 +111,11 @@ export function recordToIfc(input: IfcInput): string {
   add(`IFCRELAGGREGATES(${guid()},$,$,$,${building},(${storey}))`);
 
   // geometry: the cross-section (width along y, height along z) extruded along x by the length
+  // profile position is optional in IFC4, but some readers expect it, so it is always written
+  const profilePlace = add(`IFCAXIS2PLACEMENT2D(${add("IFCCARTESIANPOINT((0.,0.))")},$)`);
   const profile = input.round
-    ? add(`IFCCIRCLEPROFILEDEF(.AREA.,${stepString(`D${Math.min(size.width, size.height)}`)},$,${real(Math.min(size.width, size.height) / 2)})`)
-    : add(`IFCRECTANGLEPROFILEDEF(.AREA.,${stepString(`${size.width}x${size.height}`)},$,${real(size.width)},${real(size.height)})`);
+    ? add(`IFCCIRCLEPROFILEDEF(.AREA.,${stepString(`D${Math.min(size.width, size.height)}`)},${profilePlace},${real(Math.min(size.width, size.height) / 2)})`)
+    : add(`IFCRECTANGLEPROFILEDEF(.AREA.,${stepString(`${size.width}x${size.height}`)},${profilePlace},${real(size.width)},${real(size.height)})`);
   const sweep = add(`IFCAXIS2PLACEMENT3D(${origin},${xAxis},${yAxis})`);
   const solid = add(`IFCEXTRUDEDAREASOLID(${profile},${sweep},${zAxis},${real(size.length)})`);
   const shape = add(`IFCSHAPEREPRESENTATION(${body},'Body','SweptSolid',(${solid}))`);

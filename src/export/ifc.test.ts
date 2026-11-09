@@ -42,7 +42,7 @@ describe("recordToIfc", () => {
   });
 
   test("geometry has the record's dimensions", () => {
-    expect(ifc).toContain("IFCRECTANGLEPROFILEDEF(.AREA.,'120x240',$,120.,240.)");
+    expect(ifc).toMatch(/IFCRECTANGLEPROFILEDEF\(\.AREA\.,'120x240',#\d+,120\.,240\.\)/);
     expect(ifc).toMatch(/IFCEXTRUDEDAREASOLID\(#\d+,#\d+,#\d+,4200\.\)/);
   });
 
