@@ -1,10 +1,14 @@
 # timber-trace
 
-POC for inscribing wooden beam geometry data into QR codes. Vite + TypeScript, no framework.
+Static GitHub Pages app (React + Vite + R3F) at `repurposed.ch/timber-trace/`. It inscribes timber component data into base45 QR codes with densing. See README.md for the file layout.
 
-- `src/beam.ts` — payload format (`TT1|id|species|length|width|height|holes`), encode/decode. All lengths in mm.
-- `src/main.ts` — UI: form → QR canvas, paste payload → decoded beam.
-- Tests: `bun test`. Build: `bun run build`.
+- `src/schema/`: loader (fetches `public/<slug>/…`), codec (base45 / URL-safe, version detection, 128-bit id), labels (required-label rules), field helpers.
+- `src/components/`: RecordForm (generated from the schema), BeamViewer, QrPanel, Scanner, SchemaInspector (dev editor only under `import.meta.env.DEV`), UpdateBanner.
+- `src/materials/`: wood shader + species/product presets. Every species in the schema needs a preset; a test checks this.
+- `src/records/`: `RecordSource` interface. The static adapter is a stand-in for the future database.
+- Schemas and translations are static JSON in `public/`, fetched at runtime. Never import them into the bundle.
+- Adding a schema: add the slug to `public/schemas.json` and create `public/<slug>/{index.json,schema/1.json,locales/*.json}`. Don't change a published schema version; add a new version file instead.
+- All lengths are in mm. Tests: `bun test`. Build: `bun run build`.
 
 ## Commits
 
@@ -15,6 +19,6 @@ POC for inscribing wooden beam geometry data into QR codes. Vite + TypeScript, n
 
 Every plan must include:
 
-- **Success criteria** — concrete, checkable outcomes (tests passing, behaviour observed, payload decodes, etc.).
-- **Failure criteria** — conditions under which the approach is considered failed or must be abandoned/revisited.
-- **Expected changed lines of code** — an estimate per file or step (e.g. `src/beam.ts ~+40/-5`), and a total.
+- **Success criteria**: concrete, checkable outcomes (tests passing, behaviour observed, payload decodes, etc.).
+- **Failure criteria**: conditions under which the approach is considered failed or must be abandoned/revisited.
+- **Expected changed lines of code**: an estimate per file or step (e.g. `src/beam.ts ~+40/-5`), and a total.
