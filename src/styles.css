@@ -28,3 +28,23 @@ code, .mono { font-family: ui-monospace, Menlo, monospace; word-break: break-all
 .top p { margin: 4px 0 0; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 h1 a { color: inherit; text-decoration: none; }
+.record { display: grid; gap: 8px; }
+.row { display: grid; grid-template-columns: minmax(110px, 34%) 1fr; gap: 8px; align-items: center; }
+.row > label { font-size: .9rem; color: var(--muted); }
+.control { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; min-width: 0; }
+.control small { flex-basis: 100%; }
+.group { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; display: grid; gap: 8px; margin: 0; min-width: 0; }
+.group legend { font-weight: 600; padding: 0 4px; }
+.group > .variants, .group > button { justify-self: start; }
+.variants { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.variants button { border: 0; border-radius: 0; padding: 3px 9px; }
+.variants button + button { border-left: 1px solid var(--line); }
+.variants button.on { background: var(--accent); color: #fff; }
+.item { display: grid; gap: 6px; border-top: 1px dashed var(--line); padding-top: 6px; }
+.item > button { justify-self: start; }
+.id { display: flex; gap: 6px; flex-wrap: wrap; }
+.id input { flex: 1 1 18ch; min-width: 0; width: 100%; }
+select { max-width: 100%; }
+h3 { font-size: 1rem; margin: 0 0 8px; }
+.layout { display: grid; gap: 12px; grid-template-columns: 1fr; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(380px, 1fr) 1.3fr; align-items: start; } }

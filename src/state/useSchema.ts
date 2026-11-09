@@ -48,6 +48,7 @@ export function useLabels(slug: string, countryEnums: string[] = []): Labels {
       const own = raw.options?.[path]?.[value] ?? fallback.options?.[path]?.[value];
       if (own) return own;
       if (countryEnums.includes(path) && /^[A-Z]{2}$/.test(value)) return regions?.of(value) ?? value;
+      if (value === "unknown") return i18n.t("form.unknown", { ns: "ui" });
       return value;
     },
   };
