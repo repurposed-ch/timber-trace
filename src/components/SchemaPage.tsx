@@ -7,10 +7,15 @@ import { useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
+import { Scanner } from "./Scanner";
+
+const TABS = ["record", "scan"] as const;
+type Tab = (typeof TABS)[number];
 
 export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchema }) {
   const { t } = useTranslation(slug); // suspends until this schema's labels are fetched
   const labels = useLabels(slug, schema.meta.countryEnums);
+  const [tab, setTab] = useState<Tab>("record");
   const dense = schema.versions.get(schema.latest)!;
   const [record, setRecord] = useState(() => fromHash(schema) ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
 
@@ -33,22 +38,43 @@ export function SchemaPage({ slug, schema }: { slug: string; schema: LoadedSchem
     <section>
       <h2>{labels.raw.title ?? slug}</h2>
       <p className="muted">{labels.raw.description}</p>
-      <div className="layout">
+      <nav className="tabs" role="tablist">
+        {TABS.map((k) => (
+          <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
+            {t(`nav.${k}`, { ns: "ui" })}
+          </button>
+        ))}
+      </nav>
+      {tab === "scan" && (
         <div className="card">
-          <h3>{t("form.title", { ns: "ui" })}</h3>
-          <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
+          <h3>{t("scan.title", { ns: "ui" })}</h3>
+          <Scanner
+            schema={schema}
+            onDecoded={(r) => {
+              setRecord(r.data);
+              setTab("record");
+            }}
+          />
         </div>
-        <div className="side">
+      )}
+      {tab === "record" && (
+        <div className="layout">
           <div className="card">
-            <h3>{t("viewer.title", { ns: "ui" })}</h3>
-            <BeamViewer record={record} />
+            <h3>{t("form.title", { ns: "ui" })}</h3>
+            <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
           </div>
-          <div className="card">
-            <h3>{t("qr.title", { ns: "ui" })}</h3>
-            <QrPanel slug={slug} schema={dense} record={record} />
+          <div className="side">
+            <div className="card">
+              <h3>{t("viewer.title", { ns: "ui" })}</h3>
+              <BeamViewer record={record} />
+            </div>
+            <div className="card">
+              <h3>{t("qr.title", { ns: "ui" })}</h3>
+              <QrPanel slug={slug} schema={dense} record={record} />
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   );
 }
