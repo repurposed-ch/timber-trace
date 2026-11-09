@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Første prototypeskema for trækomponenter.",
+  "fields": {
+    "version": "Skemaversion",
+    "id": "Komponent-ID",
+    "origin": "Oprindelse",
+    "origin.provenance": "Materialekilde",
+    "origin.country": "Land",
+    "origin.year": "År",
+    "origin.year.value": "År",
+    "species": "Træart",
+    "product": "Produkt",
+    "product.value": "Produkttype",
+    "product.text": "Produktbetegnelse",
+    "dimensions": "Mål",
+    "dimensions.length": "Længde",
+    "dimensions.length.value": "Længde (mm)",
+    "dimensions.width": "Bredde",
+    "dimensions.width.value": "Bredde (mm)",
+    "dimensions.height": "Højde",
+    "dimensions.height.value": "Højde (mm)",
+    "grade": "Styrkeklasse",
+    "grade.class": "Klasse",
+    "grade.class.value": "Klasse",
+    "grade.class.text": "Klassebetegnelse",
+    "grade.source": "Sorteringskilde",
+    "grade.standard": "Sorteringsstandard",
+    "assessments": "Vurderinger",
+    "assessments[].kind": "Type",
+    "assessments[].ref": "Reference"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "origin.provenance": {
+      "unknown": "Ukendt",
+      "virgin": "Ny (jomfrueligt)",
+      "reclaimed": "Genbrugt"
+    },
+    "origin.year.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "species": {
+      "unknown": "Ukendt",
+      "other": "Andet",
+      "spruce": "Rødgran",
+      "silver_fir": "Ædelgran",
+      "scots_pine": "Skovfyr",
+      "black_pine": "Østrigsk fyr",
+      "maritime_pine": "Strandfyr",
+      "swiss_stone_pine": "Cembrafyr",
+      "weymouth_pine": "Weymouthfyr",
+      "larch": "Lærk",
+      "douglas_fir": "Douglasgran",
+      "yew": "Taks",
+      "atlas_cedar": "Atlasceder",
+      "sitka_spruce": "Sitkagran",
+      "western_hemlock": "Vestamerikansk hemlock",
+      "western_red_cedar": "Kæmpethuja",
+      "southern_yellow_pine": "Southern yellow pine",
+      "radiata_pine": "Montereyfyr",
+      "european_oak": "Eg",
+      "red_oak": "Rødeg",
+      "white_oak": "Amerikansk hvideg",
+      "beech": "Bøg",
+      "ash": "Ask",
+      "sweet_chestnut": "Ægte kastanje",
+      "maple": "Ahorn",
+      "sycamore": "Ær",
+      "birch": "Birk",
+      "alder": "El",
+      "poplar": "Poppel",
+      "lime": "Lind",
+      "elm": "Elm",
+      "walnut": "Valnød",
+      "cherry": "Kirsebær",
+      "robinia": "Robinie",
+      "hornbeam": "Avnbøg",
+      "plane": "Platan",
+      "eucalyptus": "Eukalyptus",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapeli",
+      "azobe": "Azobé",
+      "ipe": "Ipe",
+      "okoume": "Okoumé",
+      "mahogany": "Mahogni",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatoba",
+      "padauk": "Padouk",
+      "wenge": "Wenge"
+    },
+    "product.kind": {
+      "known": "Fra liste",
+      "custom": "Brugerdefineret"
+    },
+    "product.value": {
+      "unknown": "Ukendt",
+      "solid_sawn": "Massivt savet træ",
+      "kvh": "Fingerskarret konstruktionstræ (KVH)",
+      "duo_trio": "Duo-/triobjælke",
+      "glulam": "Limtræ",
+      "block_glulam": "Blokliimet limtræ",
+      "clt": "Krydslamineret træ (CLT)",
+      "lvl": "Finérlamineret træ (LVL)",
+      "psl": "Parallelspåntræ (PSL)",
+      "lsl": "Laminated strand lumber (LSL)",
+      "round": "Rundtræ"
+    },
+    "dimensions.length.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "dimensions.width.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "dimensions.height.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "grade.status": {
+      "unknown": "Ukendt",
+      "recorded": "Registreret"
+    },
+    "grade.class.kind": {
+      "known": "Fra liste",
+      "custom": "Brugerdefineret"
+    },
+    "grade.source": {
+      "visual": "Visuel sortering",
+      "machine": "Maskinsortering",
+      "document": "Dokument",
+      "label": "Stempel / mærkat"
+    },
+    "assessments[].kind": {
+      "visual": "Visuel inspektion",
+      "moisture": "Fugtindhold",
+      "ndt": "Ikke-destruktiv prøvning",
+      "lab": "Laboratorieprøvning",
+      "structural": "Konstruktiv vurdering",
+      "other": "Andet"
+    }
+  }
+}

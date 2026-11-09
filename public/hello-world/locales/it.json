@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Primo schema prototipo per elementi in legno.",
+  "fields": {
+    "version": "Versione dello schema",
+    "id": "ID dell'elemento",
+    "origin": "Origine",
+    "origin.provenance": "Fonte del materiale",
+    "origin.country": "Paese",
+    "origin.year": "Anno",
+    "origin.year.value": "Anno",
+    "species": "Specie legnosa",
+    "product": "Prodotto",
+    "product.value": "Tipo di prodotto",
+    "product.text": "Denominazione del prodotto",
+    "dimensions": "Dimensioni",
+    "dimensions.length": "Lunghezza",
+    "dimensions.length.value": "Lunghezza (mm)",
+    "dimensions.width": "Larghezza",
+    "dimensions.width.value": "Larghezza (mm)",
+    "dimensions.height": "Altezza",
+    "dimensions.height.value": "Altezza (mm)",
+    "grade": "Classe di resistenza",
+    "grade.class": "Classe",
+    "grade.class.value": "Classe",
+    "grade.class.text": "Denominazione della classe",
+    "grade.source": "Fonte della classificazione",
+    "grade.standard": "Norma di classificazione",
+    "assessments": "Valutazioni",
+    "assessments[].kind": "Tipo",
+    "assessments[].ref": "Riferimento"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "origin.provenance": {
+      "unknown": "Sconosciuto",
+      "virgin": "Nuovo",
+      "reclaimed": "Di recupero"
+    },
+    "origin.year.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "species": {
+      "unknown": "Sconosciuto",
+      "other": "Altro",
+      "spruce": "Abete rosso",
+      "silver_fir": "Abete bianco",
+      "scots_pine": "Pino silvestre",
+      "black_pine": "Pino nero",
+      "maritime_pine": "Pino marittimo",
+      "swiss_stone_pine": "Pino cembro",
+      "weymouth_pine": "Pino strobo",
+      "larch": "Larice",
+      "douglas_fir": "Douglasia",
+      "yew": "Tasso",
+      "atlas_cedar": "Cedro dell'Atlante",
+      "sitka_spruce": "Abete di Sitka",
+      "western_hemlock": "Tsuga occidentale",
+      "western_red_cedar": "Cedro rosso occidentale",
+      "southern_yellow_pine": "Pino giallo del sud",
+      "radiata_pine": "Pino insigne",
+      "european_oak": "Rovere",
+      "red_oak": "Quercia rossa",
+      "white_oak": "Quercia bianca americana",
+      "beech": "Faggio",
+      "ash": "Frassino",
+      "sweet_chestnut": "Castagno",
+      "maple": "Acero",
+      "sycamore": "Acero di monte",
+      "birch": "Betulla",
+      "alder": "Ontano",
+      "poplar": "Pioppo",
+      "lime": "Tiglio",
+      "elm": "Olmo",
+      "walnut": "Noce",
+      "cherry": "Ciliegio",
+      "robinia": "Robinia",
+      "hornbeam": "Carpino bianco",
+      "plane": "Platano",
+      "eucalyptus": "Eucalipto",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapelli",
+      "azobe": "Azobé",
+      "ipe": "Ipè",
+      "okoume": "Okoumé",
+      "mahogany": "Mogano",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatoba",
+      "padauk": "Padouk",
+      "wenge": "Wengé"
+    },
+    "product.kind": {
+      "known": "Da elenco",
+      "custom": "Personalizzato"
+    },
+    "product.value": {
+      "unknown": "Sconosciuto",
+      "solid_sawn": "Legno massiccio segato",
+      "kvh": "Legno massiccio strutturale giuntato (KVH)",
+      "duo_trio": "Trave duo/trio",
+      "glulam": "Legno lamellare incollato",
+      "block_glulam": "Lamellare incollato a blocchi",
+      "clt": "Legno lamellare a strati incrociati (X-LAM)",
+      "lvl": "Legno lamellare da sfogliati (LVL)",
+      "psl": "Legno a strisce parallele (PSL)",
+      "lsl": "Legno a scaglie laminate (LSL)",
+      "round": "Legno tondo"
+    },
+    "dimensions.length.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "dimensions.width.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "dimensions.height.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "grade.status": {
+      "unknown": "Sconosciuto",
+      "recorded": "Registrato"
+    },
+    "grade.class.kind": {
+      "known": "Da elenco",
+      "custom": "Personalizzato"
+    },
+    "grade.source": {
+      "visual": "Classificazione a vista",
+      "machine": "Classificazione a macchina",
+      "document": "Documento",
+      "label": "Marcatura / etichetta"
+    },
+    "assessments[].kind": {
+      "visual": "Ispezione visiva",
+      "moisture": "Umidità del legno",
+      "ndt": "Prova non distruttiva",
+      "lab": "Prova di laboratorio",
+      "structural": "Valutazione strutturale",
+      "other": "Altro"
+    }
+  }
+}

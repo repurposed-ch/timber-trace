@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Premier schéma prototype pour les éléments en bois.",
+  "fields": {
+    "version": "Version du schéma",
+    "id": "ID de l'élément",
+    "origin": "Origine",
+    "origin.provenance": "Source du matériau",
+    "origin.country": "Pays",
+    "origin.year": "Année",
+    "origin.year.value": "Année",
+    "species": "Essence",
+    "product": "Produit",
+    "product.value": "Type de produit",
+    "product.text": "Désignation du produit",
+    "dimensions": "Dimensions",
+    "dimensions.length": "Longueur",
+    "dimensions.length.value": "Longueur (mm)",
+    "dimensions.width": "Largeur",
+    "dimensions.width.value": "Largeur (mm)",
+    "dimensions.height": "Hauteur",
+    "dimensions.height.value": "Hauteur (mm)",
+    "grade": "Classe de résistance",
+    "grade.class": "Classe",
+    "grade.class.value": "Classe",
+    "grade.class.text": "Désignation de la classe",
+    "grade.source": "Source du classement",
+    "grade.standard": "Norme de classement",
+    "assessments": "Évaluations",
+    "assessments[].kind": "Type",
+    "assessments[].ref": "Référence"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "origin.provenance": {
+      "unknown": "Inconnu",
+      "virgin": "Neuf",
+      "reclaimed": "Réemploi"
+    },
+    "origin.year.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "species": {
+      "unknown": "Inconnu",
+      "other": "Autre",
+      "spruce": "Épicéa",
+      "silver_fir": "Sapin blanc",
+      "scots_pine": "Pin sylvestre",
+      "black_pine": "Pin noir",
+      "maritime_pine": "Pin maritime",
+      "swiss_stone_pine": "Pin cembro",
+      "weymouth_pine": "Pin de Weymouth",
+      "larch": "Mélèze",
+      "douglas_fir": "Douglas",
+      "yew": "If",
+      "atlas_cedar": "Cèdre de l'Atlas",
+      "sitka_spruce": "Épicéa de Sitka",
+      "western_hemlock": "Pruche de l'Ouest",
+      "western_red_cedar": "Thuya géant",
+      "southern_yellow_pine": "Pin jaune du Sud",
+      "radiata_pine": "Pin de Monterey",
+      "european_oak": "Chêne européen",
+      "red_oak": "Chêne rouge",
+      "white_oak": "Chêne blanc d'Amérique",
+      "beech": "Hêtre",
+      "ash": "Frêne",
+      "sweet_chestnut": "Châtaignier",
+      "maple": "Érable",
+      "sycamore": "Érable sycomore",
+      "birch": "Bouleau",
+      "alder": "Aulne",
+      "poplar": "Peuplier",
+      "lime": "Tilleul",
+      "elm": "Orme",
+      "walnut": "Noyer",
+      "cherry": "Merisier",
+      "robinia": "Robinier",
+      "hornbeam": "Charme",
+      "plane": "Platane",
+      "eucalyptus": "Eucalyptus",
+      "teak": "Teck",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapelli",
+      "azobe": "Azobé",
+      "ipe": "Ipé",
+      "okoume": "Okoumé",
+      "mahogany": "Acajou",
+      "afzelia": "Doussié",
+      "jatoba": "Jatoba",
+      "padauk": "Padouk",
+      "wenge": "Wengé"
+    },
+    "product.kind": {
+      "known": "Dans la liste",
+      "custom": "Personnalisé"
+    },
+    "product.value": {
+      "unknown": "Inconnu",
+      "solid_sawn": "Bois massif scié",
+      "kvh": "Bois massif abouté (KVH)",
+      "duo_trio": "Poutre duo/trio",
+      "glulam": "Bois lamellé-collé",
+      "block_glulam": "Lamellé-collé en bloc",
+      "clt": "Bois lamellé-croisé (CLT)",
+      "lvl": "Lamibois (LVL)",
+      "psl": "Bois à copeaux parallèles (PSL)",
+      "lsl": "Bois de copeaux laminés (LSL)",
+      "round": "Bois rond"
+    },
+    "dimensions.length.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "dimensions.width.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "dimensions.height.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "grade.status": {
+      "unknown": "Inconnu",
+      "recorded": "Enregistré"
+    },
+    "grade.class.kind": {
+      "known": "Dans la liste",
+      "custom": "Personnalisé"
+    },
+    "grade.source": {
+      "visual": "Classement visuel",
+      "machine": "Classement par machine",
+      "document": "Document",
+      "label": "Marquage / étiquette"
+    },
+    "assessments[].kind": {
+      "visual": "Inspection visuelle",
+      "moisture": "Humidité du bois",
+      "ndt": "Contrôle non destructif",
+      "lab": "Essai en laboratoire",
+      "structural": "Évaluation structurale",
+      "other": "Autre"
+    }
+  }
+}

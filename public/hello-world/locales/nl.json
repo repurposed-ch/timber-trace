@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Eerste prototypeschema voor houten componenten.",
+  "fields": {
+    "version": "Schemaversie",
+    "id": "Component-ID",
+    "origin": "Herkomst",
+    "origin.provenance": "Materiaalbron",
+    "origin.country": "Land",
+    "origin.year": "Jaar",
+    "origin.year.value": "Jaar",
+    "species": "Houtsoort",
+    "product": "Product",
+    "product.value": "Producttype",
+    "product.text": "Productomschrijving",
+    "dimensions": "Afmetingen",
+    "dimensions.length": "Lengte",
+    "dimensions.length.value": "Lengte (mm)",
+    "dimensions.width": "Breedte",
+    "dimensions.width.value": "Breedte (mm)",
+    "dimensions.height": "Hoogte",
+    "dimensions.height.value": "Hoogte (mm)",
+    "grade": "Sterkteklasse",
+    "grade.class": "Klasse",
+    "grade.class.value": "Klasse",
+    "grade.class.text": "Klasseaanduiding",
+    "grade.source": "Bron van de sortering",
+    "grade.standard": "Sorteringsnorm",
+    "assessments": "Beoordelingen",
+    "assessments[].kind": "Soort",
+    "assessments[].ref": "Referentie"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "origin.provenance": {
+      "unknown": "Onbekend",
+      "virgin": "Nieuw",
+      "reclaimed": "Hergebruikt"
+    },
+    "origin.year.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "species": {
+      "unknown": "Onbekend",
+      "other": "Overig",
+      "spruce": "Fijnspar",
+      "silver_fir": "Zilverspar",
+      "scots_pine": "Grove den",
+      "black_pine": "Oostenrijkse den",
+      "maritime_pine": "Zeeden",
+      "swiss_stone_pine": "Alpenden",
+      "weymouth_pine": "Weymouthden",
+      "larch": "Lork",
+      "douglas_fir": "Douglasspar",
+      "yew": "Taxus",
+      "atlas_cedar": "Atlasceder",
+      "sitka_spruce": "Sitkaspar",
+      "western_hemlock": "Westelijke hemlockspar",
+      "western_red_cedar": "Reuzenlevensboom",
+      "southern_yellow_pine": "Southern yellow pine",
+      "radiata_pine": "Montereyden",
+      "european_oak": "Europees eiken",
+      "red_oak": "Amerikaans rood eiken",
+      "white_oak": "Amerikaans wit eiken",
+      "beech": "Beuken",
+      "ash": "Essen",
+      "sweet_chestnut": "Tamme kastanje",
+      "maple": "Esdoorn",
+      "sycamore": "Gewone esdoorn",
+      "birch": "Berken",
+      "alder": "Elzen",
+      "poplar": "Populier",
+      "lime": "Linde",
+      "elm": "Iep",
+      "walnut": "Noten",
+      "cherry": "Kersen",
+      "robinia": "Robinia",
+      "hornbeam": "Haagbeuk",
+      "plane": "Plataan",
+      "eucalyptus": "Eucalyptus",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapeli",
+      "azobe": "Azobé",
+      "ipe": "Ipe",
+      "okoume": "Okoumé",
+      "mahogany": "Mahonie",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatoba",
+      "padauk": "Padoek",
+      "wenge": "Wengé"
+    },
+    "product.kind": {
+      "known": "Uit lijst",
+      "custom": "Aangepast"
+    },
+    "product.value": {
+      "unknown": "Onbekend",
+      "solid_sawn": "Massief gezaagd hout",
+      "kvh": "Gevingerlast constructiehout (KVH)",
+      "duo_trio": "Duo-/triobalk",
+      "glulam": "Gelamineerd hout",
+      "block_glulam": "Blokgelijmd gelamineerd hout",
+      "clt": "Kruislaaghout (CLT)",
+      "lvl": "Fineerlaaghout (LVL)",
+      "psl": "Parallel strand lumber (PSL)",
+      "lsl": "Laminated strand lumber (LSL)",
+      "round": "Rondhout"
+    },
+    "dimensions.length.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "dimensions.width.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "dimensions.height.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "grade.status": {
+      "unknown": "Onbekend",
+      "recorded": "Vastgelegd"
+    },
+    "grade.class.kind": {
+      "known": "Uit lijst",
+      "custom": "Aangepast"
+    },
+    "grade.source": {
+      "visual": "Visuele sortering",
+      "machine": "Machinale sortering",
+      "document": "Document",
+      "label": "Stempel / etiket"
+    },
+    "assessments[].kind": {
+      "visual": "Visuele inspectie",
+      "moisture": "Vochtgehalte",
+      "ndt": "Niet-destructief onderzoek",
+      "lab": "Laboratoriumtest",
+      "structural": "Constructieve beoordeling",
+      "other": "Overig"
+    }
+  }
+}

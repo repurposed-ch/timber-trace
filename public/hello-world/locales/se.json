@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Första prototypschemat för träkomponenter.",
+  "fields": {
+    "version": "Schemaversion",
+    "id": "Komponent-ID",
+    "origin": "Ursprung",
+    "origin.provenance": "Materialkälla",
+    "origin.country": "Land",
+    "origin.year": "År",
+    "origin.year.value": "År",
+    "species": "Träslag",
+    "product": "Produkt",
+    "product.value": "Produkttyp",
+    "product.text": "Produktbeteckning",
+    "dimensions": "Mått",
+    "dimensions.length": "Längd",
+    "dimensions.length.value": "Längd (mm)",
+    "dimensions.width": "Bredd",
+    "dimensions.width.value": "Bredd (mm)",
+    "dimensions.height": "Höjd",
+    "dimensions.height.value": "Höjd (mm)",
+    "grade": "Hållfasthetsklass",
+    "grade.class": "Klass",
+    "grade.class.value": "Klass",
+    "grade.class.text": "Klassbeteckning",
+    "grade.source": "Sorteringskälla",
+    "grade.standard": "Sorteringsstandard",
+    "assessments": "Bedömningar",
+    "assessments[].kind": "Typ",
+    "assessments[].ref": "Referens"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "origin.provenance": {
+      "unknown": "Okänd",
+      "virgin": "Ny (jungfrulig)",
+      "reclaimed": "Återbrukat"
+    },
+    "origin.year.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "species": {
+      "unknown": "Okänd",
+      "other": "Annat",
+      "spruce": "Gran",
+      "silver_fir": "Silvergran",
+      "scots_pine": "Tall",
+      "black_pine": "Svarttall",
+      "maritime_pine": "Terpentintall",
+      "swiss_stone_pine": "Cembratall",
+      "weymouth_pine": "Weymouthtall",
+      "larch": "Lärk",
+      "douglas_fir": "Douglasgran",
+      "yew": "Idegran",
+      "atlas_cedar": "Atlasceder",
+      "sitka_spruce": "Sitkagran",
+      "western_hemlock": "Västamerikansk hemlock",
+      "western_red_cedar": "Jättetuja",
+      "southern_yellow_pine": "Southern yellow pine",
+      "radiata_pine": "Montereytall",
+      "european_oak": "Ek",
+      "red_oak": "Rödek",
+      "white_oak": "Amerikansk vitek",
+      "beech": "Bok",
+      "ash": "Ask",
+      "sweet_chestnut": "Äkta kastanj",
+      "maple": "Lönn",
+      "sycamore": "Tysklönn",
+      "birch": "Björk",
+      "alder": "Al",
+      "poplar": "Poppel",
+      "lime": "Lind",
+      "elm": "Alm",
+      "walnut": "Valnöt",
+      "cherry": "Körsbär",
+      "robinia": "Robinia",
+      "hornbeam": "Avenbok",
+      "plane": "Platan",
+      "eucalyptus": "Eukalyptus",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapeli",
+      "azobe": "Azobé",
+      "ipe": "Ipe",
+      "okoume": "Okoumé",
+      "mahogany": "Mahogny",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatoba",
+      "padauk": "Padauk",
+      "wenge": "Wenge"
+    },
+    "product.kind": {
+      "known": "Från lista",
+      "custom": "Anpassad"
+    },
+    "product.value": {
+      "unknown": "Okänd",
+      "solid_sawn": "Massivt sågat virke",
+      "kvh": "Fingerskarvat konstruktionsvirke (KVH)",
+      "duo_trio": "Duo-/triobalk",
+      "glulam": "Limträ",
+      "block_glulam": "Blocklimmat limträ",
+      "clt": "Korslimmat trä (KL-trä)",
+      "lvl": "Fanerträ (LVL)",
+      "psl": "Parallel strand lumber (PSL)",
+      "lsl": "Laminated strand lumber (LSL)",
+      "round": "Rundvirke"
+    },
+    "dimensions.length.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "dimensions.width.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "dimensions.height.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "grade.status": {
+      "unknown": "Okänd",
+      "recorded": "Registrerad"
+    },
+    "grade.class.kind": {
+      "known": "Från lista",
+      "custom": "Anpassad"
+    },
+    "grade.source": {
+      "visual": "Visuell sortering",
+      "machine": "Maskinell sortering",
+      "document": "Dokument",
+      "label": "Stämpel / etikett"
+    },
+    "assessments[].kind": {
+      "visual": "Visuell besiktning",
+      "moisture": "Fuktkvot",
+      "ndt": "Oförstörande provning",
+      "lab": "Laboratorieprovning",
+      "structural": "Konstruktiv bedömning",
+      "other": "Annat"
+    }
+  }
+}

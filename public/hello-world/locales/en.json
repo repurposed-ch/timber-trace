@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "First prototype schema for timber components.",
+  "fields": {
+    "version": "Schema version",
+    "id": "Component ID",
+    "origin": "Origin",
+    "origin.provenance": "Material source",
+    "origin.country": "Country",
+    "origin.year": "Year",
+    "origin.year.value": "Year",
+    "species": "Species",
+    "product": "Product",
+    "product.value": "Product type",
+    "product.text": "Product description",
+    "dimensions": "Dimensions",
+    "dimensions.length": "Length",
+    "dimensions.length.value": "Length (mm)",
+    "dimensions.width": "Width",
+    "dimensions.width.value": "Width (mm)",
+    "dimensions.height": "Height",
+    "dimensions.height.value": "Height (mm)",
+    "grade": "Strength grade",
+    "grade.class": "Class",
+    "grade.class.value": "Class",
+    "grade.class.text": "Class designation",
+    "grade.source": "Grading source",
+    "grade.standard": "Grading standard",
+    "assessments": "Assessments",
+    "assessments[].kind": "Kind",
+    "assessments[].ref": "Reference"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "origin.provenance": {
+      "unknown": "Unknown",
+      "virgin": "New (virgin)",
+      "reclaimed": "Reclaimed"
+    },
+    "origin.year.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "species": {
+      "unknown": "Unknown",
+      "other": "Other",
+      "spruce": "Norway spruce",
+      "silver_fir": "Silver fir",
+      "scots_pine": "Scots pine",
+      "black_pine": "Black pine",
+      "maritime_pine": "Maritime pine",
+      "swiss_stone_pine": "Swiss stone pine",
+      "weymouth_pine": "Weymouth pine",
+      "larch": "European larch",
+      "douglas_fir": "Douglas fir",
+      "yew": "Yew",
+      "atlas_cedar": "Atlas cedar",
+      "sitka_spruce": "Sitka spruce",
+      "western_hemlock": "Western hemlock",
+      "western_red_cedar": "Western red cedar",
+      "southern_yellow_pine": "Southern yellow pine",
+      "radiata_pine": "Radiata pine",
+      "european_oak": "European oak",
+      "red_oak": "Red oak",
+      "white_oak": "American white oak",
+      "beech": "Beech",
+      "ash": "Ash",
+      "sweet_chestnut": "Sweet chestnut",
+      "maple": "Maple",
+      "sycamore": "Sycamore maple",
+      "birch": "Birch",
+      "alder": "Alder",
+      "poplar": "Poplar",
+      "lime": "Lime",
+      "elm": "Elm",
+      "walnut": "Walnut",
+      "cherry": "Cherry",
+      "robinia": "Robinia",
+      "hornbeam": "Hornbeam",
+      "plane": "Plane",
+      "eucalyptus": "Eucalyptus",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapele",
+      "azobe": "Azobé",
+      "ipe": "Ipê",
+      "okoume": "Okoumé",
+      "mahogany": "Mahogany",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatobá",
+      "padauk": "Padauk",
+      "wenge": "Wengé"
+    },
+    "product.kind": {
+      "known": "From list",
+      "custom": "Custom"
+    },
+    "product.value": {
+      "unknown": "Unknown",
+      "solid_sawn": "Solid sawn timber",
+      "kvh": "Finger-jointed structural timber (KVH)",
+      "duo_trio": "Duo/trio beam",
+      "glulam": "Glulam",
+      "block_glulam": "Block-glued glulam",
+      "clt": "Cross-laminated timber (CLT)",
+      "lvl": "Laminated veneer lumber (LVL)",
+      "psl": "Parallel strand lumber (PSL)",
+      "lsl": "Laminated strand lumber (LSL)",
+      "round": "Round timber"
+    },
+    "dimensions.length.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "dimensions.width.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "dimensions.height.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "grade.status": {
+      "unknown": "Unknown",
+      "recorded": "Recorded"
+    },
+    "grade.class.kind": {
+      "known": "From list",
+      "custom": "Custom"
+    },
+    "grade.source": {
+      "visual": "Visual grading",
+      "machine": "Machine grading",
+      "document": "Document",
+      "label": "Stamp / label"
+    },
+    "assessments[].kind": {
+      "visual": "Visual inspection",
+      "moisture": "Moisture content",
+      "ndt": "Non-destructive testing",
+      "lab": "Laboratory test",
+      "structural": "Structural assessment",
+      "other": "Other"
+    }
+  }
+}

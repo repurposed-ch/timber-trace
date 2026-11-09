@@ -1,0 +1,157 @@
+{
+  "title": "Hello world",
+  "description": "Erstes Prototyp-Schema für Holzbauteile.",
+  "fields": {
+    "version": "Schemaversion",
+    "id": "Bauteil-ID",
+    "origin": "Herkunft",
+    "origin.provenance": "Materialquelle",
+    "origin.country": "Land",
+    "origin.year": "Jahr",
+    "origin.year.value": "Jahr",
+    "species": "Holzart",
+    "product": "Produkt",
+    "product.value": "Produkttyp",
+    "product.text": "Produktbezeichnung",
+    "dimensions": "Abmessungen",
+    "dimensions.length": "Länge",
+    "dimensions.length.value": "Länge (mm)",
+    "dimensions.width": "Breite",
+    "dimensions.width.value": "Breite (mm)",
+    "dimensions.height": "Höhe",
+    "dimensions.height.value": "Höhe (mm)",
+    "grade": "Festigkeitsklasse",
+    "grade.class": "Klasse",
+    "grade.class.value": "Klasse",
+    "grade.class.text": "Klassenbezeichnung",
+    "grade.source": "Sortierquelle",
+    "grade.standard": "Sortiernorm",
+    "assessments": "Beurteilungen",
+    "assessments[].kind": "Art",
+    "assessments[].ref": "Referenz"
+  },
+  "options": {
+    "origin.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "origin.provenance": {
+      "unknown": "Unbekannt",
+      "virgin": "Neu (Primärholz)",
+      "reclaimed": "Wiederverwendet"
+    },
+    "origin.year.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "species": {
+      "unknown": "Unbekannt",
+      "other": "Andere",
+      "spruce": "Fichte",
+      "silver_fir": "Weisstanne",
+      "scots_pine": "Waldkiefer",
+      "black_pine": "Schwarzkiefer",
+      "maritime_pine": "Seekiefer",
+      "swiss_stone_pine": "Arve",
+      "weymouth_pine": "Weymouthkiefer",
+      "larch": "Lärche",
+      "douglas_fir": "Douglasie",
+      "yew": "Eibe",
+      "atlas_cedar": "Atlaszeder",
+      "sitka_spruce": "Sitka-Fichte",
+      "western_hemlock": "Westliche Hemlocktanne",
+      "western_red_cedar": "Riesen-Lebensbaum",
+      "southern_yellow_pine": "Southern Yellow Pine",
+      "radiata_pine": "Monterey-Kiefer",
+      "european_oak": "Eiche",
+      "red_oak": "Roteiche",
+      "white_oak": "Amerikanische Weisseiche",
+      "beech": "Buche",
+      "ash": "Esche",
+      "sweet_chestnut": "Edelkastanie",
+      "maple": "Ahorn",
+      "sycamore": "Bergahorn",
+      "birch": "Birke",
+      "alder": "Erle",
+      "poplar": "Pappel",
+      "lime": "Linde",
+      "elm": "Ulme",
+      "walnut": "Nussbaum",
+      "cherry": "Kirschbaum",
+      "robinia": "Robinie",
+      "hornbeam": "Hainbuche",
+      "plane": "Platane",
+      "eucalyptus": "Eukalyptus",
+      "teak": "Teak",
+      "iroko": "Iroko",
+      "sipo": "Sipo",
+      "meranti": "Meranti",
+      "bangkirai": "Bangkirai",
+      "merbau": "Merbau",
+      "bilinga": "Bilinga",
+      "cumaru": "Cumaru",
+      "garapa": "Garapa",
+      "massaranduba": "Massaranduba",
+      "sapele": "Sapelli",
+      "azobe": "Azobé",
+      "ipe": "Ipe",
+      "okoume": "Okoumé",
+      "mahogany": "Mahagoni",
+      "afzelia": "Afzelia",
+      "jatoba": "Jatoba",
+      "padauk": "Padouk",
+      "wenge": "Wenge"
+    },
+    "product.kind": {
+      "known": "Aus Liste",
+      "custom": "Eigene Angabe"
+    },
+    "product.value": {
+      "unknown": "Unbekannt",
+      "solid_sawn": "Vollholz",
+      "kvh": "Konstruktionsvollholz (KVH)",
+      "duo_trio": "Duo-/Triobalken",
+      "glulam": "Brettschichtholz",
+      "block_glulam": "Blockverklebtes Brettschichtholz",
+      "clt": "Brettsperrholz (BSP)",
+      "lvl": "Furnierschichtholz (LVL)",
+      "psl": "Furnierstreifenholz (PSL)",
+      "lsl": "Spanstreifenholz (LSL)",
+      "round": "Rundholz"
+    },
+    "dimensions.length.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "dimensions.width.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "dimensions.height.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "grade.status": {
+      "unknown": "Unbekannt",
+      "recorded": "Erfasst"
+    },
+    "grade.class.kind": {
+      "known": "Aus Liste",
+      "custom": "Eigene Angabe"
+    },
+    "grade.source": {
+      "visual": "Visuelle Sortierung",
+      "machine": "Maschinelle Sortierung",
+      "document": "Dokument",
+      "label": "Stempel / Etikett"
+    },
+    "assessments[].kind": {
+      "visual": "Sichtprüfung",
+      "moisture": "Holzfeuchte",
+      "ndt": "Zerstörungsfreie Prüfung",
+      "lab": "Laborprüfung",
+      "structural": "Tragwerksbeurteilung",
+      "other": "Andere"
+    }
+  }
+}
