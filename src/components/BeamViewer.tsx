@@ -4,25 +4,14 @@ import { useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import * as THREE from "three";
 import { createWoodMaterial, updateWoodMaterial } from "../materials/wood";
-
-/** shown when a dimension is unknown, in mm */
-export const DEFAULT_DIMS = { length: 4000, width: 120, height: 240 };
-
-type Dim = { status: string; value?: number };
+import { beamDims } from "../schema/beam";
 
 export function beamShape(record: any) {
-  const dims = record?.dimensions ?? {};
-  const pick = (k: keyof typeof DEFAULT_DIMS) => {
-    const d: Dim | undefined = dims[k];
-    return d?.status === "known" && d.value! > 0 ? { mm: d.value!, known: true } : { mm: DEFAULT_DIMS[k], known: false };
-  };
-  const length = pick("length");
-  const width = pick("width");
-  const height = pick("height");
+  const { size, known } = beamDims(record);
   const product = record?.product?.kind === "known" ? record.product.value : "custom";
   return {
-    size: [length.mm / 1000, height.mm / 1000, width.mm / 1000] as [number, number, number],
-    allKnown: length.known && width.known && height.known,
+    size: [size.length / 1000, size.height / 1000, size.width / 1000] as [number, number, number],
+    allKnown: known,
     species: record?.species ?? "unknown",
     product,
     seed: ((record?.id?.[0] ?? 0) / 2 ** 32) * 97,
