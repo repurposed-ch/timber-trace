@@ -3,8 +3,11 @@
 Static app that inscribes timber component data into a QR code and reads it back.
 Served at [timber-trace.repurposed.ch](https://timber-trace.repurposed.ch/), one path per schema (`/hello-world/`).
 
-- **Record**: a form generated from the schema, with a 3D preview using procedural wood per species and product. It produces a base45 QR code and a share link.
-- **Scan**: camera scan (BarcodeDetector, with a jsQR fallback) or paste a base45 payload or share link.
+- **Record**: the 3D preview (procedural wood per species and product, can be hidden) on top, then a form generated from the schema. It produces a QR code, a share link and downloads:
+  - QR code as PNG,
+  - a one-page **PDF fact sheet** in the current language (QR, 3D snapshot, every fact),
+  - an **IFC4** file with one `IfcBeam`: GlobalId = the 128-bit component ID, extruded cross-section in mm, species as material, every fact in the `TimberTrace` property set.
+- **Scan**: camera scan (BarcodeDetector, with a jsQR fallback) or paste a record link or payload.
 - **Schema**: read-only inspector (fields, ranges, bits, labels). `bun run dev` adds a live schema and label editor.
 - A banner appears when a newer QR code exists for the same component ID.
 
@@ -12,7 +15,7 @@ Served at [timber-trace.repurposed.ch](https://timber-trace.repurposed.ch/), one
 bun install
 bun run dev    # http://localhost:5173/hello-world/
 bun test
-bun run build  # dist/, with dist/<slug>/index.html per schema
+bun run build  # dist/, with dist/<slug>/index.html per schema and a 404.html fallback
 ```
 
 ## Layout
@@ -31,7 +34,8 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
 ## Payload
 
 - [densing](https://github.com/JonasWard/densing) bit-packs the record against the schema of the page's path.
-- The QR content is raw base45 (RFC 9285, QR alphanumeric mode). Share links carry the URL-safe base38 variant in the hash.
+- The QR holds a record link that is pure QR **alphanumeric** mode (`0-9 A-Z $%*+-./:`, no `#`, no lowercase): `HTTPS://TIMBER-TRACE.REPURPOSED.CH/HELLO-WORLD/<PAYLOAD>`. The payload uses densing's URL-safe alphabet `0-9A-Z-.`. Phone cameras open it directly; `404.html` serves the app for any such path.
+- Share links use the same path in lowercase (`/hello-world/<PAYLOAD>`). Old `#` links and raw base45 payloads still decode.
 - Unknown values are an explicit `unknown` variant, never left out.
 - A recorded grade always includes its source and grading standard.
 
