@@ -2,18 +2,9 @@ import i18n from "i18next";
 import HttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
-export const LANGS = ["en", "de", "fr", "it", "dk", "nl", "se"] as const;
-export type Lang = (typeof LANGS)[number];
+import { LANGS, type Lang } from "./i18n-langs";
 
-export const LANG_NAMES: Record<Lang, string> = {
-  en: "English",
-  de: "Deutsch",
-  fr: "Français",
-  it: "Italiano",
-  dk: "Dansk",
-  nl: "Nederlands",
-  se: "Svenska",
-};
+export { LANGS, LANG_NAMES, type Lang } from "./i18n-langs";
 
 /** app codes follow the parent site (dk, se); Intl wants BCP 47 (da, sv) */
 const TO_INTL: Partial<Record<Lang, string>> = { dk: "da", se: "sv" };
