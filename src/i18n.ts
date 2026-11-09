@@ -2,14 +2,11 @@ import i18n from "i18next";
 import HttpBackend from "i18next-http-backend";
 import { initReactI18next } from "react-i18next";
 
-import { LANGS, type Lang } from "./i18n-langs";
+import { LANGS, intlLocale, type Lang } from "./i18n-langs";
 
-export { LANGS, LANG_NAMES, type Lang } from "./i18n-langs";
+export { LANGS, LANG_NAMES, intlLocale, type Lang } from "./i18n-langs";
 
-/** app codes follow the parent site (dk, se); Intl wants BCP 47 (da, sv) */
-const TO_INTL: Partial<Record<Lang, string>> = { dk: "da", se: "sv" };
 const FROM_INTL: Record<string, Lang> = { da: "dk", sv: "se" };
-export const intlLocale = (lng: string) => TO_INTL[lng as Lang] ?? lng;
 
 const STORAGE_KEY = "timber-trace.lang";
 

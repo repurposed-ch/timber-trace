@@ -10,3 +10,7 @@ export const LANG_NAMES: Record<Lang, string> = {
   nl: "Nederlands",
   se: "Svenska",
 };
+
+/** app codes follow the parent site (dk, se); Intl wants BCP 47 (da, sv) */
+const TO_INTL: Partial<Record<Lang, string>> = { dk: "da", se: "sv" };
+export const intlLocale = (lng: string) => TO_INTL[lng as Lang] ?? lng;
