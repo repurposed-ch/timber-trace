@@ -1,6 +1,6 @@
 # timber-trace
 
-Static GitHub Pages app (React + Vite + R3F) at `repurposed.ch/timber-trace/`. It inscribes timber component data into base45 QR codes with densing. See README.md for the file layout.
+Static GitHub Pages app (React + Vite + R3F) at `timber-trace.repurposed.ch`, served from the domain root and deployed by `.github/workflows/pages.yml`. It inscribes timber component data into base45 QR codes with densing. See README.md for the file layout.
 
 - `src/schema/`: loader (fetches `public/<slug>/…`), codec (base45 / URL-safe, version detection, 128-bit id), labels (required-label rules), field helpers.
 - `src/components/`: RecordForm (generated from the schema), BeamViewer, QrPanel, Scanner, SchemaInspector (dev editor only under `import.meta.env.DEV`), UpdateBanner.
