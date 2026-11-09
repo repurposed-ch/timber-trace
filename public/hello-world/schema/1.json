@@ -1,0 +1,283 @@
+{
+  "templates": [
+    {
+      "type": "object",
+      "name": "unknown",
+      "fields": []
+    },
+    {
+      "type": "object",
+      "name": "originKnown",
+      "fields": [
+        {
+          "type": "enum",
+          "name": "provenance",
+          "options": ["unknown", "virgin", "reclaimed"],
+          "defaultValue": "unknown"
+        },
+        {
+          "type": "enum",
+          "name": "country",
+          "options": ["unknown", "AD", "AE", "AF", "AG", "AI", "AL", "AM", "AO", "AQ", "AR", "AS", "AT", "AU", "AW", "AX", "AZ", "BA", "BB", "BD", "BE", "BF", "BG", "BH", "BI", "BJ", "BL", "BM", "BN", "BO", "BQ", "BR", "BS", "BT", "BV", "BW", "BY", "BZ", "CA", "CC", "CD", "CF", "CG", "CH", "CI", "CK", "CL", "CM", "CN", "CO", "CR", "CU", "CV", "CW", "CX", "CY", "CZ", "DE", "DJ", "DK", "DM", "DO", "DZ", "EC", "EE", "EG", "EH", "ER", "ES", "ET", "FI", "FJ", "FK", "FM", "FO", "FR", "GA", "GB", "GD", "GE", "GF", "GG", "GH", "GI", "GL", "GM", "GN", "GP", "GQ", "GR", "GS", "GT", "GU", "GW", "GY", "HK", "HM", "HN", "HR", "HT", "HU", "ID", "IE", "IL", "IM", "IN", "IO", "IQ", "IR", "IS", "IT", "JE", "JM", "JO", "JP", "KE", "KG", "KH", "KI", "KM", "KN", "KP", "KR", "KW", "KY", "KZ", "LA", "LB", "LC", "LI", "LK", "LR", "LS", "LT", "LU", "LV", "LY", "MA", "MC", "MD", "ME", "MF", "MG", "MH", "MK", "ML", "MM", "MN", "MO", "MP", "MQ", "MR", "MS", "MT", "MU", "MV", "MW", "MX", "MY", "MZ", "NA", "NC", "NE", "NF", "NG", "NI", "NL", "NO", "NP", "NR", "NU", "NZ", "OM", "PA", "PE", "PF", "PG", "PH", "PK", "PL", "PM", "PN", "PR", "PS", "PT", "PW", "PY", "QA", "RE", "RO", "RS", "RU", "RW", "SA", "SB", "SC", "SD", "SE", "SG", "SH", "SI", "SJ", "SK", "SL", "SM", "SN", "SO", "SR", "SS", "ST", "SV", "SX", "SY", "SZ", "TC", "TD", "TF", "TG", "TH", "TJ", "TK", "TL", "TM", "TN", "TO", "TR", "TT", "TV", "TW", "TZ", "UA", "UG", "UM", "US", "UY", "UZ", "VA", "VC", "VE", "VG", "VI", "VN", "VU", "WF", "WS", "YE", "YT", "ZA", "ZM", "ZW"],
+          "defaultValue": "unknown"
+        },
+        {
+          "type": "union",
+          "name": "year",
+          "discriminator": "status",
+          "variants": {
+            "unknown": 0,
+            "known": 2
+          }
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "yearKnown",
+      "fields": [
+        {
+          "type": "int",
+          "name": "value",
+          "min": 1800,
+          "max": 2100,
+          "defaultValue": 2000
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "productKnown",
+      "fields": [
+        {
+          "type": "enum",
+          "name": "value",
+          "options": ["unknown", "solid_sawn", "kvh", "duo_trio", "glulam", "block_glulam", "clt", "lvl", "psl", "lsl", "round"],
+          "defaultValue": "unknown"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "productCustom",
+      "fields": [
+        {
+          "type": "enum_array",
+          "name": "text",
+          "enum": {
+            "type": "enum",
+            "name": "char",
+            "options": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+            "defaultValue": "A"
+          },
+          "minLength": 1,
+          "maxLength": 32,
+          "defaultValue": ["A"]
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "lengthKnown",
+      "fields": [
+        {
+          "type": "int",
+          "name": "value",
+          "min": 0,
+          "max": 20000,
+          "defaultValue": 4000
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "sectionKnown",
+      "fields": [
+        {
+          "type": "int",
+          "name": "value",
+          "min": 0,
+          "max": 2000,
+          "defaultValue": 120
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "gradeRecorded",
+      "fields": [
+        {
+          "type": "union",
+          "name": "class",
+          "discriminator": "kind",
+          "variants": {
+            "known": 8,
+            "custom": 9
+          }
+        },
+        {
+          "type": "enum",
+          "name": "source",
+          "options": ["visual", "machine", "document", "label"],
+          "defaultValue": "visual"
+        },
+        {
+          "type": "enum",
+          "name": "standard",
+          "options": ["EN338", "EN14081-1", "EN14080", "EN1912", "DIN4074-1", "SIA265", "other"],
+          "defaultValue": "EN338"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "gradeKnown",
+      "fields": [
+        {
+          "type": "enum",
+          "name": "value",
+          "options": ["C14", "C16", "C18", "C20", "C22", "C24", "C27", "C30", "C35", "C40", "C45", "C50", "GL20h", "GL22h", "GL24h", "GL26h", "GL28h", "GL30h", "GL32h", "GL20c", "GL22c", "GL24c", "GL26c", "GL28c", "GL30c", "GL32c", "D18", "D24", "D27", "D30", "D35", "D40", "D45", "D50", "D55", "D60", "D65", "D70", "D75", "D80", "S7", "S10", "S13", "FKI", "FKII", "FKIII"],
+          "defaultValue": "C24"
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "gradeCustom",
+      "fields": [
+        {
+          "type": "enum_array",
+          "name": "text",
+          "enum": {
+            "type": "enum",
+            "name": "char",
+            "options": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+            "defaultValue": "A"
+          },
+          "minLength": 1,
+          "maxLength": 32,
+          "defaultValue": ["A"]
+        }
+      ]
+    }
+  ],
+  "fields": [
+    {
+      "type": "int",
+      "name": "version",
+      "min": 0,
+      "max": 255,
+      "defaultValue": 1
+    },
+    {
+      "type": "array",
+      "name": "id",
+      "minLength": 4,
+      "maxLength": 4,
+      "items": {
+        "type": "int",
+        "name": "part",
+        "min": 0,
+        "max": 4294967295,
+        "defaultValue": 0
+      }
+    },
+    {
+      "type": "union",
+      "name": "origin",
+      "discriminator": "status",
+      "variants": {
+        "unknown": 0,
+        "known": 1
+      }
+    },
+    {
+      "type": "enum",
+      "name": "species",
+      "options": ["unknown", "other", "spruce", "silver_fir", "scots_pine", "black_pine", "maritime_pine", "swiss_stone_pine", "weymouth_pine", "larch", "douglas_fir", "yew", "atlas_cedar", "sitka_spruce", "western_hemlock", "western_red_cedar", "southern_yellow_pine", "radiata_pine", "european_oak", "red_oak", "white_oak", "beech", "ash", "sweet_chestnut", "maple", "sycamore", "birch", "alder", "poplar", "lime", "elm", "walnut", "cherry", "robinia", "hornbeam", "plane", "eucalyptus", "teak", "iroko", "sapele", "sipo", "meranti", "azobe", "bangkirai", "ipe", "merbau", "okoume", "mahogany", "afzelia", "bilinga", "cumaru", "garapa", "jatoba", "massaranduba", "padauk", "wenge"],
+      "defaultValue": "unknown"
+    },
+    {
+      "type": "union",
+      "name": "product",
+      "discriminator": "kind",
+      "variants": {
+        "known": 3,
+        "custom": 4
+      }
+    },
+    {
+      "type": "object",
+      "name": "dimensions",
+      "fields": [
+        {
+          "type": "union",
+          "name": "length",
+          "discriminator": "status",
+          "variants": {
+            "unknown": 0,
+            "known": 5
+          }
+        },
+        {
+          "type": "union",
+          "name": "width",
+          "discriminator": "status",
+          "variants": {
+            "unknown": 0,
+            "known": 6
+          }
+        },
+        {
+          "type": "union",
+          "name": "height",
+          "discriminator": "status",
+          "variants": {
+            "unknown": 0,
+            "known": 6
+          }
+        }
+      ]
+    },
+    {
+      "type": "union",
+      "name": "grade",
+      "discriminator": "status",
+      "variants": {
+        "unknown": 0,
+        "recorded": 7
+      }
+    },
+    {
+      "type": "array",
+      "name": "assessments",
+      "minLength": 0,
+      "maxLength": 8,
+      "items": {
+        "type": "object",
+        "name": "assessment",
+        "fields": [
+          {
+            "type": "enum",
+            "name": "kind",
+            "options": ["visual", "moisture", "ndt", "lab", "structural", "other"],
+            "defaultValue": "visual"
+          },
+          {
+            "type": "enum_array",
+            "name": "ref",
+            "enum": {
+              "type": "enum",
+              "name": "char",
+              "options": ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"],
+              "defaultValue": "A"
+            },
+            "minLength": 1,
+            "maxLength": 16,
+            "defaultValue": ["A"]
+          }
+        ]
+      }
+    }
+  ]
+}
