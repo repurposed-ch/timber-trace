@@ -197,3 +197,14 @@ input::placeholder { color: #a7a196; font-size: .85em; }
 .main-pane > * + * { margin-top: 12px; }
 .aside-pane > * + * { margin-top: 12px; }
 @media (max-width: 520px) { .shell-body { padding: 8px; gap: 8px; } .top { padding: 6px 8px; } }
+@media (min-width: 960px) {
+  html, body { height: 100%; }
+  .shell { height: 100dvh; display: grid; grid-template-rows: auto minmax(0, 1fr); }
+  .shell-head { position: static; }
+  .shell-body { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: minmax(0, 1fr); min-height: 0; }
+  .shell.has-aside .shell-body { grid-template-columns: minmax(0, 1fr) clamp(340px, 32vw, 460px); grid-template-rows: auto minmax(0, 1fr); }
+  .main-pane { overflow: auto; min-height: 0; grid-column: 1; grid-row: 1 / -1; padding-right: 4px; }
+  .aside-pin { grid-column: 2; grid-row: 1; }
+  .aside-pane { grid-column: 2; grid-row: 2; overflow: auto; min-height: 0; }
+  .viewer { height: 300px; }
+}
