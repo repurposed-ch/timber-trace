@@ -50,7 +50,8 @@ code, .mono { font-family: ui-monospace, Menlo, monospace; overflow-wrap: anywhe
 .item { display: grid; gap: 6px; border-top: 1px dashed var(--line); padding-top: 6px; }
 .item > button { justify-self: start; }
 .id { display: flex; gap: 6px; flex-wrap: wrap; }
-.id input { flex: 1 1 18ch; min-width: 0; width: 100%; }
+.id .draft { flex: 1 1 18ch; min-width: 0; }
+.id input { width: 100%; }
 select { max-width: 100%; }
 h3 { font-size: 1rem; margin: 0 0 8px; }
 .viewer { position: relative; height: 220px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
@@ -143,13 +144,9 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .lang-face .flag { font-size: 1.1rem; line-height: 1; }
 .lang select { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
 .lang:focus-within .lang-face { outline: 2px solid var(--accent); outline-offset: 1px; }
-/* unknown checkbox: at the end of a row, or in a group heading */
-.row { grid-template-columns: minmax(110px, 34%) 1fr auto; }
-.unk { display: inline-flex; align-items: center; gap: 4px; font-size: .8rem; color: var(--muted); white-space: nowrap; cursor: pointer; }
-.unk input { margin: 0; }
-.unknown-dash { color: var(--muted); }
+/* group headings: title left, a status select (history) right */
 .group > legend { display: flex; align-items: center; justify-content: space-between; gap: 10px; width: 100%; }
-.group > legend .unk { font-weight: 400; }
+.group > legend select { font-weight: 400; font-size: .85rem; }
 /* compact form: flat groups (heading + left rule), tighter rhythm */
 .record { gap: 4px; }
 .record .row { min-height: 30px; gap: 6px; }
@@ -162,7 +159,10 @@ input::placeholder { color: #a7a196; font-size: .85em; }
   .card { padding: 10px; }
   main { padding: 8px; }
   /* keep label | control | unknown on one line; wide controls may wrap inside their cell */
-  .row { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto; gap: 6px; align-items: center; }
+  .row { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 6px; align-items: center; }
+  /* several inputs in a row: label on top, the inputs share the full width */
+  .row.multi { grid-template-columns: 1fr; gap: 3px; }
+  .row.multi > label { font-size: .8rem; }
   .row > label { font-size: .85rem; }
   .control > input, .control > select { flex: 1 1 100%; width: 100%; min-width: 0; }
   .id { flex-wrap: nowrap; }
@@ -238,3 +238,15 @@ input::placeholder { color: #a7a196; font-size: .85em; }
 .draft > input { width: 100%; }
 .draft.invalid > input { border-color: var(--error); }
 .draft-error { color: var(--error); font-size: .75rem; }
+.row { grid-template-columns: minmax(110px, 34%) 1fr; }
+.row.multi .control { flex-wrap: nowrap; }
+.row.multi .control > * { flex: 1 1 0; min-width: 0; }
+.row.multi .control > .incomplete { flex-basis: 100%; }
+.control { flex-wrap: wrap; }
+.control .incomplete, .group > .incomplete { color: #8a6d1d; font-size: .75rem; flex-basis: 100%; }
+.row.multi .control { flex-wrap: wrap; }
+.row.multi .control > :not(.incomplete) { flex: 1 1 0; }
+select.is-empty { color: #8f897f; }
+select.is-empty option { color: var(--fg); }
+.row.multi .control > .variants { flex: none; }
+.variants button { white-space: nowrap; }

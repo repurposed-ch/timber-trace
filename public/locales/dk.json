@@ -62,7 +62,9 @@
       "dayOrYear": "Et år (1962) eller en dato (1962-05-03)",
       "chars": "Kun bogstaver og tal, maks. {{max}}",
       "id": "32 hex-tegn"
-    }
+    },
+    "incomplete": "Ufuldstændig: forbliver ukendt, indtil alt er udfyldt",
+    "required": "Påkrævet her"
   },
   "viewer": {
     "title": "3D-visning",
@@ -139,7 +141,10 @@
     "omitted_one": "{{count}} strukturel hændelse kun online",
     "omitted_other": "{{count}} strukturelle hændelser kun online",
     "unavailable_one": "{{count}} yderligere strukturel hændelse er registreret, men ikke tilgængelig her. Den tælles fortsat i koden.",
-    "unavailable_other": "{{count}} yderligere strukturelle hændelser er registreret, men ikke tilgængelige her. De tælles fortsat i koden."
+    "unavailable_other": "{{count}} yderligere strukturelle hændelser er registreret, men ikke tilgængelige her. De tælles fortsat i koden.",
+    "nothingRecorded": "Intet registreret",
+    "recordedCount_one": "{{count}} hændelse",
+    "recordedCount_other": "{{count}} hændelser"
   },
   "prov": {
     "revision": "Revision {{n}}",

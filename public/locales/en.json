@@ -62,7 +62,9 @@
       "dayOrYear": "A year (1962) or a date (1962-05-03)",
       "chars": "Letters and digits only, max. {{max}}",
       "id": "32 hex characters"
-    }
+    },
+    "incomplete": "Incomplete: still unknown until every part is filled in",
+    "required": "Required here"
   },
   "viewer": {
     "title": "3D preview",
@@ -139,7 +141,10 @@
     "omitted_one": "{{count}} structural event only online",
     "omitted_other": "{{count}} structural events only online",
     "unavailable_one": "{{count}} more structural event is recorded but not available here. It stays counted in the code.",
-    "unavailable_other": "{{count}} more structural events are recorded but not available here. They stay counted in the code."
+    "unavailable_other": "{{count}} more structural events are recorded but not available here. They stay counted in the code.",
+    "nothingRecorded": "Nothing recorded",
+    "recordedCount_one": "{{count}} event",
+    "recordedCount_other": "{{count}} events"
   },
   "prov": {
     "revision": "Revision {{n}}",

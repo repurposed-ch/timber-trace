@@ -62,7 +62,9 @@
       "dayOrYear": "Un anno (1962) o una data (1962-05-03)",
       "chars": "Solo lettere e cifre, max. {{max}}",
       "id": "32 caratteri esadecimali"
-    }
+    },
+    "incomplete": "Incompleto: resta sconosciuto finché non è tutto compilato",
+    "required": "Obbligatorio qui"
   },
   "viewer": {
     "title": "Anteprima 3D",
@@ -139,7 +141,10 @@
     "omitted_one": "{{count}} evento strutturale solo online",
     "omitted_other": "{{count}} eventi strutturali solo online",
     "unavailable_one": "Un altro evento strutturale è registrato ma non disponibile qui. Resta conteggiato nel codice.",
-    "unavailable_other": "Altri {{count}} eventi strutturali sono registrati ma non disponibili qui. Restano conteggiati nel codice."
+    "unavailable_other": "Altri {{count}} eventi strutturali sono registrati ma non disponibili qui. Restano conteggiati nel codice.",
+    "nothingRecorded": "Nulla registrato",
+    "recordedCount_one": "{{count}} evento",
+    "recordedCount_other": "{{count}} eventi"
   },
   "prov": {
     "revision": "Revisione {{n}}",

@@ -62,7 +62,9 @@
       "dayOrYear": "Een jaar (1962) of een datum (1962-05-03)",
       "chars": "Alleen letters en cijfers, max. {{max}}",
       "id": "32 hexadecimale tekens"
-    }
+    },
+    "incomplete": "Onvolledig: blijft onbekend tot alles is ingevuld",
+    "required": "Hier verplicht"
   },
   "viewer": {
     "title": "3D-voorbeeld",
@@ -139,7 +141,10 @@
     "omitted_one": "{{count}} structurele gebeurtenis alleen online",
     "omitted_other": "{{count}} structurele gebeurtenissen alleen online",
     "unavailable_one": "Nog {{count}} structurele gebeurtenis is vastgelegd maar hier niet beschikbaar. Ze blijft geteld in de code.",
-    "unavailable_other": "Nog {{count}} structurele gebeurtenissen zijn vastgelegd maar hier niet beschikbaar. Ze blijven geteld in de code."
+    "unavailable_other": "Nog {{count}} structurele gebeurtenissen zijn vastgelegd maar hier niet beschikbaar. Ze blijven geteld in de code.",
+    "nothingRecorded": "Niets vastgelegd",
+    "recordedCount_one": "{{count}} gebeurtenis",
+    "recordedCount_other": "{{count}} gebeurtenissen"
   },
   "prov": {
     "revision": "Revisie {{n}}",

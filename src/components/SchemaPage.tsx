@@ -206,6 +206,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             <RecordView schema={dense} record={record} labels={labels} history={hist} tiers={tiers} />
           ) : (
             <RecordForm
+              key={`${record.version}:${record.id.join(".")}:${loaded?.payload ?? "new"}`}
               schema={dense}
               labels={labels}
               value={record}

@@ -62,15 +62,15 @@ export function HistoryEditor({ schema, field, labels, tiers, value, onChange }:
     <fieldset className="group history">
       <legend>
         {labels.field("history")}
-        <label className="unk">
-          <input
-            type="checkbox"
-            checked={value.status === "unknown"}
-            onChange={(e) => set({ status: e.target.checked ? "unknown" : "known" })}
-            aria-label={`${labels.field("history")}: ${t("form.unknown")}`}
-          />
-          <span>{t("form.unknown")}</span>
-        </label>
+        <select
+          aria-label={labels.field("history")}
+          value={value.status}
+          className={value.status === "unknown" ? "is-empty" : ""}
+          onChange={(e) => set({ status: e.target.value as "unknown" | "known" })}
+        >
+          <option value="unknown">— {t("form.unknown").toLowerCase()} —</option>
+          <option value="known">{full.length ? t("history.recordedCount", { count: full.length }) : t("history.nothingRecorded")}</option>
+        </select>
       </legend>
       {value.status === "known" && (
         <>
@@ -112,7 +112,7 @@ export function HistoryEditor({ schema, field, labels, tiers, value, onChange }:
               );
             })}
           </ol>
-          <button type="button" onClick={() => setFull([...full, newEvent()])}>
+          <button type="button" onClick={() => set({ status: "known", full: sortHistory([...full, newEvent()]) })}>
             {t("history.add")}
           </button>
         </>

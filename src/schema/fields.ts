@@ -65,3 +65,62 @@ export function unknownable(field: DenseField, schema: DenseSchema): { other: st
   if (variantFields(field, "unknown", schema).length !== 0) return null;
   return { other: names.find((n) => n !== "unknown")! };
 }
+
+const resolve = (field: DenseField, schema: DenseSchema): DenseField => (field.type === "reference" ? resolve(schema.templates![field.ref], schema) : field);
+
+/**
+ * Whether a (possibly partial) value is fully filled in: every enum chosen, every number typed.
+ * Nested unknown-able values always count as complete (unknown is a valid answer there).
+ */
+export function isComplete(field: DenseField, value: any, schema: DenseSchema): boolean {
+  const f = resolve(field, schema);
+  if (f.type === "union" && unknownable(f, schema)) return true;
+  // an untouched choice that has its own "unknown" option is answered: unknown
+  if ((value === undefined || value === null) && f.type === "enum" && f.options.includes("unknown")) return true;
+  if (value === undefined || value === null) return false;
+  switch (f.type) {
+    case "enum":
+      return f.options.includes(value);
+    case "int":
+    case "fixed":
+      return typeof value === "number";
+    case "bool":
+      return typeof value === "boolean";
+    case "enum_array":
+      return Array.isArray(value) && value.length >= f.minLength;
+    case "array":
+      return Array.isArray(value);
+    case "object":
+      return f.fields.every((c) => isComplete(c, value[c.name], schema));
+    case "union": {
+      const variant = value[f.discriminator];
+      if (!(variant in f.variants)) return false;
+      return variantFields(f, variant, schema).every((c) => isComplete(c, value[c.name], schema));
+    }
+    default:
+      return true;
+  }
+}
+
+/** whether a (possibly partial) value holds nothing: empty, "unknown", or only unknown parts */
+export function isEmptyish(field: DenseField, value: any, schema: DenseSchema): boolean {
+  const f = resolve(field, schema);
+  if (value === undefined || value === null || value === "unknown") return true;
+  switch (f.type) {
+    case "enum_array":
+    case "array":
+      return Array.isArray(value) && value.length === 0;
+    case "object":
+      return f.fields.every((c) => isEmptyish(c, value[c.name], schema));
+    case "union": {
+      if (unknownable(f, schema) && value[f.discriminator] === "unknown") return true;
+      const variant = value[f.discriminator];
+      return variantFields(f, variant, schema).every((c) => isEmptyish(c, value[c.name], schema));
+    }
+    default:
+      return false;
+  }
+}
+
+/** the known variant's day | year union of a `dayOrYear` field, if `field` is one */
+export const isDayOrYear = (field: DenseField) => field.type === "union" && "day" in field.variants && "year" in field.variants;

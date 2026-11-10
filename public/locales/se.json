@@ -62,7 +62,9 @@
       "dayOrYear": "Ett år (1962) eller ett datum (1962-05-03)",
       "chars": "Endast bokstäver och siffror, max. {{max}}",
       "id": "32 hextecken"
-    }
+    },
+    "incomplete": "Ofullständig: förblir okänd tills allt är ifyllt",
+    "required": "Krävs här"
   },
   "viewer": {
     "title": "3D-förhandsvisning",
@@ -139,7 +141,10 @@
     "omitted_one": "{{count}} strukturell händelse endast online",
     "omitted_other": "{{count}} strukturella händelser endast online",
     "unavailable_one": "Ytterligare {{count}} strukturell händelse är registrerad men inte tillgänglig här. Den räknas fortfarande i koden.",
-    "unavailable_other": "Ytterligare {{count}} strukturella händelser är registrerade men inte tillgängliga här. De räknas fortfarande i koden."
+    "unavailable_other": "Ytterligare {{count}} strukturella händelser är registrerade men inte tillgängliga här. De räknas fortfarande i koden.",
+    "nothingRecorded": "Inget registrerat",
+    "recordedCount_one": "{{count}} händelse",
+    "recordedCount_other": "{{count}} händelser"
   },
   "prov": {
     "revision": "Revision {{n}}",
