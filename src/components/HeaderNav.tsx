@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LANGS, LANG_FLAGS, LANG_NAMES, setLang, type Lang } from "../i18n";
-import { currentSlug, schemaUrl } from "../state/route";
+import { currentSlug, pushTab, schemaUrl, type Tab } from "../state/route";
 import { useSchemaSlugs } from "../state/useSchema";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -44,18 +44,26 @@ export function HeaderNav() {
   }, [open]);
 
   const scanHref = target ? `${schemaUrl(target)}?tab=scan` : undefined;
+  // on that schema's own page, switch in place: the record (and its online history) stays loaded
+  const inPlace = (tab: Tab, slug?: string) => (e: React.MouseEvent) => {
+    if (!slug || slug !== here) return;
+    e.preventDefault();
+    setOpen(false);
+    pushTab(tab);
+    dispatchEvent(new PopStateEvent("popstate"));
+  };
   const schemaHref = (s: string) => `${schemaUrl(s)}?tab=schema`;
   const lng = (i18n.resolvedLanguage ?? "en") as Lang;
   return (
     <div className="header-nav" ref={menu}>
       {scanHref && (
-        <a className="hn-btn hn-scan" href={scanHref} aria-label={t("nav.scan")}>
+        <a className="hn-btn hn-scan" href={scanHref} aria-label={t("nav.scan")} onClick={inPlace("scan", target)}>
           <CameraIcon />
           <span className="hn-label">{t("nav.scan")}</span>
         </a>
       )}
       {target && (
-        <a className="hn-btn hn-wide" href={schemaHref(target)}>
+        <a className="hn-btn hn-wide" href={schemaHref(target)} onClick={inPlace("schema", target)}>
           {t("nav.schema")}
         </a>
       )}
@@ -68,7 +76,7 @@ export function HeaderNav() {
       {open && (
         <div className="hn-menu" role="menu">
           {slugs.map((s) => (
-            <a key={`schema-${s}`} role="menuitem" href={schemaHref(s)} onClick={() => setOpen(false)}>
+            <a key={`schema-${s}`} role="menuitem" href={schemaHref(s)} onClick={inPlace("schema", s)}>
               {t("nav.schema")}
               {slugs.length > 1 && <span className="muted"> · {s}</span>}
             </a>

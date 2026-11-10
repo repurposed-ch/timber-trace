@@ -7,7 +7,7 @@ import { useLatest } from "../records/useLatest";
 import { useOnlineHistory } from "../records/useOnlineHistory";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
 import { decodeInput } from "../schema/links";
-import { TABS, currentMode, currentPayload, currentTab, pushTab, replaceMode, schemaUrl, type Mode, type Tab } from "../state/route";
+import { currentMode, currentPayload, currentTab, pushTab, replaceMode, schemaUrl, type Mode, type Tab } from "../state/route";
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
@@ -91,12 +91,14 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setMode("view");
   };
 
-  // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug
+  // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug; on Scan
+  // and Schema only when a record was opened, so those pages don't show a made-up record's link
   useEffect(() => {
+    if (tab !== "record" && !loaded && !currentPayload()) return;
     try {
       history.replaceState(null, "", `${schemaUrl(slug)}${encodeRecord(dense, record, URL_SAFE)}${location.search}`);
     } catch {}
-  }, [slug, dense, record]);
+  }, [slug, dense, record, tab]);
 
   useEffect(() => {
     const onNav = () => {
@@ -111,15 +113,6 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       removeEventListener("hashchange", onNav);
     };
   }, [schema]);
-  const nav = (
-    <nav className="tabs" role="tablist">
-      {TABS.map((k) => (
-        <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)} data-label={t(`nav.${k}`, { ns: "ui" })}>
-          {t(`nav.${k}`, { ns: "ui" })}
-        </button>
-      ))}
-    </nav>
-  );
   // the right column on every tab: the 3D view of the current record, then its QR and exports
   const hideButton = (what: "viewer" | "qr") => (
     <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer}>
@@ -168,7 +161,6 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         { label: labels.raw.title ?? slug, href: schemaUrl(slug), onClick: () => setTab("record"), title: labels.raw.description },
         { label: t(`nav.${tab}`, { ns: "ui" }) },
       ]}
-      nav={nav}
       // Scan and Schema aren't views of the record: no 3D view or QR next to them
       aside={tab === "record" ? { pinned, scroll } : undefined}
       className={tab === "record" ? (showQr ? "aside-qr" : "aside-3d") : undefined}
