@@ -125,3 +125,5 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .home-footer { margin: 32px 0 8px; padding-top: 12px; border-top: 1px solid var(--line); font-size: .9rem; }
 .home-footer a { color: var(--accent); }
 .crumbs .brand [aria-current] { color: var(--fg); }
+.note { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 6px; padding: 6px 10px; font-size: .85rem; margin: 8px 0; }
+.layout .card-head { margin-bottom: 8px; }

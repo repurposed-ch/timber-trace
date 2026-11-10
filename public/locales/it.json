@@ -49,7 +49,9 @@
     "remove": "Rimuovi",
     "charset": "Solo lettere e cifre, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caratteri esadecimali"
+    "idInvalid": "32 caratteri esadecimali",
+    "newRecord": "Nuova scheda (v{{v}})",
+    "olderVersion": "Creata con la versione {{v}} dello schema. Viene mostrata ed esportata come versione {{v}}; le nuove schede usano la versione {{latest}}."
   },
   "viewer": {
     "title": "Anteprima 3D",

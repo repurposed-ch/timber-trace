@@ -49,7 +49,9 @@
     "remove": "Fjern",
     "charset": "Kun bogstaver og tal, maks. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex-tegn"
+    "idInvalid": "32 hex-tegn",
+    "newRecord": "Ny post (v{{v}})",
+    "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}."
   },
   "viewer": {
     "title": "3D-visning",

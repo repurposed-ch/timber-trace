@@ -49,7 +49,9 @@
     "remove": "Entfernen",
     "charset": "Nur Buchstaben und Ziffern, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 Hex-Zeichen"
+    "idInvalid": "32 Hex-Zeichen",
+    "newRecord": "Neuer Datensatz (v{{v}})",
+    "olderVersion": "Mit Schemaversion {{v}} erstellt. Er wird als Version {{v}} angezeigt und exportiert; neue Datensätze verwenden Version {{latest}}."
   },
   "viewer": {
     "title": "3D-Vorschau",

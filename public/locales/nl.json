@@ -49,7 +49,9 @@
     "remove": "Verwijderen",
     "charset": "Alleen letters en cijfers, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hexadecimale tekens"
+    "idInvalid": "32 hexadecimale tekens",
+    "newRecord": "Nieuw record (v{{v}})",
+    "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}."
   },
   "viewer": {
     "title": "3D-voorbeeld",

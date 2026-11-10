@@ -49,7 +49,9 @@
     "remove": "Supprimer",
     "charset": "Lettres et chiffres uniquement, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caractères hexadécimaux"
+    "idInvalid": "32 caractères hexadécimaux",
+    "newRecord": "Nouvelle fiche (v{{v}})",
+    "olderVersion": "Créée avec la version {{v}} du schéma. Elle est affichée et exportée en version {{v}} ; les nouvelles fiches utilisent la version {{latest}}."
   },
   "viewer": {
     "title": "Aperçu 3D",

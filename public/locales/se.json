@@ -49,7 +49,9 @@
     "remove": "Ta bort",
     "charset": "Endast bokstäver och siffror, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hextecken"
+    "idInvalid": "32 hextecken",
+    "newRecord": "Ny post (v{{v}})",
+    "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}."
   },
   "viewer": {
     "title": "3D-förhandsvisning",

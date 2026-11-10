@@ -31,11 +31,14 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     if (next !== tab) pushTab(next);
     setTabState(next);
   };
-  const dense = schema.versions.get(schema.latest)!;
+  const latest = schema.versions.get(schema.latest)!;
+  const newRecord = () => ({ ...defaultRecord(latest), version: schema.latest, id: randomId() });
   const [showViewer, setShowViewer] = useStoredFlag("timber-trace.viewer", true);
   // the record that was scanned or opened from a link, checked for newer versions
   const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
-  const [record, setRecord] = useState(() => loaded?.data ?? { ...defaultRecord(dense), version: schema.latest, id: randomId() });
+  const [record, setRecord] = useState(() => loaded?.data ?? newRecord());
+  // a record is edited and exported in the schema version it was made with
+  const dense = schema.versions.get(record.version) ?? latest;
   const newer = useLatest(records, slug, schema, loaded);
   const load = (l: NonNullable<Loaded>) => {
     setLoaded(l);
@@ -130,7 +133,23 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
           </div>
           <div className="layout">
             <div className="card">
-              <h3>{t("form.title", { ns: "ui" })}</h3>
+              <div className="card-head">
+                <h3>{t("form.title", { ns: "ui" })}</h3>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setLoaded(null);
+                    setRecord(newRecord());
+                  }}
+                >
+                  {t("form.newRecord", { ns: "ui", v: schema.latest })}
+                </button>
+              </div>
+              {record.version !== schema.latest && (
+                <p className="note" role="note">
+                  {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
+                </p>
+              )}
               <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
             </div>
             <div className="card side">

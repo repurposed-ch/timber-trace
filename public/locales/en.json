@@ -49,7 +49,9 @@
     "remove": "Remove",
     "charset": "Letters and digits only, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex characters"
+    "idInvalid": "32 hex characters",
+    "newRecord": "New record (v{{v}})",
+    "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}."
   },
   "viewer": {
     "title": "3D preview",
