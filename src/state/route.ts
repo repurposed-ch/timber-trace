@@ -27,3 +27,18 @@ export function pushTab(tab: Tab) {
   const search = params.toString();
   history.pushState(null, "", `${location.pathname}${search ? `?${search}` : ""}`);
 }
+
+export type Mode = "view" | "edit";
+
+/** ?mode=edit|view, or null when the address doesn't say (UI state only, never in a QR link) */
+export function currentMode(search = location.search): Mode | null {
+  const m = new URLSearchParams(search).get("mode");
+  return m === "edit" || m === "view" ? m : null;
+}
+
+/** remember the mode in the address bar without adding a history entry */
+export function replaceMode(mode: Mode) {
+  const params = new URLSearchParams(location.search);
+  params.set("mode", mode);
+  history.replaceState(null, "", `${location.pathname}?${params}`);
+}

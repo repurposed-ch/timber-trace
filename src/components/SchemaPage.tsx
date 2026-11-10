@@ -7,7 +7,7 @@ import { useLatest } from "../records/useLatest";
 import { useOnlineHistory } from "../records/useOnlineHistory";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
 import { decodeInput } from "../schema/links";
-import { TABS, currentPayload, currentTab, pushTab, schemaUrl, type Tab } from "../state/route";
+import { TABS, currentMode, currentPayload, currentTab, pushTab, replaceMode, schemaUrl, type Mode, type Tab } from "../state/route";
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
@@ -18,6 +18,7 @@ import { Shell } from "./Shell";
 import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
+import { RecordView } from "./RecordView";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { UpdateBanner } from "./UpdateBanner";
@@ -58,10 +59,17 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     // a scanned code only holds a selection; the record source may know the full history
     if (online?.length && hist.source === "code") setHistState({ status: "known", full: sortHistory(online), unavailable: 0, source: "online" });
   }, [online]); // eslint-disable-line react-hooks/exhaustive-deps
+  // an opened or scanned record is read first; a new one is filled in
+  const [mode, setModeState] = useState<Mode>(() => currentMode() ?? (loaded ? "view" : "edit"));
+  const setMode = (m: Mode) => {
+    setModeState(m);
+    replaceMode(m);
+  };
   const load = (l: NonNullable<Loaded>) => {
     setLoaded(l);
     setRecord(l.data);
     if (tiers) setHistState(historyState(l.data.history, tiers));
+    setMode("view");
   };
 
   // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug
@@ -164,16 +172,26 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             <h3>
               {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
             </h3>
-            <button
-              type="button"
-              onClick={() => {
-                setLoaded(null);
-                setRecord(newRecord());
-                setHistState(historyState(null, tiers!));
-              }}
-            >
-              {t("form.newRecord", { ns: "ui", v: schema.latest })}
-            </button>
+            <div className="card-actions">
+              <div className="variants" role="radiogroup" aria-label={t("form.mode", { ns: "ui" })}>
+                {(["view", "edit"] as const).map((m) => (
+                  <button key={m} type="button" role="radio" aria-checked={mode === m} className={mode === m ? "on" : ""} onClick={() => setMode(m)}>
+                    {t(`form.${m}`, { ns: "ui" })}
+                  </button>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => {
+                  setLoaded(null);
+                  setRecord(newRecord());
+                  setHistState(historyState(null, tiers!));
+                  setMode("edit");
+                }}
+              >
+                {t("form.newRecord", { ns: "ui", v: schema.latest })}
+              </button>
+            </div>
           </div>
           {(() => {
             const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
@@ -184,17 +202,21 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
             </p>
           )}
-          <RecordForm
-            schema={dense}
-            labels={labels}
-            value={record}
-            onChange={setRecord}
-            overrides={
-              tiers && historyField
-                ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
-                : {}
-            }
-          />
+          {mode === "view" ? (
+            <RecordView schema={dense} record={record} labels={labels} history={hist} tiers={tiers} />
+          ) : (
+            <RecordForm
+              schema={dense}
+              labels={labels}
+              value={record}
+              onChange={setRecord}
+              overrides={
+                tiers && historyField
+                  ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
+                  : {}
+              }
+            />
+          )}
         </div>
       )}
     </Shell>

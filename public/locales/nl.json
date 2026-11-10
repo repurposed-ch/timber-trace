@@ -52,7 +52,10 @@
     "range": "{{min}}–{{max}}",
     "idInvalid": "32 hexadecimale tekens",
     "newRecord": "Nieuw record (v{{v}})",
-    "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}."
+    "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
+    "view": "Bekijken",
+    "edit": "Bewerken",
+    "mode": "Modus"
   },
   "viewer": {
     "title": "3D-voorbeeld",

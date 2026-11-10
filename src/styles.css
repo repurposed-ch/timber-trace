@@ -221,3 +221,15 @@ input::placeholder { color: #a7a196; font-size: .85em; }
 .crumb-menu li::before { content: none !important; }
 .crumb-menu a { display: block; padding: 6px 12px; white-space: nowrap; }
 .top { flex-wrap: nowrap; }
+/* view-only record */
+.card-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+.record-view { display: grid; gap: 8px; }
+.record-view dl { margin: 0; display: grid; }
+.view-row { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 8px; padding: 4px 0; border-bottom: 1px solid var(--bg); }
+.view-row dt { color: var(--muted); font-size: .9rem; }
+.view-row dd { margin: 0; overflow-wrap: anywhere; }
+.view-group { border-left: 2px solid var(--line); padding-left: 10px; }
+.view-group h4 { margin: 4px 0 2px; font-size: .9rem; }
+.view-events { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.view-events li { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; padding: 4px 0 4px 8px; border-left: 3px solid var(--accent); }
+.view-events li.online { border-left-color: var(--line); }

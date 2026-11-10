@@ -52,7 +52,10 @@
     "range": "{{min}}–{{max}}",
     "idInvalid": "32 hextecken",
     "newRecord": "Ny post (v{{v}})",
-    "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}."
+    "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}.",
+    "view": "Visa",
+    "edit": "Redigera",
+    "mode": "Läge"
   },
   "viewer": {
     "title": "3D-förhandsvisning",

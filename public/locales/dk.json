@@ -52,7 +52,10 @@
     "range": "{{min}}–{{max}}",
     "idInvalid": "32 hex-tegn",
     "newRecord": "Ny post (v{{v}})",
-    "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}."
+    "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}.",
+    "view": "Vis",
+    "edit": "Rediger",
+    "mode": "Tilstand"
   },
   "viewer": {
     "title": "3D-visning",
