@@ -39,7 +39,8 @@
     "record": "Datensatz",
     "scan": "Scannen",
     "schema": "Schema",
-    "breadcrumb": "Navigationspfad"
+    "breadcrumb": "Navigationspfad",
+    "more": "Mehr"
   },
   "form": {
     "title": "Bauteildatensatz",

@@ -39,7 +39,8 @@
     "record": "Scheda",
     "scan": "Scansiona",
     "schema": "Schema",
-    "breadcrumb": "Percorso di navigazione"
+    "breadcrumb": "Percorso di navigazione",
+    "more": "Altro"
   },
   "form": {
     "title": "Scheda dell'elemento",

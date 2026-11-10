@@ -39,7 +39,8 @@
     "record": "Record",
     "scan": "Scannen",
     "schema": "Schema",
-    "breadcrumb": "Kruimelpad"
+    "breadcrumb": "Kruimelpad",
+    "more": "Meer"
   },
   "form": {
     "title": "Componentrecord",

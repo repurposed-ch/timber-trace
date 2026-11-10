@@ -39,7 +39,8 @@
     "record": "Record",
     "scan": "Scan",
     "schema": "Schema",
-    "breadcrumb": "Breadcrumb"
+    "breadcrumb": "Breadcrumb",
+    "more": "More"
   },
   "form": {
     "title": "Component record",

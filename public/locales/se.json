@@ -39,7 +39,8 @@
     "record": "Post",
     "scan": "Skanna",
     "schema": "Schema",
-    "breadcrumb": "Sökväg"
+    "breadcrumb": "Sökväg",
+    "more": "Mer"
   },
   "form": {
     "title": "Komponentpost",

@@ -39,7 +39,8 @@
     "record": "Fiche",
     "scan": "Scanner",
     "schema": "Schéma",
-    "breadcrumb": "Fil d'Ariane"
+    "breadcrumb": "Fil d'Ariane",
+    "more": "Plus"
   },
   "form": {
     "title": "Fiche de l'élément",

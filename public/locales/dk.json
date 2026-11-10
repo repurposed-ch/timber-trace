@@ -39,7 +39,8 @@
     "record": "Post",
     "scan": "Scan",
     "schema": "Skema",
-    "breadcrumb": "Brødkrummesti"
+    "breadcrumb": "Brødkrummesti",
+    "more": "Mere"
   },
   "form": {
     "title": "Komponentpost",
