@@ -153,7 +153,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
           <div className="layout">
             <div className="card">
               <div className="card-head">
-                <h3>{t("form.title", { ns: "ui" })}</h3>
+                <h3>
+                  {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
+                </h3>
                 <button
                   type="button"
                   onClick={() => {

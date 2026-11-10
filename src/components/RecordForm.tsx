@@ -78,7 +78,7 @@ export function Field(props: Props) {
   const id = idFor(path);
   const wrap = (control: React.ReactNode) => (bare ? control : <Row label={label} htmlFor={id}>{control}</Row>);
 
-  if (path === "version" && field.type === "int") return wrap(<output id={id} className="mono">{value}</output>);
+  if (path === "version" && field.type === "int") return null;
 
   if (isId128(field)) return wrap(<IdInput id={id} value={value} onChange={onChange} />);
 
@@ -125,12 +125,13 @@ export function Field(props: Props) {
           aria-label={label}
           value={value.join("")}
           maxLength={field.maxLength}
+          placeholder={t("form.charset", { max: field.maxLength })}
+          title={t("form.charset", { max: field.maxLength })}
           onChange={(e) => {
             const allowed = new Set(field.enum.options);
             onChange([...e.target.value].filter((c) => allowed.has(c)).slice(0, field.maxLength));
           }}
         />
-        <small className="muted">{t("form.charset", { max: field.maxLength })}</small>
       </>,
     );
 
