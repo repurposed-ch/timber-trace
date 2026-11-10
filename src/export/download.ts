@@ -1,7 +1,7 @@
 import type { DenseSchema } from "densing";
 import QRCode from "qrcode";
 import { intlLocale } from "../i18n-langs";
-import { beamDims } from "../schema/beam";
+import { beamDims, beamName } from "../schema/beam";
 import { BASE45, encodeRecord, idToHex } from "../schema/codec";
 import type { Labels } from "../schema/labels";
 import { provenance } from "../records/revision";
@@ -20,13 +20,6 @@ export function saveFile(name: string, data: Blob | string, type = "application/
 
 /** "<slug>-<32 hex id>" */
 export const fileBase = (slug: string, record: any) => `${slug}-${record.id.map((n: number) => n.toString(16).padStart(8, "0")).join("")}`;
-
-/** "Norway spruce · Glulam"; unknown parts stay in as "Unknown" */
-export function beamName(record: any, labels: Pick<Labels, "option">) {
-  const species = labels.option("species", record.species);
-  const product = record.product?.kind === "known" ? labels.option("product.value", record.product.value) : (record.product?.text ?? []).join("");
-  return `${species} · ${product}`;
-}
 
 export function downloadIfc(slug: string, schema: DenseSchema, record: any, labels: Labels) {
   const dims = beamDims(record);

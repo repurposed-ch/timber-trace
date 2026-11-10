@@ -193,17 +193,18 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               </button>
             </div>
           </div>
-          {(() => {
-            const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
-            return line && <p className="provenance" data-testid="provenance">{line}</p>;
-          })()}
+          {mode === "edit" &&
+            (() => {
+              const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
+              return line && <p className="provenance" data-testid="provenance">{line}</p>;
+            })()}
           {record.version !== schema.latest && (
             <p className="note" role="note">
               {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
             </p>
           )}
           {mode === "view" ? (
-            <RecordView schema={dense} record={record} labels={labels} history={hist} tiers={tiers} />
+            <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={() => setMode("edit")} />
           ) : (
             <RecordForm
               key={`${record.version}:${record.id.join(".")}:${loaded?.payload ?? "new"}`}

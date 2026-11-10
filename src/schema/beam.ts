@@ -1,3 +1,5 @@
+import type { Labels } from "./labels";
+
 /** shown (3D) and exported (IFC) when a dimension is unknown, in mm */
 export const DEFAULT_DIMS = { length: 4000, width: 120, height: 240 };
 
@@ -14,4 +16,11 @@ export function beamDims(record: any) {
     size: { length: length.mm, width: width.mm, height: height.mm },
     known: length.known && width.known && height.known,
   };
+}
+
+/** "Norway spruce · Glulam"; unknown parts stay in as "Unknown" */
+export function beamName(record: any, labels: Pick<Labels, "option">) {
+  const species = labels.option("species", record.species);
+  const product = record.product?.kind === "known" ? labels.option("product.value", record.product.value) : (record.product?.text ?? []).join("");
+  return `${species} · ${product}`;
 }
