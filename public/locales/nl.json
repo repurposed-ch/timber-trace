@@ -33,7 +33,9 @@
     "p4Text": "Elk schema is een openbaar JSON-bestand met labels in 7 talen, te bekijken op het tabblad Schema.",
     "fields": "{{count}} velden",
     "bits": "{{min}}–{{max}} bits",
-    "source": "Broncode op GitHub"
+    "source": "Broncode op GitHub",
+    "examplesTitle": "Voorbeelden",
+    "examplesText": "Balken gecodeerd met het schema hello-world. Open er een om te lezen, of scan de code met een telefoon."
   },
   "nav": {
     "record": "Record",

@@ -33,7 +33,9 @@
     "p4Text": "Each schema is a public JSON file with labels in 7 languages, inspectable on its Schema tab.",
     "fields": "{{count}} fields",
     "bits": "{{min}}–{{max}} bits",
-    "source": "Source code on GitHub"
+    "source": "Source code on GitHub",
+    "examplesTitle": "Examples",
+    "examplesText": "Beams encoded with the hello-world schema. Open one to read it, or scan its code with a phone."
   },
   "nav": {
     "record": "Record",

@@ -33,7 +33,9 @@
     "p4Text": "Hvert skema er en offentlig JSON-fil med etiketter på 7 sprog, som kan ses under fanen Skema.",
     "fields": "{{count}} felter",
     "bits": "{{min}}–{{max}} bit",
-    "source": "Kildekode på GitHub"
+    "source": "Kildekode på GitHub",
+    "examplesTitle": "Eksempler",
+    "examplesText": "Bjælker kodet med skemaet hello-world. Åbn en for at læse den, eller scan dens kode med en telefon."
   },
   "nav": {
     "record": "Post",

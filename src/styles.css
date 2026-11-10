@@ -301,3 +301,11 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .qr-card.collapsed .qr-body { display: none; }
 }
 .viewer-card .card-head, .qr-card .card-head { gap: 8px; }
+/* landing page examples */
+.examples { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); margin-top: 8px; }
+.example { display: flex; gap: 12px; align-items: flex-start; color: inherit; text-decoration: none; padding: 10px; transition: border-color .15s; }
+.example:hover { border-color: var(--accent); }
+.example-qr { width: 96px; height: 96px; flex: none; image-rendering: pixelated; border-radius: 4px; background: var(--bg); }
+.example-text { display: grid; gap: 2px; min-width: 0; }
+.example-text strong { line-height: 1.25; }
+.example-meta { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }

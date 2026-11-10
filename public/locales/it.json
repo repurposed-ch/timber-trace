@@ -33,7 +33,9 @@
     "p4Text": "Ogni schema è un file JSON pubblico con etichette in 7 lingue, consultabile nella scheda Schema.",
     "fields": "{{count}} campi",
     "bits": "{{min}}–{{max}} bit",
-    "source": "Codice sorgente su GitHub"
+    "source": "Codice sorgente su GitHub",
+    "examplesTitle": "Esempi",
+    "examplesText": "Travi codificate con lo schema hello-world. Aprine una per leggerla o scansiona il suo codice con il telefono."
   },
   "nav": {
     "record": "Scheda",

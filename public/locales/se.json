@@ -33,7 +33,9 @@
     "p4Text": "Varje schema är en offentlig JSON-fil med etiketter på 7 språk, som kan granskas under fliken Schema.",
     "fields": "{{count}} fält",
     "bits": "{{min}}–{{max}} bitar",
-    "source": "Källkod på GitHub"
+    "source": "Källkod på GitHub",
+    "examplesTitle": "Exempel",
+    "examplesText": "Balkar kodade med schemat hello-world. Öppna en för att läsa den, eller skanna dess kod med en telefon."
   },
   "nav": {
     "record": "Post",

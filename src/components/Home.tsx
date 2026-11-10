@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { listSchemas } from "../schema/loader";
 import { schemaUrl } from "../state/route";
 import { read, useLabels, useSchema } from "../state/useSchema";
+import { Examples } from "./Examples";
 import { Shell } from "./Shell";
 
 const REPO = "https://github.com/repurposed-ch/timber-trace";
@@ -61,6 +62,12 @@ export function Home() {
           </div>
         )}
       </section>
+
+      {(slugs ?? []).map((s) => (
+        <Suspense key={s} fallback={null}>
+          <Examples slug={s} />
+        </Suspense>
+      ))}
 
       <section className="home-section">
         <h2>{t("home.principlesTitle")}</h2>

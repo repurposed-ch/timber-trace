@@ -33,7 +33,9 @@
     "p4Text": "Chaque schéma est un fichier JSON public avec des libellés en 7 langues, consultable dans l'onglet Schéma.",
     "fields": "{{count}} champs",
     "bits": "{{min}}–{{max}} bits",
-    "source": "Code source sur GitHub"
+    "source": "Code source sur GitHub",
+    "examplesTitle": "Exemples",
+    "examplesText": "Des poutres encodées avec le schéma hello-world. Ouvrez-en une pour la lire, ou scannez son code avec un téléphone."
   },
   "nav": {
     "record": "Fiche",
