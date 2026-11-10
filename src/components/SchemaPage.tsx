@@ -18,7 +18,9 @@ import { Shell } from "./Shell";
 import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
+import { RecordEditor } from "./RecordEditor";
 import { RecordView } from "./RecordView";
+import { editTabsFor } from "../schema/sections";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { UpdateBanner } from "./UpdateBanner";
@@ -65,6 +67,20 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setModeState(m);
     replaceMode(m);
   };
+  // edit tab, and the section to bring into view after switching between view and edit
+  const [editTab, setEditTab] = useState("overview");
+  const [focusSection, setFocusSection] = useState<string | null>(null);
+  const editSection = (sectionId?: string) => {
+    const tabs = editTabsFor(schema.versions.get(record.version) ?? latest, schema.meta);
+    setEditTab(tabs.find((t) => t.sections.some((s) => s.id === sectionId))?.id ?? tabs[0].id);
+    setFocusSection(sectionId ?? null);
+    setMode("edit");
+  };
+  useEffect(() => {
+    if (!focusSection) return;
+    const id = `${mode === "edit" ? "edit" : "view"}-sec-${focusSection}`;
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ block: "start", behavior: "smooth" }));
+  }, [mode, editTab, focusSection]);
   const load = (l: NonNullable<Loaded>) => {
     setLoaded(l);
     setRecord(l.data);
@@ -167,7 +183,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         </div>
       )}
       {tab === "record" && (
-        <div className="card">
+        <div className="card record-card">
           <div className="card-head">
             <h3>
               {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
@@ -175,7 +191,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             <div className="card-actions">
               <div className="variants" role="radiogroup" aria-label={t("form.mode", { ns: "ui" })}>
                 {(["view", "edit"] as const).map((m) => (
-                  <button key={m} type="button" role="radio" aria-checked={mode === m} className={mode === m ? "on" : ""} onClick={() => setMode(m)}>
+                  <button key={m} type="button" role="radio" aria-checked={mode === m} className={mode === m ? "on" : ""} onClick={() => (m === "edit" ? editSection() : setMode("view"))}>
                     {t(`form.${m}`, { ns: "ui" })}
                   </button>
                 ))}
@@ -204,14 +220,20 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             </p>
           )}
           {mode === "view" ? (
-            <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={() => setMode("edit")} />
+            <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={editSection} />
           ) : (
-            <RecordForm
-              key={`${record.version}:${record.id.join(".")}:${loaded?.payload ?? "new"}`}
+            <RecordEditor
+              formKey={`${record.version}:${record.id.join(".")}:${loaded?.payload ?? "new"}`}
               schema={dense}
-              labels={labels}
-              value={record}
+              meta={schema.meta}
+              record={record}
               onChange={setRecord}
+              labels={labels}
+              tab={editTab}
+              onTab={(id) => {
+                setEditTab(id);
+                setFocusSection(null);
+              }}
               overrides={
                 tiers && historyField
                   ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }

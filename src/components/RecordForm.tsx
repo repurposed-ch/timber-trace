@@ -33,24 +33,41 @@ type FormProps = {
   onChange: (v: any) => void;
   /** replaces the generic editor of a top-level field, e.g. the history editor */
   overrides?: Record<string, React.ReactNode>;
-  /** only these top-level fields, in this order (a tab of the form); default: all */
+  /** only these top-level fields, in this order; default: all */
   fields?: string[];
+  /** titled groups of top-level fields (a tab of the form); overrides `fields` */
+  sections?: { id: string; title: string; fields: string[] }[];
 };
 
-export function RecordForm({ schema, labels, value, onChange, overrides = {}, fields }: FormProps) {
+export function RecordForm({ schema, labels, value, onChange, overrides = {}, fields, sections }: FormProps) {
   const { t } = useTranslation();
   const ctx = { schema, labels };
-  const errors = useMemo(() => validate(schema, value).errors, [schema, value]);
-  const shown = fields ? fields.map((n) => schema.fields.find((f) => f.name === n)!).filter(Boolean) : schema.fields;
+  const groups = sections ?? [{ id: "", title: "", fields: fields ?? schema.fields.map((f) => f.name) }];
+  const shownNames = groups.flatMap((g) => g.fields);
+  // only the errors of the fields on this tab; other tabs show a badge instead
+  const errors = useMemo(() => validate(schema, value).errors.filter((e) => shownNames.includes(e.path.split(/[.[]/)[0])), [schema, value, shownNames.join()]);
+  const field = (name: string) => {
+    const f = schema.fields.find((x) => x.name === name);
+    if (!f) return null;
+    return f.name in overrides ? (
+      <div key={f.name}>{overrides[f.name]}</div>
+    ) : (
+      <Field key={f.name} field={f} path={f.name} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} />
+    );
+  };
   return (
     <form className="record" onSubmit={(e) => e.preventDefault()}>
-      {shown.map((f) =>
-        f.name in overrides ? (
-          <div key={f.name}>{overrides[f.name]}</div>
-        ) : (
-          <Field key={f.name} field={f} path={f.name} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} />
-        ),
-      )}
+      {groups.map((g) => (
+        // a section that is one plain field group already says its title
+        <div key={g.id || "all"} className={`form-sec${g.title && g.fields.length === 1 && !(g.fields[0] in overrides) ? " single" : ""}`}>
+          {g.title && (
+            <h4 className="sec-h" id={`edit-sec-${g.id}`}>
+              <span>{g.title}</span>
+            </h4>
+          )}
+          {g.fields.map(field)}
+        </div>
+      ))}
       {errors.length > 0 && (
         <ul className="error" role="alert">
           {errors.map((e) => (

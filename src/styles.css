@@ -157,7 +157,6 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 input::placeholder { color: #a7a196; font-size: .85em; }
 @media (max-width: 520px) {
   .card { padding: 10px; }
-  main { padding: 8px; }
   /* keep label | control | unknown on one line; wide controls may wrap inside their cell */
   .row { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 6px; align-items: center; }
   /* several inputs in a row: label on top, the inputs share the full width */
@@ -268,3 +267,17 @@ select.is-empty { color: #8f897f; }
 select.is-empty option { color: var(--fg); }
 .row.multi .control > .variants { flex: none; }
 .variants button { white-space: nowrap; }
+/* edit tabs */
+.subtabs { display: flex; gap: 2px; border-bottom: 1px solid var(--line); margin: 4px 0 8px; overflow-x: auto; }
+.subtabs button { border: 0; border-bottom: 2px solid transparent; border-radius: 0; background: none; padding: 6px 12px; white-space: nowrap; }
+.subtabs button.on { border-bottom-color: var(--accent); font-weight: 600; }
+.subtabs .badge { color: #c0392b; font-size: .7rem; margin-left: 4px; vertical-align: super; }
+.form-sec + .form-sec { margin-top: 4px; }
+.form-sec > .sec-h { margin-top: 12px; }
+/* phones: the record card is flush, one 12px gutter from the screen edge */
+@media (max-width: 520px) {
+  .shell-body { padding: 12px; }
+  .record-card { border: 0; border-radius: 0; padding: 0; background: none; }
+}
+.form-sec.single > .group > legend { display: none; }
+.form-sec.single > .group { border-left: 0; padding-left: 0; }
