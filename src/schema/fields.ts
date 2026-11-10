@@ -53,3 +53,15 @@ export const isId128 = (field: DenseField) =>
 /** enum array of single characters: shown as a text input */
 export const isCharText = (field: DenseField): field is EnumArrayField =>
   field.type === "enum_array" && field.enum.options.every((o) => o.length === 1);
+
+/**
+ * A union that is "unknown, or one kind of value": exactly two variants, one of them `unknown`
+ * without fields. The form shows these as a value plus an "unknown" checkbox.
+ */
+export function unknownable(field: DenseField, schema: DenseSchema): { other: string } | null {
+  if (field.type !== "union") return null;
+  const names = Object.keys(field.variants);
+  if (names.length !== 2 || !names.includes("unknown")) return null;
+  if (variantFields(field, "unknown", schema).length !== 0) return null;
+  return { other: names.find((n) => n !== "unknown")! };
+}

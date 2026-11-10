@@ -58,17 +58,20 @@ export function HistoryEditor({ schema, field, labels, tiers, value, onChange }:
     return { ...e, date: { status: "known", day: Math.floor(Date.now() / 86_400_000) } };
   };
 
-  const statusLabel = (s: string) => labels.option("history.status", s);
   return (
     <fieldset className="group history">
-      <legend>{labels.field("history")}</legend>
-      <div className="variants" role="radiogroup" aria-label={labels.field("history")}>
-        {(["unknown", "known"] as const).map((s) => (
-          <button key={s} type="button" role="radio" aria-checked={value.status === s} className={value.status === s ? "on" : ""} onClick={() => set({ status: s })}>
-            {statusLabel(s)}
-          </button>
-        ))}
-      </div>
+      <legend>
+        {labels.field("history")}
+        <label className="unk">
+          <input
+            type="checkbox"
+            checked={value.status === "unknown"}
+            onChange={(e) => set({ status: e.target.checked ? "unknown" : "known" })}
+            aria-label={`${labels.field("history")}: ${t("form.unknown")}`}
+          />
+          <span>{t("form.unknown")}</span>
+        </label>
+      </legend>
       {value.status === "known" && (
         <>
           <p className="muted small" data-testid="history-summary">

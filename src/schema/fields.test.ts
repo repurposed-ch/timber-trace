@@ -33,3 +33,28 @@ describe("field helpers", () => {
     expect(custom.type === "object" && isCharText(custom.fields[0])).toBe(true);
   });
 });
+
+describe("unknownable unions", async () => {
+  const { walkDenseSchema } = await import("densing");
+  const { unknownable } = await import("./fields");
+  const loaded = await loadHelloWorld();
+
+  test("only unknown-or-one-value unions qualify, in every version", () => {
+    for (const [, s] of loaded.versions) {
+      walkDenseSchema(s, (f, path) => {
+        if (f.type !== "union") return;
+        const names = Object.keys(f.variants);
+        const expected = names.length === 2 && names.includes("unknown");
+        expect({ path, ok: unknownable(f, s) !== null }).toEqual({ path, ok: expected });
+      });
+    }
+  });
+
+  test("real choices keep their selector", () => {
+    const v2 = loaded.versions.get(2)!;
+    const product = v2.fields.find((f) => f.name === "product")!;
+    const grade = v2.fields.find((f) => f.name === "grade")!;
+    expect(unknownable(product, v2)).toBeNull();
+    expect(unknownable(grade, v2)).toEqual({ other: "recorded" });
+  });
+});

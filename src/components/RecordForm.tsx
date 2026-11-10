@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { hexToId, idToHex, randomId } from "../schema/codec";
 import { DAY_MAX, DAY_MIN, dayToIso, formatYear, isDayField, isYearField, isoToDay, todayDay } from "../schema/dates";
-import { defaultFor, isCharText, isId128, unionValue, variantFields } from "../schema/fields";
+import { defaultFor, isCharText, isId128, unionValue, unknownable, variantFields } from "../schema/fields";
 import { intlLocale } from "../i18n-langs";
 import { labelKey } from "../schema/labels";
 import type { Labels } from "../state/useSchema";
@@ -47,12 +47,24 @@ export function RecordForm({ schema, labels, value, onChange, overrides = {} }: 
   );
 }
 
-function Row({ label, children, htmlFor }: { label: string; children: React.ReactNode; htmlFor?: string }) {
+function Row({ label, children, htmlFor, end }: { label: string; children: React.ReactNode; htmlFor?: string; end?: React.ReactNode }) {
   return (
     <div className="row">
       <label htmlFor={htmlFor}>{label}</label>
       <div className="control">{children}</div>
+      {end}
     </div>
+  );
+}
+
+/** the "unknown" checkbox at the end of a row or group heading */
+function UnknownBox({ checked, onChange, label }: { checked: boolean; onChange: (unknown: boolean) => void; label: string }) {
+  const { t } = useTranslation();
+  return (
+    <label className="unk">
+      <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} aria-label={`${label}: ${t("form.unknown")}`} />
+      <span>{t("form.unknown")}</span>
+    </label>
   );
 }
 
@@ -229,6 +241,43 @@ function UnionField({ field, value, onChange, path, ctx, bare }: Props & { field
       ))}
     </div>
   );
+  // "unknown, or one kind of value": the value plus an unknown checkbox, no toggle
+  const unk = unknownable(field, ctx.schema);
+  if (unk) {
+    const isUnknown = variant === "unknown";
+    const known = variantFields(field, unk.other, ctx.schema);
+    const knownOnly = known.length === 1 ? known[0] : null;
+    const knownInline = !!knownOnly && (!["object", "union", "array"].includes(knownOnly.type) || isFlatUnion(knownOnly, ctx.schema));
+    const label = ctx.labels.field(key);
+    const box = <UnknownBox checked={isUnknown} label={label} onChange={(u) => pick(u ? "unknown" : unk.other)} />;
+    const child = (f: DenseField, bareChild = false) => (
+      <Field key={f.name} field={f} path={`${path}.${f.name}`} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} bare={bareChild} />
+    );
+    const dash = <span className="unknown-dash" aria-hidden>—</span>;
+    if (bare)
+      return (
+        <>
+          {isUnknown ? dash : knownInline ? child(knownOnly!, true) : known.map((f) => child(f))}
+          {box}
+        </>
+      );
+    if (isUnknown || knownInline)
+      return (
+        <Row label={label} end={box}>
+          {isUnknown ? dash : child(knownOnly!, true)}
+        </Row>
+      );
+    return (
+      <fieldset className="group">
+        <legend>
+          {label}
+          {box}
+        </legend>
+        {known.map((f) => child(f))}
+      </fieldset>
+    );
+  }
+
   const childField = (f: DenseField, bare = false) => (
     <Field key={f.name} field={f} path={`${path}.${f.name}`} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} bare={bare} />
   );
