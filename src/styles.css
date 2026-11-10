@@ -279,3 +279,6 @@ select.is-empty option { color: var(--fg); }
 }
 .form-sec.single > .group > legend { display: none; }
 .form-sec.single > .group { border-left: 0; padding-left: 0; }
+/* tabs: reserve the bold width so the active (bold) tab doesn't shift its neighbours */
+.tabs button, .subtabs button { display: inline-grid; justify-items: center; }
+.tabs button::after, .subtabs button::after { content: attr(data-label); font-weight: 600; height: 0; visibility: hidden; overflow: hidden; pointer-events: none; }

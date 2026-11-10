@@ -54,7 +54,7 @@ export function RecordEditor({ schema, meta, record, onChange, labels, overrides
       {tabs.length > 1 && (
         <nav className="subtabs" role="tablist">
           {tabs.map((t) => (
-            <button key={t.id} type="button" role="tab" aria-selected={t.id === current} className={t.id === current ? "on" : ""} onClick={() => onTab(t.id)}>
+            <button key={t.id} type="button" role="tab" aria-selected={t.id === current} className={t.id === current ? "on" : ""} onClick={() => onTab(t.id)} data-label={labels.raw.tabs?.[t.id] ?? t.id}>
               {labels.raw.tabs?.[t.id] ?? t.id}
               {problem(t.id) && (
                 <span className="badge" aria-label="!" data-testid={`badge-${t.id}`}>

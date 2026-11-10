@@ -111,7 +111,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const nav = (
     <nav className="tabs" role="tablist">
       {TABS.map((k) => (
-        <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
+        <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)} data-label={t(`nav.${k}`, { ns: "ui" })}>
           {t(`nav.${k}`, { ns: "ui" })}
         </button>
       ))}
