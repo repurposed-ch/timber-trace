@@ -52,6 +52,9 @@ i18n
     },
   });
 
-document.documentElement.lang = intlLocale(i18n.language);
+// keep <html lang> in step with the active language (i18n.language is unset until init finishes)
+i18n.on("languageChanged", (lng) => {
+  document.documentElement.lang = intlLocale(lng);
+});
 
 export default i18n;
