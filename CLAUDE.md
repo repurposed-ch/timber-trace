@@ -4,10 +4,11 @@ Static GitHub Pages app (React + Vite + R3F) at `timber-trace.repurposed.ch`, se
 
 - `src/schema/`: loader (fetches `public/<slug>/…`), codec (base45 / URL-safe, version detection, 128-bit id), links (record URLs, input decoding), labels (required-label rules, pure lookup), field helpers, beam dimension defaults.
 - QR content must stay QR **alphanumeric** (`0-9 A-Z $%*+-./:`): no `#`, `?` or lowercase, or the code falls back to byte mode. `src/schema/links.test.ts` checks this.
-- `src/components/`: Header (breadcrumbs, on every page), Home, RecordForm (generated from the schema), BeamViewer, QrPanel (QR + exports), Scanner, SchemaInspector (dev editor only under `import.meta.env.DEV`), UpdateBanner.
+- `src/components/`: Shell (the frame of every page: header + nav + main, optional aside with a pinned and a scrolling part), Header (one-line breadcrumbs: truncate, short brand, then fold into "…"), Home, RecordView (read-only, from `recordFacts`), RecordForm (generated from the schema), BeamViewer, QrPanel (QR + exports), Scanner, SchemaInspector (dev editor only under `import.meta.env.DEV`), UpdateBanner.
 - `src/export/`: facts (record → labelled rows, shared by PDF and IFC), IFC4 writer, PDF fact sheet (dynamically imported; keep it out of the main bundle), downloads. IFC output is checked with `web-ifc` (dev dependency only).
 - `src/materials/`: wood shader + species/product presets. Every species in the schema needs a preset; a test checks this.
 - `src/records/`: `RecordSource` interface (static adapter = stand-in for the future database), history tiers (`selectForQr`), revision comparison and provenance, changed facts for the update banner.
+- Form: a union of `unknown` + one other variant is edited as a value plus an "unknown" checkbox (`unknownable` in `src/schema/fields.ts`); other unions keep a selector. Form controls stay ≥ 16px on touch devices (iOS zoom).
 - Dates: `day` (days since 1970, 17 bits from 1830-08-25) and `year` (12 bits, to 2189) templates; helpers in `src/schema/dates.ts`, always UTC. Use the type the field needs; `dayOrYear` only where both are realistic.
 - History: never put a full history in the code. `historyTiers` in `index.json` decides the selection; keep `omitted` honest.
 - Schemas and translations are static JSON in `public/`, fetched at runtime. Never import them into the bundle.

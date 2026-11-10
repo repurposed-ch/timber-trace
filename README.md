@@ -3,7 +3,8 @@
 Static app that inscribes timber component data into a QR code and reads it back.
 Served at [timber-trace.repurposed.ch](https://timber-trace.repurposed.ch/), one path per schema (`/hello-world/`).
 
-- **Record**: the 3D preview (procedural wood per species and product, can be hidden) on top, then a form generated from the schema. It produces a QR code, a share link and downloads:
+- **Layout**: every page uses the same frame (`src/components/Shell.tsx`): header with one-line breadcrumbs and a flag language switcher, the nav below it, then the content. On desktop (≥ 960 px) the frame fills the screen (max 1440 px): the main pane and the right column scroll separately, and the 3D view stays pinned at the top of the right column on every tab. On phones it is one page with a sticky header and nav.
+- **Record**: opened or scanned records show read-only (**View**); **Edit** shows the form (`?mode=edit`, never part of a QR link). Unknown values are a checkbox next to the field. The 3D preview (procedural wood per species and product, can be hidden) on top, then a form generated from the schema. It produces a QR code, a share link and downloads:
   - QR code as PNG,
   - a one-page **PDF fact sheet** in the current language (QR, 3D snapshot, every fact),
   - an **IFC4** file with one `IfcBeam`: GlobalId = the 128-bit component ID, extruded cross-section in mm, species as material, every fact in the `TimberTrace` property set.
