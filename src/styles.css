@@ -207,12 +207,10 @@ input::placeholder { color: #a7a196; font-size: .85em; }
   .aside-pane { grid-column: 2; grid-row: 2; overflow: auto; min-height: 0; }
   .viewer { height: 300px; }
 }
-/* breadcrumbs: one line; middle crumbs truncate, brand shortens, then the middle folds into "…" */
-.crumbs li.mid { flex: 0 1 auto; min-width: 2.5em; }
-.crumbs li.mid > a, .crumbs li.mid > span { overflow: hidden; text-overflow: ellipsis; max-width: 28ch; }
-.crumbs li.current { flex: none; }
-.brand-short { display: none; }
-@media (max-width: 520px) { .brand-long { display: none; } .brand-short { display: inline; } .crumbs li.mid > a { max-width: 14ch; } }
+/* breadcrumbs: one line; crumbs that don't fit hide behind "…" (current first, then root, then from the bottom up) */
+.crumbs li.mid, .crumbs li.brand { flex: none; }
+.crumbs li.current { flex: 0 1 auto; min-width: 0; }
+.crumbs li.current > span, .crumbs li.current > a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
 .crumbs-measure { position: absolute; visibility: hidden; pointer-events: none; left: 0; top: 0; width: max-content; }
 .crumbs li.more { min-width: 0; flex: none; position: relative; }
 .crumbs li.more button { border: 0; background: none; padding: 0 4px; color: var(--accent); font-weight: 700; }
