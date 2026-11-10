@@ -16,6 +16,7 @@ import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { Shell } from "./Shell";
 import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
+import { ExportButtons } from "./ExportButtons";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
 import { RecordEditor } from "./RecordEditor";
@@ -157,7 +158,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         <span className="phone-only">{hideButton("qr")}</span>
       </div>
       <div className="qr-body">
-        <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
+        <QrPanel slug={slug} schema={dense} record={record} />
       </div>
     </div>
   );
@@ -230,6 +231,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               >
                 {t("form.newRecord", { ns: "ui", v: schema.latest })}
               </button>
+              <ExportButtons slug={slug} schema={dense} record={record} labels={labels} />
             </div>
           </div>
           {mode === "edit" &&

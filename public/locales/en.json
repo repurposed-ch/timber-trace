@@ -86,7 +86,8 @@
     "pdf": "PDF fact sheet",
     "pdfBusy": "Creating PDF…",
     "hide": "Hide QR",
-    "show": "Show QR"
+    "show": "Show QR",
+    "exports": "Exports"
   },
   "scan": {
     "title": "Scan QR code",

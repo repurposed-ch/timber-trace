@@ -86,7 +86,8 @@
     "pdf": "PDF-factsheet",
     "pdfBusy": "PDF wordt gemaakt…",
     "hide": "QR verbergen",
-    "show": "QR tonen"
+    "show": "QR tonen",
+    "exports": "Exports"
   },
   "scan": {
     "title": "QR-code scannen",

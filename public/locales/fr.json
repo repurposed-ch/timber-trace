@@ -86,7 +86,8 @@
     "pdf": "Fiche PDF",
     "pdfBusy": "Création du PDF…",
     "hide": "Masquer le QR",
-    "show": "Afficher le QR"
+    "show": "Afficher le QR",
+    "exports": "Exports"
   },
   "scan": {
     "title": "Scanner un code QR",

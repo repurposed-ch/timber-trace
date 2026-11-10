@@ -86,7 +86,8 @@
     "pdf": "PDF-Datenblatt",
     "pdfBusy": "PDF wird erstellt…",
     "hide": "QR ausblenden",
-    "show": "QR anzeigen"
+    "show": "QR anzeigen",
+    "exports": "Exporte"
   },
   "scan": {
     "title": "QR-Code scannen",

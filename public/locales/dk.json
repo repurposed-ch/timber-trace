@@ -86,7 +86,8 @@
     "pdf": "PDF-datablad",
     "pdfBusy": "Opretter PDF…",
     "hide": "Skjul QR",
-    "show": "Vis QR"
+    "show": "Vis QR",
+    "exports": "Eksport"
   },
   "scan": {
     "title": "Scan QR-kode",

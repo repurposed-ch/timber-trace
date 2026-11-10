@@ -86,7 +86,8 @@
     "pdf": "PDF-faktablad",
     "pdfBusy": "Skapar PDF…",
     "hide": "Dölj QR",
-    "show": "Visa QR"
+    "show": "Visa QR",
+    "exports": "Exporter"
   },
   "scan": {
     "title": "Skanna QR-kod",
