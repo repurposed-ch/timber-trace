@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { LanguageSwitcher } from "./LanguageSwitcher";
+import { HeaderNav } from "./HeaderNav";
 import { visibleCrumbs } from "./crumbs";
 
 export type Crumb = { label: string; href?: string; onClick?: () => void; title?: string };
@@ -108,7 +108,7 @@ export function Header({ crumbs = [] }: { crumbs?: Crumb[] }) {
           </li>
         </ol>
       </nav>
-      <LanguageSwitcher />
+      <HeaderNav />
     </header>
   );
 }

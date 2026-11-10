@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { fetchText, loadSchema, type LoadedSchema } from "../schema/loader";
+import { fetchText, listSchemas, loadSchema, type LoadedSchema } from "../schema/loader";
 import { makeLabels, type Labels, type SchemaLabels } from "../schema/labels";
 
 export const read = fetchText(import.meta.env.BASE_URL);
@@ -33,4 +33,20 @@ export function useLabels(slug: string, countryEnums: string[] = []): Labels {
   const raw = (i18n.getResourceBundle(lng, slug) as SchemaLabels | undefined) ?? EMPTY;
   const fallback = (i18n.getResourceBundle("en", slug) as SchemaLabels | undefined) ?? EMPTY;
   return makeLabels(raw, fallback, lng, countryEnums, i18n.t("form.unknown", { ns: "ui" }));
+}
+
+let slugsOnce: Promise<string[]> | null = null;
+
+/** the schema slugs (public/schemas.json), fetched once per page */
+export function useSchemaSlugs(): string[] {
+  const [slugs, setSlugs] = useState<string[]>([]);
+  useEffect(() => {
+    slugsOnce ??= listSchemas(read).catch(() => []);
+    let alive = true;
+    slugsOnce.then((s) => alive && setSlugs(s));
+    return () => {
+      alive = false;
+    };
+  }, []);
+  return slugs;
 }

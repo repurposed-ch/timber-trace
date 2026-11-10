@@ -42,7 +42,9 @@
     "scan": "Scansiona",
     "schema": "Schema",
     "breadcrumb": "Percorso di navigazione",
-    "more": "Altro"
+    "more": "Altro",
+    "menu": "Menu",
+    "newRecord": "Nuova scheda"
   },
   "form": {
     "title": "Scheda dell'elemento",

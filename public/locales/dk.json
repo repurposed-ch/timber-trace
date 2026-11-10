@@ -42,7 +42,9 @@
     "scan": "Scan",
     "schema": "Skema",
     "breadcrumb": "Brødkrummesti",
-    "more": "Mere"
+    "more": "Mere",
+    "menu": "Menu",
+    "newRecord": "Ny post"
   },
   "form": {
     "title": "Komponentpost",

@@ -42,7 +42,9 @@
     "scan": "Scanner",
     "schema": "Schéma",
     "breadcrumb": "Fil d'Ariane",
-    "more": "Plus"
+    "more": "Plus",
+    "menu": "Menu",
+    "newRecord": "Nouvelle fiche"
   },
   "form": {
     "title": "Fiche de l'élément",

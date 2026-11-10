@@ -212,7 +212,7 @@ input::placeholder { color: #a7a196; font-size: .85em; }
 .crumbs li.mid, .crumbs li.brand { flex: none; }
 .crumbs li.current { flex: 0 1 auto; min-width: 0; }
 .crumbs li.current > span, .crumbs li.current > a { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
-.crumbs-measure { position: absolute; visibility: hidden; pointer-events: none; left: 0; top: 0; width: max-content; }
+.crumbs-measure { position: absolute; visibility: hidden; pointer-events: none; right: 100vw; top: 0; width: max-content; }
 .crumbs li.more { min-width: 0; flex: none; position: relative; }
 .crumbs li.more button { border: 0; background: none; padding: 0 4px; color: var(--accent); font-weight: 700; }
 .crumb-menu { position: absolute; top: 100%; left: 0; margin: 4px 0 0; padding: 4px 0; list-style: none; background: var(--card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,.08); z-index: 20; min-width: 12ch; }
@@ -310,3 +310,21 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .example-text { display: grid; gap: 2px; min-width: 0; }
 .example-text strong { line-height: 1.25; }
 .example-meta { display: flex; gap: 4px; flex-wrap: wrap; margin-top: 4px; }
+/* header shortcuts: Scan, Schema, language; phones: Scan + ☰ menu */
+.header-nav { display: flex; align-items: center; gap: 6px; flex: none; position: relative; }
+.hn-btn { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); border-radius: 6px; background: var(--card); color: var(--fg); text-decoration: none; padding: 3px 9px; font-size: .9rem; white-space: nowrap; line-height: 1.4; }
+.hn-btn:hover { border-color: var(--accent); }
+.hn-scan { background: var(--accent); border-color: var(--accent); color: #fff; }
+.hn-burger { display: none; font-size: 1.05rem; padding: 2px 9px; }
+.hn-menu { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px rgba(0,0,0,.12); padding: 6px; min-width: 220px; display: grid; gap: 2px; }
+.hn-menu > a { padding: 8px 10px; border-radius: 6px; color: var(--fg); text-decoration: none; }
+.hn-menu > a:hover { background: var(--bg); }
+.hn-langs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6px 0; margin: 4px 0; }
+.hn-langs button { border: 0; background: none; text-align: left; padding: 6px 8px; border-radius: 6px; font-size: .9rem; }
+.hn-langs button.on { background: var(--bg); font-weight: 600; }
+@media (max-width: 719px) {
+  .hn-wide { display: none; }
+  .hn-burger { display: inline-flex; }
+  .hn-scan .hn-label { display: none; }
+  .hn-scan { padding: 3px 8px; }
+}

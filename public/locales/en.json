@@ -42,7 +42,9 @@
     "scan": "Scan",
     "schema": "Schema",
     "breadcrumb": "Breadcrumb",
-    "more": "More"
+    "more": "More",
+    "menu": "Menu",
+    "newRecord": "New record"
   },
   "form": {
     "title": "Component record",

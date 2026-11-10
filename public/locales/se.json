@@ -42,7 +42,9 @@
     "scan": "Skanna",
     "schema": "Schema",
     "breadcrumb": "Sökväg",
-    "more": "Mer"
+    "more": "Mer",
+    "menu": "Meny",
+    "newRecord": "Ny post"
   },
   "form": {
     "title": "Komponentpost",

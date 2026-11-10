@@ -42,7 +42,9 @@
     "scan": "Scannen",
     "schema": "Schema",
     "breadcrumb": "Navigationspfad",
-    "more": "Mehr"
+    "more": "Mehr",
+    "menu": "Menü",
+    "newRecord": "Neuer Datensatz"
   },
   "form": {
     "title": "Bauteildatensatz",

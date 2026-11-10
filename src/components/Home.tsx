@@ -65,7 +65,9 @@ export function Home() {
 
       {(slugs ?? []).map((s) => (
         <Suspense key={s} fallback={null}>
-          <Examples slug={s} />
+          <div id="examples">
+            <Examples slug={s} />
+          </div>
         </Suspense>
       ))}
 
