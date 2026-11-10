@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { listSchemas } from "../schema/loader";
 import { schemaUrl } from "../state/route";
 import { read, useLabels, useSchema } from "../state/useSchema";
-import { Header } from "./Header";
+import { Shell } from "./Shell";
 
 const REPO = "https://github.com/repurposed-ch/timber-trace";
 
@@ -16,9 +16,17 @@ export function Home() {
   }, []);
   const steps = [1, 2, 3];
   const principles = [1, 2, 3, 4];
+  const nav = (
+    <nav className="tabs" aria-label={t("home.title")}>
+      {(slugs ?? []).map((s) => (
+        <Suspense key={s} fallback={<a href={schemaUrl(s)}>{s}</a>}>
+          <SchemaNavLink slug={s} />
+        </Suspense>
+      ))}
+    </nav>
+  );
   return (
-    <>
-      <Header />
+    <Shell nav={nav}>
       <section className="hero">
         <h1>{t("home.heroTitle")}</h1>
         <p>{t("home.heroText")}</p>
@@ -69,8 +77,14 @@ export function Home() {
       <footer className="home-footer">
         <a href={REPO}>{t("home.source")}</a>
       </footer>
-    </>
+    </Shell>
   );
+}
+
+function SchemaNavLink({ slug }: { slug: string }) {
+  useTranslation(slug); // suspends until the schema's labels are fetched
+  const labels = useLabels(slug);
+  return <a href={schemaUrl(slug)}>{labels.raw.title ?? slug}</a>;
 }
 
 /** title and description come from the schema's own runtime label files */

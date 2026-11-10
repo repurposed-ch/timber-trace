@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
-export type Crumb = { label: string; href?: string; onClick?: () => void };
+export type Crumb = { label: string; href?: string; onClick?: () => void; title?: string };
 
 /** the same header on every page: brand, breadcrumbs, language */
 export function Header({ crumbs = [] }: { crumbs?: Crumb[] }) {
@@ -14,7 +14,7 @@ export function Header({ crumbs = [] }: { crumbs?: Crumb[] }) {
           {all.map((c, i) => {
             const last = i === all.length - 1;
             return (
-              <li key={i} className={i === 0 ? "brand" : ""}>
+              <li key={i} className={i === 0 ? "brand" : ""} title={c.title}>
                 {last ? (
                   <span aria-current="page">{c.label}</span>
                 ) : (

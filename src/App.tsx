@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { Home } from "./components/Home";
-import { Header } from "./components/Header";
+import { Shell } from "./components/Shell";
 import { SchemaPage } from "./components/SchemaPage";
 import "./i18n";
 import { currentSlug } from "./state/route";
@@ -12,36 +12,30 @@ function SchemaRoute({ slug }: { slug: string }) {
   const state = useSchema(slug);
   if (state.status === "loading")
     return (
-      <>
-        <Header crumbs={[{ label: slug }]} />
+      <Shell crumbs={[{ label: slug }]}>
         <p className="muted">{t("loading")}</p>
-      </>
+      </Shell>
     );
   if (state.status === "error")
     return (
-      <>
-        <Header crumbs={[{ label: slug }]} />
+      <Shell crumbs={[{ label: slug }]}>
         <p className="error">
           {t("error.load")}: {state.error}
         </p>
-      </>
+      </Shell>
     );
   return <SchemaPage slug={slug} schema={state.schema} />;
 }
 
-function Shell() {
+function Routes() {
   const slug = currentSlug();
-  return (
-    <main>
-      <Suspense fallback={<Header />}>{slug ? <SchemaRoute slug={slug} /> : <Home />}</Suspense>
-    </main>
-  );
+  return <Suspense fallback={<Shell>…</Shell>}>{slug ? <SchemaRoute slug={slug} /> : <Home />}</Suspense>;
 }
 
 export function App() {
   return (
-    <Suspense fallback={<main>…</main>}>
-      <Shell />
+    <Suspense fallback={<div className="shell" />}>
+      <Routes />
     </Suspense>
   );
 }

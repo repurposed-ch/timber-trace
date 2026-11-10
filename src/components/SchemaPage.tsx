@@ -14,7 +14,7 @@ import type { LoadedSchema } from "../schema/loader";
 import { intlLocale } from "../i18n-langs";
 import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
-import { Header } from "./Header";
+import { Shell } from "./Shell";
 import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
@@ -84,23 +84,46 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       removeEventListener("hashchange", onNav);
     };
   }, [schema]);
+  const nav = (
+    <nav className="tabs" role="tablist">
+      {TABS.map((k) => (
+        <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
+          {t(`nav.${k}`, { ns: "ui" })}
+        </button>
+      ))}
+    </nav>
+  );
+  // the right column on every tab: the 3D view of the current record, then its QR and exports
+  const pinned = (
+    <div className="card viewer-card">
+      <div className="card-head">
+        <h3>{t("viewer.title", { ns: "ui" })}</h3>
+        <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer} aria-controls="viewer">
+          {showViewer ? t("viewer.hide", { ns: "ui" }) : t("viewer.show", { ns: "ui" })}
+        </button>
+      </div>
+      {showViewer && (
+        <div id="viewer">
+          <BeamViewer record={record} />
+        </div>
+      )}
+    </div>
+  );
+  const scroll = (
+    <div className="card">
+      <h3>{t("qr.title", { ns: "ui" })}</h3>
+      <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
+    </div>
+  );
   return (
-    <section>
-      <Header
-        crumbs={[
-          { label: labels.raw.title ?? slug, href: schemaUrl(slug), onClick: () => setTab("record") },
-          { label: t(`nav.${tab}`, { ns: "ui" }) },
-        ]}
-      />
-      <h2>{labels.raw.title ?? slug}</h2>
-      <p className="muted">{labels.raw.description}</p>
-      <nav className="tabs" role="tablist">
-        {TABS.map((k) => (
-          <button key={k} role="tab" aria-selected={tab === k} className={tab === k ? "on" : ""} onClick={() => setTab(k)}>
-            {t(`nav.${k}`, { ns: "ui" })}
-          </button>
-        ))}
-      </nav>
+    <Shell
+      crumbs={[
+        { label: labels.raw.title ?? slug, href: schemaUrl(slug), onClick: () => setTab("record"), title: labels.raw.description },
+        { label: t(`nav.${tab}`, { ns: "ui" }) },
+      ]}
+      nav={nav}
+      aside={{ pinned, scroll }}
+    >
       {newer && loaded && (
         <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
       )}
@@ -136,66 +159,45 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         </div>
       )}
       {tab === "record" && (
-        <>
-          <div className="card viewer-card">
-            <div className="card-head">
-              <h3>{t("viewer.title", { ns: "ui" })}</h3>
-              <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer} aria-controls="viewer">
-                {showViewer ? t("viewer.hide", { ns: "ui" }) : t("viewer.show", { ns: "ui" })}
-              </button>
-            </div>
-            {showViewer && (
-              <div id="viewer">
-                <BeamViewer record={record} />
-              </div>
-            )}
+        <div className="card">
+          <div className="card-head">
+            <h3>
+              {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
+            </h3>
+            <button
+              type="button"
+              onClick={() => {
+                setLoaded(null);
+                setRecord(newRecord());
+                setHistState(historyState(null, tiers!));
+              }}
+            >
+              {t("form.newRecord", { ns: "ui", v: schema.latest })}
+            </button>
           </div>
-          <div className="layout">
-            <div className="card">
-              <div className="card-head">
-                <h3>
-                  {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
-                </h3>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setLoaded(null);
-                    setRecord(newRecord());
-                    setHistState(historyState(null, tiers!));
-                  }}
-                >
-                  {t("form.newRecord", { ns: "ui", v: schema.latest })}
-                </button>
-              </div>
-              {(() => {
-                const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
-                return line && <p className="provenance" data-testid="provenance">{line}</p>;
-              })()}
-              {record.version !== schema.latest && (
-                <p className="note" role="note">
-                  {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
-                </p>
-              )}
-              <RecordForm
-                schema={dense}
-                labels={labels}
-                value={record}
-                onChange={setRecord}
-                overrides={
-                  tiers && historyField
-                    ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
-                    : {}
-                }
-              />
-            </div>
-            <div className="card side">
-              <h3>{t("qr.title", { ns: "ui" })}</h3>
-              <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
-            </div>
-          </div>
-        </>
+          {(() => {
+            const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
+            return line && <p className="provenance" data-testid="provenance">{line}</p>;
+          })()}
+          {record.version !== schema.latest && (
+            <p className="note" role="note">
+              {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
+            </p>
+          )}
+          <RecordForm
+            schema={dense}
+            labels={labels}
+            value={record}
+            onChange={setRecord}
+            overrides={
+              tiers && historyField
+                ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
+                : {}
+            }
+          />
+        </div>
       )}
-    </section>
+    </Shell>
   );
 }
 
