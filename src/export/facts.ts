@@ -7,15 +7,19 @@ import { labelKey, type Labels } from "../schema/labels";
 /** one line of a fact sheet: "Strength grade · Grading standard: SIA265" */
 export type Fact = { path: string; group?: string; label: string; value: string };
 
-type Ctx = { schema: DenseSchema; labels: Pick<Labels, "field" | "option">; none: string };
+/** how days and years are written; ISO by default (IFC, PDF), localised for reading on screen */
+export type DateFormat = { day: (day: number) => string; year: (year: number) => string };
+export const ISO_DATES: DateFormat = { day: dayToIso, year: yearToIso };
+
+type Ctx = { schema: DenseSchema; labels: Pick<Labels, "field" | "option">; none: string; dates: DateFormat };
 
 /** "Length (mm)" -> "mm": a unit in the child label is carried over to inline values */
 const unitOf = (label: string) => label.match(/\(([^)]+)\)\s*$/)?.[1];
 
 function scalar(field: DenseField, value: any, path: string, ctx: Ctx): string | null {
   if (isId128(field)) return idToHex(value);
-  if (isDayField(field)) return dayToIso(value);
-  if (isYearField(field)) return yearToIso(value);
+  if (isDayField(field)) return ctx.dates.day(value);
+  if (isYearField(field)) return ctx.dates.year(value);
   if (isCharText(field)) return value.join("");
   switch (field.type) {
     case "enum":
@@ -97,9 +101,9 @@ function walk(field: DenseField, value: any, path: string, ctx: Ctx, out: Fact[]
 }
 
 /** a record as ordered, labelled rows, the same for the PDF fact sheet and the IFC property set */
-export function recordFacts(schema: DenseSchema, record: any, labels: Pick<Labels, "field" | "option">, none = "—"): Fact[] {
+export function recordFacts(schema: DenseSchema, record: any, labels: Pick<Labels, "field" | "option">, none = "—", dates: DateFormat = ISO_DATES): Fact[] {
   const out: Fact[] = [];
-  const ctx = { schema, labels, none };
+  const ctx = { schema, labels, none, dates };
   for (const f of schema.fields) walk(f, record[f.name], f.name, ctx, out);
   return out;
 }

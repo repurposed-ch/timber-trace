@@ -68,3 +68,16 @@ describe("record facts, schema v2", async () => {
     expect(find(facts, "Verified by")).toBe("Unknown");
   });
 });
+
+describe("localised dates", async () => {
+  const { fullRecordV2 } = await import("../schema/testing");
+  const { formatDay, formatYear } = await import("../schema/dates");
+  test("days and years in the reader's language, ISO stays the default", async () => {
+    const v2 = loaded.versions.get(2)!;
+    const de = await labelsFor("de");
+    const local = recordFacts(v2, fullRecordV2, de, "—", { day: (d) => formatDay(d, "de"), year: (y) => formatYear(y, "de") });
+    expect(find(local, "Revisionsdatum", "Revision")).toBe("10. Nov. 2026");
+    expect(find(local, "Herstellungsjahr", "Daten")).toBe("1961");
+    expect(find(recordFacts(v2, fullRecordV2, de), "Revisionsdatum", "Revision")).toBe("2026-11-10");
+  });
+});
