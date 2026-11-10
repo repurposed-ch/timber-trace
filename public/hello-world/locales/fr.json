@@ -28,7 +28,52 @@
     "grade.standard": "Norme de classement",
     "assessments": "Évaluations",
     "assessments[].kind": "Type",
-    "assessments[].ref": "Référence"
+    "assessments[].ref": "Référence",
+    "revision": "Révision",
+    "revision.number": "Numéro de révision",
+    "revision.date": "Date de révision",
+    "revision.date.day": "Date",
+    "origin.harvest": "Récolte",
+    "origin.harvest.country": "Pays de récolte",
+    "origin.harvest.certification": "Certification",
+    "origin.previousUse": "Utilisation précédente",
+    "origin.previousUse.country": "Pays d'utilisation précédente",
+    "origin.previousUse.use": "Utilisé comme",
+    "dates": "Dates",
+    "dates.production": "Année de production",
+    "dates.production.year": "Année",
+    "dates.installation": "Installation",
+    "dates.installation.value": "Installation",
+    "dates.installation.value.day": "Date",
+    "dates.installation.value.year": "Année",
+    "dates.recovery": "Dépose",
+    "dates.recovery.value": "Dépose",
+    "dates.recovery.value.day": "Date",
+    "dates.recovery.value.year": "Année",
+    "history": "Historique",
+    "history.omitted": "Événements structurels absents du code",
+    "history.events": "Événements",
+    "history.events[].date": "Date",
+    "history.events[].date.day": "Date",
+    "history.events[].what": "Événement",
+    "history.events[].what.change": "Modification",
+    "history.events[].what.at": "Position sur la poutre",
+    "history.events[].what.at.mm": "Position (mm)",
+    "history.events[].what.agent": "Cause",
+    "history.events[].what.result": "Résultat",
+    "history.events[].what.method": "Méthode",
+    "history.events[].what.activity": "Activité",
+    "history.events[].ref": "Référence",
+    "supplied": "Fourni par",
+    "supplied.role": "Rôle",
+    "supplied.party": "ID de l'intervenant",
+    "supplied.date": "Date",
+    "supplied.date.day": "Date",
+    "verified": "Vérifié par",
+    "verified.role": "Rôle",
+    "verified.party": "ID de l'intervenant",
+    "verified.date": "Date",
+    "verified.date.day": "Date"
   },
   "options": {
     "origin.status": {
@@ -152,6 +197,138 @@
       "lab": "Essai en laboratoire",
       "structural": "Évaluation structurale",
       "other": "Autre"
+    },
+    "revision.date.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "origin.harvest.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "origin.previousUse.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "origin.harvest.certification": {
+      "unknown": "Inconnu",
+      "none": "Aucune",
+      "FSC": "FSC",
+      "PEFC": "PEFC",
+      "other": "Autre"
+    },
+    "origin.previousUse.use": {
+      "unknown": "Inconnu",
+      "roof": "Toiture",
+      "floor": "Plancher",
+      "wall": "Mur",
+      "frame": "Ossature",
+      "bridge": "Pont",
+      "other": "Autre"
+    },
+    "dates.production.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "dates.installation.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "dates.recovery.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "dates.installation.value.precision": {
+      "day": "Date",
+      "year": "Année"
+    },
+    "dates.recovery.value.precision": {
+      "day": "Date",
+      "year": "Année"
+    },
+    "history.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "history.events[].date.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "history.events[].what.at.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "history.events[].what.kind": {
+      "modification": "Modification",
+      "exposure": "Exposition",
+      "repair": "Réparation",
+      "inspection": "Inspection",
+      "treatment": "Traitement",
+      "routine": "Routine"
+    },
+    "history.events[].what.change": {
+      "cut": "Coupe",
+      "hole": "Perçage",
+      "notch": "Entaille",
+      "other": "Autre"
+    },
+    "history.events[].what.agent": {
+      "water": "Eau",
+      "fire": "Feu",
+      "insects": "Insectes",
+      "fungus": "Champignons",
+      "other": "Autre"
+    },
+    "history.events[].what.result": {
+      "ok": "Conforme",
+      "defect": "Défaut constaté",
+      "unknown": "Inconnu"
+    },
+    "history.events[].what.method": {
+      "preservative": "Produit de préservation",
+      "fire": "Ignifugation",
+      "coating": "Revêtement",
+      "other": "Autre"
+    },
+    "history.events[].what.activity": {
+      "check": "Contrôle de routine",
+      "moisture": "Mesure d'humidité",
+      "moved": "Déplacé / stocké",
+      "ownership": "Changement de propriétaire",
+      "regrading": "Reclassement",
+      "other": "Autre"
+    },
+    "supplied.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "verified.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "supplied.role": {
+      "owner": "Propriétaire",
+      "dismantler": "Entreprise de déconstruction",
+      "assessor": "Expert",
+      "engineer": "Ingénieur structure",
+      "supplier": "Fournisseur",
+      "other": "Autre"
+    },
+    "verified.role": {
+      "owner": "Propriétaire",
+      "dismantler": "Entreprise de déconstruction",
+      "assessor": "Expert",
+      "engineer": "Ingénieur structure",
+      "supplier": "Fournisseur",
+      "other": "Autre"
+    },
+    "supplied.date.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "verified.date.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
     }
   }
 }

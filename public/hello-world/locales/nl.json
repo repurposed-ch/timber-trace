@@ -28,7 +28,52 @@
     "grade.standard": "Sorteringsnorm",
     "assessments": "Beoordelingen",
     "assessments[].kind": "Soort",
-    "assessments[].ref": "Referentie"
+    "assessments[].ref": "Referentie",
+    "revision": "Revisie",
+    "revision.number": "Revisienummer",
+    "revision.date": "Revisiedatum",
+    "revision.date.day": "Datum",
+    "origin.harvest": "Kap",
+    "origin.harvest.country": "Land van kap",
+    "origin.harvest.certification": "Certificering",
+    "origin.previousUse": "Vorig gebruik",
+    "origin.previousUse.country": "Land van vorig gebruik",
+    "origin.previousUse.use": "Gebruikt als",
+    "dates": "Data",
+    "dates.production": "Productiejaar",
+    "dates.production.year": "Jaar",
+    "dates.installation": "Inbouw",
+    "dates.installation.value": "Inbouw",
+    "dates.installation.value.day": "Datum",
+    "dates.installation.value.year": "Jaar",
+    "dates.recovery": "Demontage",
+    "dates.recovery.value": "Demontage",
+    "dates.recovery.value.day": "Datum",
+    "dates.recovery.value.year": "Jaar",
+    "history": "Geschiedenis",
+    "history.omitted": "Structurele gebeurtenissen niet in de code",
+    "history.events": "Gebeurtenissen",
+    "history.events[].date": "Datum",
+    "history.events[].date.day": "Datum",
+    "history.events[].what": "Gebeurtenis",
+    "history.events[].what.change": "Bewerking",
+    "history.events[].what.at": "Positie op de balk",
+    "history.events[].what.at.mm": "Positie (mm)",
+    "history.events[].what.agent": "Oorzaak",
+    "history.events[].what.result": "Resultaat",
+    "history.events[].what.method": "Methode",
+    "history.events[].what.activity": "Activiteit",
+    "history.events[].ref": "Referentie",
+    "supplied": "Geleverd door",
+    "supplied.role": "Rol",
+    "supplied.party": "Partij-ID",
+    "supplied.date": "Datum",
+    "supplied.date.day": "Datum",
+    "verified": "Geverifieerd door",
+    "verified.role": "Rol",
+    "verified.party": "Partij-ID",
+    "verified.date": "Datum",
+    "verified.date.day": "Datum"
   },
   "options": {
     "origin.status": {
@@ -152,6 +197,138 @@
       "lab": "Laboratoriumtest",
       "structural": "Constructieve beoordeling",
       "other": "Overig"
+    },
+    "revision.date.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "origin.harvest.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "origin.previousUse.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "origin.harvest.certification": {
+      "unknown": "Onbekend",
+      "none": "Geen",
+      "FSC": "FSC",
+      "PEFC": "PEFC",
+      "other": "Overig"
+    },
+    "origin.previousUse.use": {
+      "unknown": "Onbekend",
+      "roof": "Dak",
+      "floor": "Vloer",
+      "wall": "Wand",
+      "frame": "Draagconstructie",
+      "bridge": "Brug",
+      "other": "Overig"
+    },
+    "dates.production.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "dates.installation.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "dates.recovery.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "dates.installation.value.precision": {
+      "day": "Datum",
+      "year": "Jaar"
+    },
+    "dates.recovery.value.precision": {
+      "day": "Datum",
+      "year": "Jaar"
+    },
+    "history.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "history.events[].date.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "history.events[].what.at.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "history.events[].what.kind": {
+      "modification": "Bewerking",
+      "exposure": "Blootstelling",
+      "repair": "Herstelling",
+      "inspection": "Inspectie",
+      "treatment": "Behandeling",
+      "routine": "Routine"
+    },
+    "history.events[].what.change": {
+      "cut": "Zaagsnede",
+      "hole": "Gat",
+      "notch": "Inkeping",
+      "other": "Overig"
+    },
+    "history.events[].what.agent": {
+      "water": "Water",
+      "fire": "Brand",
+      "insects": "Insecten",
+      "fungus": "Schimmels",
+      "other": "Overig"
+    },
+    "history.events[].what.result": {
+      "ok": "In orde",
+      "defect": "Gebrek gevonden",
+      "unknown": "Onbekend"
+    },
+    "history.events[].what.method": {
+      "preservative": "Houtverduurzaming",
+      "fire": "Brandvertrager",
+      "coating": "Coating",
+      "other": "Overig"
+    },
+    "history.events[].what.activity": {
+      "check": "Routinecontrole",
+      "moisture": "Vochtmeting",
+      "moved": "Verplaatst / opgeslagen",
+      "ownership": "Eigenaarswissel",
+      "regrading": "Hersortering",
+      "other": "Overig"
+    },
+    "supplied.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "verified.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "supplied.role": {
+      "owner": "Eigenaar",
+      "dismantler": "Demontagebedrijf",
+      "assessor": "Beoordelaar",
+      "engineer": "Constructeur",
+      "supplier": "Leverancier",
+      "other": "Overig"
+    },
+    "verified.role": {
+      "owner": "Eigenaar",
+      "dismantler": "Demontagebedrijf",
+      "assessor": "Beoordelaar",
+      "engineer": "Constructeur",
+      "supplier": "Leverancier",
+      "other": "Overig"
+    },
+    "supplied.date.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "verified.date.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
     }
   }
 }

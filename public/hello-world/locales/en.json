@@ -28,7 +28,52 @@
     "grade.standard": "Grading standard",
     "assessments": "Assessments",
     "assessments[].kind": "Kind",
-    "assessments[].ref": "Reference"
+    "assessments[].ref": "Reference",
+    "revision": "Revision",
+    "revision.number": "Revision number",
+    "revision.date": "Revision date",
+    "revision.date.day": "Date",
+    "origin.harvest": "Harvest",
+    "origin.harvest.country": "Country of harvest",
+    "origin.harvest.certification": "Certification",
+    "origin.previousUse": "Previous use",
+    "origin.previousUse.country": "Country of previous use",
+    "origin.previousUse.use": "Used as",
+    "dates": "Dates",
+    "dates.production": "Production year",
+    "dates.production.year": "Year",
+    "dates.installation": "Installation",
+    "dates.installation.value": "Installation",
+    "dates.installation.value.day": "Date",
+    "dates.installation.value.year": "Year",
+    "dates.recovery": "Recovery",
+    "dates.recovery.value": "Recovery",
+    "dates.recovery.value.day": "Date",
+    "dates.recovery.value.year": "Year",
+    "history": "History",
+    "history.omitted": "Structural events not in the code",
+    "history.events": "Events",
+    "history.events[].date": "Date",
+    "history.events[].date.day": "Date",
+    "history.events[].what": "Event",
+    "history.events[].what.change": "Change",
+    "history.events[].what.at": "Position along the beam",
+    "history.events[].what.at.mm": "Position (mm)",
+    "history.events[].what.agent": "Cause",
+    "history.events[].what.result": "Result",
+    "history.events[].what.method": "Method",
+    "history.events[].what.activity": "Activity",
+    "history.events[].ref": "Reference",
+    "supplied": "Supplied by",
+    "supplied.role": "Role",
+    "supplied.party": "Party ID",
+    "supplied.date": "Date",
+    "supplied.date.day": "Date",
+    "verified": "Verified by",
+    "verified.role": "Role",
+    "verified.party": "Party ID",
+    "verified.date": "Date",
+    "verified.date.day": "Date"
   },
   "options": {
     "origin.status": {
@@ -152,6 +197,138 @@
       "lab": "Laboratory test",
       "structural": "Structural assessment",
       "other": "Other"
+    },
+    "revision.date.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "origin.harvest.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "origin.previousUse.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "origin.harvest.certification": {
+      "unknown": "Unknown",
+      "none": "None",
+      "FSC": "FSC",
+      "PEFC": "PEFC",
+      "other": "Other"
+    },
+    "origin.previousUse.use": {
+      "unknown": "Unknown",
+      "roof": "Roof",
+      "floor": "Floor",
+      "wall": "Wall",
+      "frame": "Frame",
+      "bridge": "Bridge",
+      "other": "Other"
+    },
+    "dates.production.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "dates.installation.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "dates.recovery.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "dates.installation.value.precision": {
+      "day": "Date",
+      "year": "Year"
+    },
+    "dates.recovery.value.precision": {
+      "day": "Date",
+      "year": "Year"
+    },
+    "history.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "history.events[].date.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "history.events[].what.at.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "history.events[].what.kind": {
+      "modification": "Modification",
+      "exposure": "Exposure",
+      "repair": "Repair",
+      "inspection": "Inspection",
+      "treatment": "Treatment",
+      "routine": "Routine"
+    },
+    "history.events[].what.change": {
+      "cut": "Cut",
+      "hole": "Hole",
+      "notch": "Notch",
+      "other": "Other"
+    },
+    "history.events[].what.agent": {
+      "water": "Water",
+      "fire": "Fire",
+      "insects": "Insects",
+      "fungus": "Fungi",
+      "other": "Other"
+    },
+    "history.events[].what.result": {
+      "ok": "OK",
+      "defect": "Defect found",
+      "unknown": "Unknown"
+    },
+    "history.events[].what.method": {
+      "preservative": "Wood preservative",
+      "fire": "Fire retardant",
+      "coating": "Coating",
+      "other": "Other"
+    },
+    "history.events[].what.activity": {
+      "check": "Routine check",
+      "moisture": "Moisture reading",
+      "moved": "Moved / stored",
+      "ownership": "Change of owner",
+      "regrading": "Regrading",
+      "other": "Other"
+    },
+    "supplied.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "verified.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "supplied.role": {
+      "owner": "Owner",
+      "dismantler": "Dismantler",
+      "assessor": "Assessor",
+      "engineer": "Structural engineer",
+      "supplier": "Supplier",
+      "other": "Other"
+    },
+    "verified.role": {
+      "owner": "Owner",
+      "dismantler": "Dismantler",
+      "assessor": "Assessor",
+      "engineer": "Structural engineer",
+      "supplier": "Supplier",
+      "other": "Other"
+    },
+    "supplied.date.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "verified.date.status": {
+      "unknown": "Unknown",
+      "known": "Known"
     }
   }
 }

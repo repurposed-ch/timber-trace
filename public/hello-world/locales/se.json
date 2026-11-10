@@ -28,7 +28,52 @@
     "grade.standard": "Sorteringsstandard",
     "assessments": "Bedömningar",
     "assessments[].kind": "Typ",
-    "assessments[].ref": "Referens"
+    "assessments[].ref": "Referens",
+    "revision": "Revision",
+    "revision.number": "Revisionsnummer",
+    "revision.date": "Revisionsdatum",
+    "revision.date.day": "Datum",
+    "origin.harvest": "Avverkning",
+    "origin.harvest.country": "Avverkningsland",
+    "origin.harvest.certification": "Certifiering",
+    "origin.previousUse": "Tidigare användning",
+    "origin.previousUse.country": "Land för tidigare användning",
+    "origin.previousUse.use": "Använd som",
+    "dates": "Datum",
+    "dates.production": "Tillverkningsår",
+    "dates.production.year": "År",
+    "dates.installation": "Montering",
+    "dates.installation.value": "Montering",
+    "dates.installation.value.day": "Datum",
+    "dates.installation.value.year": "År",
+    "dates.recovery": "Demontering",
+    "dates.recovery.value": "Demontering",
+    "dates.recovery.value.day": "Datum",
+    "dates.recovery.value.year": "År",
+    "history": "Historik",
+    "history.omitted": "Strukturella händelser som inte finns i koden",
+    "history.events": "Händelser",
+    "history.events[].date": "Datum",
+    "history.events[].date.day": "Datum",
+    "history.events[].what": "Händelse",
+    "history.events[].what.change": "Bearbetning",
+    "history.events[].what.at": "Position på balken",
+    "history.events[].what.at.mm": "Position (mm)",
+    "history.events[].what.agent": "Orsak",
+    "history.events[].what.result": "Resultat",
+    "history.events[].what.method": "Metod",
+    "history.events[].what.activity": "Aktivitet",
+    "history.events[].ref": "Referens",
+    "supplied": "Levererad av",
+    "supplied.role": "Roll",
+    "supplied.party": "Part-ID",
+    "supplied.date": "Datum",
+    "supplied.date.day": "Datum",
+    "verified": "Verifierad av",
+    "verified.role": "Roll",
+    "verified.party": "Part-ID",
+    "verified.date": "Datum",
+    "verified.date.day": "Datum"
   },
   "options": {
     "origin.status": {
@@ -152,6 +197,138 @@
       "lab": "Laboratorieprovning",
       "structural": "Konstruktiv bedömning",
       "other": "Annat"
+    },
+    "revision.date.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "origin.harvest.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "origin.previousUse.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "origin.harvest.certification": {
+      "unknown": "Okänd",
+      "none": "Ingen",
+      "FSC": "FSC",
+      "PEFC": "PEFC",
+      "other": "Annat"
+    },
+    "origin.previousUse.use": {
+      "unknown": "Okänd",
+      "roof": "Tak",
+      "floor": "Bjälklag",
+      "wall": "Vägg",
+      "frame": "Stomme",
+      "bridge": "Bro",
+      "other": "Annat"
+    },
+    "dates.production.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "dates.installation.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "dates.recovery.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "dates.installation.value.precision": {
+      "day": "Datum",
+      "year": "År"
+    },
+    "dates.recovery.value.precision": {
+      "day": "Datum",
+      "year": "År"
+    },
+    "history.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "history.events[].date.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "history.events[].what.at.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "history.events[].what.kind": {
+      "modification": "Bearbetning",
+      "exposure": "Påverkan",
+      "repair": "Reparation",
+      "inspection": "Inspektion",
+      "treatment": "Behandling",
+      "routine": "Rutin"
+    },
+    "history.events[].what.change": {
+      "cut": "Sågsnitt",
+      "hole": "Hål",
+      "notch": "Urtag",
+      "other": "Annat"
+    },
+    "history.events[].what.agent": {
+      "water": "Vatten",
+      "fire": "Brand",
+      "insects": "Insekter",
+      "fungus": "Svamp",
+      "other": "Annat"
+    },
+    "history.events[].what.result": {
+      "ok": "OK",
+      "defect": "Brist upptäckt",
+      "unknown": "Okänd"
+    },
+    "history.events[].what.method": {
+      "preservative": "Träskyddsmedel",
+      "fire": "Brandskyddsmedel",
+      "coating": "Ytbehandling",
+      "other": "Annat"
+    },
+    "history.events[].what.activity": {
+      "check": "Rutinkontroll",
+      "moisture": "Fuktmätning",
+      "moved": "Flyttad / lagrad",
+      "ownership": "Ägarbyte",
+      "regrading": "Omsortering",
+      "other": "Annat"
+    },
+    "supplied.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "verified.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "supplied.role": {
+      "owner": "Ägare",
+      "dismantler": "Rivningsentreprenör",
+      "assessor": "Bedömare",
+      "engineer": "Konstruktör",
+      "supplier": "Leverantör",
+      "other": "Annat"
+    },
+    "verified.role": {
+      "owner": "Ägare",
+      "dismantler": "Rivningsentreprenör",
+      "assessor": "Bedömare",
+      "engineer": "Konstruktör",
+      "supplier": "Leverantör",
+      "other": "Annat"
+    },
+    "supplied.date.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "verified.date.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
     }
   }
 }

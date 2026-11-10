@@ -28,7 +28,52 @@
     "grade.standard": "Sorteringsstandard",
     "assessments": "Vurderinger",
     "assessments[].kind": "Type",
-    "assessments[].ref": "Reference"
+    "assessments[].ref": "Reference",
+    "revision": "Revision",
+    "revision.number": "Revisionsnummer",
+    "revision.date": "Revisionsdato",
+    "revision.date.day": "Dato",
+    "origin.harvest": "Fældning",
+    "origin.harvest.country": "Fældningsland",
+    "origin.harvest.certification": "Certificering",
+    "origin.previousUse": "Tidligere anvendelse",
+    "origin.previousUse.country": "Land for tidligere anvendelse",
+    "origin.previousUse.use": "Anvendt som",
+    "dates": "Datoer",
+    "dates.production": "Produktionsår",
+    "dates.production.year": "År",
+    "dates.installation": "Indbygning",
+    "dates.installation.value": "Indbygning",
+    "dates.installation.value.day": "Dato",
+    "dates.installation.value.year": "År",
+    "dates.recovery": "Nedtagning",
+    "dates.recovery.value": "Nedtagning",
+    "dates.recovery.value.day": "Dato",
+    "dates.recovery.value.year": "År",
+    "history": "Historik",
+    "history.omitted": "Strukturelle hændelser ikke i koden",
+    "history.events": "Hændelser",
+    "history.events[].date": "Dato",
+    "history.events[].date.day": "Dato",
+    "history.events[].what": "Hændelse",
+    "history.events[].what.change": "Bearbejdning",
+    "history.events[].what.at": "Position på bjælken",
+    "history.events[].what.at.mm": "Position (mm)",
+    "history.events[].what.agent": "Årsag",
+    "history.events[].what.result": "Resultat",
+    "history.events[].what.method": "Metode",
+    "history.events[].what.activity": "Aktivitet",
+    "history.events[].ref": "Reference",
+    "supplied": "Leveret af",
+    "supplied.role": "Rolle",
+    "supplied.party": "Parts-ID",
+    "supplied.date": "Dato",
+    "supplied.date.day": "Dato",
+    "verified": "Verificeret af",
+    "verified.role": "Rolle",
+    "verified.party": "Parts-ID",
+    "verified.date": "Dato",
+    "verified.date.day": "Dato"
   },
   "options": {
     "origin.status": {
@@ -152,6 +197,138 @@
       "lab": "Laboratorieprøvning",
       "structural": "Konstruktiv vurdering",
       "other": "Andet"
+    },
+    "revision.date.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "origin.harvest.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "origin.previousUse.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "origin.harvest.certification": {
+      "unknown": "Ukendt",
+      "none": "Ingen",
+      "FSC": "FSC",
+      "PEFC": "PEFC",
+      "other": "Andet"
+    },
+    "origin.previousUse.use": {
+      "unknown": "Ukendt",
+      "roof": "Tag",
+      "floor": "Etageadskillelse",
+      "wall": "Væg",
+      "frame": "Rammeværk",
+      "bridge": "Bro",
+      "other": "Andet"
+    },
+    "dates.production.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "dates.installation.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "dates.recovery.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "dates.installation.value.precision": {
+      "day": "Dato",
+      "year": "År"
+    },
+    "dates.recovery.value.precision": {
+      "day": "Dato",
+      "year": "År"
+    },
+    "history.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "history.events[].date.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "history.events[].what.at.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "history.events[].what.kind": {
+      "modification": "Bearbejdning",
+      "exposure": "Påvirkning",
+      "repair": "Reparation",
+      "inspection": "Inspektion",
+      "treatment": "Behandling",
+      "routine": "Rutine"
+    },
+    "history.events[].what.change": {
+      "cut": "Snit",
+      "hole": "Hul",
+      "notch": "Udsparing",
+      "other": "Andet"
+    },
+    "history.events[].what.agent": {
+      "water": "Vand",
+      "fire": "Brand",
+      "insects": "Insekter",
+      "fungus": "Svamp",
+      "other": "Andet"
+    },
+    "history.events[].what.result": {
+      "ok": "OK",
+      "defect": "Fejl fundet",
+      "unknown": "Ukendt"
+    },
+    "history.events[].what.method": {
+      "preservative": "Træbeskyttelse",
+      "fire": "Brandimprægnering",
+      "coating": "Overfladebehandling",
+      "other": "Andet"
+    },
+    "history.events[].what.activity": {
+      "check": "Rutinekontrol",
+      "moisture": "Fugtmåling",
+      "moved": "Flyttet / opbevaret",
+      "ownership": "Ejerskifte",
+      "regrading": "Omsortering",
+      "other": "Andet"
+    },
+    "supplied.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "verified.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "supplied.role": {
+      "owner": "Ejer",
+      "dismantler": "Nedriver",
+      "assessor": "Vurderingsmand",
+      "engineer": "Statiker",
+      "supplier": "Leverandør",
+      "other": "Andet"
+    },
+    "verified.role": {
+      "owner": "Ejer",
+      "dismantler": "Nedriver",
+      "assessor": "Vurderingsmand",
+      "engineer": "Statiker",
+      "supplier": "Leverandør",
+      "other": "Andet"
+    },
+    "supplied.date.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "verified.date.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
     }
   }
 }
