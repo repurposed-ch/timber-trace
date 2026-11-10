@@ -4,7 +4,7 @@ import { initReactI18next } from "react-i18next";
 
 import { LANGS, intlLocale, type Lang } from "./i18n-langs";
 
-export { LANGS, LANG_NAMES, intlLocale, type Lang } from "./i18n-langs";
+export { LANGS, LANG_FLAGS, LANG_NAMES, intlLocale, type Lang } from "./i18n-langs";
 
 const FROM_INTL: Record<string, Lang> = { da: "dk", sv: "se" };
 

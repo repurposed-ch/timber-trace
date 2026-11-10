@@ -11,6 +11,17 @@ export const LANG_NAMES: Record<Lang, string> = {
   se: "Svenska",
 };
 
+/** flag emoji per language (Windows shows the two letters instead, which still reads fine) */
+export const LANG_FLAGS: Record<Lang, string> = {
+  en: "🇬🇧",
+  de: "🇩🇪",
+  fr: "🇫🇷",
+  it: "🇮🇹",
+  dk: "🇩🇰",
+  nl: "🇳🇱",
+  se: "🇸🇪",
+};
+
 /** app codes follow the parent site (dk, se); Intl wants BCP 47 (da, sv) */
 const TO_INTL: Partial<Record<Lang, string>> = { dk: "da", se: "sv" };
 export const intlLocale = (lng: string) => TO_INTL[lng as Lang] ?? lng;
