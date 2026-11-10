@@ -330,5 +330,19 @@
       "unknown": "Onbekend",
       "known": "Bekend"
     }
+  },
+  "sections": {
+    "identity": "Identiteit",
+    "origin": "Herkomst & data",
+    "material": "Materiaal & klasse",
+    "assessments": "Beoordelingen",
+    "provenance": "Herkomstbewijs",
+    "history": "Geschiedenis",
+    "other": "Overig"
+  },
+  "tabs": {
+    "overview": "Overzicht",
+    "history": "Geschiedenis",
+    "provenance": "Herkomstbewijs"
   }
 }

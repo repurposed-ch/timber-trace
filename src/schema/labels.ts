@@ -8,6 +8,9 @@ export type SchemaLabels = {
   description?: string;
   fields: Record<string, string>;
   options: Record<string, Record<string, string>>;
+  /** section and edit-tab titles, by id */
+  sections?: Record<string, string>;
+  tabs?: Record<string, string>;
 };
 
 /** "assessments[].assessment.kind" -> "assessments[].kind": array item wrappers carry no label */

@@ -330,5 +330,19 @@
       "unknown": "Sconosciuto",
       "known": "Noto"
     }
+  },
+  "sections": {
+    "identity": "Identità",
+    "origin": "Origine e date",
+    "material": "Materiale e classe",
+    "assessments": "Valutazioni",
+    "provenance": "Provenienza",
+    "history": "Cronologia",
+    "other": "Altro"
+  },
+  "tabs": {
+    "overview": "Panoramica",
+    "history": "Cronologia",
+    "provenance": "Provenienza"
   }
 }

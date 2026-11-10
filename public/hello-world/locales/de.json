@@ -330,5 +330,19 @@
       "unknown": "Unbekannt",
       "known": "Bekannt"
     }
+  },
+  "sections": {
+    "identity": "Identität",
+    "origin": "Herkunft & Daten",
+    "material": "Material & Festigkeit",
+    "assessments": "Beurteilungen",
+    "provenance": "Nachweis",
+    "history": "Verlauf",
+    "other": "Weitere"
+  },
+  "tabs": {
+    "overview": "Übersicht",
+    "history": "Verlauf",
+    "provenance": "Nachweis"
   }
 }

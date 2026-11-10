@@ -330,5 +330,19 @@
       "unknown": "Okänd",
       "known": "Känd"
     }
+  },
+  "sections": {
+    "identity": "Identitet",
+    "origin": "Ursprung & datum",
+    "material": "Material & klass",
+    "assessments": "Bedömningar",
+    "provenance": "Proveniens",
+    "history": "Historik",
+    "other": "Övrigt"
+  },
+  "tabs": {
+    "overview": "Översikt",
+    "history": "Historik",
+    "provenance": "Proveniens"
   }
 }

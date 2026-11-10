@@ -8,5 +8,45 @@
     "condition": ["inspection", "treatment"],
     "routine": ["routine"],
     "structuralMax": 4
-  }
+  },
+  "sections": [
+    {
+      "id": "identity",
+      "fields": ["id", "revision"]
+    },
+    {
+      "id": "origin",
+      "fields": ["origin", "dates"]
+    },
+    {
+      "id": "material",
+      "fields": ["species", "product", "dimensions", "grade"]
+    },
+    {
+      "id": "assessments",
+      "fields": ["assessments"]
+    },
+    {
+      "id": "provenance",
+      "fields": ["supplied", "verified"]
+    },
+    {
+      "id": "history",
+      "fields": ["history"]
+    }
+  ],
+  "editTabs": [
+    {
+      "id": "overview",
+      "sections": ["identity", "origin", "material", "assessments"]
+    },
+    {
+      "id": "history",
+      "sections": ["history"]
+    },
+    {
+      "id": "provenance",
+      "sections": ["provenance"]
+    }
+  ]
 }

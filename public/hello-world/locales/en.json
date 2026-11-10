@@ -330,5 +330,19 @@
       "unknown": "Unknown",
       "known": "Known"
     }
+  },
+  "sections": {
+    "identity": "Identity",
+    "origin": "Origin & dates",
+    "material": "Material & grade",
+    "assessments": "Assessments",
+    "provenance": "Provenance",
+    "history": "History",
+    "other": "Other"
+  },
+  "tabs": {
+    "overview": "Overview",
+    "history": "History",
+    "provenance": "Provenance"
   }
 }

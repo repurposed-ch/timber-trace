@@ -9,7 +9,13 @@ export type SchemaMeta = {
   countryEnums: string[];
   /** which history event kinds go into the QR, and how many (see src/records/history.ts) */
   historyTiers?: HistoryTiers;
+  /** how the record is read and edited: titled groups of top-level fields, in order */
+  sections?: Section[];
+  /** edit mode: tabs, each a list of section ids */
+  editTabs?: { id: string; sections: string[] }[];
 };
+
+export type Section = { id: string; fields: string[] };
 
 export type HistoryTiers = {
   /** always the first, plus chosen ones, up to `structuralMax` */

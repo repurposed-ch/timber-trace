@@ -330,5 +330,19 @@
       "unknown": "Ukendt",
       "known": "Kendt"
     }
+  },
+  "sections": {
+    "identity": "Identitet",
+    "origin": "Oprindelse & datoer",
+    "material": "Materiale & klasse",
+    "assessments": "Vurderinger",
+    "provenance": "Proveniens",
+    "history": "Historik",
+    "other": "Andet"
+  },
+  "tabs": {
+    "overview": "Oversigt",
+    "history": "Historik",
+    "provenance": "Proveniens"
   }
 }
