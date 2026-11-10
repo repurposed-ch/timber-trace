@@ -42,6 +42,8 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const latest = schema.versions.get(schema.latest)!;
   const newRecord = () => ({ ...defaultRecord(latest), version: schema.latest, id: randomId() });
   const [showViewer, setShowViewer] = useStoredFlag("timber-trace.viewer", true);
+  // phones show either the 3D view or the QR code in the top spot; desktop shows both
+  const [showQr, setShowQr] = useStoredFlag("timber-trace.aside-qr", false);
   // the record that was scanned or opened from a link, checked for newer versions
   const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
   const [record, setRecord] = useState(() => loaded?.data ?? newRecord());
@@ -118,13 +120,27 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     </nav>
   );
   // the right column on every tab: the 3D view of the current record, then its QR and exports
+  const hideButton = (what: "viewer" | "qr") => (
+    <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer}>
+      {showViewer ? t(`${what}.hide`, { ns: "ui" }) : t(`${what}.show`, { ns: "ui" })}
+    </button>
+  );
+  // phones only: which of the two the top spot shows
+  const asideSwitch = (
+    <div className="variants aside-switch" role="radiogroup" aria-label={`${t("viewer.title", { ns: "ui" })} / ${t("qr.title", { ns: "ui" })}`}>
+      {([false, true] as const).map((qr) => (
+        <button key={String(qr)} type="button" role="radio" aria-checked={showQr === qr} className={showQr === qr ? "on" : ""} onClick={() => setShowQr(qr)} title={t(qr ? "qr.title" : "viewer.title", { ns: "ui" })}>
+          {qr ? "QR" : "3D"}
+        </button>
+      ))}
+    </div>
+  );
   const pinned = (
     <div className="card viewer-card">
       <div className="card-head">
         <h3>{t("viewer.title", { ns: "ui" })}</h3>
-        <button type="button" onClick={() => setShowViewer(!showViewer)} aria-expanded={showViewer} aria-controls="viewer">
-          {showViewer ? t("viewer.hide", { ns: "ui" }) : t("viewer.show", { ns: "ui" })}
-        </button>
+        {asideSwitch}
+        {hideButton("viewer")}
       </div>
       {showViewer && (
         <div id="viewer">
@@ -134,9 +150,15 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     </div>
   );
   const scroll = (
-    <div className="card">
-      <h3>{t("qr.title", { ns: "ui" })}</h3>
-      <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
+    <div className={`card qr-card${showViewer ? "" : " collapsed"}`}>
+      <div className="card-head">
+        <h3>{t("qr.title", { ns: "ui" })}</h3>
+        {asideSwitch}
+        <span className="phone-only">{hideButton("qr")}</span>
+      </div>
+      <div className="qr-body">
+        <QrPanel slug={slug} schema={dense} record={record} labels={labels} />
+      </div>
     </div>
   );
   return (
@@ -147,6 +169,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       ]}
       nav={nav}
       aside={{ pinned, scroll }}
+      className={showQr ? "aside-qr" : "aside-3d"}
     >
       {newer && loaded && (
         <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />

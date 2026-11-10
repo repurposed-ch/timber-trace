@@ -82,7 +82,9 @@
     "download": "PNG downloaden",
     "ifc": "IFC downloaden",
     "pdf": "PDF-factsheet",
-    "pdfBusy": "PDF wordt gemaakt…"
+    "pdfBusy": "PDF wordt gemaakt…",
+    "hide": "QR verbergen",
+    "show": "QR tonen"
   },
   "scan": {
     "title": "QR-code scannen",

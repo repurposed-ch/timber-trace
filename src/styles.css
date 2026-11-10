@@ -288,3 +288,16 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .control > *, .draft, .draft > input, .draft > textarea, select { min-width: 0; max-width: 100%; }
 .draft > textarea { width: 100%; resize: none; overflow: hidden; line-height: 1.35; padding: 5px 6px; overflow-wrap: anywhere; word-break: normal; }
 .id { align-items: flex-start; }
+/* phones: the top spot shows either the 3D view or the QR code */
+.aside-switch, .phone-only { display: none; }
+@media (max-width: 959px) {
+  .aside-switch { display: inline-flex; margin-right: auto; }
+  .phone-only { display: inline; }
+  .aside-pin .card-head h3, .aside-pane .card-head h3 { display: none; }
+  .aside-3d .aside-pane { display: none; }
+  /* the 3D view keeps its size off-screen, so the PDF can still take its snapshot */
+  .aside-qr .aside-pin { position: absolute; left: -10000px; top: 0; width: min(100vw, 600px); }
+  .aside-qr .aside-pane { order: -1; }
+  .qr-card.collapsed .qr-body { display: none; }
+}
+.viewer-card .card-head, .qr-card .card-head { gap: 8px; }

@@ -8,6 +8,8 @@ type Props = {
   children: ReactNode;
   /** desktop: right column. `pinned` stays put (3D view), `scroll` scrolls on its own (QR, exports) */
   aside?: { pinned?: ReactNode; scroll?: ReactNode };
+  /** extra classes on the frame, e.g. which aside part a phone shows */
+  className?: string;
 };
 
 /**
@@ -15,9 +17,9 @@ type Props = {
  * Desktop: fixed height, main and the aside's lower part scroll separately, width depends on the
  * screen only. Phones: one scrolling page, header and nav sticky, pinned part first.
  */
-export function Shell({ crumbs, nav, children, aside }: Props) {
+export function Shell({ crumbs, nav, children, aside, className }: Props) {
   return (
-    <div className={`shell${aside ? " has-aside" : ""}`}>
+    <div className={`shell${aside ? " has-aside" : ""}${className ? ` ${className}` : ""}`}>
       <div className="shell-head">
         <Header crumbs={crumbs} />
         {nav && <div className="shell-nav">{nav}</div>}

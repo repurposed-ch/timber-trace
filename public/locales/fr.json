@@ -82,7 +82,9 @@
     "download": "Télécharger PNG",
     "ifc": "Télécharger IFC",
     "pdf": "Fiche PDF",
-    "pdfBusy": "Création du PDF…"
+    "pdfBusy": "Création du PDF…",
+    "hide": "Masquer le QR",
+    "show": "Afficher le QR"
   },
   "scan": {
     "title": "Scanner un code QR",

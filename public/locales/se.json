@@ -82,7 +82,9 @@
     "download": "Ladda ner PNG",
     "ifc": "Ladda ner IFC",
     "pdf": "PDF-faktablad",
-    "pdfBusy": "Skapar PDF…"
+    "pdfBusy": "Skapar PDF…",
+    "hide": "Dölj QR",
+    "show": "Visa QR"
   },
   "scan": {
     "title": "Skanna QR-kod",

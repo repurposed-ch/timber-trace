@@ -82,7 +82,9 @@
     "download": "Download PNG",
     "ifc": "Download IFC",
     "pdf": "PDF fact sheet",
-    "pdfBusy": "Creating PDF…"
+    "pdfBusy": "Creating PDF…",
+    "hide": "Hide QR",
+    "show": "Show QR"
   },
   "scan": {
     "title": "Scan QR code",
