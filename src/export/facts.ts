@@ -1,5 +1,6 @@
 import type { DenseField, DenseSchema } from "densing";
 import { idToHex } from "../schema/codec";
+import { dayToIso, isDayField, isYearField, yearToIso } from "../schema/dates";
 import { isCharText, isId128, variantFields } from "../schema/fields";
 import { labelKey, type Labels } from "../schema/labels";
 
@@ -13,6 +14,8 @@ const unitOf = (label: string) => label.match(/\(([^)]+)\)\s*$/)?.[1];
 
 function scalar(field: DenseField, value: any, path: string, ctx: Ctx): string | null {
   if (isId128(field)) return idToHex(value);
+  if (isDayField(field)) return dayToIso(value);
+  if (isYearField(field)) return yearToIso(value);
   if (isCharText(field)) return value.join("");
   switch (field.type) {
     case "enum":
@@ -56,11 +59,25 @@ function walk(field: DenseField, value: any, path: string, ctx: Ctx, out: Fact[]
       // one plain field (e.g. a known length): inline, with the child's unit
       const only = children.length === 1 ? children[0] : null;
       const inline = only ? scalar(only, value[only.name], `${path}.${only.name}`, ctx) : null;
+      // a union with more than two variants names a kind (e.g. an event): its variant is a fact too
+      const named = Object.keys(field.variants).length > 2;
+      const variantLabel = ctx.labels.option(`${key}.${field.discriminator}`, variant);
       if (only && inline !== null) {
         const unit = only.type === "int" || only.type === "fixed" ? unitOf(ctx.labels.field(`${key}.${only.name}`)) : undefined;
-        out.push({ path, group, label, value: unit ? `${inline} ${unit}` : inline });
+        const text = unit ? `${inline} ${unit}` : inline;
+        out.push({ path, group, label, value: named ? `${variantLabel} · ${text}` : text });
         return;
       }
+      // a nested flat union (unknown | known{ day | year }): one row under this label
+      if (only && only.type === "union") {
+        const inner: Fact[] = [];
+        walk(only, value[only.name], `${path}.${only.name}`, ctx, inner, group);
+        if (inner.length === 1) {
+          out.push({ ...inner[0], path, label });
+          return;
+        }
+      }
+      if (named) out.push({ path: `${path}.${field.discriminator}`, group: label, label, value: variantLabel });
       for (const f of children) walk(f, value[f.name], `${path}.${f.name}`, ctx, out, label);
       return;
     }
@@ -70,7 +87,7 @@ function walk(field: DenseField, value: any, path: string, ctx: Ctx, out: Fact[]
       items.forEach((item, i) => {
         const parts: Fact[] = [];
         walk(field.items, item, `${path}[].${field.items.name}`, ctx, parts);
-        out.push({ path: `${path}[${i}]`, group, label: `${label} ${i + 1}`, value: parts.map((p) => p.value).join(" · ") });
+        out.push({ path: `${path}[${i}]`, group, label: `${label} ${i + 1}`, value: parts.map((p) => p.value).filter(Boolean).join(" · ") });
       });
       return;
     }

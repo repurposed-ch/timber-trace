@@ -73,6 +73,8 @@ export function recordToIfc(input: IfcInput): string {
   const { record, size } = input;
   const id: number[] = record.id;
   const idHex = idToHex(id);
+  // the revision, when the schema has one, tells a reader how current this export is
+  const description = record.revision ? `${idHex} · revision ${record.revision.number}` : idHex;
   const lines: string[] = [];
   let n = 0;
   const add = (entity: string) => {
@@ -122,7 +124,7 @@ export function recordToIfc(input: IfcInput): string {
   const productShape = add(`IFCPRODUCTDEFINITIONSHAPE($,$,(${shape}))`);
   const beamPlace = add(`IFCLOCALPLACEMENT(${storeyPlace},${world})`);
   const beam = add(
-    `IFCBEAM(${stepString(ifcGuid(id))},$,${stepString(input.name)},${stepString(idHex)},$,${beamPlace},${productShape},${stepString(idHex)},.BEAM.)`,
+    `IFCBEAM(${stepString(ifcGuid(id))},$,${stepString(input.name)},${stepString(description)},$,${beamPlace},${productShape},${stepString(idHex)},.BEAM.)`,
   );
   add(`IFCRELCONTAINEDINSPATIALSTRUCTURE(${guid()},$,$,$,(${beam}),${storey})`);
 

@@ -43,3 +43,28 @@ describe("record facts", () => {
     expect(find(facts, "Land", "Herkunft")).toBe("Schweiz");
   });
 });
+
+describe("record facts, schema v2", async () => {
+  const { fullRecordV2, unknownRecordV2 } = await import("../schema/testing");
+  const v2 = loaded.versions.get(2)!;
+
+  test("dates are ISO, history events read as one line", async () => {
+    const facts = recordFacts(v2, fullRecordV2, await labelsFor("en"));
+    expect(find(facts, "Production year", "Dates")).toBe("1961");
+    expect(find(facts, "Installation", "Dates")).toBe("1962");
+    expect(find(facts, "Recovery", "Dates")).toBe("2026-09-04");
+    expect(find(facts, "Revision date", "Revision")).toBe("2026-11-10");
+    expect(find(facts, "Country of harvest", "Harvest")).toBe("Switzerland");
+    expect(find(facts, "Events 1", "History")).toBe("2022-01-08 · Modification · Hole · 600 mm");
+    expect(find(facts, "Events 2", "History")).toBe("2026-09-04 · Inspection · OK · INS7");
+    expect(find(facts, "Role", "Verified by")).toBe("Structural engineer");
+  });
+
+  test("all-unknown v2 record stays explicitly unknown", async () => {
+    const facts = recordFacts(v2, unknownRecordV2, await labelsFor("en"));
+    expect(find(facts, "Harvest", "Origin")).toBe("Unknown");
+    expect(find(facts, "Recovery", "Dates")).toBe("Unknown");
+    expect(find(facts, "History")).toBe("Unknown");
+    expect(find(facts, "Verified by")).toBe("Unknown");
+  });
+});

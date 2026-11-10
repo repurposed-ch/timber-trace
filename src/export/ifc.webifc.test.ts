@@ -44,3 +44,37 @@ describe("IFC export read by web-ifc", () => {
     expect(value("grade.standard")).toBe("SIA265");
   });
 });
+
+describe("IFC export of a v2 record read by web-ifc", async () => {
+  const { BASE45, encodeRecord } = await import("../schema/codec");
+  const { fullRecordV2 } = await import("../schema/testing");
+  const { recordToIfc } = await import("./ifc");
+  const { loaded, labels } = await ifcFixtures();
+  const v2 = loaded.versions.get(2)!;
+  const ifc = recordToIfc({
+    slug: "hello-world",
+    schema: v2,
+    record: fullRecordV2,
+    labels,
+    payload: encodeRecord(v2, fullRecordV2, BASE45),
+    size: { length: 4200, width: 120, height: 240 },
+    dimensionsKnown: true,
+    round: false,
+    name: "Norway spruce · Glulam",
+  });
+  const m = api.OpenModel(new TextEncoder().encode(ifc));
+  const beam = api.GetLineIDsWithType(m, WebIFC.IFCBEAM).get(0);
+
+  test("beam description carries the revision", () => {
+    expect(api.GetLine(m, beam).Description.value).toBe("12345678-9abc-def0-0fed-cba987654322 · revision 3");
+  });
+
+  test("dates and history are in the TimberTrace property set", async () => {
+    const psets = await api.properties.getPropertySets(m, beam, true);
+    const tt = psets.find((p: any) => p.Name.value === "TimberTrace");
+    const value = (name: string) => tt.HasProperties.find((p: any) => p.Name.value === name)?.NominalValue.value;
+    expect(value("dates.recovery")).toBe("2026-09-04");
+    expect(value("history.events[0]")).toBe("2022-01-08 · Modification · Hole · 600 mm");
+    expect(value("verified.role")).toBe("Structural engineer");
+  });
+});
