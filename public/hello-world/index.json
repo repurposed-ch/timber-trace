@@ -2,5 +2,11 @@
   "slug": "hello-world",
   "versions": [1],
   "codeEnums": ["origin.country", "grade.class.value", "grade.standard"],
-  "countryEnums": ["origin.country"]
+  "countryEnums": ["origin.country", "origin.harvest.country", "origin.previousUse.country"],
+  "historyTiers": {
+    "structural": ["modification", "exposure", "repair"],
+    "condition": ["inspection", "treatment"],
+    "routine": ["routine"],
+    "structuralMax": 4
+  }
 }

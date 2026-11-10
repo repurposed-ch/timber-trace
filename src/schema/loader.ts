@@ -7,6 +7,18 @@ export type SchemaMeta = {
   codeEnums: string[];
   /** enum paths whose options are ISO 3166-1 alpha-2 codes, labelled with Intl.DisplayNames */
   countryEnums: string[];
+  /** which history event kinds go into the QR, and how many (see src/records/history.ts) */
+  historyTiers?: HistoryTiers;
+};
+
+export type HistoryTiers = {
+  /** always the first, plus chosen ones, up to `structuralMax` */
+  structural: string[];
+  /** only the latest of each kind */
+  condition: string[];
+  /** only the latest one */
+  routine: string[];
+  structuralMax: number;
 };
 
 export type LoadedSchema = {
