@@ -282,3 +282,7 @@ select.is-empty option { color: var(--fg); }
 /* tabs: reserve the bold width so the active (bold) tab doesn't shift its neighbours */
 .tabs button, .subtabs button { display: inline-grid; justify-items: center; }
 .tabs button::after, .subtabs button::after { content: attr(data-label); font-weight: 600; height: 0; visibility: hidden; overflow: hidden; pointer-events: none; }
+/* iOS Safari: date inputs have their own minimum width/height and ignore the grid cell */
+input[type="date"] { -webkit-appearance: none; appearance: none; display: block; width: 100%; min-width: 0; max-width: 100%; min-height: 2.1em; line-height: 1.3; }
+input[type="date"]::-webkit-date-and-time-value { text-align: left; }
+.control > *, .draft, .draft > input, .draft > textarea, select { min-width: 0; max-width: 100%; }
