@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { staticRecordSource } from "../records/source";
 import { sortHistory } from "../records/history";
+import { provenance } from "../records/revision";
 import { useLatest } from "../records/useLatest";
 import { useOnlineHistory } from "../records/useOnlineHistory";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
@@ -10,6 +11,7 @@ import { TABS, currentPayload, currentTab, pushTab, schemaUrl, type Tab } from "
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
 import type { LoadedSchema } from "../schema/loader";
+import { intlLocale } from "../i18n-langs";
 import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { Header } from "./Header";
@@ -27,7 +29,7 @@ type Loaded = { payload: string; data: any } | null;
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
   // dev mode can replace the latest version in memory from the schema editor
   const [schema, setSchema] = useState(served);
-  const { t } = useTranslation(slug); // suspends until this schema's labels are fetched
+  const { t, i18n } = useTranslation(slug); // suspends until this schema's labels are fetched
   const labels = useLabels(slug, schema.meta.countryEnums);
   const [tab, setTabState] = useState<Tab>(() => currentTab());
   const setTab = (next: Tab) => {
@@ -163,6 +165,10 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                   {t("form.newRecord", { ns: "ui", v: schema.latest })}
                 </button>
               </div>
+              {(() => {
+                const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
+                return line && <p className="provenance" data-testid="provenance">{line}</p>;
+              })()}
               {record.version !== schema.latest && (
                 <p className="note" role="note">
                   {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}

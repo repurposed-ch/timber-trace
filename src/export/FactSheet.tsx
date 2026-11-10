@@ -13,7 +13,7 @@ export type FactSheetInput = {
   qrContent: string;
   link: string;
   /** already translated */
-  text: { title: string; scan: string; schema: string; created: string; unknownDims: string | null; site: string };
+  text: { title: string; scan: string; schema: string; created: string; unknownDims: string | null; site: string; provenance: string | null };
 };
 
 const c = { fg: "#1d1b18", muted: "#6b665e", line: "#d8d3ca", accent: "#8a5a2b", bg: "#f6f4f0" };
@@ -24,7 +24,8 @@ const s = StyleSheet.create({
   brand: { fontFamily: "Helvetica-Bold", fontSize: 10 },
   muted: { color: c.muted },
   name: { fontFamily: "Helvetica-Bold", fontSize: 18, marginBottom: 3 },
-  id: { fontFamily: "Courier", fontSize: 9, color: c.muted, marginBottom: 14 },
+  id: { fontFamily: "Courier", fontSize: 9, color: c.muted, marginBottom: 6 },
+  prov: { fontSize: 8.5, color: c.fg, marginBottom: 14, paddingVertical: 4, paddingHorizontal: 6, backgroundColor: c.bg, borderRadius: 3 },
   top: { flexDirection: "row", gap: 16, marginBottom: 16 },
   snapshot: { flexGrow: 1, flexBasis: 0, height: 170, objectFit: "contain", backgroundColor: "#efece6", borderRadius: 4 },
   noSnapshot: { flexGrow: 1, flexBasis: 0, height: 170, backgroundColor: "#efece6", borderRadius: 4 },
@@ -74,6 +75,7 @@ function FactSheet({ input }: { input: FactSheetInput }) {
         </View>
         <Text style={s.name}>{input.name}</Text>
         <Text style={s.id}>{input.idHex}</Text>
+        {text.provenance && <Text style={s.prov}>{text.provenance}</Text>}
         <View style={s.top}>
           {input.snapshot ? <Image src={input.snapshot} style={s.snapshot} /> : <View style={s.noSnapshot} />}
           <View style={s.qrBox}>

@@ -4,6 +4,7 @@ import { intlLocale } from "../i18n-langs";
 import { beamDims } from "../schema/beam";
 import { BASE45, encodeRecord, idToHex } from "../schema/codec";
 import type { Labels } from "../schema/labels";
+import { provenance } from "../records/revision";
 import { recordFacts } from "./facts";
 import { recordToIfc } from "./ifc";
 
@@ -83,6 +84,7 @@ export async function downloadFactSheet(req: FactSheetRequest) {
       created: t("pdf.created", { date }),
       unknownDims: beamDims(record).known ? null : t("viewer.unknownDims"),
       site: location.origin,
+      provenance: provenance(record, labels, t, intlLocale(req.lng)),
     },
   });
   saveFile(`${fileBase(slug, record)}.pdf`, blob);
