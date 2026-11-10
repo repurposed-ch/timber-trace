@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bits",
     "source": "Code source sur GitHub",
     "examplesTitle": "Exemples",
-    "examplesText": "Des poutres encodées avec le schéma hello-world. Ouvrez-en une pour la lire, ou scannez son code avec un téléphone."
+    "examplesText": "Des poutres encodées avec le schéma hello-world. Ouvrez-en une pour la lire, ou scannez son code avec un téléphone.",
+    "scanCta": "Scanner un code"
   },
   "nav": {
     "record": "Fiche",

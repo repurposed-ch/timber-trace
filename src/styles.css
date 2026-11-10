@@ -325,3 +325,10 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .hn-scan .hn-label { display: none; }
   .hn-scan { padding: 3px 8px; }
 }
+.hero-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+.hero-btn { padding: 8px 14px; font-size: 1rem; font-weight: 600; }
+.schema-card h3 a { color: inherit; text-decoration: none; }
+.schema-card h3 a:hover { color: var(--accent); }
+.schema-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+.schema-actions a { color: var(--accent); font-weight: 600; text-decoration: none; }
+.schema-actions a:hover { text-decoration: underline; }

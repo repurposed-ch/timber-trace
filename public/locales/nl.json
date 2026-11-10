@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bits",
     "source": "Broncode op GitHub",
     "examplesTitle": "Voorbeelden",
-    "examplesText": "Balken gecodeerd met het schema hello-world. Open er een om te lezen, of scan de code met een telefoon."
+    "examplesText": "Balken gecodeerd met het schema hello-world. Open er een om te lezen, of scan de code met een telefoon.",
+    "scanCta": "Code scannen"
   },
   "nav": {
     "record": "Record",

@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bit",
     "source": "Codice sorgente su GitHub",
     "examplesTitle": "Esempi",
-    "examplesText": "Travi codificate con lo schema hello-world. Aprine una per leggerla o scansiona il suo codice con il telefono."
+    "examplesText": "Travi codificate con lo schema hello-world. Aprine una per leggerla o scansiona il suo codice con il telefono.",
+    "scanCta": "Scansiona un codice"
   },
   "nav": {
     "record": "Scheda",

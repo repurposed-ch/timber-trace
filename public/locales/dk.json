@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bit",
     "source": "Kildekode på GitHub",
     "examplesTitle": "Eksempler",
-    "examplesText": "Bjælker kodet med skemaet hello-world. Åbn en for at læse den, eller scan dens kode med en telefon."
+    "examplesText": "Bjælker kodet med skemaet hello-world. Åbn en for at læse den, eller scan dens kode med en telefon.",
+    "scanCta": "Scan en kode"
   },
   "nav": {
     "record": "Post",

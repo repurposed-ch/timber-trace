@@ -22,6 +22,16 @@ export function Home() {
       <section className="hero">
         <h1>{t("home.heroTitle")}</h1>
         <p>{t("home.heroText")}</p>
+        {slugs?.[0] && (
+          <div className="hero-actions">
+            <a className="hn-btn hn-scan hero-btn" href={`${schemaUrl(slugs[0])}?tab=scan`}>
+              {t("home.scanCta")}
+            </a>
+            <a className="hn-btn hero-btn" href={schemaUrl(slugs[0])}>
+              {t("nav.newRecord")}
+            </a>
+          </div>
+        )}
       </section>
 
       <section className="home-section">
@@ -89,15 +99,21 @@ function SchemaCard({ slug }: { slug: string }) {
   const size = state.status === "ready" ? analyzeDenseSchemaSize(state.schema.versions.get(state.schema.latest)!).staticRange : null;
   const fields = state.status === "ready" ? state.schema.versions.get(state.schema.latest)!.fields.length : null;
   return (
-    <a className="card schema-card" href={schemaUrl(slug)}>
-      <h3>{labels.raw.title ?? slug}</h3>
+    <div className="card schema-card">
+      <h3>
+        <a href={schemaUrl(slug)}>{labels.raw.title ?? slug}</a>
+      </h3>
       <p>{labels.raw.description}</p>
       <p className="muted small">
         <code>/{slug}/</code>
         {fields !== null && ` · ${t("home.fields", { count: fields })}`}
         {size && ` · ${t("home.bits", { min: size.minBits, max: size.maxBits })}`}
       </p>
-      <span className="open">{t("home.open")} →</span>
-    </a>
+      <nav className="schema-actions" aria-label={labels.raw.title ?? slug}>
+        <a href={schemaUrl(slug)}>{t("nav.newRecord")}</a>
+        <a href={`${schemaUrl(slug)}?tab=scan`}>{t("nav.scan")}</a>
+        <a href={`${schemaUrl(slug)}?tab=schema`}>{t("nav.schema")}</a>
+      </nav>
+    </div>
   );
 }

@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} Bit",
     "source": "Quellcode auf GitHub",
     "examplesTitle": "Beispiele",
-    "examplesText": "Balken, codiert mit dem Schema hello-world. Öffnen Sie einen zum Lesen oder scannen Sie seinen Code mit dem Handy."
+    "examplesText": "Balken, codiert mit dem Schema hello-world. Öffnen Sie einen zum Lesen oder scannen Sie seinen Code mit dem Handy.",
+    "scanCta": "Code scannen"
   },
   "nav": {
     "record": "Datensatz",

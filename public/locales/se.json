@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bitar",
     "source": "Källkod på GitHub",
     "examplesTitle": "Exempel",
-    "examplesText": "Balkar kodade med schemat hello-world. Öppna en för att läsa den, eller skanna dess kod med en telefon."
+    "examplesText": "Balkar kodade med schemat hello-world. Öppna en för att läsa den, eller skanna dess kod med en telefon.",
+    "scanCta": "Skanna en kod"
   },
   "nav": {
     "record": "Post",

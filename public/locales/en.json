@@ -35,7 +35,8 @@
     "bits": "{{min}}–{{max}} bits",
     "source": "Source code on GitHub",
     "examplesTitle": "Examples",
-    "examplesText": "Beams encoded with the hello-world schema. Open one to read it, or scan its code with a phone."
+    "examplesText": "Beams encoded with the hello-world schema. Open one to read it, or scan its code with a phone.",
+    "scanCta": "Scan a code"
   },
   "nav": {
     "record": "Record",
