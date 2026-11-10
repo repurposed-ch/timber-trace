@@ -38,6 +38,21 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
 - Share links use the same path in lowercase (`/hello-world/<PAYLOAD>`). Old `#` links and raw base45 payloads still decode.
 - Unknown values are an explicit `unknown` variant, never left out.
 - A recorded grade always includes its source and grading standard.
+- Records are edited and exported in the schema version they were made with; new records use the latest.
+
+## hello-world schema v2
+
+- **Dates**: the schema says per field whether it expects a day or a year.
+  - `day`: days since 1970-01-01, 17 bits, 1830-08-25 to 2189-07-04, UTC only.
+  - `year`: 12 bits, 1907 BC to 2189 (astronomical numbering, 0 = 1 BC).
+  - `dayOrYear` (installation, recovery): `unknown | known{ day | year }`.
+- **Origin**: harvest (country, certification) and previous use (country, use), each explicitly unknown.
+- **History**: dated events. The code holds a tiered selection (`historyTiers` in `public/hello-world/index.json`):
+  - structural (modification, exposure, repair): the first always, plus up to 3 chosen (default: latest); the rest are counted in `omitted` (4 bits, 15 = many);
+  - condition (inspection, treatment): the latest of each kind;
+  - routine: the last one.
+  - The full history lives in the record source (`public/<slug>/records/<id>.json`, `history`).
+- **Revision and provenance**: revision number and date; supplied by and verified by, as role + party ID + date (no names in the code). The update check compares revision numbers.
 
 ## Deploy
 

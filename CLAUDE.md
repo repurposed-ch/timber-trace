@@ -7,7 +7,9 @@ Static GitHub Pages app (React + Vite + R3F) at `timber-trace.repurposed.ch`, se
 - `src/components/`: Header (breadcrumbs, on every page), Home, RecordForm (generated from the schema), BeamViewer, QrPanel (QR + exports), Scanner, SchemaInspector (dev editor only under `import.meta.env.DEV`), UpdateBanner.
 - `src/export/`: facts (record → labelled rows, shared by PDF and IFC), IFC4 writer, PDF fact sheet (dynamically imported; keep it out of the main bundle), downloads. IFC output is checked with `web-ifc` (dev dependency only).
 - `src/materials/`: wood shader + species/product presets. Every species in the schema needs a preset; a test checks this.
-- `src/records/`: `RecordSource` interface. The static adapter is a stand-in for the future database.
+- `src/records/`: `RecordSource` interface (static adapter = stand-in for the future database), history tiers (`selectForQr`), revision comparison and provenance, changed facts for the update banner.
+- Dates: `day` (days since 1970, 17 bits from 1830-08-25) and `year` (12 bits, to 2189) templates; helpers in `src/schema/dates.ts`, always UTC. Use the type the field needs; `dayOrYear` only where both are realistic.
+- History: never put a full history in the code. `historyTiers` in `index.json` decides the selection; keep `omitted` honest.
 - Schemas and translations are static JSON in `public/`, fetched at runtime. Never import them into the bundle.
 - Adding a schema: add the slug to `public/schemas.json` and create `public/<slug>/{index.json,schema/1.json,locales/*.json}`. Don't change a published schema version; add a new version file instead.
 - All lengths are in mm. Tests: `bun test`. Build: `bun run build`.
