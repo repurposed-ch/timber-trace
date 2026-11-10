@@ -143,3 +143,7 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .prov-compare dt { color: var(--muted); }
 .prov-compare dd { margin: 0; }
 .provenance { font-size: .85rem; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; margin: 0 0 8px; }
+/* iOS zooms into any form control under 16px; keep them at 16px+ on touch screens */
+@media (pointer: coarse) {
+  input, select, textarea, .dev-grid textarea { font-size: max(16px, 1em); }
+}
