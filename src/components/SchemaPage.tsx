@@ -169,10 +169,11 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         { label: t(`nav.${tab}`, { ns: "ui" }) },
       ]}
       nav={nav}
-      aside={{ pinned, scroll }}
-      className={showQr ? "aside-qr" : "aside-3d"}
+      // Scan and Schema aren't views of the record: no 3D view or QR next to them
+      aside={tab === "record" ? { pinned, scroll } : undefined}
+      className={tab === "record" ? (showQr ? "aside-qr" : "aside-3d") : undefined}
     >
-      {newer && loaded && (
+      {tab === "record" && newer && loaded && (
         <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
       )}
       {tab === "scan" && (
