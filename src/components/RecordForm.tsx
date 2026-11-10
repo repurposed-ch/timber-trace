@@ -2,7 +2,9 @@ import { validate, type DenseField, type DenseSchema } from "densing";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { hexToId, idToHex, randomId } from "../schema/codec";
+import { DAY_MAX, DAY_MIN, dayToIso, formatYear, isDayField, isYearField, isoToDay, todayDay } from "../schema/dates";
 import { defaultFor, isCharText, isId128, unionValue, variantFields } from "../schema/fields";
+import { intlLocale } from "../i18n-langs";
 import { labelKey } from "../schema/labels";
 import type { Labels } from "../state/useSchema";
 
@@ -45,7 +47,7 @@ const idFor = (path: string) => "f-" + path.replace(/[^a-zA-Z0-9]+/g, "-");
 
 function Field(props: Props) {
   const { field, value, onChange, path, ctx, bare } = props;
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const key = labelKey(path);
   const label = ctx.labels.field(key);
   const id = idFor(path);
@@ -54,6 +56,41 @@ function Field(props: Props) {
   if (path === "version" && field.type === "int") return wrap(<output id={id} className="mono">{value}</output>);
 
   if (isId128(field)) return wrap(<IdInput id={id} value={value} onChange={onChange} />);
+
+  if (isDayField(field))
+    return wrap(
+      <input
+        id={id}
+        aria-label={label}
+        type="date"
+        min={dayToIso(DAY_MIN)}
+        max={dayToIso(DAY_MAX)}
+        value={dayToIso(value)}
+        onChange={(e) => {
+          try {
+            const day = isoToDay(e.target.value);
+            if (day >= DAY_MIN && day <= DAY_MAX) onChange(day);
+          } catch {}
+        }}
+      />,
+    );
+
+  if (isYearField(field) && field.type === "int")
+    return wrap(
+      <>
+        <input
+          id={id}
+          aria-label={label}
+          type="number"
+          min={field.min}
+          max={field.max}
+          step={1}
+          value={value}
+          onChange={(e) => e.target.value !== "" && onChange(Math.max(field.min, Math.min(field.max, Math.trunc(Number(e.target.value)))))}
+        />
+        {value <= 0 && <small className="muted">{formatYear(value, intlLocale(i18n.resolvedLanguage ?? "en"))}</small>}
+      </>,
+    );
 
   if (isCharText(field))
     return wrap(
@@ -137,7 +174,16 @@ function Field(props: Props) {
   }
 }
 
-function UnionField({ field, value, onChange, path, ctx }: Props & { field: Extract<DenseField, { type: "union" }> }) {
+/** a union whose variants each hold at most one plain field, e.g. day | year */
+function isFlatUnion(field: DenseField, schema: DenseSchema): boolean {
+  if (field.type !== "union") return false;
+  return Object.keys(field.variants).every((v) => {
+    const fs = variantFields(field, v, schema);
+    return fs.length === 0 || (fs.length === 1 && !["object", "union", "array"].includes(fs[0].type));
+  });
+}
+
+function UnionField({ field, value, onChange, path, ctx, bare }: Props & { field: Extract<DenseField, { type: "union" }> }) {
   const key = labelKey(path);
   const variant: string = value[field.discriminator];
   const children = variantFields(field, variant, ctx.schema);
@@ -151,7 +197,7 @@ function UnionField({ field, value, onChange, path, ctx }: Props & { field: Extr
           role="radio"
           aria-checked={v === variant}
           className={v === variant ? "on" : ""}
-          onClick={() => v !== variant && onChange(unionValue(field, v, ctx.schema))}
+          onClick={() => v !== variant && onChange(withToday(unionValue(field, v, ctx.schema), variantFields(field, v, ctx.schema)))}
         >
           {ctx.labels.option(discPath, v)}
         </button>
@@ -161,13 +207,21 @@ function UnionField({ field, value, onChange, path, ctx }: Props & { field: Extr
   const childField = (f: DenseField, bare = false) => (
     <Field key={f.name} field={f} path={`${path}.${f.name}`} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} bare={bare} />
   );
-  // a single primitive child sits inline next to the toggle
-  const inline = children.length === 1 && !["object", "union", "array"].includes(children[0].type);
+  // a single plain child, or a nested flat union (unknown | known{ day | year }), sits inline
+  const only = children.length === 1 ? children[0] : null;
+  const inline = !!only && (!["object", "union", "array"].includes(only.type) || isFlatUnion(only, ctx.schema));
+  if (bare)
+    return (
+      <>
+        {toggle}
+        {inline && childField(only!, true)}
+      </>
+    );
   if (inline || children.length === 0)
     return (
       <Row label={ctx.labels.field(key)}>
         {toggle}
-        {inline && childField(children[0], true)}
+        {inline && childField(only!, true)}
       </Row>
     );
   return (
@@ -229,4 +283,10 @@ function IdInput({ id, value, onChange }: { id: string; value: number[]; onChang
       </button>
     </div>
   );
+}
+
+/** a date that becomes known starts at today, not at the schema's fixed default */
+function withToday(value: any, fields: DenseField[]) {
+  const day = fields.find(isDayField);
+  return day ? { ...value, [day.name]: todayDay() } : value;
 }
