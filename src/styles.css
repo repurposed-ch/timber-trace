@@ -24,7 +24,7 @@ input, select, textarea { border: 1px solid var(--line); border-radius: 6px; pad
 .card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px; }
 .muted { color: var(--muted); }
 .error { color: var(--error); }
-code, .mono { font-family: ui-monospace, Menlo, monospace; word-break: break-all; }
+code, .mono { font-family: ui-monospace, Menlo, monospace; overflow-wrap: anywhere; }
 .top { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin: -16px -16px 12px; padding: 10px 16px; background: var(--card); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
 .crumbs { min-width: 0; }
 .crumbs ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 6px; }
@@ -171,4 +171,24 @@ input::placeholder { color: #a7a196; font-size: .85em; }
   .row > label { font-size: .85rem; }
   .control > input, .control > select { flex: 1 1 100%; width: 100%; min-width: 0; }
   .id { flex-wrap: nowrap; }
+}
+.schema-table .c-path { padding-left: calc(4px + var(--depth, 0) * 14px); }
+/* phones: each field is a small two-line item instead of a 5-column row */
+@media (max-width: 720px) {
+  .schema-table thead { display: none; }
+  .schema-table, .schema-table tbody { display: block; }
+  .schema-table tr {
+    display: grid; grid-template-columns: minmax(0, 1fr) auto auto; grid-template-areas: "path type bits" "label label label" "range range range";
+    column-gap: 6px; padding: 6px 0 6px calc(var(--depth, 0) * 12px); border-bottom: 1px solid var(--line);
+  }
+  .schema-table tr.disc { display: none; }
+  .schema-table td { border: 0; padding: 0; }
+  .schema-table .c-path { grid-area: path; padding-left: 0; font-weight: 600; }
+  .schema-table .c-type { grid-area: type; font-size: .75rem; color: var(--muted); }
+  .schema-table .c-bits { grid-area: bits; font-size: .75rem; color: var(--muted); }
+  .schema-table .c-bits::after { content: " bit"; }
+  .schema-table .c-label { grid-area: label; font-size: .8rem; color: var(--muted); }
+  .schema-table .c-range { grid-area: range; font-size: .8rem; }
+  .schema-table .c-label:empty, .schema-table .c-range:empty { display: none; }
+  .options { columns: 1; }
 }

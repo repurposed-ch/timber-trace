@@ -79,13 +79,11 @@ export function SchemaInspector({ slug, schema, labels, onApply }: { slug: strin
           </thead>
           <tbody>
             {table.map((r) => (
-              <tr key={r.key} className={r.discriminator ? "disc" : ""}>
-                <td className="mono" style={{ paddingLeft: 4 + r.depth * 14 }}>
-                  {r.key.split(".").pop()}
-                </td>
-                <td>{r.discriminator ? "" : labels.field(r.key)}</td>
-                <td className="mono">{r.field.type}</td>
-                <td>
+              <tr key={r.key} className={r.discriminator ? "disc" : ""} style={{ "--depth": r.depth } as React.CSSProperties}>
+                <td className="mono c-path">{r.key.split(".").pop()}</td>
+                <td className="c-label">{r.discriminator ? "" : labels.field(r.key)}</td>
+                <td className="mono c-type">{r.field.type}</td>
+                <td className="c-range">
                   {r.field.type === "enum" ? (
                     <details>
                       <summary>{t("schema.options", { count: r.field.options.length })}</summary>
@@ -101,7 +99,7 @@ export function SchemaInspector({ slug, schema, labels, onApply }: { slug: strin
                     <span className="mono">{range(r.field)}</span>
                   )}
                 </td>
-                <td className="mono">{bitsText(r.bits)}</td>
+                <td className="mono c-bits">{bitsText(r.bits)}</td>
               </tr>
             ))}
           </tbody>
