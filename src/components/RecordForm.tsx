@@ -8,18 +8,31 @@ import { intlLocale } from "../i18n-langs";
 import { labelKey } from "../schema/labels";
 import type { Labels } from "../state/useSchema";
 
-type Ctx = { schema: DenseSchema; labels: Labels };
+export type Ctx = { schema: DenseSchema; labels: Labels };
 type Props = { field: DenseField; value: any; onChange: (v: any) => void; path: string; ctx: Ctx; bare?: boolean };
 
-export function RecordForm({ schema, labels, value, onChange }: { schema: DenseSchema; labels: Labels; value: any; onChange: (v: any) => void }) {
+type FormProps = {
+  schema: DenseSchema;
+  labels: Labels;
+  value: any;
+  onChange: (v: any) => void;
+  /** replaces the generic editor of a top-level field, e.g. the history editor */
+  overrides?: Record<string, React.ReactNode>;
+};
+
+export function RecordForm({ schema, labels, value, onChange, overrides = {} }: FormProps) {
   const { t } = useTranslation();
   const ctx = { schema, labels };
   const errors = useMemo(() => validate(schema, value).errors, [schema, value]);
   return (
     <form className="record" onSubmit={(e) => e.preventDefault()}>
-      {schema.fields.map((f) => (
-        <Field key={f.name} field={f} path={f.name} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} />
-      ))}
+      {schema.fields.map((f) =>
+        f.name in overrides ? (
+          <div key={f.name}>{overrides[f.name]}</div>
+        ) : (
+          <Field key={f.name} field={f} path={f.name} ctx={ctx} value={value[f.name]} onChange={(v) => onChange({ ...value, [f.name]: v })} />
+        ),
+      )}
       {errors.length > 0 && (
         <ul className="error" role="alert">
           {errors.map((e) => (
@@ -45,7 +58,7 @@ function Row({ label, children, htmlFor }: { label: string; children: React.Reac
 
 const idFor = (path: string) => "f-" + path.replace(/[^a-zA-Z0-9]+/g, "-");
 
-function Field(props: Props) {
+export function Field(props: Props) {
   const { field, value, onChange, path, ctx, bare } = props;
   const { t, i18n } = useTranslation();
   const key = labelKey(path);
@@ -188,7 +201,19 @@ function UnionField({ field, value, onChange, path, ctx, bare }: Props & { field
   const variant: string = value[field.discriminator];
   const children = variantFields(field, variant, ctx.schema);
   const discPath = `${key}.${field.discriminator}`;
-  const toggle = (
+  const pick = (v: string) => v !== variant && onChange(withToday(unionValue(field, v, ctx.schema), variantFields(field, v, ctx.schema)));
+  const names = Object.keys(field.variants);
+  // many variants (e.g. event kinds) don't fit a button row on a phone: use a dropdown
+  const toggle =
+    names.length > 4 ? (
+      <select aria-label={ctx.labels.field(key)} value={variant} onChange={(e) => pick(e.target.value)}>
+        {names.map((v) => (
+          <option key={v} value={v}>
+            {ctx.labels.option(discPath, v)}
+          </option>
+        ))}
+      </select>
+    ) : (
     <div className="variants" role="radiogroup" aria-label={ctx.labels.field(key)}>
       {Object.keys(field.variants).map((v) => (
         <button
@@ -197,7 +222,7 @@ function UnionField({ field, value, onChange, path, ctx, bare }: Props & { field
           role="radio"
           aria-checked={v === variant}
           className={v === variant ? "on" : ""}
-          onClick={() => v !== variant && onChange(withToday(unionValue(field, v, ctx.schema), variantFields(field, v, ctx.schema)))}
+          onClick={() => pick(v)}
         >
           {ctx.labels.option(discPath, v)}
         </button>
