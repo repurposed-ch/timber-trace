@@ -129,5 +129,12 @@
     "omitted_other": "{{count}} structural events only online",
     "unavailable_one": "{{count}} more structural event is recorded but not available here. It stays counted in the code.",
     "unavailable_other": "{{count}} more structural events are recorded but not available here. They stay counted in the code."
+  },
+  "prov": {
+    "revision": "Revision {{n}}",
+    "supplied": "Supplied: {{who}}",
+    "verified": "Verified: {{who}}",
+    "supplierUnknown": "Supplier unknown",
+    "notVerified": "Not verified"
   }
 }

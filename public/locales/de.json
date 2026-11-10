@@ -129,5 +129,12 @@
     "omitted_other": "{{count}} strukturelle Ereignisse nur online",
     "unavailable_one": "{{count}} weiteres strukturelles Ereignis ist erfasst, hier aber nicht verfügbar. Es bleibt im Code gezählt.",
     "unavailable_other": "{{count}} weitere strukturelle Ereignisse sind erfasst, hier aber nicht verfügbar. Sie bleiben im Code gezählt."
+  },
+  "prov": {
+    "revision": "Revision {{n}}",
+    "supplied": "Geliefert: {{who}}",
+    "verified": "Geprüft: {{who}}",
+    "supplierUnknown": "Lieferant unbekannt",
+    "notVerified": "Nicht geprüft"
   }
 }

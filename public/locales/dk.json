@@ -129,5 +129,12 @@
     "omitted_other": "{{count}} strukturelle hændelser kun online",
     "unavailable_one": "{{count}} yderligere strukturel hændelse er registreret, men ikke tilgængelig her. Den tælles fortsat i koden.",
     "unavailable_other": "{{count}} yderligere strukturelle hændelser er registreret, men ikke tilgængelige her. De tælles fortsat i koden."
+  },
+  "prov": {
+    "revision": "Revision {{n}}",
+    "supplied": "Leveret: {{who}}",
+    "verified": "Verificeret: {{who}}",
+    "supplierUnknown": "Leverandør ukendt",
+    "notVerified": "Ikke verificeret"
   }
 }

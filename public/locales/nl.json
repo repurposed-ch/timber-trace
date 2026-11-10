@@ -129,5 +129,12 @@
     "omitted_other": "{{count}} structurele gebeurtenissen alleen online",
     "unavailable_one": "Nog {{count}} structurele gebeurtenis is vastgelegd maar hier niet beschikbaar. Ze blijft geteld in de code.",
     "unavailable_other": "Nog {{count}} structurele gebeurtenissen zijn vastgelegd maar hier niet beschikbaar. Ze blijven geteld in de code."
+  },
+  "prov": {
+    "revision": "Revisie {{n}}",
+    "supplied": "Geleverd: {{who}}",
+    "verified": "Geverifieerd: {{who}}",
+    "supplierUnknown": "Leverancier onbekend",
+    "notVerified": "Niet geverifieerd"
   }
 }

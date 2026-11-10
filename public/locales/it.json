@@ -129,5 +129,12 @@
     "omitted_other": "{{count}} eventi strutturali solo online",
     "unavailable_one": "Un altro evento strutturale è registrato ma non disponibile qui. Resta conteggiato nel codice.",
     "unavailable_other": "Altri {{count}} eventi strutturali sono registrati ma non disponibili qui. Restano conteggiati nel codice."
+  },
+  "prov": {
+    "revision": "Revisione {{n}}",
+    "supplied": "Fornito: {{who}}",
+    "verified": "Verificato: {{who}}",
+    "supplierUnknown": "Fornitore sconosciuto",
+    "notVerified": "Non verificato"
   }
 }

@@ -100,7 +100,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         ))}
       </nav>
       {newer && loaded && (
-        <UpdateBanner current={loaded.data} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
+        <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
       )}
       {tab === "scan" && (
         <div className="card">
