@@ -55,7 +55,14 @@
     "olderVersion": "Mit Schemaversion {{v}} erstellt. Er wird als Version {{v}} angezeigt und exportiert; neue Datensätze verwenden Version {{latest}}.",
     "view": "Ansicht",
     "edit": "Bearbeiten",
-    "mode": "Modus"
+    "mode": "Modus",
+    "err": {
+      "number": "Ganze Zahl von {{min}} bis {{max}}",
+      "date": "Datum als JJJJ-MM-TT",
+      "dayOrYear": "Ein Jahr (1962) oder ein Datum (1962-05-03)",
+      "chars": "Nur Buchstaben und Ziffern, max. {{max}}",
+      "id": "32 Hex-Zeichen"
+    }
   },
   "viewer": {
     "title": "3D-Vorschau",

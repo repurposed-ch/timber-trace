@@ -233,3 +233,8 @@ input::placeholder { color: #a7a196; font-size: .85em; }
 .view-events { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
 .view-events li { display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: baseline; padding: 4px 0 4px 8px; border-left: 3px solid var(--accent); }
 .view-events li.online { border-left-color: var(--line); }
+/* draft inputs: hint under the field when the draft can't be committed */
+.draft { display: inline-flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1 1 auto; }
+.draft > input { width: 100%; }
+.draft.invalid > input { border-color: var(--error); }
+.draft-error { color: var(--error); font-size: .75rem; }

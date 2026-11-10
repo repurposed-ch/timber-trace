@@ -55,7 +55,14 @@
     "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}.",
     "view": "View",
     "edit": "Edit",
-    "mode": "Mode"
+    "mode": "Mode",
+    "err": {
+      "number": "Whole number from {{min}} to {{max}}",
+      "date": "Date as YYYY-MM-DD",
+      "dayOrYear": "A year (1962) or a date (1962-05-03)",
+      "chars": "Letters and digits only, max. {{max}}",
+      "id": "32 hex characters"
+    }
   },
   "viewer": {
     "title": "3D preview",

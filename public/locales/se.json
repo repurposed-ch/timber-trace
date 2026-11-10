@@ -55,7 +55,14 @@
     "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}.",
     "view": "Visa",
     "edit": "Redigera",
-    "mode": "Läge"
+    "mode": "Läge",
+    "err": {
+      "number": "Heltal från {{min}} till {{max}}",
+      "date": "Datum som ÅÅÅÅ-MM-DD",
+      "dayOrYear": "Ett år (1962) eller ett datum (1962-05-03)",
+      "chars": "Endast bokstäver och siffror, max. {{max}}",
+      "id": "32 hextecken"
+    }
   },
   "viewer": {
     "title": "3D-förhandsvisning",

@@ -55,7 +55,14 @@
     "olderVersion": "Creata con la versione {{v}} dello schema. Viene mostrata ed esportata come versione {{v}}; le nuove schede usano la versione {{latest}}.",
     "view": "Visualizza",
     "edit": "Modifica",
-    "mode": "Modalità"
+    "mode": "Modalità",
+    "err": {
+      "number": "Numero intero da {{min}} a {{max}}",
+      "date": "Data nel formato AAAA-MM-GG",
+      "dayOrYear": "Un anno (1962) o una data (1962-05-03)",
+      "chars": "Solo lettere e cifre, max. {{max}}",
+      "id": "32 caratteri esadecimali"
+    }
   },
   "viewer": {
     "title": "Anteprima 3D",

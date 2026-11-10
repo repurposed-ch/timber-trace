@@ -55,7 +55,14 @@
     "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}.",
     "view": "Vis",
     "edit": "Rediger",
-    "mode": "Tilstand"
+    "mode": "Tilstand",
+    "err": {
+      "number": "Heltal fra {{min}} til {{max}}",
+      "date": "Dato som ÅÅÅÅ-MM-DD",
+      "dayOrYear": "Et år (1962) eller en dato (1962-05-03)",
+      "chars": "Kun bogstaver og tal, maks. {{max}}",
+      "id": "32 hex-tegn"
+    }
   },
   "viewer": {
     "title": "3D-visning",

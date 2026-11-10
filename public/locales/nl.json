@@ -55,7 +55,14 @@
     "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
     "view": "Bekijken",
     "edit": "Bewerken",
-    "mode": "Modus"
+    "mode": "Modus",
+    "err": {
+      "number": "Geheel getal van {{min}} tot {{max}}",
+      "date": "Datum als JJJJ-MM-DD",
+      "dayOrYear": "Een jaar (1962) of een datum (1962-05-03)",
+      "chars": "Alleen letters en cijfers, max. {{max}}",
+      "id": "32 hexadecimale tekens"
+    }
   },
   "viewer": {
     "title": "3D-voorbeeld",
