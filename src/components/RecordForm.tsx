@@ -407,6 +407,7 @@ function IdInput({ id, value, onChange }: { id: string; value: number[]; onChang
       <DraftInput
         id={id}
         className="mono"
+        multiline
         value={value}
         format={(v) => (v ? idToHex(v) : "")}
         parse={(s) => {

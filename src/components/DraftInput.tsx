@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, type InputHTMLAttributes } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type InputHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 import type { Parsed } from "../schema/inputs";
 
@@ -10,13 +10,15 @@ type Props<T> = Omit<InputHTMLAttributes<HTMLInputElement>, "value" | "onChange"
   onCommit: (value: T | null) => void;
   /** ms without typing before the draft is committed */
   delay?: number;
+  /** a textarea that wraps and grows with its text (long values on narrow screens); Enter still commits */
+  multiline?: boolean;
 };
 
 /**
  * An input that keeps its own draft and only commits (and validates) on blur, Enter, or after a
  * pause in typing. Invalid drafts show a hint and leave the committed value untouched.
  */
-export function DraftInput<T>({ value, format, parse, onCommit, delay = 600, onBlur, onKeyDown, ...rest }: Props<T>) {
+export function DraftInput<T>({ value, format, parse, onCommit, delay = 600, onBlur, onKeyDown, multiline, ...rest }: Props<T>) {
   const { t } = useTranslation();
   const [text, setText] = useState(() => format(value));
   const [error, setError] = useState<string | null>(null);
@@ -33,6 +35,21 @@ export function DraftInput<T>({ value, format, parse, onCommit, delay = 600, onB
 
   useEffect(() => () => clearTimeout(timer.current), []);
 
+  // a multiline field is as tall as its text, so it wraps instead of hiding the end
+  const area = useRef<HTMLTextAreaElement>(null);
+  useLayoutEffect(() => {
+    const el = area.current;
+    if (!el) return;
+    const fit = () => {
+      el.style.height = "auto";
+      el.style.height = `${el.scrollHeight + 2}px`;
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [text, multiline]);
+
   const commit = (draft = text) => {
     clearTimeout(timer.current);
     const r = parse(draft);
@@ -46,30 +63,35 @@ export function DraftInput<T>({ value, format, parse, onCommit, delay = 600, onB
 
   return (
     <span className={`draft${error ? " invalid" : ""}`}>
-      <input
-        {...rest}
-        value={text}
-        aria-invalid={!!error}
-        onChange={(e) => {
-          editing.current = true;
-          const next = e.target.value;
-          setText(next);
-          clearTimeout(timer.current);
-          timer.current = window.setTimeout(() => commit(next), delay);
-        }}
-        onBlur={(e) => {
-          commit();
-          editing.current = false;
-          onBlur?.(e);
-        }}
-        onKeyDown={(e) => {
-          if (e.key === "Enter") {
-            e.preventDefault();
+      {(() => {
+        const handlers = {
+          value: text,
+          "aria-invalid": !!error,
+          onChange: (e: { target: { value: string } }) => {
+            editing.current = true;
+            const next = e.target.value.replace(/\n/g, "");
+            setText(next);
+            clearTimeout(timer.current);
+            timer.current = window.setTimeout(() => commit(next), delay);
+          },
+          onBlur: (e: any) => {
             commit();
-          }
-          onKeyDown?.(e);
-        }}
-      />
+            editing.current = false;
+            onBlur?.(e);
+          },
+          onKeyDown: (e: any) => {
+            if (e.key === "Enter") {
+              e.preventDefault();
+              commit();
+            }
+            onKeyDown?.(e);
+          },
+        };
+        if (!multiline) return <input {...rest} {...handlers} />;
+        const { id, className, title, placeholder, maxLength, inputMode } = rest;
+        const label = rest["aria-label"];
+        return <textarea ref={area} rows={1} id={id} className={className} title={title} placeholder={placeholder} maxLength={maxLength} inputMode={inputMode} aria-label={label} spellCheck={false} {...handlers} />;
+      })()}
       {error && (
         <small className="draft-error" role="alert">
           {error}
