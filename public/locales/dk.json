@@ -111,5 +111,23 @@
     "scan": "Scan for at åbne posten",
     "schema": "Skema {{name}} · version {{v}}",
     "created": "Oprettet {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} af {{total}} hændelser i koden",
+    "fromOnline": "fuld historik hentet online",
+    "alwaysInCode": "Altid i koden (første strukturelle hændelse)",
+    "inCode": "I koden",
+    "notInCode": "Kun online",
+    "keep": "Behold i koden",
+    "add": "Tilføj hændelse",
+    "tier": {
+      "structural": "Strukturel",
+      "condition": "Tilstand",
+      "routine": "Rutine"
+    },
+    "omitted_one": "{{count}} strukturel hændelse kun online",
+    "omitted_other": "{{count}} strukturelle hændelser kun online",
+    "unavailable_one": "{{count}} yderligere strukturel hændelse er registreret, men ikke tilgængelig her. Den tælles fortsat i koden.",
+    "unavailable_other": "{{count}} yderligere strukturelle hændelser er registreret, men ikke tilgængelige her. De tælles fortsat i koden."
   }
 }

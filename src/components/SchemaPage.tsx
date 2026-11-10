@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { staticRecordSource } from "../records/source";
+import { sortHistory } from "../records/history";
 import { useLatest } from "../records/useLatest";
+import { useOnlineHistory } from "../records/useOnlineHistory";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
 import { decodeInput } from "../schema/links";
 import { TABS, currentPayload, currentTab, pushTab, schemaUrl, type Tab } from "../state/route";
@@ -11,6 +13,7 @@ import type { LoadedSchema } from "../schema/loader";
 import { read, useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { Header } from "./Header";
+import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
 import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
 import { SchemaInspector } from "./SchemaInspector";
@@ -40,9 +43,23 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   // a record is edited and exported in the schema version it was made with
   const dense = schema.versions.get(record.version) ?? latest;
   const newer = useLatest(records, slug, schema, loaded);
+  const tiers = schema.meta.historyTiers;
+  const historyField = dense.fields.find((f) => f.name === "history");
+  // the full history; record.history is the selection of it that fits the code
+  const [hist, setHistState] = useState<HistoryState>(() => historyState(record.history, tiers!));
+  const setHist = (next: HistoryState) => {
+    setHistState(next);
+    if (tiers) setRecord((r: any) => ({ ...r, history: historyFromState(next, tiers) }));
+  };
+  const online = useOnlineHistory(records, slug, loaded?.data.id);
+  useEffect(() => {
+    // a scanned code only holds a selection; the record source may know the full history
+    if (online?.length && hist.source === "code") setHistState({ status: "known", full: sortHistory(online), unavailable: 0, source: "online" });
+  }, [online]); // eslint-disable-line react-hooks/exhaustive-deps
   const load = (l: NonNullable<Loaded>) => {
     setLoaded(l);
     setRecord(l.data);
+    if (tiers) setHistState(historyState(l.data.history, tiers));
   };
 
   // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug
@@ -140,6 +157,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                   onClick={() => {
                     setLoaded(null);
                     setRecord(newRecord());
+                    setHistState(historyState(null, tiers!));
                   }}
                 >
                   {t("form.newRecord", { ns: "ui", v: schema.latest })}
@@ -150,7 +168,17 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                   {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
                 </p>
               )}
-              <RecordForm schema={dense} labels={labels} value={record} onChange={setRecord} />
+              <RecordForm
+                schema={dense}
+                labels={labels}
+                value={record}
+                onChange={setRecord}
+                overrides={
+                  tiers && historyField
+                    ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
+                    : {}
+                }
+              />
             </div>
             <div className="card side">
               <h3>{t("qr.title", { ns: "ui" })}</h3>

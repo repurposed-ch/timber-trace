@@ -127,3 +127,15 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .crumbs .brand [aria-current] { color: var(--fg); }
 .note { background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 6px; padding: 6px 10px; font-size: .85rem; margin: 8px 0; }
 .layout .card-head { margin-bottom: 8px; }
+.events { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.event { border: 1px solid var(--line); border-left-width: 4px; border-radius: 8px; padding: 8px; display: grid; gap: 6px; }
+.event.in-code { border-left-color: var(--accent); }
+.event.online { border-left-color: var(--line); background: var(--bg); }
+.event-head { display: flex; flex-wrap: wrap; gap: 6px 10px; align-items: center; }
+.event-head > button { margin-left: auto; }
+.tier { font-size: .75rem; font-weight: 600; padding: 1px 7px; border-radius: 10px; background: var(--line); }
+.tier-structural { background: #f1d9c0; color: #6b3f16; }
+.tier-condition { background: #dde8f0; color: #24506e; }
+.tier-routine { background: #e8e6e1; color: var(--muted); }
+.keep { display: inline-flex; gap: 4px; align-items: center; }
+.history > button, .history > .variants { justify-self: start; }

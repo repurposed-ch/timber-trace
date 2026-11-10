@@ -1,10 +1,13 @@
 import type { ReadText } from "../schema/loader";
+import type { FullEvent } from "./history";
 
 export type LatestRecord = {
   /** base45 payload of the most recent QR code for this id */
   payload: string;
   /** ISO date */
   updatedAt?: string;
+  /** the full history, of which the QR code holds a selection */
+  history?: FullEvent[];
 };
 
 /** where the latest record per id lives; the static files are a stand-in for a database */

@@ -42,3 +42,16 @@ describe("static record source", () => {
     expect(await source.getLatest("hello-world", "00000000-0000-0000-0000-00000000beef")).toBeNull();
   });
 });
+
+describe("online full history", () => {
+  test("the record source serves the full history of the v2 sample", async () => {
+    const { fullRecordV2 } = await import("../schema/testing");
+    const { historyForQr } = await import("./history");
+    const latest = await staticRecordSource(readPublic).getLatest("hello-world", idToHex(fullRecordV2.id));
+    expect(latest?.history?.length).toBe(9);
+    // the code the source holds is exactly the tier selection of that history
+    const data = decodeRecord(loaded, latest!.payload, BASE45).data;
+    expect(data.history).toEqual(historyForQr(latest!.history!, loaded.meta.historyTiers!));
+    expect(data.history.omitted).toBe(1);
+  });
+});

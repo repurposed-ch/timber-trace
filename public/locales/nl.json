@@ -111,5 +111,23 @@
     "scan": "Scan om het record te openen",
     "schema": "Schema {{name}} · versie {{v}}",
     "created": "Gemaakt op {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} van {{total}} gebeurtenissen in de code",
+    "fromOnline": "volledige geschiedenis online geladen",
+    "alwaysInCode": "Altijd in de code (eerste structurele gebeurtenis)",
+    "inCode": "In de code",
+    "notInCode": "Alleen online",
+    "keep": "In de code houden",
+    "add": "Gebeurtenis toevoegen",
+    "tier": {
+      "structural": "Structureel",
+      "condition": "Toestand",
+      "routine": "Routine"
+    },
+    "omitted_one": "{{count}} structurele gebeurtenis alleen online",
+    "omitted_other": "{{count}} structurele gebeurtenissen alleen online",
+    "unavailable_one": "Nog {{count}} structurele gebeurtenis is vastgelegd maar hier niet beschikbaar. Ze blijft geteld in de code.",
+    "unavailable_other": "Nog {{count}} structurele gebeurtenissen zijn vastgelegd maar hier niet beschikbaar. Ze blijven geteld in de code."
   }
 }

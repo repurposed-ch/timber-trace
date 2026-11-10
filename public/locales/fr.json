@@ -111,5 +111,23 @@
     "scan": "Scanner pour ouvrir la fiche",
     "schema": "Schéma {{name}} · version {{v}}",
     "created": "Créé le {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} événements sur {{total}} dans le code",
+    "fromOnline": "historique complet chargé en ligne",
+    "alwaysInCode": "Toujours dans le code (premier événement structurel)",
+    "inCode": "Dans le code",
+    "notInCode": "Uniquement en ligne",
+    "keep": "Garder dans le code",
+    "add": "Ajouter un événement",
+    "tier": {
+      "structural": "Structurel",
+      "condition": "État",
+      "routine": "Routine"
+    },
+    "omitted_one": "{{count}} événement structurel uniquement en ligne",
+    "omitted_other": "{{count}} événements structurels uniquement en ligne",
+    "unavailable_one": "{{count}} autre événement structurel est enregistré mais pas disponible ici. Il reste compté dans le code.",
+    "unavailable_other": "{{count}} autres événements structurels sont enregistrés mais pas disponibles ici. Ils restent comptés dans le code."
   }
 }

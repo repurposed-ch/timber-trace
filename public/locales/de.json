@@ -111,5 +111,23 @@
     "scan": "Scannen, um den Datensatz zu öffnen",
     "schema": "Schema {{name}} · Version {{v}}",
     "created": "Erstellt am {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} von {{total}} Ereignissen im Code",
+    "fromOnline": "vollständiger Verlauf online geladen",
+    "alwaysInCode": "Immer im Code (erstes strukturelles Ereignis)",
+    "inCode": "Im Code",
+    "notInCode": "Nur online",
+    "keep": "Im Code behalten",
+    "add": "Ereignis hinzufügen",
+    "tier": {
+      "structural": "Strukturell",
+      "condition": "Zustand",
+      "routine": "Routine"
+    },
+    "omitted_one": "{{count}} strukturelles Ereignis nur online",
+    "omitted_other": "{{count}} strukturelle Ereignisse nur online",
+    "unavailable_one": "{{count}} weiteres strukturelles Ereignis ist erfasst, hier aber nicht verfügbar. Es bleibt im Code gezählt.",
+    "unavailable_other": "{{count}} weitere strukturelle Ereignisse sind erfasst, hier aber nicht verfügbar. Sie bleiben im Code gezählt."
   }
 }

@@ -111,5 +111,23 @@
     "scan": "Skanna för att öppna posten",
     "schema": "Schema {{name}} · version {{v}}",
     "created": "Skapad {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} av {{total}} händelser i koden",
+    "fromOnline": "fullständig historik hämtad online",
+    "alwaysInCode": "Alltid i koden (första strukturella händelsen)",
+    "inCode": "I koden",
+    "notInCode": "Endast online",
+    "keep": "Behåll i koden",
+    "add": "Lägg till händelse",
+    "tier": {
+      "structural": "Strukturell",
+      "condition": "Skick",
+      "routine": "Rutin"
+    },
+    "omitted_one": "{{count}} strukturell händelse endast online",
+    "omitted_other": "{{count}} strukturella händelser endast online",
+    "unavailable_one": "Ytterligare {{count}} strukturell händelse är registrerad men inte tillgänglig här. Den räknas fortfarande i koden.",
+    "unavailable_other": "Ytterligare {{count}} strukturella händelser är registrerade men inte tillgängliga här. De räknas fortfarande i koden."
   }
 }

@@ -111,5 +111,23 @@
     "scan": "Scan to open the record",
     "schema": "Schema {{name}} · version {{v}}",
     "created": "Created {{date}}"
+  },
+  "history": {
+    "summary": "{{inCode}} of {{total}} events in the code",
+    "fromOnline": "full history loaded online",
+    "alwaysInCode": "Always in code (first structural event)",
+    "inCode": "In code",
+    "notInCode": "Online only",
+    "keep": "Keep in code",
+    "add": "Add event",
+    "tier": {
+      "structural": "Structural",
+      "condition": "Condition",
+      "routine": "Routine"
+    },
+    "omitted_one": "{{count}} structural event only online",
+    "omitted_other": "{{count}} structural events only online",
+    "unavailable_one": "{{count}} more structural event is recorded but not available here. It stays counted in the code.",
+    "unavailable_other": "{{count}} more structural events are recorded but not available here. They stay counted in the code."
   }
 }
