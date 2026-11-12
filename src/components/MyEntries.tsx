@@ -74,12 +74,26 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
       </li>
     );
   };
-  const skipped = (count: number, key: string) =>
-    count > 0 && (
-      <li key={key} className="mine-skip muted" aria-hidden>
-        {t("mine.more", { count })}
-      </li>
-    );
+  // the overview runs left to right; between steps an arrow, with the count of entries it skips
+  const step = (key: string, role: string, rows: MineRow[], yours = false) => (
+    <li key={key} className={`mine-step${yours ? " mine-yours" : ""}`}>
+      <span className="mine-role">{role}</span>
+      <ul className="mine-list">{rows.map((r) => entryRow(r, null))}</ul>
+    </li>
+  );
+  const arrow = (key: string, skipped: number) => (
+    <li key={key} className="mine-arrow" aria-hidden>
+      {skipped > 0 && <span className="muted">{t("mine.more", { count: skipped })}</span>}
+      <span>→</span>
+    </li>
+  );
+  const overview = (b: Branch) => {
+    const out = [];
+    if (b.earlier.length) out.push(step("earlier", t("mine.earlier"), b.earlier), arrow("a1", b.skippedBefore));
+    out.push(step("yours", t("mine.yourLatest"), [b.yourLatest], true));
+    if (b.latest.length) out.push(arrow("a2", b.skippedAfter), step("latest", t("mine.actualLatest"), b.latest));
+    return <ol className="mine-flow">{out}</ol>;
+  };
 
   return (
     <div className="card mine">
@@ -106,13 +120,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
               expanded ? (
                 <ol className="mine-list mine-branch">{b.all.map((r) => entryRow(r, null, r === b.yourLatest ? "mine-yours" : undefined))}</ol>
               ) : (
-                <ol className="mine-list">
-                  {b.earlier.map((r) => entryRow(r, t("mine.earlier")))}
-                  {skipped(b.skippedBefore, "before")}
-                  {entryRow(b.yourLatest, t("mine.yourLatest"), "mine-yours")}
-                  {skipped(b.skippedAfter, "after")}
-                  {b.latest.map((r) => entryRow(r, t("mine.actualLatest")))}
-                </ol>
+                overview(b)
               )
             }
           </BranchCard>

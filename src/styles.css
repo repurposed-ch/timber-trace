@@ -356,7 +356,13 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 button.link { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; }
 .mine-group { border-top: 1px solid var(--line); padding: 10px 0 4px; display: grid; gap: 6px; }
 .mine-role { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 2px 0 2px 2px; }
-.mine-yours > button { border-color: var(--accent); }
-.mine-skip { padding-left: 12px; font-size: .85rem; }
+.mine-yours > button, .mine-step.mine-yours button { border-color: var(--accent); }
+/* overview: steps side by side; a long branch scrolls inside its card, never the page */
+.mine-flow { list-style: none; margin: 0; padding: 0 0 6px; display: flex; align-items: stretch; gap: 6px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
+.mine-step { flex: 0 0 auto; width: min(240px, 72vw); display: flex; flex-direction: column; gap: 2px; scroll-snap-align: start; }
+.mine-step .mine-list { flex: 1; align-content: start; }
+.mine-step .mine-list button { height: 100%; }
+.mine-arrow { flex: 0 0 auto; align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 16px; font-size: 1.2rem; color: var(--muted); }
+.mine-arrow .muted { font-size: .75rem; white-space: nowrap; }
 .mine-branch { border-left: 2px solid var(--line); padding-left: 10px; }
 .mine-toggle { justify-self: start; font-size: .9rem; }
