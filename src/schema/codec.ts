@@ -5,6 +5,10 @@ import type { LoadedSchema } from "./loader";
 export const BASE45 = customBase("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ $%*+-./:");
 /** URL-safe subset (no space, %, +, …), used in share links */
 export const URL_SAFE: BaseSpec = "baseQRCode45UrlSafe";
+/** one character per byte (U+0100–U+01FF): densing output converts straight to bytes for the database */
+export const BYTES = customBase(Array.from({ length: 256 }, (_, i) => String.fromCharCode(0x100 + i)).join(""));
+export const toBytes = (dense: string) => Uint8Array.from(dense, (c) => c.charCodeAt(0) - 0x100);
+export const fromBytes = (bytes: Uint8Array) => String.fromCharCode(...Array.from(bytes, (b) => b + 0x100));
 
 export type DecodedRecord = { version: number; schema: DenseSchema; data: any };
 

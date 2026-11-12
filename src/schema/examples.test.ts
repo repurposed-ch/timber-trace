@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import QRCode from "qrcode";
-import { URL_SAFE, decodeRecord } from "./codec";
+import { BYTES, URL_SAFE, decodeRecord, encodeRecord, fromBytes, toBytes } from "./codec";
 import { QR_ALPHANUMERIC, recordLink } from "./links";
 import { loadHelloWorld, readPublic } from "./testing";
 
@@ -23,6 +23,15 @@ describe("landing page examples", () => {
       const code = QRCode.create([{ data: qr, mode: "alphanumeric" }], { errorCorrectionLevel: "Q" });
       expect(code.segments.map((s: any) => s.mode.id)).toEqual(["Alphanumeric"]);
       expect(code.version).toBeLessThanOrEqual(9);
+    });
+
+    test(`${e.key}: round-trips through bytes to the same QR text`, () => {
+      const r = decodeRecord(loaded, e.payload, URL_SAFE);
+      const bytes = toBytes(encodeRecord(r.schema, r.data, BYTES));
+      expect(bytes.length).toBeLessThan(e.payload.length);
+      const back = decodeRecord(loaded, fromBytes(bytes), BYTES);
+      expect(back.data).toEqual(r.data);
+      expect(encodeRecord(back.schema, back.data, URL_SAFE)).toBe(e.payload);
     });
   }
 });
