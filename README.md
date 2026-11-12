@@ -27,7 +27,9 @@ bun run build  # dist/, with dist/<slug>/index.html per schema and a 404.html fa
 | `public/<slug>/index.json` | versions, code enums, country enums |
 | `public/<slug>/schema/<version>.json` | densing schema (JSON string); `version` (8 bit) is always the first field |
 | `public/<slug>/locales/<lng>.json` | field and option labels, fetched at runtime |
-| `public/<slug>/records/<id>.json` | latest payload per 128-bit id (stand-in for a database) |
+| `public/<slug>/records/<id>.json` | latest payload per 128-bit id; offline fallback for the database |
+| `supabase/` | the database: `config.toml` (auth URLs), `migrations/` (table, access rules, functions), `tests/entries.sql` |
+| `.env` | Supabase URL and publishable key (public values; without them the app uses the static files only) |
 | `public/locales/<lng>.json` | UI strings, fetched at runtime |
 
 Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayNames`.
@@ -52,8 +54,35 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
   - structural (modification, exposure, repair): the first always, plus up to 3 chosen (default: latest); the rest are counted in `omitted` (4 bits, 15 = many);
   - condition (inspection, treatment): the latest of each kind;
   - routine: the last one.
-  - The full history lives in the record source (`public/<slug>/records/<id>.json`, `history`).
+  - The full history lives in the record's database entry (or the static file), not in the code.
 - **Revision and provenance**: revision number and date; supplied by and verified by, as role + party ID + date (no names in the code). The update check compares revision numbers.
+
+## Database (Supabase)
+
+Every saved state of a component is an **entry** in one table, `public.entries`. Entries are never changed. A new state is a new entry that lists the entries it continues as `predecessors`, so entries form a DAG; successors aren't stored but derived.
+
+| Column | Type | Purpose |
+| --- | --- | --- |
+| `id` | uuid | the entry's identity; `predecessors` point here |
+| `schema` | text | the schema slug that decodes the payload |
+| `component_id`, `revision` | uuid, int | what a scanned code is matched by (unique together) |
+| `payload` | bytea | the full record as densing bytes; it may hold more than the QR code |
+| `history` | jsonb | the full history |
+| `predecessors` | uuid[] | the entries this one continues |
+| `created_by`, `created_at` | uuid, timestamptz | who saved it, when |
+
+| Shape | `predecessors` |
+| --- | --- |
+| new component | `{}` |
+| revision | `{A}` (higher revision number) |
+| split | `{A}` on each of several entries, added in one call |
+| join | `{A, B, …}` on one entry |
+
+- **Reading** is open to everyone: `latest_for(component_id, revision)` finds the scanned code's entry and walks on to every leaf. The app shows that entry, or the "newer version" banner, or after a split asks which part to continue with.
+- **Writing** needs a sign-in (email link) and only goes through `append_entries(predecessors, entries)`. It only extends leaves you created, with the shapes above. Nobody can insert, update or delete rows directly.
+- **Bytes**: densing writes them directly through a 256-character alphabet (`BYTES` in `src/schema/codec.ts`); they travel as `\x…` hex over PostgREST.
+- **Changes** go in a new file in `supabase/migrations/`; never edit an applied one. Apply with `supabase link --project-ref rvlnynwkxjguaakhzalj` and `supabase db push`. `supabase/tests/entries.sql` checks the graph and access rules; it always rolls back.
+- **Auth URLs** (site and redirect) are in `supabase/config.toml`; apply with `supabase config push`.
 
 ## Deploy
 
