@@ -11,6 +11,7 @@ import type { SchemaMeta } from "../schema/loader";
 import { sectionsFor } from "../schema/sections";
 import type { Labels } from "../state/useSchema";
 import type { HistoryState } from "./HistoryEditor";
+import { Timeline } from "./Timeline";
 
 type Props = {
   schema: DenseSchema;
@@ -155,21 +156,24 @@ function HistorySection({ id, title, schema, meta, record, labels, history, date
       {history.full.length === 0 ? (
         <p className="folded">{t("history.nothingRecorded")}</p>
       ) : (
-        <ol className="timeline">
-          {history.full.map((e, i) => {
+        <Timeline
+          items={history.full.map((e, i) => {
             const tier = tierOf(e, tiers);
-            const line = eventLine(schema, record, e, labels, dates);
-            const [when, ...what] = line.split(" · ");
-            return (
-              <li key={i} className={inCode.has(i) ? "in-code" : "online"}>
-                <span className="tl-when">{when}</span>
-                <span className="tl-what">{what.join(" · ")}</span>
-                {tier && <span className={`tier tier-${tier}`}>{t(`history.tier.${tier}`)}</span>}
-                {!inCode.has(i) && <span className="muted small">{t("history.notInCode")}</span>}
-              </li>
-            );
+            const [when, ...what] = eventLine(schema, record, e, labels, dates).split(" · ");
+            return {
+              key: i,
+              when,
+              what: what.join(" · "),
+              faded: !inCode.has(i),
+              extra: (
+                <>
+                  {tier && <span className={`tier tier-${tier}`}>{t(`history.tier.${tier}`)}</span>}
+                  {!inCode.has(i) && <span className="muted small">{t("history.notInCode")}</span>}
+                </>
+              ),
+            };
           })}
-        </ol>
+        />
       )}
       {history.unavailable > 0 && <p className="folded">{t("history.omitted", { count: history.unavailable })}</p>}
     </section>
