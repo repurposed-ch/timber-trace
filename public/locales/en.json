@@ -199,7 +199,6 @@
     "loading": "Loading…",
     "empty": "You haven't saved any entries yet.",
     "latest": "Latest",
-    "revision": "Revision {{n}}",
     "unreadable": "Unreadable entry",
     "kind": {
       "new": "New",
@@ -210,9 +209,14 @@
     "earlier": "Earlier version",
     "yourLatest": "Your latest edit",
     "actualLatest": "Latest",
-    "more": "… {{count}} more",
-    "showBranch": "Show whole branch ({{count}})",
-    "hideBranch": "Show overview",
-    "byOther": "By someone else"
+    "more": "+{{count}}",
+    "byOther": "other",
+    "detail": "Detail",
+    "details": {
+      "latest": "Latest",
+      "overview": "Overview",
+      "full": "Full"
+    },
+    "rev": "R{{n}}"
   }
 }

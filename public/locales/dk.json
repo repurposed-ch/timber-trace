@@ -199,7 +199,6 @@
     "loading": "Indlæser…",
     "empty": "Du har ikke gemt nogen poster endnu.",
     "latest": "Seneste",
-    "revision": "Revision {{n}}",
     "unreadable": "Ulæselig post",
     "kind": {
       "new": "Ny",
@@ -210,9 +209,14 @@
     "earlier": "Tidligere version",
     "yourLatest": "Din seneste ændring",
     "actualLatest": "Seneste",
-    "more": "… {{count}} mere",
-    "showBranch": "Vis hele grenen ({{count}})",
-    "hideBranch": "Vis oversigt",
-    "byOther": "Af en anden"
+    "more": "+{{count}}",
+    "byOther": "anden",
+    "detail": "Detaljer",
+    "details": {
+      "latest": "Seneste",
+      "overview": "Oversigt",
+      "full": "Alt"
+    },
+    "rev": "R{{n}}"
   }
 }

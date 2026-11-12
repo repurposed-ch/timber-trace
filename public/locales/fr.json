@@ -199,7 +199,6 @@
     "loading": "Chargement…",
     "empty": "Vous n'avez encore enregistré aucune entrée.",
     "latest": "Dernière",
-    "revision": "Révision {{n}}",
     "unreadable": "Entrée illisible",
     "kind": {
       "new": "Nouvelle",
@@ -210,9 +209,14 @@
     "earlier": "Version antérieure",
     "yourLatest": "Votre dernière modification",
     "actualLatest": "Dernière",
-    "more": "… {{count}} de plus",
-    "showBranch": "Afficher toute la branche ({{count}})",
-    "hideBranch": "Afficher l'aperçu",
-    "byOther": "Par quelqu'un d'autre"
+    "more": "+{{count}}",
+    "byOther": "autre",
+    "detail": "Niveau de détail",
+    "details": {
+      "latest": "Dernières",
+      "overview": "Aperçu",
+      "full": "Tout"
+    },
+    "rev": "R{{n}}"
   }
 }

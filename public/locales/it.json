@@ -199,7 +199,6 @@
     "loading": "Caricamento…",
     "empty": "Non hai ancora salvato nessuna voce.",
     "latest": "Ultima",
-    "revision": "Revisione {{n}}",
     "unreadable": "Voce illeggibile",
     "kind": {
       "new": "Nuova",
@@ -210,9 +209,14 @@
     "earlier": "Versione precedente",
     "yourLatest": "La tua ultima modifica",
     "actualLatest": "Ultima",
-    "more": "… altre {{count}}",
-    "showBranch": "Mostra tutto il ramo ({{count}})",
-    "hideBranch": "Mostra panoramica",
-    "byOther": "Da qualcun altro"
+    "more": "+{{count}}",
+    "byOther": "altri",
+    "detail": "Dettaglio",
+    "details": {
+      "latest": "Ultime",
+      "overview": "Panoramica",
+      "full": "Tutto"
+    },
+    "rev": "R{{n}}"
   }
 }

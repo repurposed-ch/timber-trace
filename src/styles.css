@@ -347,22 +347,30 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .signin h3 { margin: 0 0 8px; }
 .signin-close { margin-top: 10px; }
 .save-status { font-size: .85rem; align-self: center; }
-.mine-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.mine-list button { display: grid; gap: 2px; width: 100%; text-align: left; padding: 8px 10px; }
-.mine-name { font-weight: 600; }
-.mine-id { font-size: .8rem; overflow-wrap: anywhere; }
-.mine-meta { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: center; font-size: .85rem; }
+/* my entries: compact boxes; overview steps share the width, stacked on phones */
+.mine-group, .mine-grid { border-top: 1px solid var(--line); padding: 10px 0 2px; margin: 0; }
+.mine-boxes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.mine-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+.mine-box > button { display: grid; gap: 1px; width: 100%; min-width: 0; text-align: left; padding: 6px 9px; }
+.mine-yours > button { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
+.mine-name { font-weight: 600; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mine-line { display: flex; align-items: center; gap: 5px; min-width: 0; font-size: .78rem; }
+.mine-id { flex: 1 1 auto; min-width: 4ch; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--muted); }
+.mine-line .chip { flex: none; }
+.mine-date { flex: none; color: var(--muted); white-space: nowrap; }
 .chip-ok { color: var(--accent); border-color: var(--accent); }
+.mine-flow { list-style: none; display: flex; align-items: stretch; gap: 6px; }
+.mine-step { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+.mine-role { font-size: .68rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding-left: 2px; }
+.mine-arrow { flex: none; align-self: center; display: flex; flex-direction: column; align-items: center; padding-top: 14px; color: var(--muted); font-size: .72rem; line-height: 1.1; }
+.mine-arrow-head { font-size: 1.1rem; }
+.mine-history { border-left: 2px solid var(--line); padding-left: 8px; margin-top: 10px; }
+.mine-history.mine-group { border-top: 0; }
+.mine-history + .mine-history { margin-top: 14px; }
+@media (max-width: 719px) {
+  .mine-flow { flex-direction: column; gap: 2px; }
+  .mine-step { flex: none; }
+  .mine-arrow { flex-direction: row; gap: 6px; padding: 0 0 0 12px; align-self: flex-start; }
+  .mine-arrow-head { transform: rotate(90deg); }
+}
 button.link { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; }
-.mine-group { border-top: 1px solid var(--line); padding: 10px 0 4px; display: grid; gap: 6px; }
-.mine-role { display: block; font-size: .72rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); margin: 2px 0 2px 2px; }
-.mine-yours > button, .mine-step.mine-yours button { border-color: var(--accent); }
-/* overview: steps side by side; a long branch scrolls inside its card, never the page */
-.mine-flow { list-style: none; margin: 0; padding: 0 0 6px; display: flex; align-items: stretch; gap: 6px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x proximity; }
-.mine-step { flex: 0 0 auto; width: min(240px, 72vw); display: flex; flex-direction: column; gap: 2px; scroll-snap-align: start; }
-.mine-step .mine-list { flex: 1; align-content: start; }
-.mine-step .mine-list button { height: 100%; }
-.mine-arrow { flex: 0 0 auto; align-self: center; display: flex; flex-direction: column; align-items: center; gap: 2px; padding-top: 16px; font-size: 1.2rem; color: var(--muted); }
-.mine-arrow .muted { font-size: .75rem; white-space: nowrap; }
-.mine-branch { border-left: 2px solid var(--line); padding-left: 10px; }
-.mine-toggle { justify-self: start; font-size: .9rem; }

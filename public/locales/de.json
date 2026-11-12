@@ -199,7 +199,6 @@
     "loading": "Wird geladen…",
     "empty": "Sie haben noch keine Einträge gespeichert.",
     "latest": "Neueste",
-    "revision": "Revision {{n}}",
     "unreadable": "Nicht lesbarer Eintrag",
     "kind": {
       "new": "Neu",
@@ -210,9 +209,14 @@
     "earlier": "Frühere Version",
     "yourLatest": "Ihre letzte Bearbeitung",
     "actualLatest": "Neueste",
-    "more": "… {{count}} weitere",
-    "showBranch": "Ganzen Zweig zeigen ({{count}})",
-    "hideBranch": "Übersicht zeigen",
-    "byOther": "Von jemand anderem"
+    "more": "+{{count}}",
+    "byOther": "andere",
+    "detail": "Detailgrad",
+    "details": {
+      "latest": "Neueste",
+      "overview": "Übersicht",
+      "full": "Alles"
+    },
+    "rev": "R{{n}}"
   }
 }

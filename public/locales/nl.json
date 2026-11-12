@@ -199,7 +199,6 @@
     "loading": "Laden…",
     "empty": "Je hebt nog geen invoer opgeslagen.",
     "latest": "Nieuwste",
-    "revision": "Revisie {{n}}",
     "unreadable": "Onleesbare invoer",
     "kind": {
       "new": "Nieuw",
@@ -210,9 +209,14 @@
     "earlier": "Eerdere versie",
     "yourLatest": "Jouw laatste bewerking",
     "actualLatest": "Nieuwste",
-    "more": "… nog {{count}}",
-    "showBranch": "Hele tak tonen ({{count}})",
-    "hideBranch": "Overzicht tonen",
-    "byOther": "Door iemand anders"
+    "more": "+{{count}}",
+    "byOther": "ander",
+    "detail": "Detail",
+    "details": {
+      "latest": "Nieuwste",
+      "overview": "Overzicht",
+      "full": "Alles"
+    },
+    "rev": "R{{n}}"
   }
 }
