@@ -9,6 +9,7 @@ import { decodeEntry, type Found } from "../records/useLatest";
 import { beamName } from "../schema/beam";
 import type { LoadedSchema } from "../schema/loader";
 import type { Labels } from "../state/useSchema";
+import { Timeline } from "./Timeline";
 
 type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[] };
 
@@ -89,6 +90,15 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
       </span>
     );
   };
+  // revision, how it was made (plain revisions need no chip), latest, who
+  const chips = (r: MineRow, showLatest = false) => (
+    <>
+      {r.entry.revision !== null && <span className="chip">{t("mine.rev", { n: r.entry.revision })}</span>}
+      {r.kind !== "revision" && <span className="chip">{t(`mine.kind.${r.kind}`)}</span>}
+      {showLatest && r.latest && <span className="chip chip-ok">{t("mine.latest")}</span>}
+      {who(r)}
+    </>
+  );
   // one compact box: name, then the ID (cut short) and a few chips on one line
   const box = (r: MineRow, opts: { yours?: boolean; showLatest?: boolean } = {}) => {
     const found = decodeEntry(schema, r.entry);
@@ -99,10 +109,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
           <span className="mine-name">{found ? beamName(found.data, labels) : t("mine.unreadable")}</span>
           <span className="mine-line">
             <span className="mono mine-id">{id}</span>
-            {r.entry.revision !== null && <span className="chip">{t("mine.rev", { n: r.entry.revision })}</span>}
-            {r.kind !== "revision" && <span className="chip">{t(`mine.kind.${r.kind}`)}</span>}
-            {opts.showLatest && r.latest && <span className="chip chip-ok">{t("mine.latest")}</span>}
-            {who(r)}
+            {chips(r, opts.showLatest)}
             <span className="mine-date">{shortDate(r.entry.savedAt)}</span>
           </span>
         </button>
@@ -133,10 +140,27 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
       </ol>
     );
   };
+  // the whole branch as a timeline, styled like a record's history; others' entries get a hollow dot
   const full = (b: Branch) => (
-    <ol key={b.yourLatest.entry.id} className="mine-boxes mine-history mine-group">
-      {b.all.map((r) => box(r, { yours: r === b.yourLatest, showLatest: true }))}
-    </ol>
+    <section key={b.yourLatest.entry.id} className="mine-group mine-history">
+      <Timeline
+        items={b.all.map((r) => {
+          const found = decodeEntry(schema, r.entry);
+          return {
+            key: r.entry.id!,
+            when: <span title={longDate(r.entry.savedAt)}>{shortDate(r.entry.savedAt)}</span>,
+            what: (
+              <button type="button" className="link mine-tl-name" disabled={!found} onClick={() => found && onOpen(found)} title={r.entry.componentId}>
+                {found ? beamName(found.data, labels) : t("mine.unreadable")}
+              </button>
+            ),
+            extra: chips(r, true),
+            faded: r.entry.createdBy !== userId,
+            className: r === b.yourLatest ? "mine-yours" : undefined,
+          };
+        })}
+      />
+    </section>
   );
   // latest only: whatever is current in each branch (several after a split)
   const current = (bs: Branch[]) => {
