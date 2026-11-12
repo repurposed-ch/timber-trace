@@ -1,7 +1,7 @@
 import { useSyncExternalStore } from "react";
 import { authClient, authEnabled, hasStoredSession, returningFromEmail } from "./client";
 
-export type Session = { status: "off" } | { status: "checking" } | { status: "out" } | { status: "in"; email: string };
+export type Session = { status: "off" } | { status: "checking" } | { status: "out" } | { status: "in"; id: string; email: string };
 
 // one shared session state for the whole page; the client library loads only when there is (or
 // may be) a session, so first-time visitors never download it
@@ -18,9 +18,9 @@ export function watchSession(): Promise<void> {
   if (watching || !authEnabled()) return Promise.resolve();
   watching = true;
   return authClient().then(async (c) => {
-    c.auth.onAuthStateChange((_event, s) => set(s ? { status: "in", email: s.user.email ?? "" } : { status: "out" }));
+    c.auth.onAuthStateChange((_event, s) => set(s ? { status: "in", id: s.user.id, email: s.user.email ?? "" } : { status: "out" }));
     const { data } = await c.auth.getSession();
-    set(data.session ? { status: "in", email: data.session.user.email ?? "" } : { status: "out" });
+    set(data.session ? { status: "in", id: data.session.user.id, email: data.session.user.email ?? "" } : { status: "out" });
     // the link's tokens are in the hash; they're used, so drop them from the address bar
     if (returningFromEmail()) history.replaceState(null, "", location.pathname + location.search);
   });

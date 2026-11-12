@@ -45,7 +45,8 @@
     "breadcrumb": "Navigationspfad",
     "more": "Mehr",
     "menu": "Menü",
-    "newRecord": "Neuer Datensatz"
+    "newRecord": "Neuer Datensatz",
+    "mine": "Meine Einträge"
   },
   "form": {
     "title": "Bauteildatensatz",
@@ -191,6 +192,22 @@
       "duplicate": "Dieser Code (ID und Revision) ist bereits gespeichert.",
       "network": "Keine Verbindung zur Datenbank. Bitte erneut versuchen.",
       "other": "Speichern fehlgeschlagen ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Melden Sie sich an, um Ihre gespeicherten Einträge zu sehen.",
+    "loading": "Wird geladen…",
+    "empty": "Sie haben noch keine Einträge gespeichert.",
+    "onlyLatest": "Nur neueste",
+    "latest": "Neueste",
+    "continued": "Fortgesetzt",
+    "revision": "Revision {{n}}",
+    "unreadable": "Nicht lesbarer Eintrag",
+    "kind": {
+      "new": "Neu",
+      "revision": "Revision",
+      "split": "Teilstück",
+      "join": "Zusammengefügt"
     }
   }
 }

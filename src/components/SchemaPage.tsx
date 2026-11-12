@@ -25,6 +25,7 @@ import { RecordView } from "./RecordView";
 import { editTabsFor } from "../schema/sections";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
+import { MyEntries } from "./MyEntries";
 import { SaveButton } from "./SaveButton";
 import { SplitChoice } from "./SplitChoice";
 import { UpdateBanner } from "./UpdateBanner";
@@ -191,6 +192,17 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             }}
           />
         </div>
+      )}
+      {tab === "mine" && (
+        <MyEntries
+          source={records}
+          schema={schema}
+          labels={labels}
+          onOpen={(f) => {
+            load({ payload: f.payload, data: f.data });
+            setTab("record");
+          }}
+        />
       )}
       {tab === "schema" && (
         <div className="card">

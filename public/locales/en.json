@@ -45,7 +45,8 @@
     "breadcrumb": "Breadcrumb",
     "more": "More",
     "menu": "Menu",
-    "newRecord": "New record"
+    "newRecord": "New record",
+    "mine": "My entries"
   },
   "form": {
     "title": "Component record",
@@ -191,6 +192,22 @@
       "duplicate": "This code (ID and revision) is already saved.",
       "network": "No connection to the database. Try again.",
       "other": "Couldn't save ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Sign in to see the entries you saved.",
+    "loading": "Loading…",
+    "empty": "You haven't saved any entries yet.",
+    "onlyLatest": "Latest only",
+    "latest": "Latest",
+    "continued": "Continued",
+    "revision": "Revision {{n}}",
+    "unreadable": "Unreadable entry",
+    "kind": {
+      "new": "New",
+      "revision": "Revision",
+      "split": "Split part",
+      "join": "Join"
     }
   }
 }

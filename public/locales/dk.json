@@ -45,7 +45,8 @@
     "breadcrumb": "Brødkrummesti",
     "more": "Mere",
     "menu": "Menu",
-    "newRecord": "Ny post"
+    "newRecord": "Ny post",
+    "mine": "Mine poster"
   },
   "form": {
     "title": "Komponentpost",
@@ -191,6 +192,22 @@
       "duplicate": "Denne kode (ID og revision) er allerede gemt.",
       "network": "Ingen forbindelse til databasen. Prøv igen.",
       "other": "Kunne ikke gemme ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Log ind for at se de poster, du har gemt.",
+    "loading": "Indlæser…",
+    "empty": "Du har ikke gemt nogen poster endnu.",
+    "onlyLatest": "Kun seneste",
+    "latest": "Seneste",
+    "continued": "Videreført",
+    "revision": "Revision {{n}}",
+    "unreadable": "Ulæselig post",
+    "kind": {
+      "new": "Ny",
+      "revision": "Revision",
+      "split": "Del",
+      "join": "Samlet"
     }
   }
 }

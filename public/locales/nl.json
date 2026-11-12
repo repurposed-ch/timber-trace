@@ -45,7 +45,8 @@
     "breadcrumb": "Kruimelpad",
     "more": "Meer",
     "menu": "Menu",
-    "newRecord": "Nieuw record"
+    "newRecord": "Nieuw record",
+    "mine": "Mijn invoer"
   },
   "form": {
     "title": "Componentrecord",
@@ -191,6 +192,22 @@
       "duplicate": "Deze code (ID en revisie) is al opgeslagen.",
       "network": "Geen verbinding met de database. Probeer het opnieuw.",
       "other": "Opslaan mislukt ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Log in om de invoer te zien die je hebt opgeslagen.",
+    "loading": "Laden…",
+    "empty": "Je hebt nog geen invoer opgeslagen.",
+    "onlyLatest": "Alleen nieuwste",
+    "latest": "Nieuwste",
+    "continued": "Voortgezet",
+    "revision": "Revisie {{n}}",
+    "unreadable": "Onleesbare invoer",
+    "kind": {
+      "new": "Nieuw",
+      "revision": "Revisie",
+      "split": "Deel",
+      "join": "Samengevoegd"
     }
   }
 }

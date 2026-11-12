@@ -29,6 +29,8 @@ export interface RecordSource {
   latest(schema: LoadedSchema, componentId: string, revision: number | null): Promise<Entry[]>;
   /** adds entries after the given leaves (several entries = a split) and returns their ids */
   append?(predecessors: string[], entries: Entry[]): Promise<string[]>;
+  /** every entry a user saved in this schema, newest first */
+  mine?(schema: LoadedSchema, userId: string): Promise<Entry[]>;
 }
 
 /** <slug>/records/<32 hex id>.json: { payload (base45), savedAt?, history? }; 404 means nothing is known */
@@ -67,4 +69,5 @@ export const fallbackSource = (primary: RecordSource, fallback: RecordSource): R
     return fallback.latest(schema, componentId, revision);
   },
   append: primary.append && ((predecessors, entries) => primary.append!(predecessors, entries)),
+  mine: primary.mine && ((schema, userId) => primary.mine!(schema, userId)),
 });

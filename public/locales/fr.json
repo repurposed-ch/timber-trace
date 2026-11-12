@@ -45,7 +45,8 @@
     "breadcrumb": "Fil d'Ariane",
     "more": "Plus",
     "menu": "Menu",
-    "newRecord": "Nouvelle fiche"
+    "newRecord": "Nouvelle fiche",
+    "mine": "Mes entrées"
   },
   "form": {
     "title": "Fiche de l'élément",
@@ -191,6 +192,22 @@
       "duplicate": "Ce code (ID et révision) est déjà enregistré.",
       "network": "Pas de connexion à la base de données. Réessayez.",
       "other": "Échec de l'enregistrement ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Connectez-vous pour voir les entrées que vous avez enregistrées.",
+    "loading": "Chargement…",
+    "empty": "Vous n'avez encore enregistré aucune entrée.",
+    "onlyLatest": "Dernières seulement",
+    "latest": "Dernière",
+    "continued": "Poursuivie",
+    "revision": "Révision {{n}}",
+    "unreadable": "Entrée illisible",
+    "kind": {
+      "new": "Nouvelle",
+      "revision": "Révision",
+      "split": "Partie",
+      "join": "Assemblage"
     }
   }
 }

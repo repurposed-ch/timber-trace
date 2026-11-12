@@ -45,7 +45,8 @@
     "breadcrumb": "Sökväg",
     "more": "Mer",
     "menu": "Meny",
-    "newRecord": "Ny post"
+    "newRecord": "Ny post",
+    "mine": "Mina poster"
   },
   "form": {
     "title": "Komponentpost",
@@ -191,6 +192,22 @@
       "duplicate": "Den här koden (ID och revision) är redan sparad.",
       "network": "Ingen anslutning till databasen. Försök igen.",
       "other": "Kunde inte spara ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Logga in för att se posterna du har sparat.",
+    "loading": "Laddar…",
+    "empty": "Du har inte sparat några poster än.",
+    "onlyLatest": "Bara senaste",
+    "latest": "Senaste",
+    "continued": "Fortsatt",
+    "revision": "Revision {{n}}",
+    "unreadable": "Oläslig post",
+    "kind": {
+      "new": "Ny",
+      "revision": "Revision",
+      "split": "Del",
+      "join": "Sammanfogad"
     }
   }
 }

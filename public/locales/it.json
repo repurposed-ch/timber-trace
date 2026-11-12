@@ -45,7 +45,8 @@
     "breadcrumb": "Percorso di navigazione",
     "more": "Altro",
     "menu": "Menu",
-    "newRecord": "Nuova scheda"
+    "newRecord": "Nuova scheda",
+    "mine": "Le mie voci"
   },
   "form": {
     "title": "Scheda dell'elemento",
@@ -191,6 +192,22 @@
       "duplicate": "Questo codice (ID e revisione) è già salvato.",
       "network": "Nessuna connessione al database. Riprova.",
       "other": "Salvataggio non riuscito ({{code}})."
+    }
+  },
+  "mine": {
+    "signedOut": "Accedi per vedere le voci che hai salvato.",
+    "loading": "Caricamento…",
+    "empty": "Non hai ancora salvato nessuna voce.",
+    "onlyLatest": "Solo le ultime",
+    "latest": "Ultima",
+    "continued": "Proseguita",
+    "revision": "Revisione {{n}}",
+    "unreadable": "Voce illeggibile",
+    "kind": {
+      "new": "Nuova",
+      "revision": "Revisione",
+      "split": "Parte",
+      "join": "Unione"
     }
   }
 }

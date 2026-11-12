@@ -76,10 +76,17 @@ export function HeaderNav() {
           {t("nav.schema")}
         </a>
       )}
-      {session.status !== "off" && (
-        <button type="button" className="hn-btn hn-wide hn-account" onClick={account} title={session.status === "in" ? t("auth.signedInAs", { email: session.email }) : undefined} disabled={session.status === "checking"}>
-          {accountLabel}
-        </button>
+      {/* signed in, the account spot leads to your entries (sign out is there); otherwise it signs in */}
+      {session.status === "in" && target ? (
+        <a className="hn-btn hn-wide hn-account" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)} title={t("auth.signedInAs", { email: session.email })}>
+          {t("nav.mine")}
+        </a>
+      ) : (
+        session.status !== "off" && (
+          <button type="button" className="hn-btn hn-wide hn-account" onClick={account} disabled={session.status === "checking"}>
+            {accountLabel}
+          </button>
+        )
       )}
       <span className="hn-wide">
         <LanguageSwitcher />
@@ -120,6 +127,11 @@ export function HeaderNav() {
               </button>
             ))}
           </div>
+          {session.status === "in" && target && (
+            <a role="menuitem" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)}>
+              {t("nav.mine")}
+            </a>
+          )}
           {session.status !== "off" && (
             <button type="button" role="menuitem" className="hn-menu-account" onClick={account} disabled={session.status === "checking"}>
               {accountLabel}

@@ -23,7 +23,8 @@ export type Lineage =
 
 export const codeOf = (data: any) => ({ componentId: idToHex(data.id), revision: (data.revision?.number as number | undefined) ?? null });
 
-function decode(schema: LoadedSchema, entry: Entry): Found | null {
+/** an entry decoded for display, or null when its payload is unreadable or another component */
+export function decodeEntry(schema: LoadedSchema, entry: Entry): Found | null {
   try {
     const r = decodeRecord(schema, fromBytes(entry.payload), BYTES);
     // a payload that isn't the component it claims to be is not shown
@@ -36,7 +37,7 @@ function decode(schema: LoadedSchema, entry: Entry): Found | null {
 
 /** sorts the latest entries for a code into a Lineage; pure, so it can be tested */
 export function lineageOf(schema: LoadedSchema, loaded: { payload: string; data: any }, entries: Entry[]): Lineage {
-  const found = entries.map((e) => decode(schema, e)).filter((f): f is Found => !!f);
+  const found = entries.map((e) => decodeEntry(schema, e)).filter((f): f is Found => !!f);
   if (!found.length) return { status: "unknown" };
   const code = codeOf(loaded.data);
   const self = found.find((f) => f.entry.componentId === code.componentId && f.entry.revision === code.revision);

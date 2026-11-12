@@ -79,5 +79,16 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
       const rows = entries.map((e) => ({ schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
       return rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
     },
+    async mine(schema, userId) {
+      const q = new URLSearchParams({ select: "*", created_by: `eq.${userId}`, schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "500" });
+      let res: Response;
+      try {
+        res = await fetcher(`${cfg.url}/rest/v1/entries?${q}`, { method: "GET", headers: { apikey: cfg.key } });
+      } catch {
+        throw new EntryError("network");
+      }
+      if (!res.ok) throw new EntryError(`http_${res.status}`);
+      return ((await res.json()) as Row[]).map(fromRow);
+    },
   };
 }

@@ -10,7 +10,7 @@ export const currentPayload = (pathname = location.pathname) => parsePath(pathna
 
 export const schemaUrl = (slug: string) => `${base}${slug}/`;
 
-export const TABS = ["record", "scan", "schema"] as const;
+export const TABS = ["record", "scan", "schema", "mine"] as const;
 export type Tab = (typeof TABS)[number];
 
 /** the active tab, from ?tab= (UI state only, never part of a record link or QR) */
