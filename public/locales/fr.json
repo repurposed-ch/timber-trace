@@ -175,5 +175,22 @@
     "sent": "Nous avons envoyé un lien de connexion à {{email}}. Ouvrez-le sur cet appareil ou un autre.",
     "error": "Impossible d'envoyer le lien : {{message}}",
     "close": "Fermer"
+  },
+  "save": {
+    "save": "Enregistrer",
+    "signInToSave": "Se connecter pour enregistrer",
+    "saved": "Enregistré comme révision {{n}}",
+    "savedNoRevision": "Enregistré",
+    "blocked": "Une entrée plus récente existe : ouvrez d'abord la dernière",
+    "invalid": "Corrigez d'abord les champs signalés",
+    "errors": {
+      "signed_out": "Reconnectez-vous pour enregistrer.",
+      "not_owner": "Ce composant a été enregistré par un autre compte.",
+      "not_latest": "Une entrée plus récente a été enregistrée entre-temps. Rechargez pour la voir.",
+      "revision_not_increasing": "Le numéro de révision doit être supérieur à celui enregistré.",
+      "duplicate": "Ce code (ID et révision) est déjà enregistré.",
+      "network": "Pas de connexion à la base de données. Réessayez.",
+      "other": "Échec de l'enregistrement ({{code}})."
+    }
   }
 }

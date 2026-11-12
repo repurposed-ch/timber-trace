@@ -346,3 +346,4 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .signin input { font-size: 16px; padding: 8px; }
 .signin h3 { margin: 0 0 8px; }
 .signin-close { margin-top: 10px; }
+.save-status { font-size: .85rem; align-self: center; }

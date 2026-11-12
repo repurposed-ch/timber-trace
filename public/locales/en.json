@@ -175,5 +175,22 @@
     "sent": "We sent a sign-in link to {{email}}. Open it on this device or any other.",
     "error": "Couldn't send the link: {{message}}",
     "close": "Close"
+  },
+  "save": {
+    "save": "Save",
+    "signInToSave": "Sign in to save",
+    "saved": "Saved as revision {{n}}",
+    "savedNoRevision": "Saved",
+    "blocked": "A newer entry exists: open the latest first",
+    "invalid": "Fix the marked fields first",
+    "errors": {
+      "signed_out": "Sign in again to save.",
+      "not_owner": "This component was saved by another account.",
+      "not_latest": "Someone saved a newer entry in the meantime. Reload to see it.",
+      "revision_not_increasing": "The revision number must be higher than the saved one.",
+      "duplicate": "This code (ID and revision) is already saved.",
+      "network": "No connection to the database. Try again.",
+      "other": "Couldn't save ({{code}})."
+    }
   }
 }

@@ -175,5 +175,22 @@
     "sent": "Vi har skickat en inloggningslänk till {{email}}. Öppna den på den här eller en annan enhet.",
     "error": "Länken kunde inte skickas: {{message}}",
     "close": "Stäng"
+  },
+  "save": {
+    "save": "Spara",
+    "signInToSave": "Logga in för att spara",
+    "saved": "Sparad som revision {{n}}",
+    "savedNoRevision": "Sparad",
+    "blocked": "Det finns en nyare post: öppna den senaste först",
+    "invalid": "Rätta först de markerade fälten",
+    "errors": {
+      "signed_out": "Logga in igen för att spara.",
+      "not_owner": "Den här komponenten sparades av ett annat konto.",
+      "not_latest": "En nyare post har sparats under tiden. Ladda om för att se den.",
+      "revision_not_increasing": "Revisionsnumret måste vara högre än det sparade.",
+      "duplicate": "Den här koden (ID och revision) är redan sparad.",
+      "network": "Ingen anslutning till databasen. Försök igen.",
+      "other": "Kunde inte spara ({{code}})."
+    }
   }
 }

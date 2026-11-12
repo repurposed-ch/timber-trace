@@ -175,5 +175,22 @@
     "sent": "Wir haben einen Anmeldelink an {{email}} gesendet. Öffnen Sie ihn auf diesem oder einem anderen Gerät.",
     "error": "Link konnte nicht gesendet werden: {{message}}",
     "close": "Schliessen"
+  },
+  "save": {
+    "save": "Speichern",
+    "signInToSave": "Zum Speichern anmelden",
+    "saved": "Als Revision {{n}} gespeichert",
+    "savedNoRevision": "Gespeichert",
+    "blocked": "Es gibt einen neueren Eintrag: zuerst den neuesten öffnen",
+    "invalid": "Zuerst die markierten Felder korrigieren",
+    "errors": {
+      "signed_out": "Zum Speichern erneut anmelden.",
+      "not_owner": "Dieses Bauteil wurde von einem anderen Konto gespeichert.",
+      "not_latest": "Inzwischen wurde ein neuerer Eintrag gespeichert. Neu laden, um ihn zu sehen.",
+      "revision_not_increasing": "Die Revisionsnummer muss höher sein als die gespeicherte.",
+      "duplicate": "Dieser Code (ID und Revision) ist bereits gespeichert.",
+      "network": "Keine Verbindung zur Datenbank. Bitte erneut versuchen.",
+      "other": "Speichern fehlgeschlagen ({{code}})."
+    }
   }
 }

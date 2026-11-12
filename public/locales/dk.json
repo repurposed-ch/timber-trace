@@ -175,5 +175,22 @@
     "sent": "Vi har sendt et login-link til {{email}}. Åbn det på denne eller en anden enhed.",
     "error": "Linket kunne ikke sendes: {{message}}",
     "close": "Luk"
+  },
+  "save": {
+    "save": "Gem",
+    "signInToSave": "Log ind for at gemme",
+    "saved": "Gemt som revision {{n}}",
+    "savedNoRevision": "Gemt",
+    "blocked": "Der findes en nyere post: åbn den seneste først",
+    "invalid": "Ret først de markerede felter",
+    "errors": {
+      "signed_out": "Log ind igen for at gemme.",
+      "not_owner": "Denne komponent er gemt af en anden konto.",
+      "not_latest": "En nyere post er gemt i mellemtiden. Genindlæs for at se den.",
+      "revision_not_increasing": "Revisionsnummeret skal være højere end det gemte.",
+      "duplicate": "Denne kode (ID og revision) er allerede gemt.",
+      "network": "Ingen forbindelse til databasen. Prøv igen.",
+      "other": "Kunne ikke gemme ({{code}})."
+    }
   }
 }

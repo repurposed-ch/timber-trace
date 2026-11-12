@@ -63,12 +63,21 @@ async function rpc<T>(cfg: SupabaseConfig, fn: string, args: unknown, fetcher: F
   return body as T;
 }
 
-/** entries in the Supabase `entries` table, read with plain fetch (no client library in the main bundle) */
-export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url, init) => fetch(url, init)): RecordSource {
+/**
+ * Entries in the Supabase `entries` table over plain fetch (no client library in the main bundle).
+ * `token` gives the signed-in user's access token for writes.
+ */
+export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url, init) => fetch(url, init), token: () => Promise<string | null> = async () => null): RecordSource {
   return {
     async latest(schema, componentId, revision) {
       const rows = await rpc<Row[]>(cfg, "latest_for", { code_component_id: componentId, code_revision: revision }, fetcher);
       return rows.filter((r) => r.schema === schema.meta.slug).map(fromRow);
+    },
+    async append(predecessors, entries) {
+      const jwt = await token();
+      if (!jwt) throw new EntryError("signed_out");
+      const rows = entries.map((e) => ({ schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
+      return rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
     },
   };
 }

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fallbackSource, staticRecordSource } from "../records/source";
 import { supabaseConfig, supabaseRecordSource } from "../records/supabase";
+import { accessToken } from "../auth/client";
 import { sortHistory } from "../records/history";
 import { provenance } from "../records/revision";
 import { useLatest } from "../records/useLatest";
@@ -24,12 +25,13 @@ import { RecordView } from "./RecordView";
 import { editTabsFor } from "../schema/sections";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
+import { SaveButton } from "./SaveButton";
 import { SplitChoice } from "./SplitChoice";
 import { UpdateBanner } from "./UpdateBanner";
 
 // the database when configured, the static files as fallback; the UI only sees RecordSource
 const db = supabaseConfig();
-const records = db ? fallbackSource(supabaseRecordSource(db), staticRecordSource(read)) : staticRecordSource(read);
+const records = db ? fallbackSource(supabaseRecordSource(db, undefined, accessToken), staticRecordSource(read)) : staticRecordSource(read);
 type Loaded = { payload: string; data: any } | null;
 
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
@@ -234,6 +236,15 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               >
                 {t("form.newRecord", { ns: "ui", v: schema.latest })}
               </button>
+              <SaveButton
+                source={records}
+                slug={slug}
+                schema={dense}
+                record={record}
+                lineage={lineage}
+                history={hist.status === "known" ? hist.full : null}
+                onSaved={(data) => load({ payload: encodeRecord(dense, data, URL_SAFE), data })}
+              />
               <ExportButtons slug={slug} schema={dense} record={record} labels={labels} />
             </div>
           </div>

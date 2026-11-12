@@ -4,6 +4,7 @@ import { fullRecordV2, loadHelloWorld } from "../schema/testing";
 import { fallbackSource, type Entry, type RecordSource } from "./source";
 import { EntryError, type Fetch, fromHex, supabaseConfig, supabaseRecordSource, toHex } from "./supabase";
 import { lineageOf } from "./useLatest";
+import { nextEntry } from "./save";
 
 const loaded = await loadHelloWorld();
 const v2 = loaded.versions.get(2)!;
@@ -122,5 +123,48 @@ describe("lineage of an opened code", () => {
   test("an entry whose payload is another component is ignored", () => {
     const other = record((r) => (r.id = randomId()));
     expect(lineageOf(loaded, opened, [entry(other, { componentId: idToHex(scanned.id) })]).status).toBe("unknown");
+  });
+});
+
+describe("append", () => {
+  test("sends the entries with the user's token, and needs one", async () => {
+    let call: { url: string; init: RequestInit } | undefined;
+    const fake = (async (url: string, init: RequestInit) => {
+      call = { url, init };
+      return new Response(JSON.stringify(["new-id"]), { status: 200 });
+    }) as Fetch;
+    const e = entry(scanned);
+    expect(await supabaseRecordSource(cfg, fake, async () => "jwt").append!(["prev"], [e])).toEqual(["new-id"]);
+    expect(call!.url).toEndWith("/rpc/append_entries");
+    expect((call!.init.headers as any).Authorization).toBe("Bearer jwt");
+    const body = JSON.parse(call!.init.body as string);
+    expect(body.predecessors).toEqual(["prev"]);
+    expect(body.entries[0]).toEqual({ schema: "hello-world", component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: null });
+    const out = await supabaseRecordSource(cfg, fake, async () => null).append!([], [e]).then(() => null, (err: EntryError) => err.code);
+    expect(out).toBe("signed_out");
+  });
+});
+
+describe("what Save writes", () => {
+  const day = 20800;
+  test("after the opened entry: next revision number and today's date", () => {
+    const self = { entry: entry(scanned), payload: "", data: scanned, schema: v2 };
+    const next = nextEntry("hello-world", v2, scanned, { status: "latest", self }, [], day)!;
+    expect(next.predecessors).toEqual([self.entry.id!]);
+    expect(next.entry.revision).toBe(scanned.revision.number + 1);
+    expect(next.data.revision.date).toEqual({ status: "known", day });
+    expect(next.entry.componentId).toBe(idToHex(scanned.id));
+  });
+  test("a record the database doesn't know becomes a root, as it stands", () => {
+    const next = nextEntry("hello-world", v2, scanned, { status: "unknown" }, null, day)!;
+    expect(next.predecessors).toEqual([]);
+    expect(next.entry.revision).toBe(scanned.revision.number);
+    const fromStatic = { entry: entry(scanned, { id: undefined }), payload: "", data: scanned, schema: v2 };
+    expect(nextEntry("hello-world", v2, scanned, { status: "latest", self: fromStatic }, null, day)!.predecessors).toEqual([]);
+  });
+  test("nothing while a newer entry or a split exists", () => {
+    const f = { entry: entry(scanned), payload: "", data: scanned, schema: v2 };
+    expect(nextEntry("hello-world", v2, scanned, { status: "newer", newer: f }, null, day)).toBeNull();
+    expect(nextEntry("hello-world", v2, scanned, { status: "split", parts: [f, f] }, null, day)).toBeNull();
   });
 });

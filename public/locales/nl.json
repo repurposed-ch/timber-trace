@@ -175,5 +175,22 @@
     "sent": "We hebben een inloglink naar {{email}} gestuurd. Open hem op dit of een ander apparaat.",
     "error": "De link kon niet worden verstuurd: {{message}}",
     "close": "Sluiten"
+  },
+  "save": {
+    "save": "Opslaan",
+    "signInToSave": "Inloggen om op te slaan",
+    "saved": "Opgeslagen als revisie {{n}}",
+    "savedNoRevision": "Opgeslagen",
+    "blocked": "Er is een nieuwere invoer: open eerst de nieuwste",
+    "invalid": "Corrigeer eerst de gemarkeerde velden",
+    "errors": {
+      "signed_out": "Log opnieuw in om op te slaan.",
+      "not_owner": "Dit onderdeel is door een ander account opgeslagen.",
+      "not_latest": "Er is intussen een nieuwere invoer opgeslagen. Herlaad om die te zien.",
+      "revision_not_increasing": "Het revisienummer moet hoger zijn dan het opgeslagen nummer.",
+      "duplicate": "Deze code (ID en revisie) is al opgeslagen.",
+      "network": "Geen verbinding met de database. Probeer het opnieuw.",
+      "other": "Opslaan mislukt ({{code}})."
+    }
   }
 }
