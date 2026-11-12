@@ -210,13 +210,21 @@
     "yourLatest": "Your latest edit",
     "actualLatest": "Latest",
     "more": "+{{count}}",
-    "byOther": "other",
     "detail": "Detail",
     "details": {
       "latest": "Latest",
       "overview": "Overview",
       "full": "Full"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Component",
+      "id": "ID",
+      "rev": "Rev.",
+      "kind": "Kind",
+      "saved": "Saved",
+      "by": "By"
+    },
+    "you": "You"
   }
 }

@@ -210,13 +210,21 @@
     "yourLatest": "La tua ultima modifica",
     "actualLatest": "Ultima",
     "more": "+{{count}}",
-    "byOther": "altri",
     "detail": "Dettaglio",
     "details": {
       "latest": "Ultime",
       "overview": "Panoramica",
       "full": "Tutto"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Componente",
+      "id": "ID",
+      "rev": "Rev.",
+      "kind": "Tipo",
+      "saved": "Salvato",
+      "by": "Da"
+    },
+    "you": "Tu"
   }
 }

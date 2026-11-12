@@ -210,13 +210,21 @@
     "yourLatest": "Ihre letzte Bearbeitung",
     "actualLatest": "Neueste",
     "more": "+{{count}}",
-    "byOther": "andere",
     "detail": "Detailgrad",
     "details": {
       "latest": "Neueste",
       "overview": "Übersicht",
       "full": "Alles"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Bauteil",
+      "id": "ID",
+      "rev": "Rev.",
+      "kind": "Art",
+      "saved": "Gespeichert",
+      "by": "Von"
+    },
+    "you": "Sie"
   }
 }

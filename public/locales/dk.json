@@ -210,13 +210,21 @@
     "yourLatest": "Din seneste ændring",
     "actualLatest": "Seneste",
     "more": "+{{count}}",
-    "byOther": "anden",
     "detail": "Detaljer",
     "details": {
       "latest": "Seneste",
       "overview": "Oversigt",
       "full": "Alt"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Komponent",
+      "id": "ID",
+      "rev": "Rev.",
+      "kind": "Type",
+      "saved": "Gemt",
+      "by": "Af"
+    },
+    "you": "Dig"
   }
 }

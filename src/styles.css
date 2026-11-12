@@ -348,9 +348,8 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .signin-close { margin-top: 10px; }
 .save-status { font-size: .85rem; align-self: center; }
 /* my entries: compact boxes; overview steps share the width, stacked on phones */
-.mine-group, .mine-grid { border-top: 1px solid var(--line); padding: 10px 0 2px; margin: 0; }
+.mine-group, .mine-table-wrap { border-top: 1px solid var(--line); padding: 10px 0 2px; margin: 0; }
 .mine-boxes { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.mine-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
 .mine-box > button { display: grid; gap: 1px; width: 100%; min-width: 0; text-align: left; padding: 6px 9px; }
 .mine-yours > button { border-color: var(--accent); box-shadow: inset 3px 0 0 var(--accent); }
 .mine-name { font-weight: 600; font-size: .92rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -374,3 +373,26 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
   .mine-arrow-head { transform: rotate(90deg); }
 }
 button.link { border: 0; background: none; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; font: inherit; }
+.mine-table { width: 100%; border-collapse: collapse; table-layout: fixed; font-size: .88rem; }
+.mine-table th { text-align: left; font-size: .7rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); padding: 2px 8px 4px; border-bottom: 1px solid var(--line); }
+.mine-table td { padding: 5px 8px; border-bottom: 1px solid var(--line); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mine-table tbody tr { cursor: pointer; }
+.mine-table tbody tr:hover { background: var(--bg); }
+.mine-table tr.mine-yours td:first-child { box-shadow: inset 3px 0 0 var(--accent); }
+.mine-table .c-name { width: 34%; }
+.mine-table .c-name .link { color: var(--fg); text-decoration: none; font-weight: 600; max-width: 100%; overflow: hidden; text-overflow: ellipsis; vertical-align: middle; }
+.mine-table .c-name .chip { margin-left: 6px; }
+.mine-table .c-id { width: 26%; color: var(--muted); font-size: .78rem; }
+.mine-table .c-by { width: 10%; }
+.mine-table .c-num { width: 11%; text-align: right; font-variant-numeric: tabular-nums; }
+.mine-table th.c-num { text-align: right; }
+.mine-table .c-kind { width: 12%; }
+@media (max-width: 719px) {
+  .mine-table .c-id, .mine-table .c-kind { display: none; }
+  .mine-table .c-name { width: auto; }
+  .mine-table .c-num { width: 12%; }
+  .mine-table .c-date { width: 19%; }
+  .mine-table .c-by { width: 22%; }
+}
+.chip-user { font-family: var(--mono, ui-monospace, monospace); font-weight: 500; }
+.chip-you { font-family: inherit; font-weight: 600; color: var(--fg); }

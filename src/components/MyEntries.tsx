@@ -78,6 +78,17 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
   };
   const longDate = (iso?: string) => (iso ? new Date(iso).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" }) : "");
 
+  // who saved an entry: you, or a short stable tag of the account (emails aren't public)
+  const who = (r: MineRow) => {
+    const by = r.entry.createdBy;
+    if (!by) return null;
+    const you = by === userId;
+    return (
+      <span className={`chip chip-user${you ? " chip-you" : ""}`} title={you ? session.email : by}>
+        {you ? t("mine.you") : `#${by.replace(/-/g, "").slice(0, 4)}`}
+      </span>
+    );
+  };
   // one compact box: name, then the ID (cut short) and a few chips on one line
   const box = (r: MineRow, opts: { yours?: boolean; showLatest?: boolean } = {}) => {
     const found = decodeEntry(schema, r.entry);
@@ -91,7 +102,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
             {r.entry.revision !== null && <span className="chip">{t("mine.rev", { n: r.entry.revision })}</span>}
             {r.kind !== "revision" && <span className="chip">{t(`mine.kind.${r.kind}`)}</span>}
             {opts.showLatest && r.latest && <span className="chip chip-ok">{t("mine.latest")}</span>}
-            {r.entry.createdBy !== userId && <span className="chip">{t("mine.byOther")}</span>}
+            {who(r)}
             <span className="mine-date">{shortDate(r.entry.savedAt)}</span>
           </span>
         </button>
@@ -128,7 +139,49 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     </ol>
   );
   // latest only: whatever is current in each branch (several after a split)
-  const current = (bs: Branch[]) => <ul className="mine-boxes mine-grid">{bs.flatMap((b) => (b.latest.length ? b.latest : [b.yourLatest]).map((r) => box(r, { yours: r === b.yourLatest })))}</ul>;
+  const current = (bs: Branch[]) => {
+    const rows = bs.flatMap((b) => (b.latest.length ? b.latest : [b.yourLatest]).map((r) => ({ r, yours: r === b.yourLatest })));
+    return (
+      <div className="mine-table-wrap">
+        <table className="mine-table">
+          <thead>
+            <tr>
+              <th>{t("mine.col.name")}</th>
+              <th className="c-id">{t("mine.col.id")}</th>
+              <th className="c-num">{t("mine.col.rev")}</th>
+              <th className="c-kind">{t("mine.col.kind")}</th>
+              <th className="c-by">{t("mine.col.by")}</th>
+              <th className="c-num c-date">{t("mine.col.saved")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(({ r, yours }) => {
+              const found = decodeEntry(schema, r.entry);
+              const open = () => found && onOpen(found);
+              return (
+                <tr key={r.entry.id} className={yours ? "mine-yours" : undefined} onClick={open}>
+                  <td className="c-name">
+                    <button type="button" className="link" disabled={!found} onClick={(e) => (e.stopPropagation(), open())} title={r.entry.componentId}>
+                      {found ? beamName(found.data, labels) : t("mine.unreadable")}
+                    </button>
+                  </td>
+                  <td className="c-id mono">
+                    <span>{r.entry.componentId}</span>
+                  </td>
+                  <td className="c-num">{r.entry.revision ?? "–"}</td>
+                  <td className="c-kind">{t(`mine.kind.${r.kind}`)}</td>
+                  <td className="c-by">{who(r)}</td>
+                  <td className="c-num c-date" title={longDate(r.entry.savedAt)}>
+                    {shortDate(r.entry.savedAt)}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    );
+  };
 
   return (
     <div className="card mine">

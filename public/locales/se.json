@@ -210,13 +210,21 @@
     "yourLatest": "Din senaste ändring",
     "actualLatest": "Senaste",
     "more": "+{{count}}",
-    "byOther": "annan",
     "detail": "Detaljnivå",
     "details": {
       "latest": "Senaste",
       "overview": "Översikt",
       "full": "Allt"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Komponent",
+      "id": "ID",
+      "rev": "Rev.",
+      "kind": "Typ",
+      "saved": "Sparad",
+      "by": "Av"
+    },
+    "you": "Du"
   }
 }

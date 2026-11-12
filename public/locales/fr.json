@@ -210,13 +210,21 @@
     "yourLatest": "Votre dernière modification",
     "actualLatest": "Dernière",
     "more": "+{{count}}",
-    "byOther": "autre",
     "detail": "Niveau de détail",
     "details": {
       "latest": "Dernières",
       "overview": "Aperçu",
       "full": "Tout"
     },
-    "rev": "R{{n}}"
+    "rev": "R{{n}}",
+    "col": {
+      "name": "Composant",
+      "id": "ID",
+      "rev": "Rév.",
+      "kind": "Type",
+      "saved": "Enregistré",
+      "by": "Par"
+    },
+    "you": "Vous"
   }
 }
