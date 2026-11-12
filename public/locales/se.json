@@ -164,5 +164,16 @@
   "split": {
     "title": "Den här komponenten har delats i {{count}} delar",
     "ask": "Vilken vill du fortsätta med?"
+  },
+  "auth": {
+    "signIn": "Logga in",
+    "signOut": "Logga ut",
+    "signedInAs": "Inloggad som {{email}}",
+    "why": "Alla kan läsa. Logga in för att spara: vi mejlar dig en länk, inget lösenord.",
+    "email": "E-post",
+    "send": "Skicka inloggningslänk",
+    "sent": "Vi har skickat en inloggningslänk till {{email}}. Öppna den på den här eller en annan enhet.",
+    "error": "Länken kunde inte skickas: {{message}}",
+    "close": "Stäng"
   }
 }

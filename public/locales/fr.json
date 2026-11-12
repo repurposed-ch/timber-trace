@@ -164,5 +164,16 @@
   "split": {
     "title": "Ce composant a été divisé en {{count}} parties",
     "ask": "Avec laquelle voulez-vous continuer ?"
+  },
+  "auth": {
+    "signIn": "Se connecter",
+    "signOut": "Se déconnecter",
+    "signedInAs": "Connecté·e en tant que {{email}}",
+    "why": "La lecture est ouverte à toutes et tous. Connectez-vous pour enregistrer : nous vous envoyons un lien par e-mail, sans mot de passe.",
+    "email": "E-mail",
+    "send": "Envoyer le lien de connexion",
+    "sent": "Nous avons envoyé un lien de connexion à {{email}}. Ouvrez-le sur cet appareil ou un autre.",
+    "error": "Impossible d'envoyer le lien : {{message}}",
+    "close": "Fermer"
   }
 }

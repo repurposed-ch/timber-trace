@@ -164,5 +164,16 @@
   "split": {
     "title": "Denne komponent er delt i {{count}} dele",
     "ask": "Hvilken vil du fortsætte med?"
+  },
+  "auth": {
+    "signIn": "Log ind",
+    "signOut": "Log ud",
+    "signedInAs": "Logget ind som {{email}}",
+    "why": "Alle kan læse. Log ind for at gemme: vi sender dig et link på e-mail, uden adgangskode.",
+    "email": "E-mail",
+    "send": "Send login-link",
+    "sent": "Vi har sendt et login-link til {{email}}. Åbn det på denne eller en anden enhed.",
+    "error": "Linket kunne ikke sendes: {{message}}",
+    "close": "Luk"
   }
 }

@@ -164,5 +164,16 @@
   "split": {
     "title": "Dieses Bauteil wurde in {{count}} Teile aufgeteilt",
     "ask": "Mit welchem Teil möchten Sie weitermachen?"
+  },
+  "auth": {
+    "signIn": "Anmelden",
+    "signOut": "Abmelden",
+    "signedInAs": "Angemeldet als {{email}}",
+    "why": "Lesen kann jede Person. Zum Speichern anmelden: Wir senden Ihnen einen Link per E-Mail, ohne Passwort.",
+    "email": "E-Mail",
+    "send": "Anmeldelink senden",
+    "sent": "Wir haben einen Anmeldelink an {{email}} gesendet. Öffnen Sie ihn auf diesem oder einem anderen Gerät.",
+    "error": "Link konnte nicht gesendet werden: {{message}}",
+    "close": "Schliessen"
   }
 }

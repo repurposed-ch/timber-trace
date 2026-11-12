@@ -164,5 +164,16 @@
   "split": {
     "title": "This component was split into {{count}} parts",
     "ask": "Which one do you want to continue with?"
+  },
+  "auth": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "signedInAs": "Signed in as {{email}}",
+    "why": "Reading is open to everyone. Sign in to save records: we email you a link, no password.",
+    "email": "Email",
+    "send": "Send sign-in link",
+    "sent": "We sent a sign-in link to {{email}}. Open it on this device or any other.",
+    "error": "Couldn't send the link: {{message}}",
+    "close": "Close"
   }
 }

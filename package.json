@@ -13,6 +13,7 @@
     "@react-pdf/renderer": "^4.3.2",
     "@react-three/drei": "^10.7.4",
     "@react-three/fiber": "^9.3.0",
+    "@supabase/supabase-js": "^2.119.0",
     "densing": "0.5.0",
     "i18next": "24.2.2",
     "i18next-http-backend": "^3.0.2",

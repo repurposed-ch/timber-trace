@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { LANGS, LANG_FLAGS, LANG_NAMES, setLang, type Lang } from "../i18n";
 import { currentSlug, pushTab, schemaUrl, type Tab } from "../state/route";
+import { signOut } from "../auth/client";
+import { setSignInOpen, useSession } from "../auth/useSession";
 import { useSchemaSlugs } from "../state/useSchema";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 
@@ -54,6 +56,13 @@ export function HeaderNav() {
   };
   const schemaHref = (s: string) => `${schemaUrl(s)}?tab=schema`;
   const lng = (i18n.resolvedLanguage ?? "en") as Lang;
+  const session = useSession();
+  const account = () => {
+    setOpen(false);
+    if (session.status === "in") signOut().catch(() => {});
+    else setSignInOpen(true);
+  };
+  const accountLabel = session.status === "in" ? t("auth.signOut") : t("auth.signIn");
   return (
     <div className="header-nav" ref={menu}>
       {scanHref && (
@@ -66,6 +75,11 @@ export function HeaderNav() {
         <a className="hn-btn hn-wide" href={schemaHref(target)} onClick={inPlace("schema", target)}>
           {t("nav.schema")}
         </a>
+      )}
+      {session.status !== "off" && (
+        <button type="button" className="hn-btn hn-wide hn-account" onClick={account} title={session.status === "in" ? t("auth.signedInAs", { email: session.email }) : undefined} disabled={session.status === "checking"}>
+          {accountLabel}
+        </button>
       )}
       <span className="hn-wide">
         <LanguageSwitcher />
@@ -106,6 +120,12 @@ export function HeaderNav() {
               </button>
             ))}
           </div>
+          {session.status !== "off" && (
+            <button type="button" role="menuitem" className="hn-menu-account" onClick={account} disabled={session.status === "checking"}>
+              {accountLabel}
+              {session.status === "in" && <span className="muted small"> · {session.email}</span>}
+            </button>
+          )}
           <a role="menuitem" href={REPO} className="muted small">
             {t("home.source")}
           </a>

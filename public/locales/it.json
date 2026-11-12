@@ -164,5 +164,16 @@
   "split": {
     "title": "Questo componente è stato diviso in {{count}} parti",
     "ask": "Con quale vuoi continuare?"
+  },
+  "auth": {
+    "signIn": "Accedi",
+    "signOut": "Esci",
+    "signedInAs": "Accesso come {{email}}",
+    "why": "La lettura è aperta a tutti. Accedi per salvare: ti inviamo un link via e-mail, senza password.",
+    "email": "E-mail",
+    "send": "Invia link di accesso",
+    "sent": "Abbiamo inviato un link di accesso a {{email}}. Aprilo su questo o su un altro dispositivo.",
+    "error": "Impossibile inviare il link: {{message}}",
+    "close": "Chiudi"
   }
 }

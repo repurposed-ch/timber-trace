@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Header, type Crumb } from "./Header";
+import { SignIn } from "./SignIn";
 
 type Props = {
   crumbs?: Crumb[];
@@ -26,6 +27,7 @@ export function Shell({ crumbs, children, aside, className }: Props) {
         <main className="pane main-pane">{children}</main>
         {aside?.scroll && <div className="pane aside-pane">{aside.scroll}</div>}
       </div>
+      <SignIn />
     </div>
   );
 }

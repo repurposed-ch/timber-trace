@@ -164,5 +164,16 @@
   "split": {
     "title": "Dit onderdeel is gesplitst in {{count}} delen",
     "ask": "Met welk deel wil je verder?"
+  },
+  "auth": {
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen",
+    "signedInAs": "Ingelogd als {{email}}",
+    "why": "Lezen kan iedereen. Log in om op te slaan: we mailen je een link, zonder wachtwoord.",
+    "email": "E-mail",
+    "send": "Inloglink versturen",
+    "sent": "We hebben een inloglink naar {{email}} gestuurd. Open hem op dit of een ander apparaat.",
+    "error": "De link kon niet worden verstuurd: {{message}}",
+    "close": "Sluiten"
   }
 }
