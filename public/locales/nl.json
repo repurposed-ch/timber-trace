@@ -198,9 +198,7 @@
     "signedOut": "Log in om de invoer te zien die je hebt opgeslagen.",
     "loading": "Laden…",
     "empty": "Je hebt nog geen invoer opgeslagen.",
-    "onlyLatest": "Alleen nieuwste",
     "latest": "Nieuwste",
-    "continued": "Voortgezet",
     "revision": "Revisie {{n}}",
     "unreadable": "Onleesbare invoer",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revisie",
       "split": "Deel",
       "join": "Samengevoegd"
-    }
+    },
+    "earlier": "Eerdere versie",
+    "yourLatest": "Jouw laatste bewerking",
+    "actualLatest": "Nieuwste",
+    "more": "… nog {{count}}",
+    "showBranch": "Hele tak tonen ({{count}})",
+    "hideBranch": "Overzicht tonen",
+    "byOther": "Door iemand anders"
   }
 }

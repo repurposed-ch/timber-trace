@@ -198,9 +198,7 @@
     "signedOut": "Sign in to see the entries you saved.",
     "loading": "Loading…",
     "empty": "You haven't saved any entries yet.",
-    "onlyLatest": "Latest only",
     "latest": "Latest",
-    "continued": "Continued",
     "revision": "Revision {{n}}",
     "unreadable": "Unreadable entry",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revision",
       "split": "Split part",
       "join": "Join"
-    }
+    },
+    "earlier": "Earlier version",
+    "yourLatest": "Your latest edit",
+    "actualLatest": "Latest",
+    "more": "… {{count}} more",
+    "showBranch": "Show whole branch ({{count}})",
+    "hideBranch": "Show overview",
+    "byOther": "By someone else"
   }
 }

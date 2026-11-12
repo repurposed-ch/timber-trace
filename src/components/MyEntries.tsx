@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { signOut } from "../auth/client";
 import { setSignInOpen, useSession } from "../auth/useSession";
 import { intlLocale } from "../i18n-langs";
-import { describeEntries, type MineRow } from "../records/mine";
+import { branches, type Branch, type MineRow } from "../records/mine";
 import type { RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
 import { beamName } from "../schema/beam";
@@ -11,24 +11,28 @@ import { idToHex } from "../schema/codec";
 import type { LoadedSchema } from "../schema/loader";
 import type { Labels } from "../state/useSchema";
 
-type Row = MineRow & { found: Found | null };
-type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; rows: Row[] };
+type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[] };
 
-/** the entries the signed-in user saved in this schema, newest first; choosing one opens it */
+/**
+ * The signed-in user's entries, one card per branch: earlier version … your latest edit … the
+ * actual latest. A branch with more than one entry can be expanded to show all of it.
+ */
 export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSource; schema: LoadedSchema; labels: Labels; onOpen: (f: Found) => void }) {
   const { t, i18n } = useTranslation();
   const session = useSession();
   const [state, setState] = useState<State>({ s: "loading" });
-  const [onlyLatest, setOnlyLatest] = useState(false);
   const userId = session.status === "in" ? session.id : null;
 
   useEffect(() => {
     if (!userId || !source.mine) return;
     let alive = true;
     setState({ s: "loading" });
-    source
-      .mine(schema, userId)
-      .then((entries) => alive && setState({ s: "done", rows: describeEntries(entries).map((r) => ({ ...r, found: decodeEntry(schema, r.entry) })) }))
+    (async () => {
+      const mine = await source.mine!(schema, userId);
+      const all = source.related && mine.length ? await source.related(schema, mine) : mine;
+      return branches(all, userId);
+    })()
+      .then((b) => alive && setState({ s: "done", branches: b }))
       .catch((e) => alive && setState({ s: "error", code: e?.code ?? "network" }));
     return () => {
       alive = false;
@@ -51,16 +55,36 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
 
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
   const date = (iso?: string) => (iso ? new Date(iso).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" }) : "");
-  const rows = state.s === "done" ? state.rows.filter((r) => !onlyLatest || r.latest) : [];
+  const entryRow = (r: MineRow, role: string | null, extra?: string) => {
+    const found = decodeEntry(schema, r.entry);
+    return (
+      <li key={`${role}-${r.entry.id}`} className={extra}>
+        {role && <span className="mine-role">{role}</span>}
+        <button type="button" disabled={!found} onClick={() => found && onOpen(found)}>
+          <span className="mine-name">{found ? beamName(found.data, labels) : t("mine.unreadable")}</span>
+          <span className="mono mine-id">{found ? idToHex(found.data.id) : r.entry.componentId}</span>
+          <span className="mine-meta">
+            {r.entry.revision !== null && <span>{t("mine.revision", { n: r.entry.revision })}</span>}
+            <span className="chip">{t(`mine.kind.${r.kind}`)}</span>
+            {r.latest && <span className="chip chip-ok">{t("mine.latest")}</span>}
+            {r.entry.createdBy !== userId && <span className="chip">{t("mine.byOther")}</span>}
+            <span className="muted">{date(r.entry.savedAt)}</span>
+          </span>
+        </button>
+      </li>
+    );
+  };
+  const skipped = (count: number, key: string) =>
+    count > 0 && (
+      <li key={key} className="mine-skip muted" aria-hidden>
+        {t("mine.more", { count })}
+      </li>
+    );
+
   return (
     <div className="card mine">
       <div className="card-head">
         <h3>{t("nav.mine")}</h3>
-        <div className="card-actions">
-          <label className="mine-filter">
-            <input type="checkbox" checked={onlyLatest} onChange={(e) => setOnlyLatest(e.target.checked)} /> {t("mine.onlyLatest")}
-          </label>
-        </div>
       </div>
       <p className="muted small">
         {t("auth.signedInAs", { email: session.email })} ·{" "}
@@ -74,25 +98,40 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
           {t(`save.errors.${state.code}`, { defaultValue: t("save.errors.other", { code: state.code }) })}
         </p>
       )}
-      {state.s === "done" && !state.rows.length && <p>{t("mine.empty")}</p>}
-      {rows.length > 0 && (
-        <ul className="mine-list">
-          {rows.map((r) => (
-            <li key={r.entry.id}>
-              <button type="button" disabled={!r.found} onClick={() => r.found && onOpen(r.found)}>
-                <span className="mine-name">{r.found ? beamName(r.found.data, labels) : t("mine.unreadable")}</span>
-                <span className="mono mine-id">{r.found ? idToHex(r.found.data.id) : r.entry.componentId}</span>
-                <span className="mine-meta">
-                  {r.entry.revision !== null && <span>{t("mine.revision", { n: r.entry.revision })}</span>}
-                  <span className="chip">{t(`mine.kind.${r.kind}`)}</span>
-                  <span className={`chip ${r.latest ? "chip-ok" : ""}`}>{r.latest ? t("mine.latest") : t("mine.continued")}</span>
-                  <span className="muted">{date(r.entry.savedAt)}</span>
-                </span>
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {state.s === "done" && !state.branches.length && <p>{t("mine.empty")}</p>}
+      {state.s === "done" &&
+        state.branches.map((b) => (
+          <BranchCard key={b.yourLatest.entry.id} branch={b}>
+            {(expanded) =>
+              expanded ? (
+                <ol className="mine-list mine-branch">{b.all.map((r) => entryRow(r, null, r === b.yourLatest ? "mine-yours" : undefined))}</ol>
+              ) : (
+                <ol className="mine-list">
+                  {b.earlier.map((r) => entryRow(r, t("mine.earlier")))}
+                  {skipped(b.skippedBefore, "before")}
+                  {entryRow(b.yourLatest, t("mine.yourLatest"), "mine-yours")}
+                  {skipped(b.skippedAfter, "after")}
+                  {b.latest.map((r) => entryRow(r, t("mine.actualLatest")))}
+                </ol>
+              )
+            }
+          </BranchCard>
+        ))}
     </div>
+  );
+}
+
+function BranchCard({ branch, children }: { branch: Branch; children: (expanded: boolean) => React.ReactNode }) {
+  const { t } = useTranslation();
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <section className="mine-group">
+      {children(expanded)}
+      {branch.all.length > 1 && (
+        <button type="button" className="link mine-toggle" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
+          {expanded ? t("mine.hideBranch") : t("mine.showBranch", { count: branch.all.length })}
+        </button>
+      )}
+    </section>
   );
 }

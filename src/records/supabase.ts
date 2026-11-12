@@ -26,6 +26,7 @@ type Row = {
   payload: string;
   history: Entry["history"];
   predecessors: string[];
+  created_by?: string;
   created_at: string;
 };
 
@@ -37,6 +38,7 @@ export const fromRow = (r: Row): Entry => ({
   payload: fromHex(r.payload),
   history: r.history,
   predecessors: r.predecessors,
+  createdBy: r.created_by,
   savedAt: r.created_at,
 });
 
@@ -63,6 +65,22 @@ async function rpc<T>(cfg: SupabaseConfig, fn: string, args: unknown, fetcher: F
   return body as T;
 }
 
+// ids per request, so the address stays short
+const chunks = (ids: string[], size = 100) => Array.from({ length: Math.ceil(ids.length / size) }, (_, i) => ids.slice(i * size, (i + 1) * size));
+
+/** GET /rest/v1/entries with PostgREST filters */
+async function select(cfg: SupabaseConfig, fetcher: Fetch, filters: Record<string, string>): Promise<Entry[]> {
+  const q = new URLSearchParams({ select: "*", ...filters });
+  let res: Response;
+  try {
+    res = await fetcher(`${cfg.url}/rest/v1/entries?${q}`, { method: "GET", headers: { apikey: cfg.key } });
+  } catch {
+    throw new EntryError("network");
+  }
+  if (!res.ok) throw new EntryError(`http_${res.status}`);
+  return ((await res.json()) as Row[]).map(fromRow);
+}
+
 /**
  * Entries in the Supabase `entries` table over plain fetch (no client library in the main bundle).
  * `token` gives the signed-in user's access token for writes.
@@ -79,16 +97,24 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
       const rows = entries.map((e) => ({ schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
       return rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
     },
-    async mine(schema, userId) {
-      const q = new URLSearchParams({ select: "*", created_by: `eq.${userId}`, schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "500" });
-      let res: Response;
-      try {
-        res = await fetcher(`${cfg.url}/rest/v1/entries?${q}`, { method: "GET", headers: { apikey: cfg.key } });
-      } catch {
-        throw new EntryError("network");
+    mine: (schema, userId) => select(cfg, fetcher, { created_by: `eq.${userId}`, schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "500" }),
+    async related(_schema, entries) {
+      // walk the graph both ways from the given entries until nothing new turns up
+      const known = new Map(entries.map((e) => [e.id!, e]));
+      const askedUp = new Set<string>();
+      const askedDown = new Set<string>();
+      for (let round = 0; round < 50 && known.size < 2000; round++) {
+        const up = [...new Set([...known.values()].flatMap((e) => e.predecessors ?? []))].filter((id) => !known.has(id) && !askedUp.has(id));
+        const down = [...known.keys()].filter((id) => !askedDown.has(id));
+        if (!up.length && !down.length) break;
+        up.forEach((id) => askedUp.add(id));
+        down.forEach((id) => askedDown.add(id));
+        const found: Entry[] = [];
+        for (const ids of chunks(up)) found.push(...(await select(cfg, fetcher, { id: `in.(${ids.join(",")})` })));
+        for (const ids of chunks(down)) found.push(...(await select(cfg, fetcher, { predecessors: `ov.{${ids.join(",")}}` })));
+        found.forEach((e) => known.set(e.id!, e));
       }
-      if (!res.ok) throw new EntryError(`http_${res.status}`);
-      return ((await res.json()) as Row[]).map(fromRow);
+      return [...known.values()];
     },
   };
 }

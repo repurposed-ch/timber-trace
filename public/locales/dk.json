@@ -198,9 +198,7 @@
     "signedOut": "Log ind for at se de poster, du har gemt.",
     "loading": "Indlæser…",
     "empty": "Du har ikke gemt nogen poster endnu.",
-    "onlyLatest": "Kun seneste",
     "latest": "Seneste",
-    "continued": "Videreført",
     "revision": "Revision {{n}}",
     "unreadable": "Ulæselig post",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revision",
       "split": "Del",
       "join": "Samlet"
-    }
+    },
+    "earlier": "Tidligere version",
+    "yourLatest": "Din seneste ændring",
+    "actualLatest": "Seneste",
+    "more": "… {{count}} mere",
+    "showBranch": "Vis hele grenen ({{count}})",
+    "hideBranch": "Vis oversigt",
+    "byOther": "Af en anden"
   }
 }

@@ -198,9 +198,7 @@
     "signedOut": "Connectez-vous pour voir les entrées que vous avez enregistrées.",
     "loading": "Chargement…",
     "empty": "Vous n'avez encore enregistré aucune entrée.",
-    "onlyLatest": "Dernières seulement",
     "latest": "Dernière",
-    "continued": "Poursuivie",
     "revision": "Révision {{n}}",
     "unreadable": "Entrée illisible",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Révision",
       "split": "Partie",
       "join": "Assemblage"
-    }
+    },
+    "earlier": "Version antérieure",
+    "yourLatest": "Votre dernière modification",
+    "actualLatest": "Dernière",
+    "more": "… {{count}} de plus",
+    "showBranch": "Afficher toute la branche ({{count}})",
+    "hideBranch": "Afficher l'aperçu",
+    "byOther": "Par quelqu'un d'autre"
   }
 }

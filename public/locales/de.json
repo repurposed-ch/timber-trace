@@ -198,9 +198,7 @@
     "signedOut": "Melden Sie sich an, um Ihre gespeicherten Einträge zu sehen.",
     "loading": "Wird geladen…",
     "empty": "Sie haben noch keine Einträge gespeichert.",
-    "onlyLatest": "Nur neueste",
     "latest": "Neueste",
-    "continued": "Fortgesetzt",
     "revision": "Revision {{n}}",
     "unreadable": "Nicht lesbarer Eintrag",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revision",
       "split": "Teilstück",
       "join": "Zusammengefügt"
-    }
+    },
+    "earlier": "Frühere Version",
+    "yourLatest": "Ihre letzte Bearbeitung",
+    "actualLatest": "Neueste",
+    "more": "… {{count}} weitere",
+    "showBranch": "Ganzen Zweig zeigen ({{count}})",
+    "hideBranch": "Übersicht zeigen",
+    "byOther": "Von jemand anderem"
   }
 }

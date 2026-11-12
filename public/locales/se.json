@@ -198,9 +198,7 @@
     "signedOut": "Logga in för att se posterna du har sparat.",
     "loading": "Laddar…",
     "empty": "Du har inte sparat några poster än.",
-    "onlyLatest": "Bara senaste",
     "latest": "Senaste",
-    "continued": "Fortsatt",
     "revision": "Revision {{n}}",
     "unreadable": "Oläslig post",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revision",
       "split": "Del",
       "join": "Sammanfogad"
-    }
+    },
+    "earlier": "Tidigare version",
+    "yourLatest": "Din senaste ändring",
+    "actualLatest": "Senaste",
+    "more": "… {{count}} till",
+    "showBranch": "Visa hela grenen ({{count}})",
+    "hideBranch": "Visa översikt",
+    "byOther": "Av någon annan"
   }
 }

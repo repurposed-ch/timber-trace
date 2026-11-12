@@ -198,9 +198,7 @@
     "signedOut": "Accedi per vedere le voci che hai salvato.",
     "loading": "Caricamento…",
     "empty": "Non hai ancora salvato nessuna voce.",
-    "onlyLatest": "Solo le ultime",
     "latest": "Ultima",
-    "continued": "Proseguita",
     "revision": "Revisione {{n}}",
     "unreadable": "Voce illeggibile",
     "kind": {
@@ -208,6 +206,13 @@
       "revision": "Revisione",
       "split": "Parte",
       "join": "Unione"
-    }
+    },
+    "earlier": "Versione precedente",
+    "yourLatest": "La tua ultima modifica",
+    "actualLatest": "Ultima",
+    "more": "… altre {{count}}",
+    "showBranch": "Mostra tutto il ramo ({{count}})",
+    "hideBranch": "Mostra panoramica",
+    "byOther": "Da qualcun altro"
   }
 }

@@ -20,6 +20,8 @@ export type Entry = {
   /** the full history, of which the code holds a selection */
   history?: FullEvent[] | null;
   predecessors?: string[];
+  /** the user who saved it */
+  createdBy?: string;
   /** ISO date */
   savedAt?: string;
 };
@@ -31,6 +33,8 @@ export interface RecordSource {
   append?(predecessors: string[], entries: Entry[]): Promise<string[]>;
   /** every entry a user saved in this schema, newest first */
   mine?(schema: LoadedSchema, userId: string): Promise<Entry[]>;
+  /** the given entries plus every entry connected to them (ancestors, descendants, their other branches) */
+  related?(schema: LoadedSchema, entries: Entry[]): Promise<Entry[]>;
 }
 
 /** <slug>/records/<32 hex id>.json: { payload (base45), savedAt?, history? }; 404 means nothing is known */
@@ -70,4 +74,5 @@ export const fallbackSource = (primary: RecordSource, fallback: RecordSource): R
   },
   append: primary.append && ((predecessors, entries) => primary.append!(predecessors, entries)),
   mine: primary.mine && ((schema, userId) => primary.mine!(schema, userId)),
+  related: primary.related && ((schema, entries) => primary.related!(schema, entries)),
 });
