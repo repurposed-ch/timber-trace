@@ -24,6 +24,7 @@ import { RecordView } from "./RecordView";
 import { editTabsFor } from "../schema/sections";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
+import { SplitChoice } from "./SplitChoice";
 import { UpdateBanner } from "./UpdateBanner";
 
 // the database when configured, the static files as fallback; the UI only sees RecordSource
@@ -173,6 +174,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     >
       {tab === "record" && newer && loaded && (
         <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
+      )}
+      {tab === "record" && lineage.status === "split" && (
+        <SplitChoice parts={lineage.parts} labels={labels} onChoose={(p) => load({ payload: p.payload, data: p.data })} />
       )}
       {tab === "scan" && (
         <div className="card">

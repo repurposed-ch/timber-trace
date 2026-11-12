@@ -332,3 +332,7 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .schema-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
 .schema-actions a { color: var(--accent); font-weight: 600; text-decoration: none; }
 .schema-actions a:hover { text-decoration: underline; }
+.split-parts { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.split-parts button { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; width: 100%; text-align: left; }
+.split-name { font-weight: 600; }
+.split-id { font-size: .8rem; }

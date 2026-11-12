@@ -160,5 +160,9 @@
     "verified": "Geprüft: {{who}}",
     "supplierUnknown": "Lieferant unbekannt",
     "notVerified": "Nicht geprüft"
+  },
+  "split": {
+    "title": "Dieses Bauteil wurde in {{count}} Teile aufgeteilt",
+    "ask": "Mit welchem Teil möchten Sie weitermachen?"
   }
 }

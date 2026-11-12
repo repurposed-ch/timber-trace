@@ -160,5 +160,9 @@
     "verified": "Verified: {{who}}",
     "supplierUnknown": "Supplier unknown",
     "notVerified": "Not verified"
+  },
+  "split": {
+    "title": "This component was split into {{count}} parts",
+    "ask": "Which one do you want to continue with?"
   }
 }

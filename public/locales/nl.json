@@ -160,5 +160,9 @@
     "verified": "Geverifieerd: {{who}}",
     "supplierUnknown": "Leverancier onbekend",
     "notVerified": "Niet geverifieerd"
+  },
+  "split": {
+    "title": "Dit onderdeel is gesplitst in {{count}} delen",
+    "ask": "Met welk deel wil je verder?"
   }
 }

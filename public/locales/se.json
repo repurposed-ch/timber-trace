@@ -160,5 +160,9 @@
     "verified": "Verifierad: {{who}}",
     "supplierUnknown": "Leverantör okänd",
     "notVerified": "Inte verifierad"
+  },
+  "split": {
+    "title": "Den här komponenten har delats i {{count}} delar",
+    "ask": "Vilken vill du fortsätta med?"
   }
 }

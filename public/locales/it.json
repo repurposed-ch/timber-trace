@@ -160,5 +160,9 @@
     "verified": "Verificato: {{who}}",
     "supplierUnknown": "Fornitore sconosciuto",
     "notVerified": "Non verificato"
+  },
+  "split": {
+    "title": "Questo componente è stato diviso in {{count}} parti",
+    "ask": "Con quale vuoi continuare?"
   }
 }
