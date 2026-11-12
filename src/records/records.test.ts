@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { BASE45, decodeRecord, encodeRecord, idToHex } from "../schema/codec";
+import { BYTES, decodeRecord, encodeRecord, fromBytes, idToHex, toBytes } from "../schema/codec";
 import { fullRecord, loadHelloWorld, readPublic } from "../schema/testing";
 import { staticRecordSource } from "./source";
 
@@ -31,16 +31,18 @@ describe("changed facts", () => {
 describe("static record source", () => {
   const source = staticRecordSource(readPublic);
 
-  test("finds the sample newer record for the full test record", async () => {
-    const latest = await source.getLatest("hello-world", idToHex(fullRecord.id));
-    expect(latest).not.toBeNull();
-    const data = decodeRecord(loaded, latest!.payload, BASE45).data;
+  test("finds the sample newer record for the full test record, as bytes", async () => {
+    const [latest, ...rest] = await source.latest(loaded, idToHex(fullRecord.id), null);
+    expect(rest).toEqual([]);
+    expect(latest.id).toBeUndefined();
+    const data = decodeRecord(loaded, fromBytes(latest.payload), BYTES).data;
     expect(data.id).toEqual(fullRecord.id);
-    expect(latest!.payload).not.toBe(encodeRecord(schema, fullRecord));
+    expect(latest.componentId).toBe(idToHex(fullRecord.id));
+    expect(latest.payload).not.toEqual(toBytes(encodeRecord(schema, fullRecord, BYTES)));
   });
 
-  test("returns null for an unknown id", async () => {
-    expect(await source.getLatest("hello-world", "00000000-0000-0000-0000-00000000beef")).toBeNull();
+  test("knows nothing about an unknown id", async () => {
+    expect(await source.latest(loaded, "00000000-0000-0000-0000-00000000beef", null)).toEqual([]);
   });
 });
 
@@ -48,10 +50,10 @@ describe("online full history", () => {
   test("the record source serves the full history of the v2 sample", async () => {
     const { fullRecordV2 } = await import("../schema/testing");
     const { historyForQr } = await import("./history");
-    const latest = await staticRecordSource(readPublic).getLatest("hello-world", idToHex(fullRecordV2.id));
+    const [latest] = await staticRecordSource(readPublic).latest(loaded, idToHex(fullRecordV2.id), 3);
     expect(latest?.history?.length).toBe(9);
     // the code the source holds is exactly the tier selection of that history
-    const data = decodeRecord(loaded, latest!.payload, BASE45).data;
+    const data = decodeRecord(loaded, fromBytes(latest!.payload), BYTES).data;
     expect(data.history).toEqual(historyForQr(latest!.history!, loaded.meta.historyTiers!));
     expect(data.history.omitted).toBe(1);
   });

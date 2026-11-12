@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { changedFacts } from "../records/changes";
 import { intlLocale } from "../i18n";
 import { provenance } from "../records/revision";
-import type { Newer } from "../records/useLatest";
+import type { Found as Newer } from "../records/useLatest";
 import type { Labels } from "../state/useSchema";
 
 type Props = { current: any; currentSchema: DenseSchema; newer: Newer; labels: Labels; onShow: () => void };

@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { staticRecordSource } from "../records/source";
+import { fallbackSource, staticRecordSource } from "../records/source";
+import { supabaseConfig, supabaseRecordSource } from "../records/supabase";
 import { sortHistory } from "../records/history";
 import { provenance } from "../records/revision";
 import { useLatest } from "../records/useLatest";
-import { useOnlineHistory } from "../records/useOnlineHistory";
 import { URL_SAFE, encodeRecord, randomId } from "../schema/codec";
 import { decodeInput } from "../schema/links";
 import { currentMode, currentPayload, currentTab, pushTab, replaceMode, schemaUrl, type Mode, type Tab } from "../state/route";
@@ -26,8 +26,9 @@ import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { UpdateBanner } from "./UpdateBanner";
 
-// swap for a database-backed source later; the UI only sees RecordSource
-const records = staticRecordSource(read);
+// the database when configured, the static files as fallback; the UI only sees RecordSource
+const db = supabaseConfig();
+const records = db ? fallbackSource(supabaseRecordSource(db), staticRecordSource(read)) : staticRecordSource(read);
 type Loaded = { payload: string; data: any } | null;
 
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
@@ -50,7 +51,8 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const [record, setRecord] = useState(() => loaded?.data ?? newRecord());
   // a record is edited and exported in the schema version it was made with
   const dense = schema.versions.get(record.version) ?? latest;
-  const newer = useLatest(records, slug, schema, loaded);
+  const lineage = useLatest(records, schema, loaded);
+  const newer = lineage.status === "newer" ? lineage.newer : null;
   const tiers = schema.meta.historyTiers;
   const historyField = dense.fields.find((f) => f.name === "history");
   // the full history; record.history is the selection of it that fits the code
@@ -59,11 +61,15 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setHistState(next);
     if (tiers) setRecord((r: any) => ({ ...r, history: historyFromState(next, tiers) }));
   };
-  const online = useOnlineHistory(records, slug, loaded?.data.id);
   useEffect(() => {
-    // a scanned code only holds a selection; the record source may know the full history
+    if (lineage.status !== "latest" || !loaded) return;
+    const { self } = lineage;
+    // the saved entry may hold more than the code: show it, unless the record was already edited
+    if (self.payload !== loaded.payload && record === loaded.data) return load({ payload: self.payload, data: self.data });
+    // a scanned code only holds a selection; the entry may know the full history
+    const online = self.entry.history;
     if (online?.length && hist.source === "code") setHistState({ status: "known", full: sortHistory(online), unavailable: 0, source: "online" });
-  }, [online]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [lineage]); // eslint-disable-line react-hooks/exhaustive-deps
   // an opened or scanned record is read first; a new one is filled in
   const [mode, setModeState] = useState<Mode>(() => currentMode() ?? (loaded ? "view" : "edit"));
   const setMode = (m: Mode) => {
