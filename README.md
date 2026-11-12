@@ -79,7 +79,7 @@ Every saved state of a component is an **entry** in one table, `public.entries`.
 | join | `{A, B, …}` on one entry |
 
 - **Reading** is open to everyone: `latest_for(component_id, revision)` finds the scanned code's entry and walks on to every leaf. The app shows that entry, or the "newer version" banner, or after a split asks which part to continue with.
-- **My entries** (`?tab=mine`, in the header when signed in) shows one card per branch you saved in: earlier version … your latest edit … the actual latest (one row when your edit is the latest; no earlier row for a first version). "Show whole branch" lists every entry of it.
+- **My entries** (`?tab=mine`, in the header when signed in) shows one card per branch you saved in, left to right: earlier version → your latest edit → the actual latest (scrolls sideways on narrow screens) (one row when your edit is the latest; no earlier row for a first version). "Show whole branch" lists every entry of it.
 - **Writing** needs a sign-in (email link) and only goes through `append_entries(predecessors, entries)`. It only extends leaves you created, with the shapes above. Nobody can insert, update or delete rows directly.
 - **Bytes**: densing writes them directly through a 256-character alphabet (`BYTES` in `src/schema/codec.ts`); they travel as `\x…` hex over PostgREST.
 - **Changes** go in a new file in `supabase/migrations/`; never edit an applied one. Apply with `supabase link --project-ref rvlnynwkxjguaakhzalj` and `supabase db push`. `supabase/tests/entries.sql` checks the graph and access rules; it always rolls back.
