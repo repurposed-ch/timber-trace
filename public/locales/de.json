@@ -198,14 +198,7 @@
     "signedOut": "Melden Sie sich an, um Ihre gespeicherten Einträge zu sehen.",
     "loading": "Wird geladen…",
     "empty": "Sie haben noch keine Einträge gespeichert.",
-    "latest": "Neueste",
     "unreadable": "Nicht lesbarer Eintrag",
-    "kind": {
-      "new": "Neu",
-      "revision": "Revision",
-      "split": "Teilstück",
-      "join": "Zusammengefügt"
-    },
     "detail": "Detailgrad",
     "details": {
       "latest": "Neueste",
@@ -215,11 +208,10 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Bauteil",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Art",
-      "saved": "Gespeichert",
-      "by": "Von"
+      "by": "Von",
+      "status": "Status",
+      "updated": "Aktualisiert"
     },
     "you": "Sie",
     "status": {
@@ -242,6 +234,10 @@
     "gap_one": "+{{count}} Eintrag",
     "gap_other": "+{{count}} Einträge",
     "entries_one": "{{count}} Eintrag",
-    "entries_other": "{{count}} Einträge"
+    "entries_other": "{{count}} Einträge",
+    "groups": {
+      "continued": "Von anderen fortgesetzt",
+      "upToDate": "Aktuell"
+    }
   }
 }

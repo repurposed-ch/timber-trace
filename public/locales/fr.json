@@ -198,14 +198,7 @@
     "signedOut": "Connectez-vous pour voir les entrées que vous avez enregistrées.",
     "loading": "Chargement…",
     "empty": "Vous n'avez encore enregistré aucune entrée.",
-    "latest": "Dernière",
     "unreadable": "Entrée illisible",
-    "kind": {
-      "new": "Nouvelle",
-      "revision": "Révision",
-      "split": "Partie",
-      "join": "Assemblage"
-    },
     "detail": "Niveau de détail",
     "details": {
       "latest": "Dernières",
@@ -215,11 +208,10 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Composant",
-      "id": "ID",
       "rev": "Rév.",
-      "kind": "Type",
-      "saved": "Enregistré",
-      "by": "Par"
+      "by": "Par",
+      "status": "Statut",
+      "updated": "Mis à jour"
     },
     "you": "Vous",
     "status": {
@@ -242,6 +234,10 @@
     "gap_one": "+{{count}} entrée",
     "gap_other": "+{{count}} entrées",
     "entries_one": "{{count}} entrée",
-    "entries_other": "{{count}} entrées"
+    "entries_other": "{{count}} entrées",
+    "groups": {
+      "continued": "Poursuivi par d'autres",
+      "upToDate": "À jour"
+    }
   }
 }

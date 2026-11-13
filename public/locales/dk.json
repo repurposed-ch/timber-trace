@@ -198,14 +198,7 @@
     "signedOut": "Log ind for at se de poster, du har gemt.",
     "loading": "Indlæser…",
     "empty": "Du har ikke gemt nogen poster endnu.",
-    "latest": "Seneste",
     "unreadable": "Ulæselig post",
-    "kind": {
-      "new": "Ny",
-      "revision": "Revision",
-      "split": "Del",
-      "join": "Samlet"
-    },
     "detail": "Detaljer",
     "details": {
       "latest": "Seneste",
@@ -215,11 +208,10 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Komponent",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Type",
-      "saved": "Gemt",
-      "by": "Af"
+      "by": "Af",
+      "status": "Status",
+      "updated": "Opdateret"
     },
     "you": "Dig",
     "status": {
@@ -242,6 +234,10 @@
     "gap_one": "+{{count}} post",
     "gap_other": "+{{count}} poster",
     "entries_one": "{{count}} post",
-    "entries_other": "{{count}} poster"
+    "entries_other": "{{count}} poster",
+    "groups": {
+      "continued": "Videreført af andre",
+      "upToDate": "Opdateret"
+    }
   }
 }

@@ -198,14 +198,7 @@
     "signedOut": "Sign in to see the entries you saved.",
     "loading": "Loading…",
     "empty": "You haven't saved any entries yet.",
-    "latest": "Latest",
     "unreadable": "Unreadable entry",
-    "kind": {
-      "new": "New",
-      "revision": "Revision",
-      "split": "Split part",
-      "join": "Join"
-    },
     "detail": "Detail",
     "details": {
       "latest": "Latest",
@@ -215,11 +208,10 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Component",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Kind",
-      "saved": "Saved",
-      "by": "By"
+      "by": "By",
+      "status": "Status",
+      "updated": "Updated"
     },
     "you": "You",
     "status": {
@@ -242,6 +234,10 @@
     "gap_one": "+{{count}} entry",
     "gap_other": "+{{count}} entries",
     "entries_one": "{{count}} entry",
-    "entries_other": "{{count}} entries"
+    "entries_other": "{{count}} entries",
+    "groups": {
+      "continued": "Continued by others",
+      "upToDate": "Up to date"
+    }
   }
 }

@@ -198,14 +198,7 @@
     "signedOut": "Accedi per vedere le voci che hai salvato.",
     "loading": "Caricamento…",
     "empty": "Non hai ancora salvato nessuna voce.",
-    "latest": "Ultima",
     "unreadable": "Voce illeggibile",
-    "kind": {
-      "new": "Nuova",
-      "revision": "Revisione",
-      "split": "Parte",
-      "join": "Unione"
-    },
     "detail": "Dettaglio",
     "details": {
       "latest": "Ultime",
@@ -215,11 +208,10 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Componente",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Tipo",
-      "saved": "Salvato",
-      "by": "Da"
+      "by": "Da",
+      "status": "Stato",
+      "updated": "Aggiornato"
     },
     "you": "Tu",
     "status": {
@@ -242,6 +234,10 @@
     "gap_one": "+{{count}} voce",
     "gap_other": "+{{count}} voci",
     "entries_one": "{{count}} voce",
-    "entries_other": "{{count}} voci"
+    "entries_other": "{{count}} voci",
+    "groups": {
+      "continued": "Proseguito da altri",
+      "upToDate": "Aggiornato"
+    }
   }
 }
