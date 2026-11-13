@@ -109,7 +109,8 @@ describe("graph lanes", () => {
   test("a split fans out and a join merges back", () => {
     clock = 0;
     const l = lanes([e("A"), e("B", ["A"]), e("P", ["B"]), e("Q", ["B"]), e("J", ["P", "Q"])]);
-    expect(l.cols).toEqual([0, 0, 0, 1, 0]);
+    // P fans out to the side, Q continues the line, J merges back into the left column
+    expect(l.cols).toEqual([0, 0, 1, 0, 0]);
     expect(l.edges).toEqual([[0, 1], [1, 2], [1, 3], [2, 4], [3, 4]]);
     expect(l.width).toBe(2);
   });

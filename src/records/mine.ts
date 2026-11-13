@@ -114,8 +114,8 @@ export function keyRows(b: Branch): KeyRow[] {
 }
 
 /**
- * Columns for drawing a branch as a graph, rows oldest first. A row continues in the column of its
- * first predecessor that still has one; further split parts open new columns; a column frees up
+ * Columns for drawing a branch as a graph, rows oldest first. A row continues in the column of a
+ * predecessor it is the last successor of; earlier split parts open new columns; a column frees up
  * once all successors of its entry are placed, or after a leaf. `edges` are [from row, to row].
  */
 export function lanes(entries: Entry[]): { cols: number[]; edges: [number, number][]; width: number } {
@@ -127,14 +127,10 @@ export function lanes(entries: Entry[]): { cols: number[]; edges: [number, numbe
   const edges: [number, number][] = [];
   entries.forEach((e, i) => {
     const preds = (e.predecessors ?? []).filter((p) => index.has(p));
-    let c = -1;
-    for (const p of preds) {
-      const pc = open.indexOf(p);
-      if (pc >= 0) {
-        c = pc;
-        break;
-      }
-    }
+    // continue in a predecessor's column only as its last successor, so earlier split parts fan
+    // out to the side and the line from the parent stays clear; prefer the leftmost such column
+    const inherit = preds.filter((p) => remaining.get(p) === 1).map((p) => open.indexOf(p)).filter((c) => c >= 0);
+    let c = inherit.length ? Math.min(...inherit) : -1;
     if (c < 0) c = open.indexOf(null);
     if (c < 0) c = open.length;
     open[c] = e.id!;
