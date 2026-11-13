@@ -2,7 +2,7 @@ import { describe, expect, test } from "bun:test";
 import { BYTES, encodeRecord, idToHex, randomId, toBytes } from "../schema/codec";
 import { fullRecordV2, loadHelloWorld } from "../schema/testing";
 import { fallbackSource, type Entry, type RecordSource } from "./source";
-import { EntryError, type Fetch, fromHex, supabaseConfig, supabaseRecordSource, toHex } from "./supabase";
+import { EntryError, type Fetch, fromHex, supabaseAdmin, supabaseConfig, supabaseRecordSource, toHex } from "./supabase";
 import { lineageOf } from "./useLatest";
 import { nextEntry } from "./save";
 
@@ -166,5 +166,32 @@ describe("what Save writes", () => {
     const f = { entry: entry(scanned), payload: "", data: scanned, schema: v2 };
     expect(nextEntry("hello-world", v2, scanned, { status: "newer", newer: f }, null, day)).toBeNull();
     expect(nextEntry("hello-world", v2, scanned, { status: "split", parts: [f, f] }, null, day)).toBeNull();
+  });
+});
+
+describe("admin calls", () => {
+  const calls: { url: string; init: RequestInit }[] = [];
+  const fake = (async (url: string, init: RequestInit) => {
+    calls.push({ url, init });
+    if (url.includes("admin_users")) return new Response(JSON.stringify([{ id: "u1", email: "a@example.invalid" }]));
+    if (url.includes("hidden_entries")) return new Response(JSON.stringify([{ entry_id: "e2", root: "e2", reason: "spam", hidden_at: "2026-11-13T10:00:00Z" }]));
+    if (url.includes("admin_hide") || url.includes("admin_unhide")) return new Response("2");
+    return new Response(JSON.stringify([]));
+  }) as Fetch;
+  test("send the admin's token and map the answers", async () => {
+    const admin = supabaseAdmin(cfg, fake, async () => "jwt");
+    expect([...(await admin.users())]).toEqual([["u1", "a@example.invalid"]]);
+    expect(await admin.hidden()).toEqual([{ entryId: "e2", root: "e2", reason: "spam", hiddenAt: "2026-11-13T10:00:00Z" }]);
+    expect(await admin.hide("e2", "spam")).toBe(2);
+    expect(JSON.parse(calls.find((c) => c.url.endsWith("/rpc/admin_hide"))!.init.body as string)).toEqual({ entry: "e2", reason: "spam" });
+    expect(await admin.unhide("e2")).toBe(2);
+    await admin.all(loaded);
+    const all = calls.find((c) => c.url.includes("/rest/v1/entries?"))!;
+    expect(all.url).toContain("schema=eq.hello-world");
+    expect(calls.every((c) => (c.init.headers as any).Authorization === "Bearer jwt")).toBe(true);
+  });
+  test("need a sign-in", async () => {
+    const out = await supabaseAdmin(cfg, fake, async () => null).users().then(() => null, (e: EntryError) => e.code);
+    expect(out).toBe("signed_out");
   });
 });
