@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { entryChanges } from "../records/changes";
-import { branchStatus, keyRows, lanes, type Branch, type MineRow } from "../records/mine";
+import { branchStatus, keyRows, lanes, overallKeyRows, overallStatus, type Branch, type MineRow } from "../records/mine";
 import { relativeDate } from "../records/relative";
 import type { Found } from "../records/useLatest";
 import { beamName } from "../schema/beam";
@@ -16,6 +16,14 @@ export type BranchContext = {
   locale: string;
   found: (r: MineRow) => Found | null;
   onOpen: (f: Found) => void;
+  /** "mine": relative to your latest edit (My entries); "all": the whole branch (admins) */
+  perspective?: "mine" | "all";
+  /** user id → email, for admins */
+  emails?: Map<string, string>;
+  /** entry ids an admin hid; shown greyed */
+  hidden?: Set<string>;
+  /** extra controls after an entry, e.g. hide / unhide */
+  actions?: (row: MineRow) => ReactNode;
 };
 
 const hue = (tag: string) => [...tag].reduce((h, c) => (h * 31 + c.charCodeAt(0)) % 360, 7);
@@ -26,16 +34,28 @@ export function Avatar({ by, ctx, small }: { by?: string; ctx: BranchContext; sm
   if (!by) return null;
   const you = by === ctx.userId;
   const tag = by.replace(/-/g, "").slice(0, 4);
+  const email = ctx.emails?.get(by);
+  const letters = email ? email.slice(0, 2) : tag.slice(0, 2);
   return (
-    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 28% 46%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : `#${tag} · ${by}`}>
-      {you ? t("mine.you").slice(0, 1).toUpperCase() : tag.slice(0, 2).toUpperCase()}
+    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 28% 46%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : (email ?? `#${tag} · ${by}`)}>
+      {you ? t("mine.you").slice(0, 1).toUpperCase() : letters.toUpperCase()}
     </span>
   );
 }
 
-/** one sentence on what happened since your latest edit */
-export function StatusPill({ branch, short }: { branch: Branch; short?: boolean }) {
+/** one sentence on what happened since your latest edit; for admins, the shape of the whole branch */
+export function StatusPill({ branch, short, ctx }: { branch: Branch; short?: boolean; ctx?: BranchContext }) {
   const { t } = useTranslation();
+  if (ctx?.perspective === "all") {
+    const shape = overallStatus(branch);
+    const hidden = ctx.hidden ? branch.all.filter((r) => ctx.hidden!.has(r.entry.id!)).length : 0;
+    return (
+      <span className="pills">
+        {hidden > 0 && <span className="status st-hidden">{t("admin.hiddenCount", { count: hidden })}</span>}
+        <span className={`status ${shape === "linear" ? "st-ok" : "st-split"}`}>{t(`admin.shape.${shape}`)}</span>
+      </span>
+    );
+  }
   const status = branchStatus(branch);
   const cls = status === "yours" ? "st-ok" : status === "continued" ? "st-cont" : "st-split";
   const text = status === "continued" ? t("mine.status.continued", { count: branch.after.length }) : status === "split" ? t("mine.status.split", { count: branch.latest.length }) : t(`mine.status.${status}`);
@@ -90,6 +110,8 @@ function EntryLine({ row, role, branch, ctx, max }: { row: MineRow; role: Role; 
         {row.kind === "new" && role !== "started" && role !== "yoursNow" && <span className="muted">{t("mine.firstRecord")}</span>}
         <Changes row={row} branch={branch} ctx={ctx} max={max} />
       </button>
+      {ctx.hidden?.has(row.entry.id!) && <span className="status st-hidden">{t("admin.hidden")}</span>}
+      {ctx.actions?.(row)}
       <Avatar by={row.entry.createdBy} ctx={ctx} small />
     </>
   );
@@ -102,11 +124,13 @@ export function BranchBody({ branch, ctx, detail }: { branch: Branch; ctx: Branc
   let rows: GraphRow[];
   let edges: [number, number][];
   let width = 1;
+  const all = ctx.perspective === "all";
+  const hiddenCls = (r: MineRow) => (ctx.hidden?.has(r.entry.id!) ? "g-hidden" : undefined);
   if (detail === "key") {
-    rows = keyRows(branch).map((k, i) =>
+    rows = (all ? overallKeyRows(branch) : keyRows(branch)).map((k, i) =>
       k.type === "gap"
         ? { key: `gap-${i}`, col: 0, dot: null, content: t("mine.gap", { count: k.count }) }
-        : { key: k.row.entry.id!, col: 0, dot: mine(k.row), now: k.role === "now" || k.role === "yoursNow", className: k.role === "yours" || k.role === "yoursNow" ? "g-yours" : undefined, content: <EntryLine row={k.row} role={k.role} branch={branch} ctx={ctx} max={1} /> },
+        : { key: k.row.entry.id!, col: 0, dot: mine(k.row), now: k.role === "now" || k.role === "yoursNow", className: [k.role === "yours" || k.role === "yoursNow" ? "g-yours" : "", hiddenCls(k.row) ?? ""].join(" ").trim() || undefined, content: <EntryLine row={k.row} role={k.role} branch={branch} ctx={ctx} max={1} /> },
     );
     edges = rows.slice(1).map((_, i) => [i, i + 1]);
   } else {
@@ -114,8 +138,9 @@ export function BranchBody({ branch, ctx, detail }: { branch: Branch; ctx: Branc
     width = l.width;
     edges = l.edges;
     rows = branch.all.map((r, i) => {
-      const role: Role = r === branch.yourLatest ? (r.latest ? "yoursNow" : "yours") : r.latest ? "now" : r.kind === "split" || r.kind === "join" ? r.kind : i === 0 ? "started" : null;
-      return { key: r.entry.id!, col: l.cols[i], dot: mine(r), now: r.latest, className: r === branch.yourLatest ? "g-yours" : undefined, content: <EntryLine row={r} role={role} branch={branch} ctx={ctx} max={2} /> };
+      const yours = !all && r === branch.yourLatest;
+      const role: Role = yours ? (r.latest ? "yoursNow" : "yours") : r.latest ? "now" : r.kind === "split" || r.kind === "join" ? r.kind : i === 0 ? "started" : null;
+      return { key: r.entry.id!, col: l.cols[i], dot: mine(r), now: r.latest, className: [yours ? "g-yours" : "", hiddenCls(r) ?? ""].join(" ").trim() || undefined, content: <EntryLine row={r} role={role} branch={branch} ctx={ctx} max={2} /> };
     });
   }
   return <BranchGraph rows={rows} edges={edges} width={width} />;
@@ -138,7 +163,7 @@ export function BranchCard({ branch, ctx, detail, extra }: { branch: Branch; ctx
             <span>{t("mine.entries", { count: branch.all.length })}</span>
           </div>
         </div>
-        <StatusPill branch={branch} />
+        <StatusPill branch={branch} ctx={ctx} />
       </div>
       <BranchBody branch={branch} ctx={ctx} detail={detail} />
       {extra}

@@ -46,7 +46,8 @@
     "more": "Meer",
     "menu": "Menu",
     "newRecord": "Nieuw record",
-    "mine": "Mijn invoer"
+    "mine": "Mijn invoer",
+    "admin": "Alle invoer"
   },
   "form": {
     "title": "Componentrecord",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Het revisienummer moet hoger zijn dan het opgeslagen nummer.",
       "duplicate": "Deze code (ID en revisie) is al opgeslagen.",
       "network": "Geen verbinding met de database. Probeer het opnieuw.",
-      "other": "Opslaan mislukt ({{code}})."
+      "other": "Opslaan mislukt ({{code}}).",
+      "not_admin": "Alleen beheerders kunnen dit.",
+      "hidden": "Deze invoer is verborgen en kan niet worden voortgezet."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Gesplitst / samengevoegd"
     },
     "noneMatch": "Niets past bij dit filter."
+  },
+  "admin": {
+    "title": "Alle invoer",
+    "only": "Alleen beheerders kunnen deze pagina zien.",
+    "intro": "Alle invoer van dit schema, van alle gebruikers. Verborgen invoer is alleen hier zichtbaar.",
+    "empty": "Nog geen invoer.",
+    "hidden": "Verborgen",
+    "hiddenCount_one": "{{count}} verborgen",
+    "hiddenCount_other": "{{count}} verborgen",
+    "shape": {
+      "linear": "Enkele lijn",
+      "split": "Gesplitst",
+      "joined": "Samengevoegd"
+    },
+    "user": "Gebruiker",
+    "allUsers_one": "Iedereen ({{count}})",
+    "allUsers_other": "Iedereen ({{count}})",
+    "showHidden": "Verborgen tonen ({{count}})",
+    "hide": "Verbergen…",
+    "unhide": "Weer tonen",
+    "reason": "Deze invoer en alles wat erop volgt verbergen? Reden (optioneel):",
+    "hiddenDone_one": "{{count}} invoer verborgen.",
+    "hiddenDone_other": "{{count}} invoeren verborgen.",
+    "unhidden_one": "{{count}} invoer weer zichtbaar.",
+    "unhidden_other": "{{count}} invoeren weer zichtbaar."
   }
 }

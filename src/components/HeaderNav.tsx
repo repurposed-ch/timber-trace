@@ -77,6 +77,11 @@ export function HeaderNav() {
         </a>
       )}
       {/* signed in, the account spot leads to your entries (sign out is there); otherwise it signs in */}
+      {session.status === "in" && session.admin && target && (
+        <a className="hn-btn hn-wide hn-admin" href={`${schemaUrl(target)}?tab=admin`} onClick={inPlace("admin", target)}>
+          {t("nav.admin")}
+        </a>
+      )}
       {session.status === "in" && target ? (
         <a className="hn-btn hn-wide hn-account" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)} title={t("auth.signedInAs", { email: session.email })}>
           {t("nav.mine")}
@@ -130,6 +135,11 @@ export function HeaderNav() {
           {session.status === "in" && target && (
             <a role="menuitem" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)}>
               {t("nav.mine")}
+            </a>
+          )}
+          {session.status === "in" && session.admin && target && (
+            <a role="menuitem" href={`${schemaUrl(target)}?tab=admin`} onClick={inPlace("admin", target)}>
+              {t("nav.admin")}
             </a>
           )}
           {session.status !== "off" && (

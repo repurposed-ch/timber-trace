@@ -46,7 +46,8 @@
     "more": "Mehr",
     "menu": "Menü",
     "newRecord": "Neuer Datensatz",
-    "mine": "Meine Einträge"
+    "mine": "Meine Einträge",
+    "admin": "Alle Einträge"
   },
   "form": {
     "title": "Bauteildatensatz",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Die Revisionsnummer muss höher sein als die gespeicherte.",
       "duplicate": "Dieser Code (ID und Revision) ist bereits gespeichert.",
       "network": "Keine Verbindung zur Datenbank. Bitte erneut versuchen.",
-      "other": "Speichern fehlgeschlagen ({{code}})."
+      "other": "Speichern fehlgeschlagen ({{code}}).",
+      "not_admin": "Nur Admins können das.",
+      "hidden": "Dieser Eintrag ist ausgeblendet und kann nicht fortgesetzt werden."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Aufgeteilt / zusammengefügt"
     },
     "noneMatch": "Nichts passt zu diesem Filter."
+  },
+  "admin": {
+    "title": "Alle Einträge",
+    "only": "Nur Admins können diese Seite sehen.",
+    "intro": "Alle Einträge dieses Schemas, von allen Nutzern. Ausgeblendete Einträge sind nur hier sichtbar.",
+    "empty": "Noch keine Einträge.",
+    "hidden": "Ausgeblendet",
+    "hiddenCount_one": "{{count}} ausgeblendet",
+    "hiddenCount_other": "{{count}} ausgeblendet",
+    "shape": {
+      "linear": "Einzelne Linie",
+      "split": "Aufgeteilt",
+      "joined": "Zusammengefügt"
+    },
+    "user": "Nutzer",
+    "allUsers_one": "Alle Nutzer ({{count}})",
+    "allUsers_other": "Alle Nutzer ({{count}})",
+    "showHidden": "Ausgeblendete zeigen ({{count}})",
+    "hide": "Ausblenden…",
+    "unhide": "Einblenden",
+    "reason": "Diesen Eintrag und alles, was ihn fortsetzt, ausblenden? Grund (optional):",
+    "hiddenDone_one": "{{count}} Eintrag ausgeblendet.",
+    "hiddenDone_other": "{{count}} Einträge ausgeblendet.",
+    "unhidden_one": "{{count}} Eintrag wieder sichtbar.",
+    "unhidden_other": "{{count}} Einträge wieder sichtbar."
   }
 }

@@ -46,7 +46,8 @@
     "more": "Mere",
     "menu": "Menu",
     "newRecord": "Ny post",
-    "mine": "Mine poster"
+    "mine": "Mine poster",
+    "admin": "Alle poster"
   },
   "form": {
     "title": "Komponentpost",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Revisionsnummeret skal være højere end det gemte.",
       "duplicate": "Denne kode (ID og revision) er allerede gemt.",
       "network": "Ingen forbindelse til databasen. Prøv igen.",
-      "other": "Kunne ikke gemme ({{code}})."
+      "other": "Kunne ikke gemme ({{code}}).",
+      "not_admin": "Kun administratorer kan gøre dette.",
+      "hidden": "Denne post er skjult og kan ikke videreføres."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Delt / samlet"
     },
     "noneMatch": "Intet matcher dette filter."
+  },
+  "admin": {
+    "title": "Alle poster",
+    "only": "Kun administratorer kan se denne side.",
+    "intro": "Alle poster i dette skema fra alle brugere. Skjulte poster kan kun ses her.",
+    "empty": "Ingen poster endnu.",
+    "hidden": "Skjult",
+    "hiddenCount_one": "{{count}} skjult",
+    "hiddenCount_other": "{{count}} skjulte",
+    "shape": {
+      "linear": "Enkelt linje",
+      "split": "Delt",
+      "joined": "Samlet"
+    },
+    "user": "Bruger",
+    "allUsers_one": "Alle ({{count}})",
+    "allUsers_other": "Alle ({{count}})",
+    "showHidden": "Vis skjulte ({{count}})",
+    "hide": "Skjul…",
+    "unhide": "Vis igen",
+    "reason": "Skjul denne post og alt, der fortsætter den? Begrundelse (valgfri):",
+    "hiddenDone_one": "{{count}} post skjult.",
+    "hiddenDone_other": "{{count}} poster skjult.",
+    "unhidden_one": "{{count}} post vises igen.",
+    "unhidden_other": "{{count}} poster vises igen."
   }
 }
