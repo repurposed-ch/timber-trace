@@ -238,6 +238,14 @@
     "groups": {
       "continued": "Von anderen fortgesetzt",
       "upToDate": "Aktuell"
-    }
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alle",
+      "continued": "Von anderen fortgesetzt",
+      "upToDate": "Aktuell",
+      "split": "Aufgeteilt / zusammengefügt"
+    },
+    "noneMatch": "Nichts passt zu diesem Filter."
   }
 }

@@ -32,6 +32,15 @@ const GROUPS = [
   { id: "upToDate", test: (b: Branch) => branchStatus(b) === "yours" },
 ] as const;
 
+/** quick filters over the branches; counts show next to each */
+const FILTERS = [
+  { id: "all", test: () => true },
+  { id: "continued", test: (b: Branch) => branchStatus(b) !== "yours" },
+  { id: "upToDate", test: (b: Branch) => branchStatus(b) === "yours" },
+  { id: "split", test: (b: Branch) => ["split", "joined"].includes(branchStatus(b)) },
+] as const;
+type FilterId = (typeof FILTERS)[number]["id"];
+
 /** what is current in a branch: the newest latest entry, or your edit when nothing continued it */
 const currentOf = (b: Branch) => (b.latest.length ? b.latest[b.latest.length - 1] : b.yourLatest);
 
@@ -42,6 +51,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
   const [state, setState] = useState<State>({ s: "loading" });
   const [detail, setDetailState] = useState<Detail>(storedDetail);
   const [unfolded, setUnfolded] = useState<Set<string>>(new Set());
+  const [filter, setFilter] = useState<FilterId>("all");
   const setDetail = (d: Detail) => {
     setDetailState(d);
     try {
@@ -97,7 +107,8 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     });
 
   const all = state.s === "done" ? state.branches : [];
-  const grouped = GROUPS.map((g) => ({ id: g.id, list: all.filter(g.test) })).filter((g) => g.list.length);
+  const shown = all.filter(FILTERS.find((f) => f.id === filter)!.test);
+  const grouped = GROUPS.map((g) => ({ id: g.id, list: shown.filter(g.test) })).filter((g) => g.list.length);
 
   // latest: one row per branch with its status; clicking a row unfolds its key points
   const table = (
@@ -197,7 +208,21 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
         </p>
       )}
       {state.s === "done" && !all.length && <p>{t("mine.empty")}</p>}
-      {all.length > 0 &&
+      {all.length > 0 && (
+        <div className="mine-filters" role="radiogroup" aria-label={t("mine.filter")}>
+          {FILTERS.map((f) => {
+            const count = all.filter(f.test).length;
+            if (f.id !== "all" && !count) return null;
+            return (
+              <button key={f.id} type="button" role="radio" aria-checked={filter === f.id} className={`fchip${filter === f.id ? " on" : ""}`} onClick={() => setFilter(f.id)}>
+                {t(`mine.filters.${f.id}`)} <span className="fcount">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {all.length > 0 && !shown.length && <p className="muted">{t("mine.noneMatch")}</p>}
+      {shown.length > 0 &&
         (detail === "latest" ? (
           table
         ) : (

@@ -238,6 +238,14 @@
     "groups": {
       "continued": "Poursuivi par d'autres",
       "upToDate": "À jour"
-    }
+    },
+    "filter": "Filtre",
+    "filters": {
+      "all": "Tout",
+      "continued": "Poursuivi par d'autres",
+      "upToDate": "À jour",
+      "split": "Divisé / assemblé"
+    },
+    "noneMatch": "Rien ne correspond à ce filtre."
   }
 }

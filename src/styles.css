@@ -453,3 +453,12 @@ button.link { border: 0; background: none; padding: 0; color: var(--accent); tex
   .bh { flex-wrap: wrap; }
   .diff + .diff { display: none; }
 }
+.mine-filters { display: flex; gap: 6px; flex-wrap: wrap; margin: 4px 0 2px; }
+.fchip { font-size: .78rem; border-radius: 999px; padding: 2px 10px; display: inline-flex; gap: 6px; align-items: center; }
+.fchip .fcount { font: 600 .7rem var(--mono); color: var(--muted); }
+.fchip.on { background: var(--fg); color: #fff; border-color: var(--fg); }
+.fchip.on .fcount { color: #fff; opacity: .75; }
+@media (max-width: 719px) {
+  .mine-filters { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; scrollbar-width: none; }
+  .fchip { flex: none; }
+}

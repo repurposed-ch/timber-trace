@@ -238,6 +238,14 @@
     "groups": {
       "continued": "Videreført af andre",
       "upToDate": "Opdateret"
-    }
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alle",
+      "continued": "Videreført af andre",
+      "upToDate": "Opdateret",
+      "split": "Delt / samlet"
+    },
+    "noneMatch": "Intet matcher dette filter."
   }
 }

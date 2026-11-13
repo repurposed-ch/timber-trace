@@ -238,6 +238,14 @@
     "groups": {
       "continued": "Continued by others",
       "upToDate": "Up to date"
-    }
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "All",
+      "continued": "Continued by others",
+      "upToDate": "Up to date",
+      "split": "Split / joined"
+    },
+    "noneMatch": "Nothing matches this filter."
   }
 }
