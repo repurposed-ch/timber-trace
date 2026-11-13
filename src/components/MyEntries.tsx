@@ -1,19 +1,19 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { signOut } from "../auth/client";
 import { setSignInOpen, useSession } from "../auth/useSession";
 import { intlLocale } from "../i18n-langs";
-import { branches, type Branch, type MineRow } from "../records/mine";
-import type { RecordSource } from "../records/source";
+import { branchStatus, branches, type Branch } from "../records/mine";
+import { relativeDate } from "../records/relative";
+import type { Entry, RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
-import { beamName } from "../schema/beam";
 import type { LoadedSchema } from "../schema/loader";
 import type { Labels } from "../state/useSchema";
-import { Timeline } from "./Timeline";
+import { Avatar, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
 
 type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[] };
 
-/** how much of each branch to show: only what's current, the three-step overview, or everything */
+/** how much of each branch to show: a table of what's current, the key points, or everything */
 export const DETAILS = ["latest", "overview", "full"] as const;
 type Detail = (typeof DETAILS)[number];
 const DETAIL_KEY = "timber-trace.mine-detail";
@@ -26,12 +26,32 @@ function storedDetail(): Detail {
   }
 }
 
+/** branches someone continued come first, then the ones where yours is the latest; newest first in each */
+const GROUPS = [
+  { id: "continued", test: (b: Branch) => branchStatus(b) !== "yours" },
+  { id: "upToDate", test: (b: Branch) => branchStatus(b) === "yours" },
+] as const;
+
+/** quick filters over the branches; counts show next to each */
+const FILTERS = [
+  { id: "all", test: () => true },
+  { id: "continued", test: (b: Branch) => branchStatus(b) !== "yours" },
+  { id: "upToDate", test: (b: Branch) => branchStatus(b) === "yours" },
+  { id: "split", test: (b: Branch) => ["split", "joined"].includes(branchStatus(b)) },
+] as const;
+type FilterId = (typeof FILTERS)[number]["id"];
+
+/** what is current in a branch: the newest latest entry, or your edit when nothing continued it */
+const currentOf = (b: Branch) => (b.latest.length ? b.latest[b.latest.length - 1] : b.yourLatest);
+
 /** the signed-in user's entries, grouped into branches, at the chosen detail level */
 export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSource; schema: LoadedSchema; labels: Labels; onOpen: (f: Found) => void }) {
   const { t, i18n } = useTranslation();
   const session = useSession();
   const [state, setState] = useState<State>({ s: "loading" });
   const [detail, setDetailState] = useState<Detail>(storedDetail);
+  const [unfolded, setUnfolded] = useState<Set<string>>(new Set());
+  const [filter, setFilter] = useState<FilterId>("all");
   const setDetail = (d: Detail) => {
     setDetailState(d);
     try {
@@ -39,6 +59,12 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     } catch {}
   };
   const userId = session.status === "in" ? session.id : null;
+  // decode each entry once; the views ask for the same entries many times
+  const cache = useMemo(() => new Map<string, Found | null>(), [state]);
+  const decoded = (e: Entry) => {
+    if (!cache.has(e.id!)) cache.set(e.id!, decodeEntry(schema, e));
+    return cache.get(e.id!)!;
+  };
 
   useEffect(() => {
     if (!userId || !source.mine) return;
@@ -71,141 +97,91 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     );
 
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
-  const thisYear = new Date().getFullYear();
-  const shortDate = (iso?: string) => {
-    if (!iso) return "";
-    const d = new Date(iso);
-    return d.toLocaleDateString(locale, d.getFullYear() === thisYear ? { day: "numeric", month: "short" } : { day: "numeric", month: "short", year: "2-digit" });
-  };
-  const longDate = (iso?: string) => (iso ? new Date(iso).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" }) : "");
+  const ctx: BranchContext = { userId: session.id, email: session.email, labels, locale, found: (r) => decoded(r.entry), onOpen };
+  const key = (b: Branch) => b.yourLatest.entry.id!;
+  const toggle = (b: Branch) =>
+    setUnfolded((prev) => {
+      const next = new Set(prev);
+      if (!next.delete(key(b))) next.add(key(b));
+      return next;
+    });
 
-  // who saved an entry: you, or a short stable tag of the account (emails aren't public)
-  const who = (r: MineRow) => {
-    const by = r.entry.createdBy;
-    if (!by) return null;
-    const you = by === userId;
-    return (
-      <span className={`chip chip-user${you ? " chip-you" : ""}`} title={you ? session.email : by}>
-        {you ? t("mine.you") : `#${by.replace(/-/g, "").slice(0, 4)}`}
-      </span>
-    );
-  };
-  // revision, how it was made (plain revisions need no chip), latest, who
-  const chips = (r: MineRow, showLatest = false) => (
-    <>
-      {r.entry.revision !== null && <span className="chip">{t("mine.rev", { n: r.entry.revision })}</span>}
-      {r.kind !== "revision" && <span className="chip">{t(`mine.kind.${r.kind}`)}</span>}
-      {showLatest && r.latest && <span className="chip chip-ok">{t("mine.latest")}</span>}
-      {who(r)}
-    </>
-  );
-  // one compact box: name, then the ID (cut short) and a few chips on one line
-  const box = (r: MineRow, opts: { yours?: boolean; showLatest?: boolean } = {}) => {
-    const found = decodeEntry(schema, r.entry);
-    const id = r.entry.componentId;
-    return (
-      <li key={r.entry.id} className={`mine-box${opts.yours ? " mine-yours" : ""}`}>
-        <button type="button" disabled={!found} onClick={() => found && onOpen(found)} title={`${id}\n${longDate(r.entry.savedAt)}`}>
-          <span className="mine-name">{found ? beamName(found.data, labels) : t("mine.unreadable")}</span>
-          <span className="mine-line">
-            <span className="mono mine-id">{id}</span>
-            {chips(r, opts.showLatest)}
-            <span className="mine-date">{shortDate(r.entry.savedAt)}</span>
-          </span>
-        </button>
-      </li>
-    );
-  };
+  const all = state.s === "done" ? state.branches : [];
+  const shown = all.filter(FILTERS.find((f) => f.id === filter)!.test);
+  const grouped = GROUPS.map((g) => ({ id: g.id, list: shown.filter(g.test) })).filter((g) => g.list.length);
 
-  const step = (key: string, role: string, rows: MineRow[], yours = false) => (
-    <li key={key} className="mine-step">
-      <span className="mine-role">{role}</span>
-      <ul className="mine-boxes">{rows.map((r) => box(r, { yours }))}</ul>
-    </li>
+  // latest: one row per branch with its status; clicking a row unfolds its key points
+  const table = (
+    <div className="mine-table-wrap">
+      <table className="mine-table">
+        <thead>
+          <tr>
+            <th className="c-name">{t("mine.col.name")}</th>
+            <th className="c-status">{t("mine.col.status")}</th>
+            <th className="c-num c-rev">{t("mine.col.rev")}</th>
+            <th className="c-by">{t("mine.col.by")}</th>
+            <th className="c-num c-date">{t("mine.col.updated")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {grouped.map((g) => (
+            <Fragment key={g.id}>
+              <tr className="grp">
+                <td colSpan={5}>
+                  {t(`mine.groups.${g.id}`)} · {g.list.length}
+                </td>
+              </tr>
+              {g.list.map((b) => {
+                const cur = currentOf(b);
+                const f = ctx.found(cur);
+                const open = unfolded.has(key(b));
+                const when = cur.entry.savedAt;
+                return (
+                  <Fragment key={key(b)}>
+                    <tr className={open ? "open" : undefined} onClick={() => toggle(b)} aria-expanded={open}>
+                      <td className="c-name">
+                        <span className="row1">
+                          <span className="caret" aria-hidden>
+                            {open ? "▾" : "▸"}
+                          </span>
+                          <button type="button" className="link nm" disabled={!f} onClick={(e) => (e.stopPropagation(), f && onOpen(f))} title={cur.entry.componentId}>
+                            <span>{branchName(b, ctx, t("mine.unreadable"))}</span>
+                          </button>
+                        </span>
+                        <span className="sub">
+                          <span className="mono id-sub">{shortId(cur.entry.componentId)}</span>
+                          <span className="status-inline">
+                            <StatusPill branch={b} />
+                          </span>
+                        </span>
+                      </td>
+                      <td className="c-status">
+                        <StatusPill branch={b} />
+                      </td>
+                      <td className="c-num c-rev rev">{cur.entry.revision !== null ? t("mine.rev", { n: cur.entry.revision }) : "–"}</td>
+                      <td className="c-by">
+                        <Avatar by={cur.entry.createdBy} ctx={ctx} />
+                      </td>
+                      <td className="c-num c-date" title={when ? new Date(when).toLocaleString(locale, { dateStyle: "medium", timeStyle: "short" }) : undefined}>
+                        {when ? relativeDate(when, locale) : ""}
+                      </td>
+                    </tr>
+                    {open && (
+                      <tr className="unfold">
+                        <td colSpan={5}>
+                          <BranchBody branch={b} ctx={ctx} detail="key" />
+                        </td>
+                      </tr>
+                    )}
+                  </Fragment>
+                );
+              })}
+            </Fragment>
+          ))}
+        </tbody>
+      </table>
+    </div>
   );
-  const arrow = (key: string, skipped: number) => (
-    <li key={key} className="mine-arrow" aria-hidden>
-      <span className="mine-arrow-head">→</span>
-      {skipped > 0 && <span>{t("mine.more", { count: skipped })}</span>}
-    </li>
-  );
-  const overview = (b: Branch) => {
-    const out = [];
-    if (b.earlier.length) out.push(step("earlier", t("mine.earlier"), b.earlier), arrow("a1", b.skippedBefore));
-    out.push(step("yours", t("mine.yourLatest"), [b.yourLatest], true));
-    if (b.latest.length) out.push(arrow("a2", b.skippedAfter), step("latest", t("mine.actualLatest"), b.latest));
-    return (
-      <ol key={b.yourLatest.entry.id} className="mine-flow mine-group">
-        {out}
-      </ol>
-    );
-  };
-  // the whole branch as a timeline, styled like a record's history; others' entries get a hollow dot
-  const full = (b: Branch) => (
-    <section key={b.yourLatest.entry.id} className="mine-group mine-history">
-      <Timeline
-        items={b.all.map((r) => {
-          const found = decodeEntry(schema, r.entry);
-          return {
-            key: r.entry.id!,
-            when: <span title={longDate(r.entry.savedAt)}>{shortDate(r.entry.savedAt)}</span>,
-            what: (
-              <button type="button" className="link mine-tl-name" disabled={!found} onClick={() => found && onOpen(found)} title={r.entry.componentId}>
-                {found ? beamName(found.data, labels) : t("mine.unreadable")}
-              </button>
-            ),
-            extra: chips(r, true),
-            faded: r.entry.createdBy !== userId,
-            className: r === b.yourLatest ? "mine-yours" : undefined,
-          };
-        })}
-      />
-    </section>
-  );
-  // latest only: whatever is current in each branch (several after a split)
-  const current = (bs: Branch[]) => {
-    const rows = bs.flatMap((b) => (b.latest.length ? b.latest : [b.yourLatest]).map((r) => ({ r, yours: r === b.yourLatest })));
-    return (
-      <div className="mine-table-wrap">
-        <table className="mine-table">
-          <thead>
-            <tr>
-              <th>{t("mine.col.name")}</th>
-              <th className="c-id">{t("mine.col.id")}</th>
-              <th className="c-num">{t("mine.col.rev")}</th>
-              <th className="c-kind">{t("mine.col.kind")}</th>
-              <th className="c-by">{t("mine.col.by")}</th>
-              <th className="c-num c-date">{t("mine.col.saved")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map(({ r, yours }) => {
-              const found = decodeEntry(schema, r.entry);
-              const open = () => found && onOpen(found);
-              return (
-                <tr key={r.entry.id} className={yours ? "mine-yours" : undefined} onClick={open}>
-                  <td className="c-name">
-                    <button type="button" className="link" disabled={!found} onClick={(e) => (e.stopPropagation(), open())} title={r.entry.componentId}>
-                      {found ? beamName(found.data, labels) : t("mine.unreadable")}
-                    </button>
-                  </td>
-                  <td className="c-id mono">
-                    <span>{r.entry.componentId}</span>
-                  </td>
-                  <td className="c-num">{r.entry.revision ?? "–"}</td>
-                  <td className="c-kind">{t(`mine.kind.${r.kind}`)}</td>
-                  <td className="c-by">{who(r)}</td>
-                  <td className="c-num c-date" title={longDate(r.entry.savedAt)}>
-                    {shortDate(r.entry.savedAt)}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-    );
-  };
 
   return (
     <div className="card mine">
@@ -231,8 +207,31 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
           {t(`save.errors.${state.code}`, { defaultValue: t("save.errors.other", { code: state.code }) })}
         </p>
       )}
-      {state.s === "done" && !state.branches.length && <p>{t("mine.empty")}</p>}
-      {state.s === "done" && state.branches.length > 0 && (detail === "latest" ? current(state.branches) : state.branches.map(detail === "full" ? full : overview))}
+      {state.s === "done" && !all.length && <p>{t("mine.empty")}</p>}
+      {all.length > 0 && (
+        <div className="mine-filters" role="radiogroup" aria-label={t("mine.filter")}>
+          {FILTERS.map((f) => {
+            const count = all.filter(f.test).length;
+            if (f.id !== "all" && !count) return null;
+            return (
+              <button key={f.id} type="button" role="radio" aria-checked={filter === f.id} className={`fchip${filter === f.id ? " on" : ""}`} onClick={() => setFilter(f.id)}>
+                {t(`mine.filters.${f.id}`)} <span className="fcount">{count}</span>
+              </button>
+            );
+          })}
+        </div>
+      )}
+      {all.length > 0 && !shown.length && <p className="muted">{t("mine.noneMatch")}</p>}
+      {shown.length > 0 &&
+        (detail === "latest" ? (
+          table
+        ) : (
+          <div className="bcs">
+            {grouped.flatMap((g) => g.list).map((b) => (
+              <BranchCard key={key(b)} branch={b} ctx={ctx} detail={detail === "full" ? "all" : "key"} />
+            ))}
+          </div>
+        ))}
     </div>
   );
 }

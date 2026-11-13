@@ -198,18 +198,7 @@
     "signedOut": "Melden Sie sich an, um Ihre gespeicherten Einträge zu sehen.",
     "loading": "Wird geladen…",
     "empty": "Sie haben noch keine Einträge gespeichert.",
-    "latest": "Neueste",
     "unreadable": "Nicht lesbarer Eintrag",
-    "kind": {
-      "new": "Neu",
-      "revision": "Revision",
-      "split": "Teilstück",
-      "join": "Zusammengefügt"
-    },
-    "earlier": "Frühere Version",
-    "yourLatest": "Ihre letzte Bearbeitung",
-    "actualLatest": "Neueste",
-    "more": "+{{count}}",
     "detail": "Detailgrad",
     "details": {
       "latest": "Neueste",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Bauteil",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Art",
-      "saved": "Gespeichert",
-      "by": "Von"
+      "by": "Von",
+      "status": "Status",
+      "updated": "Aktualisiert"
     },
-    "you": "Sie"
+    "you": "Sie",
+    "status": {
+      "yours": "Ihre ist die neueste",
+      "continued_one": "{{count}} Eintrag nach Ihrem",
+      "continued_other": "{{count}} Einträge nach Ihrem",
+      "split_one": "Nach Ihnen aufgeteilt",
+      "split_other": "Nach Ihnen in {{count}} aufgeteilt",
+      "joined": "Nach Ihnen zusammengefügt"
+    },
+    "role": {
+      "started": "Begonnen",
+      "yours": "Ihre Bearbeitung",
+      "now": "Jetzt",
+      "yoursNow": "Ihre Bearbeitung = jetzt",
+      "split": "Teilstück",
+      "join": "Zusammengefügt"
+    },
+    "firstRecord": "erster Eintrag",
+    "gap_one": "+{{count}} Eintrag",
+    "gap_other": "+{{count}} Einträge",
+    "entries_one": "{{count}} Eintrag",
+    "entries_other": "{{count}} Einträge",
+    "groups": {
+      "continued": "Von anderen fortgesetzt",
+      "upToDate": "Aktuell"
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alle",
+      "continued": "Von anderen fortgesetzt",
+      "upToDate": "Aktuell",
+      "split": "Aufgeteilt / zusammengefügt"
+    },
+    "noneMatch": "Nichts passt zu diesem Filter."
   }
 }

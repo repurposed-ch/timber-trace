@@ -198,18 +198,7 @@
     "signedOut": "Log ind for at se de poster, du har gemt.",
     "loading": "Indlæser…",
     "empty": "Du har ikke gemt nogen poster endnu.",
-    "latest": "Seneste",
     "unreadable": "Ulæselig post",
-    "kind": {
-      "new": "Ny",
-      "revision": "Revision",
-      "split": "Del",
-      "join": "Samlet"
-    },
-    "earlier": "Tidligere version",
-    "yourLatest": "Din seneste ændring",
-    "actualLatest": "Seneste",
-    "more": "+{{count}}",
     "detail": "Detaljer",
     "details": {
       "latest": "Seneste",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Komponent",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Type",
-      "saved": "Gemt",
-      "by": "Af"
+      "by": "Af",
+      "status": "Status",
+      "updated": "Opdateret"
     },
-    "you": "Dig"
+    "you": "Dig",
+    "status": {
+      "yours": "Din er den seneste",
+      "continued_one": "{{count}} post efter din",
+      "continued_other": "{{count}} poster efter din",
+      "split_one": "Delt efter dig",
+      "split_other": "Delt i {{count}} efter dig",
+      "joined": "Samlet efter dig"
+    },
+    "role": {
+      "started": "Startet",
+      "yours": "Din ændring",
+      "now": "Nu",
+      "yoursNow": "Din ændring = nu",
+      "split": "Del",
+      "join": "Samlet"
+    },
+    "firstRecord": "første post",
+    "gap_one": "+{{count}} post",
+    "gap_other": "+{{count}} poster",
+    "entries_one": "{{count}} post",
+    "entries_other": "{{count}} poster",
+    "groups": {
+      "continued": "Videreført af andre",
+      "upToDate": "Opdateret"
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alle",
+      "continued": "Videreført af andre",
+      "upToDate": "Opdateret",
+      "split": "Delt / samlet"
+    },
+    "noneMatch": "Intet matcher dette filter."
   }
 }

@@ -198,18 +198,7 @@
     "signedOut": "Connectez-vous pour voir les entrées que vous avez enregistrées.",
     "loading": "Chargement…",
     "empty": "Vous n'avez encore enregistré aucune entrée.",
-    "latest": "Dernière",
     "unreadable": "Entrée illisible",
-    "kind": {
-      "new": "Nouvelle",
-      "revision": "Révision",
-      "split": "Partie",
-      "join": "Assemblage"
-    },
-    "earlier": "Version antérieure",
-    "yourLatest": "Votre dernière modification",
-    "actualLatest": "Dernière",
-    "more": "+{{count}}",
     "detail": "Niveau de détail",
     "details": {
       "latest": "Dernières",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Composant",
-      "id": "ID",
       "rev": "Rév.",
-      "kind": "Type",
-      "saved": "Enregistré",
-      "by": "Par"
+      "by": "Par",
+      "status": "Statut",
+      "updated": "Mis à jour"
     },
-    "you": "Vous"
+    "you": "Vous",
+    "status": {
+      "yours": "La vôtre est la dernière",
+      "continued_one": "{{count}} entrée après la vôtre",
+      "continued_other": "{{count}} entrées après la vôtre",
+      "split_one": "Divisé après vous",
+      "split_other": "Divisé en {{count}} après vous",
+      "joined": "Assemblé après vous"
+    },
+    "role": {
+      "started": "Début",
+      "yours": "Votre modification",
+      "now": "Maintenant",
+      "yoursNow": "Votre modification = maintenant",
+      "split": "Partie",
+      "join": "Assemblé"
+    },
+    "firstRecord": "première entrée",
+    "gap_one": "+{{count}} entrée",
+    "gap_other": "+{{count}} entrées",
+    "entries_one": "{{count}} entrée",
+    "entries_other": "{{count}} entrées",
+    "groups": {
+      "continued": "Poursuivi par d'autres",
+      "upToDate": "À jour"
+    },
+    "filter": "Filtre",
+    "filters": {
+      "all": "Tout",
+      "continued": "Poursuivi par d'autres",
+      "upToDate": "À jour",
+      "split": "Divisé / assemblé"
+    },
+    "noneMatch": "Rien ne correspond à ce filtre."
   }
 }

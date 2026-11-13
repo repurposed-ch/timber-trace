@@ -198,18 +198,7 @@
     "signedOut": "Sign in to see the entries you saved.",
     "loading": "Loading…",
     "empty": "You haven't saved any entries yet.",
-    "latest": "Latest",
     "unreadable": "Unreadable entry",
-    "kind": {
-      "new": "New",
-      "revision": "Revision",
-      "split": "Split part",
-      "join": "Join"
-    },
-    "earlier": "Earlier version",
-    "yourLatest": "Your latest edit",
-    "actualLatest": "Latest",
-    "more": "+{{count}}",
     "detail": "Detail",
     "details": {
       "latest": "Latest",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Component",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Kind",
-      "saved": "Saved",
-      "by": "By"
+      "by": "By",
+      "status": "Status",
+      "updated": "Updated"
     },
-    "you": "You"
+    "you": "You",
+    "status": {
+      "yours": "Yours is latest",
+      "continued_one": "{{count}} entry after yours",
+      "continued_other": "{{count}} entries after yours",
+      "split_one": "Split after yours",
+      "split_other": "Split into {{count}} after yours",
+      "joined": "Joined after yours"
+    },
+    "role": {
+      "started": "Started",
+      "yours": "Your edit",
+      "now": "Now",
+      "yoursNow": "Your edit = now",
+      "split": "Split part",
+      "join": "Joined"
+    },
+    "firstRecord": "first record",
+    "gap_one": "+{{count}} entry",
+    "gap_other": "+{{count}} entries",
+    "entries_one": "{{count}} entry",
+    "entries_other": "{{count}} entries",
+    "groups": {
+      "continued": "Continued by others",
+      "upToDate": "Up to date"
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "All",
+      "continued": "Continued by others",
+      "upToDate": "Up to date",
+      "split": "Split / joined"
+    },
+    "noneMatch": "Nothing matches this filter."
   }
 }

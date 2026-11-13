@@ -198,18 +198,7 @@
     "signedOut": "Logga in för att se posterna du har sparat.",
     "loading": "Laddar…",
     "empty": "Du har inte sparat några poster än.",
-    "latest": "Senaste",
     "unreadable": "Oläslig post",
-    "kind": {
-      "new": "Ny",
-      "revision": "Revision",
-      "split": "Del",
-      "join": "Sammanfogad"
-    },
-    "earlier": "Tidigare version",
-    "yourLatest": "Din senaste ändring",
-    "actualLatest": "Senaste",
-    "more": "+{{count}}",
     "detail": "Detaljnivå",
     "details": {
       "latest": "Senaste",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Komponent",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Typ",
-      "saved": "Sparad",
-      "by": "Av"
+      "by": "Av",
+      "status": "Status",
+      "updated": "Uppdaterad"
     },
-    "you": "Du"
+    "you": "Du",
+    "status": {
+      "yours": "Din är den senaste",
+      "continued_one": "{{count}} post efter din",
+      "continued_other": "{{count}} poster efter din",
+      "split_one": "Delad efter dig",
+      "split_other": "Delad i {{count}} efter dig",
+      "joined": "Sammanfogad efter dig"
+    },
+    "role": {
+      "started": "Startad",
+      "yours": "Din ändring",
+      "now": "Nu",
+      "yoursNow": "Din ändring = nu",
+      "split": "Del",
+      "join": "Sammanfogad"
+    },
+    "firstRecord": "första post",
+    "gap_one": "+{{count}} post",
+    "gap_other": "+{{count}} poster",
+    "entries_one": "{{count}} post",
+    "entries_other": "{{count}} poster",
+    "groups": {
+      "continued": "Fortsatt av andra",
+      "upToDate": "Aktuell"
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alla",
+      "continued": "Fortsatt av andra",
+      "upToDate": "Aktuell",
+      "split": "Delad / sammanfogad"
+    },
+    "noneMatch": "Inget matchar det här filtret."
   }
 }

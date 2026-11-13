@@ -198,18 +198,7 @@
     "signedOut": "Accedi per vedere le voci che hai salvato.",
     "loading": "Caricamento…",
     "empty": "Non hai ancora salvato nessuna voce.",
-    "latest": "Ultima",
     "unreadable": "Voce illeggibile",
-    "kind": {
-      "new": "Nuova",
-      "revision": "Revisione",
-      "split": "Parte",
-      "join": "Unione"
-    },
-    "earlier": "Versione precedente",
-    "yourLatest": "La tua ultima modifica",
-    "actualLatest": "Ultima",
-    "more": "+{{count}}",
     "detail": "Dettaglio",
     "details": {
       "latest": "Ultime",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Componente",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Tipo",
-      "saved": "Salvato",
-      "by": "Da"
+      "by": "Da",
+      "status": "Stato",
+      "updated": "Aggiornato"
     },
-    "you": "Tu"
+    "you": "Tu",
+    "status": {
+      "yours": "La tua è l'ultima",
+      "continued_one": "{{count}} voce dopo la tua",
+      "continued_other": "{{count}} voci dopo la tua",
+      "split_one": "Diviso dopo di te",
+      "split_other": "Diviso in {{count}} dopo di te",
+      "joined": "Unito dopo di te"
+    },
+    "role": {
+      "started": "Inizio",
+      "yours": "La tua modifica",
+      "now": "Ora",
+      "yoursNow": "La tua modifica = ora",
+      "split": "Parte",
+      "join": "Unito"
+    },
+    "firstRecord": "prima voce",
+    "gap_one": "+{{count}} voce",
+    "gap_other": "+{{count}} voci",
+    "entries_one": "{{count}} voce",
+    "entries_other": "{{count}} voci",
+    "groups": {
+      "continued": "Proseguito da altri",
+      "upToDate": "Aggiornato"
+    },
+    "filter": "Filtro",
+    "filters": {
+      "all": "Tutti",
+      "continued": "Proseguito da altri",
+      "upToDate": "Aggiornato",
+      "split": "Diviso / unito"
+    },
+    "noneMatch": "Niente corrisponde a questo filtro."
   }
 }

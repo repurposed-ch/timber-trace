@@ -16,3 +16,10 @@ export function changedFacts(current: any, currentSchema: DenseSchema, newer: { 
       return { path: p, label: f.group ? `${f.group} · ${f.label}` : f.label, before: before.get(p)?.value, after: after.get(p)?.value };
     });
 }
+
+/** what one entry changed compared with the one before it: the first few facts, without id and revision */
+export function entryChanges(prev: { data: any; schema: DenseSchema }, next: { data: any; schema: DenseSchema }, labels: Pick<Labels, "field" | "option">, max = 2): Change[] {
+  return changedFacts(prev.data, prev.schema, next, labels)
+    .filter((c) => !/^(id|version|revision)(\.|$)/.test(c.path))
+    .slice(0, max);
+}

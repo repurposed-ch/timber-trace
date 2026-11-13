@@ -198,18 +198,7 @@
     "signedOut": "Log in om de invoer te zien die je hebt opgeslagen.",
     "loading": "Laden…",
     "empty": "Je hebt nog geen invoer opgeslagen.",
-    "latest": "Nieuwste",
     "unreadable": "Onleesbare invoer",
-    "kind": {
-      "new": "Nieuw",
-      "revision": "Revisie",
-      "split": "Deel",
-      "join": "Samengevoegd"
-    },
-    "earlier": "Eerdere versie",
-    "yourLatest": "Jouw laatste bewerking",
-    "actualLatest": "Nieuwste",
-    "more": "+{{count}}",
     "detail": "Detail",
     "details": {
       "latest": "Nieuwste",
@@ -219,12 +208,44 @@
     "rev": "R{{n}}",
     "col": {
       "name": "Onderdeel",
-      "id": "ID",
       "rev": "Rev.",
-      "kind": "Soort",
-      "saved": "Opgeslagen",
-      "by": "Door"
+      "by": "Door",
+      "status": "Status",
+      "updated": "Bijgewerkt"
     },
-    "you": "Jij"
+    "you": "Jij",
+    "status": {
+      "yours": "De jouwe is de nieuwste",
+      "continued_one": "{{count}} invoer na de jouwe",
+      "continued_other": "{{count}} invoeren na de jouwe",
+      "split_one": "Gesplitst na jou",
+      "split_other": "Gesplitst in {{count}} na jou",
+      "joined": "Samengevoegd na jou"
+    },
+    "role": {
+      "started": "Begonnen",
+      "yours": "Jouw bewerking",
+      "now": "Nu",
+      "yoursNow": "Jouw bewerking = nu",
+      "split": "Deel",
+      "join": "Samengevoegd"
+    },
+    "firstRecord": "eerste invoer",
+    "gap_one": "+{{count}} invoer",
+    "gap_other": "+{{count}} invoeren",
+    "entries_one": "{{count}} invoer",
+    "entries_other": "{{count}} invoeren",
+    "groups": {
+      "continued": "Voortgezet door anderen",
+      "upToDate": "Actueel"
+    },
+    "filter": "Filter",
+    "filters": {
+      "all": "Alles",
+      "continued": "Voortgezet door anderen",
+      "upToDate": "Actueel",
+      "split": "Gesplitst / samengevoegd"
+    },
+    "noneMatch": "Niets past bij dit filter."
   }
 }
