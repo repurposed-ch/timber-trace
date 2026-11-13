@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { branchStatus, branches, describeEntries, keyRows, lanes } from "./mine";
+import { branchStatus, branches, describeEntries, keyRows, lanes, overallKeyRows, overallStatus } from "./mine";
 import type { Entry } from "./source";
 
 let clock = 0;
@@ -119,5 +119,32 @@ describe("graph lanes", () => {
     const l = lanes([e("X"), e("Y"), e("J", ["X", "Y"]), e("K", ["J"])]);
     expect(l.cols).toEqual([0, 1, 0, 0]);
     expect(l.width).toBe(2);
+  });
+});
+
+describe("everyone's entries (admin)", () => {
+  const all = () => true;
+  const keys = (b: ReturnType<typeof branches>[number]) => overallKeyRows(b).map((k) => (k.type === "gap" ? `+${k.count}` : `${k.role}:${k.row.entry.id}`));
+  test("a focus check keeps branches nobody in particular owns, newest edit as the anchor", () => {
+    clock = 0;
+    const bs = branches([e("A", [], "u1"), e("B", ["A"], "u2"), e("X", [], "u3")], all);
+    expect(bs.map((b) => b.yourLatest.entry.id)).toEqual(["X", "B"]);
+    expect(branches([e("A", [], "u1"), e("B", ["A"], "u2")], (x) => x.createdBy === "u1")[0].yourLatest.entry.id).toBe("A");
+  });
+  test("overall status and key points: first … latest", () => {
+    clock = 0;
+    const lin = branches([e("A", [], "u1"), e("B", ["A"], "u2"), e("C", ["B"], "u1")], all)[0];
+    expect(overallStatus(lin)).toBe("linear");
+    expect(keys(lin)).toEqual(["started:A", "+1", "now:C"]);
+    clock = 0;
+    const joined = branches([e("A"), e("P", ["A"]), e("Q", ["A"]), e("J", ["P", "Q"])], all)[0];
+    expect(overallStatus(joined)).toBe("joined");
+    expect(keys(joined)).toEqual(["started:A", "+2", "now:J"]);
+    clock = 0;
+    const split = branches([e("A"), e("P", ["A"]), e("Q", ["A"])], all)[0];
+    expect(overallStatus(split)).toBe("split");
+    expect(keys(split)).toEqual(["started:A", "now:P", "now:Q"]);
+    clock = 0;
+    expect(keys(branches([e("S")], all)[0])).toEqual(["now:S"]);
   });
 });
