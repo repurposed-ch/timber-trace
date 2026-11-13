@@ -28,6 +28,25 @@ describe("changed facts", () => {
   });
 });
 
+describe("entry changes", () => {
+  test("leaves out id and revision, keeps the first changed facts", async () => {
+    const { entryChanges } = await import("./changes");
+    const { makeLabels } = await import("../schema/labels");
+    const { fullRecordV2 } = await import("../schema/testing");
+    const en = JSON.parse(await readPublic("hello-world/locales/en.json"));
+    const labels = makeLabels(en, en, "en", loaded.meta.countryEnums, "Unknown");
+    const v2 = loaded.versions.get(2)!;
+    const after = structuredClone(fullRecordV2);
+    after.revision = { number: 9, date: { status: "known", day: 20770 } };
+    after.grade.class.value = "GL28h";
+    after.dimensions.length = { status: "known", value: 3950 };
+    const changes = entryChanges({ data: fullRecordV2, schema: v2 }, { data: after, schema: v2 }, labels);
+    expect(changes.map((c) => c.path)).toEqual(["dimensions.length", "grade.class"]);
+    expect(changes.every((c) => !c.path.startsWith("revision"))).toBe(true);
+    expect(entryChanges({ data: fullRecordV2, schema: v2 }, { data: after, schema: v2 }, labels, 1)).toHaveLength(1);
+  });
+});
+
 describe("static record source", () => {
   const source = staticRecordSource(readPublic);
 
