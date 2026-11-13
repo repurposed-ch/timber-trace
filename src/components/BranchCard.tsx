@@ -63,8 +63,8 @@ function Changes({ row, branch, ctx, max }: { row: MineRow; branch: Branch; ctx:
   return (
     <>
       {changes.map((c) => (
-        <span key={c.path} className="diff">
-          {c.label} {c.before && <del>{c.before}</del>} {c.after && <ins>{c.after}</ins>}
+        <span key={c.path} className="diff" title={c.label}>
+          {c.label.split(" · ").pop()} {c.before && <del>{c.before}</del>} {c.after && <ins>{c.after}</ins>}
         </span>
       ))}
     </>
