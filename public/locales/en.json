@@ -206,10 +206,6 @@
       "split": "Split part",
       "join": "Join"
     },
-    "earlier": "Earlier version",
-    "yourLatest": "Your latest edit",
-    "actualLatest": "Latest",
-    "more": "+{{count}}",
     "detail": "Detail",
     "details": {
       "latest": "Latest",
@@ -225,6 +221,27 @@
       "saved": "Saved",
       "by": "By"
     },
-    "you": "You"
+    "you": "You",
+    "status": {
+      "yours": "Yours is latest",
+      "continued_one": "{{count}} entry after yours",
+      "continued_other": "{{count}} entries after yours",
+      "split_one": "Split after yours",
+      "split_other": "Split into {{count}} after yours",
+      "joined": "Joined after yours"
+    },
+    "role": {
+      "started": "Started",
+      "yours": "Your edit",
+      "now": "Now",
+      "yoursNow": "Your edit = now",
+      "split": "Split part",
+      "join": "Joined"
+    },
+    "firstRecord": "first record",
+    "gap_one": "+{{count}} entry",
+    "gap_other": "+{{count}} entries",
+    "entries_one": "{{count}} entry",
+    "entries_other": "{{count}} entries"
   }
 }

@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { signOut } from "../auth/client";
 import { setSignInOpen, useSession } from "../auth/useSession";
 import { intlLocale } from "../i18n-langs";
 import { branches, type Branch, type MineRow } from "../records/mine";
-import type { RecordSource } from "../records/source";
+import type { Entry, RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
 import { beamName } from "../schema/beam";
 import type { LoadedSchema } from "../schema/loader";
 import type { Labels } from "../state/useSchema";
-import { Timeline } from "./Timeline";
+import { BranchCard, type BranchContext } from "./BranchCard";
 
 type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[] };
 
@@ -39,6 +39,12 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     } catch {}
   };
   const userId = session.status === "in" ? session.id : null;
+  // decode each entry once; the cards ask for the same entries many times
+  const cache = useMemo(() => new Map<string, Found | null>(), [state]);
+  const decoded = (e: Entry) => {
+    if (!cache.has(e.id!)) cache.set(e.id!, decodeEntry(schema, e));
+    return cache.get(e.id!)!;
+  };
 
   useEffect(() => {
     if (!userId || !source.mine) return;
@@ -71,6 +77,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     );
 
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
+  const ctx: BranchContext = { userId: session.id, email: session.email, labels, locale, found: (r) => decoded(r.entry), onOpen };
   const thisYear = new Date().getFullYear();
   const shortDate = (iso?: string) => {
     if (!iso) return "";
@@ -117,51 +124,6 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     );
   };
 
-  const step = (key: string, role: string, rows: MineRow[], yours = false) => (
-    <li key={key} className="mine-step">
-      <span className="mine-role">{role}</span>
-      <ul className="mine-boxes">{rows.map((r) => box(r, { yours }))}</ul>
-    </li>
-  );
-  const arrow = (key: string, skipped: number) => (
-    <li key={key} className="mine-arrow" aria-hidden>
-      <span className="mine-arrow-head">→</span>
-      {skipped > 0 && <span>{t("mine.more", { count: skipped })}</span>}
-    </li>
-  );
-  const overview = (b: Branch) => {
-    const out = [];
-    if (b.earlier.length) out.push(step("earlier", t("mine.earlier"), b.earlier), arrow("a1", b.skippedBefore));
-    out.push(step("yours", t("mine.yourLatest"), [b.yourLatest], true));
-    if (b.latest.length) out.push(arrow("a2", b.skippedAfter), step("latest", t("mine.actualLatest"), b.latest));
-    return (
-      <ol key={b.yourLatest.entry.id} className="mine-flow mine-group">
-        {out}
-      </ol>
-    );
-  };
-  // the whole branch as a timeline, styled like a record's history; others' entries get a hollow dot
-  const full = (b: Branch) => (
-    <section key={b.yourLatest.entry.id} className="mine-group mine-history">
-      <Timeline
-        items={b.all.map((r) => {
-          const found = decodeEntry(schema, r.entry);
-          return {
-            key: r.entry.id!,
-            when: <span title={longDate(r.entry.savedAt)}>{shortDate(r.entry.savedAt)}</span>,
-            what: (
-              <button type="button" className="link mine-tl-name" disabled={!found} onClick={() => found && onOpen(found)} title={r.entry.componentId}>
-                {found ? beamName(found.data, labels) : t("mine.unreadable")}
-              </button>
-            ),
-            extra: chips(r, true),
-            faded: r.entry.createdBy !== userId,
-            className: r === b.yourLatest ? "mine-yours" : undefined,
-          };
-        })}
-      />
-    </section>
-  );
   // latest only: whatever is current in each branch (several after a split)
   const current = (bs: Branch[]) => {
     const rows = bs.flatMap((b) => (b.latest.length ? b.latest : [b.yourLatest]).map((r) => ({ r, yours: r === b.yourLatest })));
@@ -232,7 +194,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
         </p>
       )}
       {state.s === "done" && !state.branches.length && <p>{t("mine.empty")}</p>}
-      {state.s === "done" && state.branches.length > 0 && (detail === "latest" ? current(state.branches) : state.branches.map(detail === "full" ? full : overview))}
+      {state.s === "done" && state.branches.length > 0 && (detail === "latest" ? current(state.branches) : <div className="bcs">{state.branches.map((b) => <BranchCard key={b.yourLatest.entry.id} branch={b} ctx={ctx} detail={detail === "full" ? "all" : "key"} />)}</div>)}
     </div>
   );
 }

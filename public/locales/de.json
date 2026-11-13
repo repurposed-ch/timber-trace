@@ -206,10 +206,6 @@
       "split": "Teilstück",
       "join": "Zusammengefügt"
     },
-    "earlier": "Frühere Version",
-    "yourLatest": "Ihre letzte Bearbeitung",
-    "actualLatest": "Neueste",
-    "more": "+{{count}}",
     "detail": "Detailgrad",
     "details": {
       "latest": "Neueste",
@@ -225,6 +221,27 @@
       "saved": "Gespeichert",
       "by": "Von"
     },
-    "you": "Sie"
+    "you": "Sie",
+    "status": {
+      "yours": "Ihre ist die neueste",
+      "continued_one": "{{count}} Eintrag nach Ihrem",
+      "continued_other": "{{count}} Einträge nach Ihrem",
+      "split_one": "Nach Ihnen aufgeteilt",
+      "split_other": "Nach Ihnen in {{count}} aufgeteilt",
+      "joined": "Nach Ihnen zusammengefügt"
+    },
+    "role": {
+      "started": "Begonnen",
+      "yours": "Ihre Bearbeitung",
+      "now": "Jetzt",
+      "yoursNow": "Ihre Bearbeitung = jetzt",
+      "split": "Teilstück",
+      "join": "Zusammengefügt"
+    },
+    "firstRecord": "erster Eintrag",
+    "gap_one": "+{{count}} Eintrag",
+    "gap_other": "+{{count}} Einträge",
+    "entries_one": "{{count}} Eintrag",
+    "entries_other": "{{count}} Einträge"
   }
 }

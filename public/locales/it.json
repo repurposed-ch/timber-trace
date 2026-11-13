@@ -206,10 +206,6 @@
       "split": "Parte",
       "join": "Unione"
     },
-    "earlier": "Versione precedente",
-    "yourLatest": "La tua ultima modifica",
-    "actualLatest": "Ultima",
-    "more": "+{{count}}",
     "detail": "Dettaglio",
     "details": {
       "latest": "Ultime",
@@ -225,6 +221,27 @@
       "saved": "Salvato",
       "by": "Da"
     },
-    "you": "Tu"
+    "you": "Tu",
+    "status": {
+      "yours": "La tua è l'ultima",
+      "continued_one": "{{count}} voce dopo la tua",
+      "continued_other": "{{count}} voci dopo la tua",
+      "split_one": "Diviso dopo di te",
+      "split_other": "Diviso in {{count}} dopo di te",
+      "joined": "Unito dopo di te"
+    },
+    "role": {
+      "started": "Inizio",
+      "yours": "La tua modifica",
+      "now": "Ora",
+      "yoursNow": "La tua modifica = ora",
+      "split": "Parte",
+      "join": "Unito"
+    },
+    "firstRecord": "prima voce",
+    "gap_one": "+{{count}} voce",
+    "gap_other": "+{{count}} voci",
+    "entries_one": "{{count}} voce",
+    "entries_other": "{{count}} voci"
   }
 }
