@@ -1,5 +1,5 @@
 import { describe, expect, test } from "bun:test";
-import { branches, describeEntries } from "./mine";
+import { branchStatus, branches, describeEntries, keyRows, lanes } from "./mine";
 import type { Entry } from "./source";
 
 let clock = 0;
@@ -72,5 +72,51 @@ describe("branches", () => {
     const all = [e("A"), e("B", ["A"]), e("X", [], "other"), e("S")];
     const bs = branches(all, "me");
     expect(bs.map((b) => b.yourLatest.entry.id)).toEqual(["S", "B"]);
+  });
+});
+
+describe("status and key points", () => {
+  test("yours is latest: started … yours = now", () => {
+    clock = 0;
+    const [b] = branches([e("A"), e("B", ["A"]), e("C", ["B"])], "me");
+    expect(branchStatus(b)).toBe("yours");
+    expect(keyRows(b).map((k) => (k.type === "gap" ? `+${k.count}` : `${k.role}:${k.row.entry.id}`))).toEqual(["started:A", "+1", "yoursNow:C"]);
+  });
+  test("continued, split and joined after you", () => {
+    clock = 0;
+    const cont = branches([e("A", [], "o"), e("B", ["A"]), e("C", ["B"], "o"), e("D", ["C"], "o")], "me")[0];
+    expect(branchStatus(cont)).toBe("continued");
+    expect(keyRows(cont).map((k) => (k.type === "gap" ? `+${k.count}` : `${k.role}:${k.row.entry.id}`))).toEqual(["started:A", "yours:B", "+1", "now:D"]);
+    clock = 0;
+    const split = branches([e("A"), e("P", ["A"], "o"), e("Q", ["A"], "o")], "me")[0];
+    expect(branchStatus(split)).toBe("split");
+    clock = 0;
+    const joined = branches([e("A"), e("P", ["A"], "o"), e("Q", ["A"], "o"), e("J", ["P", "Q"], "o")], "me")[0];
+    expect(branchStatus(joined)).toBe("joined");
+    expect(keyRows(joined).map((k) => (k.type === "gap" ? `+${k.count}` : `${k.role}:${k.row.entry.id}`))).toEqual(["yours:A", "+2", "now:J"]);
+  });
+  test("a single first version is just yours = now", () => {
+    clock = 0;
+    expect(keyRows(branches([e("A")], "me")[0]).map((k) => (k.type === "row" ? k.role : "gap"))).toEqual(["yoursNow"]);
+  });
+});
+
+describe("graph lanes", () => {
+  test("a straight line stays in one column", () => {
+    clock = 0;
+    expect(lanes([e("A"), e("B", ["A"]), e("C", ["B"])])).toEqual({ cols: [0, 0, 0], edges: [[0, 1], [1, 2]], width: 1 });
+  });
+  test("a split fans out and a join merges back", () => {
+    clock = 0;
+    const l = lanes([e("A"), e("B", ["A"]), e("P", ["B"]), e("Q", ["B"]), e("J", ["P", "Q"])]);
+    expect(l.cols).toEqual([0, 0, 0, 1, 0]);
+    expect(l.edges).toEqual([[0, 1], [1, 2], [1, 3], [2, 4], [3, 4]]);
+    expect(l.width).toBe(2);
+  });
+  test("unrelated roots and leaves reuse freed columns", () => {
+    clock = 0;
+    const l = lanes([e("X"), e("Y"), e("J", ["X", "Y"]), e("K", ["J"])]);
+    expect(l.cols).toEqual([0, 1, 0, 0]);
+    expect(l.width).toBe(2);
   });
 });

@@ -28,6 +28,8 @@ export type Branch = {
   skippedBefore: number;
   skippedAfter: number;
   latest: MineRow[];
+  /** everything that continues your latest edit, oldest first */
+  after: MineRow[];
   all: MineRow[];
 };
 
@@ -84,8 +86,67 @@ export function branches(entries: Entry[], userId: string): Branch[] {
       skippedBefore: before.size - earlier.length,
       skippedAfter: after.size - latest.length,
       latest: sorted(latest),
+      after: sorted([...after]),
       all: sorted(members.map((e) => e.id!)),
     });
   }
   return out.sort((a, b) => time(b.yourLatest.entry) - time(a.yourLatest.entry));
+}
+
+/** what happened to a branch since your latest edit */
+export type BranchStatus = "yours" | "continued" | "split" | "joined";
+export function branchStatus(b: Branch): BranchStatus {
+  if (!b.latest.length) return "yours";
+  if (b.after.some((r) => r.kind === "join")) return "joined";
+  if (b.after.some((r) => r.kind === "split")) return "split";
+  return "continued";
+}
+
+/** the Overview: where it started, your edit, where it is now; skipped entries become gaps */
+export type KeyRow = { type: "row"; row: MineRow; role: "started" | "yours" | "now" | "yoursNow" } | { type: "gap"; count: number };
+export function keyRows(b: Branch): KeyRow[] {
+  const out: KeyRow[] = b.earlier.map((row) => ({ type: "row", row, role: "started" }));
+  if (b.skippedBefore > 0) out.push({ type: "gap", count: b.skippedBefore });
+  out.push({ type: "row", row: b.yourLatest, role: b.latest.length ? "yours" : "yoursNow" });
+  if (b.skippedAfter > 0) out.push({ type: "gap", count: b.skippedAfter });
+  for (const row of b.latest) out.push({ type: "row", row, role: "now" });
+  return out;
+}
+
+/**
+ * Columns for drawing a branch as a graph, rows oldest first. A row continues in the column of its
+ * first predecessor that still has one; further split parts open new columns; a column frees up
+ * once all successors of its entry are placed, or after a leaf. `edges` are [from row, to row].
+ */
+export function lanes(entries: Entry[]): { cols: number[]; edges: [number, number][]; width: number } {
+  const index = new Map(entries.map((e, i) => [e.id!, i]));
+  const remaining = new Map<string, number>();
+  for (const e of entries) for (const p of e.predecessors ?? []) if (index.has(p)) remaining.set(p, (remaining.get(p) ?? 0) + 1);
+  const open: (string | null)[] = [];
+  const cols: number[] = [];
+  const edges: [number, number][] = [];
+  entries.forEach((e, i) => {
+    const preds = (e.predecessors ?? []).filter((p) => index.has(p));
+    let c = -1;
+    for (const p of preds) {
+      const pc = open.indexOf(p);
+      if (pc >= 0) {
+        c = pc;
+        break;
+      }
+    }
+    if (c < 0) c = open.indexOf(null);
+    if (c < 0) c = open.length;
+    open[c] = e.id!;
+    cols[i] = c;
+    for (const p of preds) {
+      edges.push([index.get(p)!, i]);
+      const left = remaining.get(p)! - 1;
+      remaining.set(p, left);
+      const pc = open.indexOf(p);
+      if (left === 0 && pc >= 0) open[pc] = null;
+    }
+    if (!remaining.get(e.id!)) open[c] = null;
+  });
+  return { cols, edges, width: Math.max(1, ...cols.map((c) => c + 1)) };
 }
