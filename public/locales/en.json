@@ -60,6 +60,7 @@
     "idInvalid": "32 hex characters",
     "newRecord": "New record (v{{v}})",
     "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}.",
+    "liftedVersion": "Read from a version {{from}} code and shown as version {{latest}}. Fields added since are not stated; saving writes version {{latest}}.",
     "view": "View",
     "edit": "Edit",
     "mode": "Mode",

@@ -156,8 +156,8 @@
         {
           "type": "enum",
           "name": "basis",
-          "options": ["original", "reassessed"],
-          "defaultValue": "original"
+          "options": ["unknown", "original", "reassessed"],
+          "defaultValue": "unknown"
         },
         {
           "type": "enum",

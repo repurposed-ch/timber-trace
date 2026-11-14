@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fallbackSource, staticRecordSource } from "../records/source";
 import { supabaseAdmin, supabaseConfig, supabaseRecordSource } from "../records/supabase";
@@ -11,6 +11,7 @@ import { decodeInput } from "../schema/links";
 import { currentMode, currentPayload, currentTab, pushTab, replaceMode, schemaUrl, type Mode, type Tab } from "../state/route";
 import { schemaFromJson } from "densing";
 import { defaultRecord } from "../schema/fields";
+import { liftRecord } from "../schema/upgrade";
 import type { LoadedSchema } from "../schema/loader";
 import { intlLocale } from "../i18n-langs";
 import { read, useLabels } from "../state/useSchema";
@@ -56,8 +57,14 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const [showQr, setShowQr] = useStoredFlag("timber-trace.aside-qr", false);
   // the record that was scanned or opened from a link, checked for newer versions
   const [loaded, setLoaded] = useState<Loaded>(() => fromLocation(schema));
-  const [record, setRecord] = useState(() => loaded?.data ?? newRecord());
-  // a record is edited and exported in the schema version it was made with
+  // an older code is shown in the latest version when that only adds fields (they show as unknown);
+  // `loaded` keeps the code as it was read, for the update check
+  const lift = (data: any) => liftRecord(schema, data) ?? data;
+  const [record, setRecord] = useState(() => (loaded ? lift(loaded.data) : newRecord()));
+  // the record as first shown, to tell whether it was edited since
+  const shown = useRef(record);
+  const liftedFrom = loaded && loaded.data.version !== record.version ? loaded.data.version : null;
+  // otherwise a record is edited and exported in the schema version it was made with
   const dense = schema.versions.get(record.version) ?? latest;
   const lineage = useLatest(records, schema, loaded);
   const newer = lineage.status === "newer" ? lineage.newer : null;
@@ -73,7 +80,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     if (lineage.status !== "latest" || !loaded) return;
     const { self } = lineage;
     // the saved entry may hold more than the code: show it, unless the record was already edited
-    if (self.payload !== loaded.payload && record === loaded.data) return load({ payload: self.payload, data: self.data });
+    if (self.payload !== loaded.payload && record === shown.current) return load({ payload: self.payload, data: self.data });
     // a scanned code only holds a selection; the entry may know the full history
     const online = self.entry.history;
     if (online?.length && hist.source === "code") setHistState({ status: "known", full: sortHistory(online), unavailable: 0, source: "online" });
@@ -100,7 +107,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   }, [mode, editTab, focusSection]);
   const load = (l: NonNullable<Loaded>) => {
     setLoaded(l);
-    setRecord(l.data);
+    const r = lift(l.data);
+    shown.current = r;
+    setRecord(r);
     if (tiers) setHistState(historyState(l.data.history, tiers));
     setMode("view");
   };
@@ -273,10 +282,16 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
               return line && <p className="provenance" data-testid="provenance">{line}</p>;
             })()}
-          {record.version !== schema.latest && (
+          {liftedFrom !== null ? (
             <p className="note" role="note">
-              {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
+              {t("form.liftedVersion", { ns: "ui", from: liftedFrom, latest: record.version })}
             </p>
+          ) : (
+            record.version !== schema.latest && (
+              <p className="note" role="note">
+                {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
+              </p>
+            )
           )}
           {mode === "view" ? (
             <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={editSection} />

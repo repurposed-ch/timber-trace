@@ -60,6 +60,7 @@
     "idInvalid": "32 Hex-Zeichen",
     "newRecord": "Neuer Datensatz (v{{v}})",
     "olderVersion": "Mit Schemaversion {{v}} erstellt. Er wird als Version {{v}} angezeigt und exportiert; neue Datensätze verwenden Version {{latest}}.",
+    "liftedVersion": "Aus einem Code der Version {{from}} gelesen und als Version {{latest}} angezeigt. Seither hinzugefügte Felder sind nicht angegeben; Speichern schreibt Version {{latest}}.",
     "view": "Ansicht",
     "edit": "Bearbeiten",
     "mode": "Modus",

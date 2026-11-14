@@ -190,6 +190,7 @@
       "custom": "Personnalisé"
     },
     "grade.basis": {
+      "unknown": "Inconnu",
       "original": "Documentation d'origine",
       "reassessed": "Évaluation ultérieure"
     },

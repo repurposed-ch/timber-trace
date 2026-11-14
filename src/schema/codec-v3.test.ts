@@ -19,7 +19,7 @@ describe("schema v3", () => {
   }
 
   test("grade basis and verification scope round-trip in every combination", () => {
-    for (const basis of ["original", "reassessed"]) {
+    for (const basis of ["unknown", "original", "reassessed"]) {
       for (let bits = 0; bits < 8; bits++) {
         const checked = { provenance: !!(bits & 1), condition: !!(bits & 2), suitability: !!(bits & 4) };
         const record = { ...fullRecordV3, grade: { ...fullRecordV3.grade, basis }, verified: { ...fullRecordV3.verified, checked } };

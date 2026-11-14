@@ -60,6 +60,7 @@
     "idInvalid": "32 hexadecimale tekens",
     "newRecord": "Nieuw record (v{{v}})",
     "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
+    "liftedVersion": "Gelezen uit een code van versie {{from}} en getoond als versie {{latest}}. Velden die sindsdien zijn toegevoegd, zijn niet ingevuld; opslaan schrijft versie {{latest}}.",
     "view": "Bekijken",
     "edit": "Bewerken",
     "mode": "Modus",
