@@ -60,6 +60,7 @@
     "idInvalid": "32 hextecken",
     "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}.",
+    "liftedVersion": "Läst från en kod i version {{from}} och visad som version {{latest}}. Fält som lagts till sedan dess är inte angivna; att spara skriver version {{latest}}.",
     "view": "Visa",
     "edit": "Redigera",
     "mode": "Läge",

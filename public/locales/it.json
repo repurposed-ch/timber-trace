@@ -60,6 +60,7 @@
     "idInvalid": "32 caratteri esadecimali",
     "newRecord": "Nuova scheda (v{{v}})",
     "olderVersion": "Creata con la versione {{v}} dello schema. Viene mostrata ed esportata come versione {{v}}; le nuove schede usano la versione {{latest}}.",
+    "liftedVersion": "Letto da un codice della versione {{from}} e mostrato come versione {{latest}}. I campi aggiunti in seguito non sono indicati; il salvataggio scrive la versione {{latest}}.",
     "view": "Visualizza",
     "edit": "Modifica",
     "mode": "Modalità",
