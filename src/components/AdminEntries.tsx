@@ -120,7 +120,7 @@ export function AdminEntries({ admin, schema, labels, onOpen }: { admin: AdminSo
       </button>
     );
   };
-  const ctx: BranchContext = { userId: session.id, email: session.email, labels, locale, found: (r) => decoded(r.entry), onOpen, perspective: "all", emails: data?.users, hidden, actions };
+  const ctx: BranchContext = { userId: session.id, email: session.email, labels: () => labels, locale, found: (r) => decoded(r.entry), onOpen, perspective: "all", emails: data?.users, hidden, actions };
 
   const visible = (data?.entries ?? []).filter((e) => showHidden || !hidden.has(e.id!));
   const all = branches(visible, user ? (e) => e.createdBy === user : () => true);

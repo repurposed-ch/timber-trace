@@ -7,11 +7,14 @@ import { branchStatus, branches, type Branch } from "../records/mine";
 import { relativeDate } from "../records/relative";
 import type { Entry, RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
-import type { LoadedSchema } from "../schema/loader";
-import type { Labels } from "../state/useSchema";
+import { makeLabels, type SchemaLabels } from "../schema/labels";
+import { loadSchema, type LoadedSchema } from "../schema/loader";
+import { read, type Labels } from "../state/useSchema";
 import { Avatar, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
 
-type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[] };
+// entries of every schema; each branch is decoded and labelled with its own schema
+type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[]; schemas: Map<string, LoadedSchema> };
+const EMPTY: SchemaLabels = { fields: {}, options: {} };
 
 /** how much of each branch to show: a table of what's current, the key points, or everything */
 export const DETAILS = ["latest", "overview", "full"] as const;
@@ -44,14 +47,18 @@ type FilterId = (typeof FILTERS)[number]["id"];
 /** what is current in a branch: the newest latest entry, or your edit when nothing continued it */
 const currentOf = (b: Branch) => (b.latest.length ? b.latest[b.latest.length - 1] : b.yourLatest);
 
-/** the signed-in user's entries, grouped into branches, at the chosen detail level */
-export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSource; schema: LoadedSchema; labels: Labels; onOpen: (f: Found) => void }) {
+/** the schema a branch belongs to (its anchor entry's) */
+const schemaOf = (b: Branch) => b.yourLatest.entry.schema;
+
+/** the signed-in user's entries across all schemas, grouped into branches, at the chosen detail level */
+export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f: Found) => void }) {
   const { t, i18n } = useTranslation();
   const session = useSession();
   const [state, setState] = useState<State>({ s: "loading" });
   const [detail, setDetailState] = useState<Detail>(storedDetail);
   const [unfolded, setUnfolded] = useState<Set<string>>(new Set());
   const [filter, setFilter] = useState<FilterId>("all");
+  const [schemaFilter, setSchemaFilter] = useState("");
   const setDetail = (d: Detail) => {
     setDetailState(d);
     try {
@@ -62,7 +69,8 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
   // decode each entry once; the views ask for the same entries many times
   const cache = useMemo(() => new Map<string, Found | null>(), [state]);
   const decoded = (e: Entry) => {
-    if (!cache.has(e.id!)) cache.set(e.id!, decodeEntry(schema, e));
+    const schema = state.s === "done" ? state.schemas.get(e.schema) : undefined;
+    if (!cache.has(e.id!)) cache.set(e.id!, schema ? decodeEntry(schema, e) : null);
     return cache.get(e.id!)!;
   };
 
@@ -71,16 +79,20 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     let alive = true;
     setState({ s: "loading" });
     (async () => {
-      const mine = await source.mine!(schema, userId);
-      const all = source.related && mine.length ? await source.related(schema, mine) : mine;
-      return branches(all, userId);
+      const mine = await source.mine!(userId);
+      const all = source.related && mine.length ? await source.related(mine) : mine;
+      // every schema these entries use, and its labels, once
+      const slugs = [...new Set(all.map((e) => e.schema))];
+      const loaded = await Promise.all(slugs.map((slug) => loadSchema(slug, read).then((s) => [slug, s] as const, () => null)));
+      await i18n.loadNamespaces(slugs);
+      return { branches: branches(all, userId), schemas: new Map(loaded.filter((x) => x !== null)) };
     })()
-      .then((b) => alive && setState({ s: "done", branches: b }))
+      .then((r) => alive && setState({ s: "done", ...r }))
       .catch((e) => alive && setState({ s: "error", code: e?.code ?? "network" }));
     return () => {
       alive = false;
     };
-  }, [source, schema, userId]);
+  }, [source, userId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (session.status === "checking") return <p className="muted">{t("mine.loading")}</p>;
   if (session.status !== "in")
@@ -97,7 +109,21 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
     );
 
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
-  const ctx: BranchContext = { userId: session.id, email: session.email, labels, locale, found: (r) => decoded(r.entry), onOpen };
+  const lng = i18n.resolvedLanguage ?? "en";
+  const labelCache = new Map<string, Labels>();
+  const labelsOf = (slug: string) => {
+    if (!labelCache.has(slug)) {
+      const raw = (i18n.getResourceBundle(lng, slug) as SchemaLabels | undefined) ?? EMPTY;
+      const fallback = (i18n.getResourceBundle("en", slug) as SchemaLabels | undefined) ?? EMPTY;
+      const countries = state.s === "done" ? (state.schemas.get(slug)?.meta.countryEnums ?? []) : [];
+      labelCache.set(slug, makeLabels(raw, fallback, lng, countries, t("form.unknown")));
+    }
+    return labelCache.get(slug)!;
+  };
+  // the schema's name next to each branch, as soon as entries span more than one
+  const manySchemas = state.s === "done" && new Set(state.branches.map(schemaOf)).size > 1;
+  const tag = (b: Branch) => (manySchemas ? (labelsOf(schemaOf(b)).raw.title ?? schemaOf(b)) : null);
+  const ctx: BranchContext = { userId: session.id, email: session.email, labels: (r) => labelsOf(r.entry.schema), locale, found: (r) => decoded(r.entry), onOpen, tag };
   const key = (b: Branch) => b.yourLatest.entry.id!;
   const toggle = (b: Branch) =>
     setUnfolded((prev) => {
@@ -106,7 +132,9 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
       return next;
     });
 
-  const all = state.s === "done" ? state.branches : [];
+  const everything = state.s === "done" ? state.branches : [];
+  const schemaSlugs = [...new Set(everything.map(schemaOf))];
+  const all = everything.filter((b) => !schemaFilter || schemaOf(b) === schemaFilter);
   const shown = all.filter(FILTERS.find((f) => f.id === filter)!.test);
   const grouped = GROUPS.map((g) => ({ id: g.id, list: shown.filter(g.test) })).filter((g) => g.list.length);
 
@@ -150,6 +178,7 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
                         </span>
                         <span className="sub">
                           <span className="mono id-sub">{shortId(cur.entry.componentId)}</span>
+                          {tag(b) && <span className="bh-tag">{tag(b)}</span>}
                           <span className="status-inline">
                             <StatusPill branch={b} />
                           </span>
@@ -207,7 +236,20 @@ export function MyEntries({ source, schema, labels, onOpen }: { source: RecordSo
           {t(`save.errors.${state.code}`, { defaultValue: t("save.errors.other", { code: state.code }) })}
         </p>
       )}
-      {state.s === "done" && !all.length && <p>{t("mine.empty")}</p>}
+      {state.s === "done" && !everything.length && <p>{t("mine.empty")}</p>}
+      {everything.length > 0 && (
+        <label className="admin-user">
+          <span className="muted small">{t("mine.schema")}</span>
+          <select value={schemaFilter} onChange={(e) => setSchemaFilter(e.target.value)}>
+            <option value="">{t("mine.allSchemas", { count: everything.length })}</option>
+            {schemaSlugs.map((slug) => (
+              <option key={slug} value={slug}>
+                {labelsOf(slug).raw.title ?? slug} ({everything.filter((b) => schemaOf(b) === slug).length})
+              </option>
+            ))}
+          </select>
+        </label>
+      )}
       {all.length > 0 && (
         <div className="mine-filters" role="radiogroup" aria-label={t("mine.filter")}>
           {FILTERS.map((f) => {

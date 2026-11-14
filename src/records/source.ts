@@ -31,10 +31,10 @@ export interface RecordSource {
   latest(schema: LoadedSchema, componentId: string, revision: number | null): Promise<Entry[]>;
   /** adds entries after the given leaves (several entries = a split) and returns their ids */
   append?(predecessors: string[], entries: Entry[]): Promise<string[]>;
-  /** every entry a user saved in this schema, newest first */
-  mine?(schema: LoadedSchema, userId: string): Promise<Entry[]>;
+  /** every entry a user saved, in any schema, newest first */
+  mine?(userId: string): Promise<Entry[]>;
   /** the given entries plus every entry connected to them (ancestors, descendants, their other branches) */
-  related?(schema: LoadedSchema, entries: Entry[]): Promise<Entry[]>;
+  related?(entries: Entry[]): Promise<Entry[]>;
 }
 
 /** <slug>/records/<32 hex id>.json: { payload (base45), savedAt?, history? }; 404 means nothing is known */
@@ -73,6 +73,6 @@ export const fallbackSource = (primary: RecordSource, fallback: RecordSource): R
     return fallback.latest(schema, componentId, revision);
   },
   append: primary.append && ((predecessors, entries) => primary.append!(predecessors, entries)),
-  mine: primary.mine && ((schema, userId) => primary.mine!(schema, userId)),
-  related: primary.related && ((schema, entries) => primary.related!(schema, entries)),
+  mine: primary.mine && ((userId) => primary.mine!(userId)),
+  related: primary.related && ((entries) => primary.related!(entries)),
 });

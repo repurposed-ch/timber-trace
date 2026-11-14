@@ -249,7 +249,9 @@
       "upToDate": "À jour",
       "split": "Divisé / assemblé"
     },
-    "noneMatch": "Rien ne correspond à ce filtre."
+    "noneMatch": "Rien ne correspond à ce filtre.",
+    "schema": "Schéma",
+    "allSchemas": "Tous les schémas ({{count}})"
   },
   "admin": {
     "title": "Toutes les entrées",

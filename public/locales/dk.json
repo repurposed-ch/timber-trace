@@ -249,7 +249,9 @@
       "upToDate": "Opdateret",
       "split": "Delt / samlet"
     },
-    "noneMatch": "Intet matcher dette filter."
+    "noneMatch": "Intet matcher dette filter.",
+    "schema": "Skema",
+    "allSchemas": "Alle skemaer ({{count}})"
   },
   "admin": {
     "title": "Alle poster",

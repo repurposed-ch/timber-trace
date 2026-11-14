@@ -249,7 +249,9 @@
       "upToDate": "Up to date",
       "split": "Split / joined"
     },
-    "noneMatch": "Nothing matches this filter."
+    "noneMatch": "Nothing matches this filter.",
+    "schema": "Schema",
+    "allSchemas": "All schemas ({{count}})"
   },
   "admin": {
     "title": "All entries",

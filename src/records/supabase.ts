@@ -99,8 +99,8 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
       const rows = entries.map((e) => ({ schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
       return rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
     },
-    mine: (schema, userId) => select(cfg, fetcher, { created_by: `eq.${userId}`, schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "500" }),
-    async related(_schema, entries) {
+    mine: (userId) => select(cfg, fetcher, { created_by: `eq.${userId}`, order: "created_at.desc", limit: "500" }),
+    async related(entries) {
       // walk the graph both ways from the given entries until nothing new turns up
       const known = new Map(entries.map((e) => [e.id!, e]));
       const askedUp = new Set<string>();

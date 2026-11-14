@@ -12,7 +12,8 @@ import { BranchGraph, type GraphRow } from "./BranchGraph";
 export type BranchContext = {
   userId: string;
   email: string;
-  labels: Labels;
+  /** labels of the schema an entry belongs to */
+  labels: (r: MineRow) => Labels;
   locale: string;
   found: (r: MineRow) => Found | null;
   onOpen: (f: Found) => void;
@@ -22,6 +23,8 @@ export type BranchContext = {
   emails?: Map<string, string>;
   /** entry ids an admin hid; shown greyed */
   hidden?: Set<string>;
+  /** a short note in each branch header, e.g. the schema when several are shown */
+  tag?: (b: Branch) => string | null;
   /** extra controls after an entry, e.g. hide / unhide */
   actions?: (row: MineRow) => ReactNode;
 };
@@ -69,7 +72,8 @@ export function StatusPill({ branch, short, ctx }: { branch: Branch; short?: boo
 export const shortId = (id: string) => `${id.slice(0, 8)}…${id.slice(-4)}`;
 export const branchName = (b: Branch, ctx: BranchContext, unreadable: string) => {
   const f = ctx.found(b.latest.length === 1 ? b.latest[0] : b.yourLatest);
-  return f ? beamName(f.data, ctx.labels) : unreadable;
+  const r = b.latest.length === 1 ? b.latest[0] : b.yourLatest;
+  return f ? beamName(f.data, ctx.labels(r)) : unreadable;
 };
 
 /** the facts an entry changed against the one before it (none for first versions and joins) */
@@ -79,7 +83,7 @@ function Changes({ row, branch, ctx, max }: { row: MineRow; branch: Branch; ctx:
   const prev = branch.all.find((r) => r.entry.id === preds[0]);
   const [a, b] = [prev && ctx.found(prev), ctx.found(row)];
   if (!a || !b) return null;
-  const changes = entryChanges(a, b, ctx.labels, max);
+  const changes = entryChanges(a, b, ctx.labels(row), max);
   return (
     <>
       {changes.map((c) => (
@@ -161,6 +165,7 @@ export function BranchCard({ branch, ctx, detail, extra }: { branch: Branch; ctx
             </span>
             <span>·</span>
             <span>{t("mine.entries", { count: branch.all.length })}</span>
+            {ctx.tag?.(branch) && <span className="bh-tag">· {ctx.tag(branch)}</span>}
           </div>
         </div>
         <StatusPill branch={branch} ctx={ctx} />

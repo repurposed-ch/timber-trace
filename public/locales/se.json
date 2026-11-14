@@ -249,7 +249,9 @@
       "upToDate": "Aktuell",
       "split": "Delad / sammanfogad"
     },
-    "noneMatch": "Inget matchar det här filtret."
+    "noneMatch": "Inget matchar det här filtret.",
+    "schema": "Schema",
+    "allSchemas": "Alla scheman ({{count}})"
   },
   "admin": {
     "title": "Alla poster",

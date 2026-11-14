@@ -249,7 +249,9 @@
       "upToDate": "Actueel",
       "split": "Gesplitst / samengevoegd"
     },
-    "noneMatch": "Niets past bij dit filter."
+    "noneMatch": "Niets past bij dit filter.",
+    "schema": "Schema",
+    "allSchemas": "Alle schema's ({{count}})"
   },
   "admin": {
     "title": "Alle invoer",

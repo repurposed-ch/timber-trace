@@ -200,9 +200,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       {tab === "mine" && (
         <MyEntries
           source={records}
-          schema={schema}
-          labels={labels}
           onOpen={(f) => {
+            // an entry of another schema opens on that schema's page
+            if (f.entry.schema !== slug) return location.assign(`${schemaUrl(f.entry.schema)}${f.payload}`);
             load({ payload: f.payload, data: f.data });
             setTab("record");
           }}

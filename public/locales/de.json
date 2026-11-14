@@ -249,7 +249,9 @@
       "upToDate": "Aktuell",
       "split": "Aufgeteilt / zusammengefügt"
     },
-    "noneMatch": "Nichts passt zu diesem Filter."
+    "noneMatch": "Nichts passt zu diesem Filter.",
+    "schema": "Schema",
+    "allSchemas": "Alle Schemas ({{count}})"
   },
   "admin": {
     "title": "Alle Einträge",

@@ -249,7 +249,9 @@
       "upToDate": "Aggiornato",
       "split": "Diviso / unito"
     },
-    "noneMatch": "Niente corrisponde a questo filtro."
+    "noneMatch": "Niente corrisponde a questo filtro.",
+    "schema": "Schema",
+    "allSchemas": "Tutti gli schemi ({{count}})"
   },
   "admin": {
     "title": "Tutte le voci",
