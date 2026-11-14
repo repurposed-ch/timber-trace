@@ -59,7 +59,7 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
 
 ## hello-world schema v3
 
-v2 plus two fields (3 bits more):
+v2 plus two fields (4 bits more, only when the grade or the verification is recorded):
 
 - **Grade basis**: `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
 - **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. Older codes show "scope not stated".
