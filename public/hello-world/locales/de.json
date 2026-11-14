@@ -190,6 +190,7 @@
       "custom": "Eigene Angabe"
     },
     "grade.basis": {
+      "unknown": "Unbekannt",
       "original": "Originaldokumentation",
       "reassessed": "Spätere Beurteilung"
     },

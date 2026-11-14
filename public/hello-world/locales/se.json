@@ -190,6 +190,7 @@
       "custom": "Anpassad"
     },
     "grade.basis": {
+      "unknown": "Okänd",
       "original": "Ursprunglig dokumentation",
       "reassessed": "Senare bedömning"
     },

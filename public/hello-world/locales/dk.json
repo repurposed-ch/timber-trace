@@ -190,6 +190,7 @@
       "custom": "Brugerdefineret"
     },
     "grade.basis": {
+      "unknown": "Ukendt",
       "original": "Oprindelig dokumentation",
       "reassessed": "Senere vurdering"
     },

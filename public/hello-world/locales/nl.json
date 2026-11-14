@@ -190,6 +190,7 @@
       "custom": "Aangepast"
     },
     "grade.basis": {
+      "unknown": "Onbekend",
       "original": "Oorspronkelijke documentatie",
       "reassessed": "Latere beoordeling"
     },
