@@ -11,8 +11,10 @@ const v2 = loaded.versions.get(2)!;
 const roundTrip = (record: any, base: any = BASE45) => decodeRecord(loaded, encodeRecord(v2, record, base), base);
 
 describe("schema v2", () => {
-  test("is the latest version", () => {
-    expect(loaded.latest).toBe(2);
+  test("v2 codes still decode as v2", () => {
+    const r = decodeRecord(loaded, encodeRecord(v2, fullRecordV2));
+    expect(r.version).toBe(2);
+    expect(r.data).toEqual(fullRecordV2);
   });
 
   for (const [name, base] of [["base45", BASE45], ["url-safe", URL_SAFE]] as const) {

@@ -57,6 +57,13 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
   - The full history lives in the record's database entry (or the static file), not in the code.
 - **Revision and provenance**: revision number and date; supplied by and verified by, as role + party ID + date (no names in the code). The update check compares revision numbers.
 
+## hello-world schema v3
+
+v2 plus two fields (3 bits more):
+
+- **Grade basis**: `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
+- **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. Older codes show "scope not stated".
+
 ## Database (Supabase)
 
 Every saved state of a component is an **entry** in one table, `public.entries`. Entries are never changed. A new state is a new entry that lists the entries it continues as `predecessors`, so entries form a DAG; successors aren't stored but derived.

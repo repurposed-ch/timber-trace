@@ -90,3 +90,13 @@ export const unknownRecordV2 = {
   supplied: { status: "unknown" },
   verified: { status: "unknown" },
 };
+
+/** v3: the grade states its basis, a verification states what was checked */
+export const fullRecordV3 = {
+  ...fullRecordV2,
+  version: 3,
+  grade: { status: "recorded", class: { kind: "known", value: "GL24h" }, basis: "reassessed", source: "visual", standard: "SIA265" },
+  verified: { status: "known", role: "engineer", party: 77, date: { status: "known", day: 20767 }, checked: { provenance: true, condition: true, suitability: false } },
+};
+
+export const unknownRecordV3 = { ...unknownRecordV2, version: 3, id: [0, 0, 0, 3] };

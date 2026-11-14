@@ -24,6 +24,7 @@
     "grade.class": "Klasse",
     "grade.class.value": "Klasse",
     "grade.class.text": "Klasseaanduiding",
+    "grade.basis": "Basis",
     "grade.source": "Bron van de sortering",
     "grade.standard": "Sorteringsnorm",
     "assessments": "Beoordelingen",
@@ -73,7 +74,11 @@
     "verified.role": "Rol",
     "verified.party": "Partij-ID",
     "verified.date": "Datum",
-    "verified.date.day": "Datum"
+    "verified.date.day": "Datum",
+    "verified.checked": "Wat is gecontroleerd",
+    "verified.checked.provenance": "Herkomst",
+    "verified.checked.condition": "Staat",
+    "verified.checked.suitability": "Geschiktheid voor gebruik"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "Uit lijst",
       "custom": "Aangepast"
+    },
+    "grade.basis": {
+      "original": "Oorspronkelijke documentatie",
+      "reassessed": "Latere beoordeling"
     },
     "grade.source": {
       "visual": "Visuele sortering",

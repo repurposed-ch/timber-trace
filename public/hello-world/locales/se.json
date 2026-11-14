@@ -24,6 +24,7 @@
     "grade.class": "Klass",
     "grade.class.value": "Klass",
     "grade.class.text": "Klassbeteckning",
+    "grade.basis": "Underlag",
     "grade.source": "Sorteringskälla",
     "grade.standard": "Sorteringsstandard",
     "assessments": "Bedömningar",
@@ -73,7 +74,11 @@
     "verified.role": "Roll",
     "verified.party": "Part-ID",
     "verified.date": "Datum",
-    "verified.date.day": "Datum"
+    "verified.date.day": "Datum",
+    "verified.checked": "Vad som kontrollerades",
+    "verified.checked.provenance": "Ursprung",
+    "verified.checked.condition": "Skick",
+    "verified.checked.suitability": "Lämplighet för användning"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "Från lista",
       "custom": "Anpassad"
+    },
+    "grade.basis": {
+      "original": "Ursprunglig dokumentation",
+      "reassessed": "Senare bedömning"
     },
     "grade.source": {
       "visual": "Visuell sortering",
