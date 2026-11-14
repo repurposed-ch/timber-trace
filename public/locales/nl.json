@@ -256,7 +256,7 @@
   "admin": {
     "title": "Alle invoer",
     "only": "Alleen beheerders kunnen deze pagina zien.",
-    "intro": "Alle invoer van dit schema, van alle gebruikers. Verborgen invoer is alleen hier zichtbaar.",
+    "intro": "Alle invoer van alle gebruikers, in alle schema's. Verborgen invoer is alleen hier zichtbaar.",
     "empty": "Nog geen invoer.",
     "hidden": "Verborgen",
     "hiddenCount_one": "{{count}} verborgen",

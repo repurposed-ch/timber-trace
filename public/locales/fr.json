@@ -256,7 +256,7 @@
   "admin": {
     "title": "Toutes les entrées",
     "only": "Seuls les admins peuvent voir cette page.",
-    "intro": "Toutes les entrées de ce schéma, de tous les utilisateurs. Les entrées masquées ne sont visibles qu'ici.",
+    "intro": "Toutes les entrées de tous les utilisateurs, dans tous les schémas. Les entrées masquées ne sont visibles qu'ici.",
     "empty": "Aucune entrée pour l'instant.",
     "hidden": "Masquée",
     "hiddenCount_one": "{{count}} masquée",

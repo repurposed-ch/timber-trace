@@ -185,9 +185,9 @@ describe("admin calls", () => {
     expect(await admin.hide("e2", "spam")).toBe(2);
     expect(JSON.parse(calls.find((c) => c.url.endsWith("/rpc/admin_hide"))!.init.body as string)).toEqual({ entry: "e2", reason: "spam" });
     expect(await admin.unhide("e2")).toBe(2);
-    await admin.all(loaded);
+    await admin.all();
     const all = calls.find((c) => c.url.includes("/rest/v1/entries?"))!;
-    expect(all.url).toContain("schema=eq.hello-world");
+    expect(all.url).not.toContain("schema=");
     expect(calls.every((c) => (c.init.headers as any).Authorization === "Bearer jwt")).toBe(true);
   });
   test("need a sign-in", async () => {

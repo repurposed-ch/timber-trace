@@ -256,7 +256,7 @@
   "admin": {
     "title": "Tutte le voci",
     "only": "Solo gli admin possono vedere questa pagina.",
-    "intro": "Tutte le voci di questo schema, di tutti gli utenti. Le voci nascoste sono visibili solo qui.",
+    "intro": "Tutte le voci di tutti gli utenti, in tutti gli schemi. Le voci nascoste sono visibili solo qui.",
     "empty": "Ancora nessuna voce.",
     "hidden": "Nascosta",
     "hiddenCount_one": "{{count}} nascosta",

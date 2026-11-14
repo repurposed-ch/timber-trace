@@ -256,7 +256,7 @@
   "admin": {
     "title": "Alla poster",
     "only": "Bara administratörer kan se den här sidan.",
-    "intro": "Alla poster i det här schemat, från alla användare. Dolda poster syns bara här.",
+    "intro": "Alla poster från alla användare, i alla scheman. Dolda poster syns bara här.",
     "empty": "Inga poster än.",
     "hidden": "Dold",
     "hiddenCount_one": "{{count}} dold",

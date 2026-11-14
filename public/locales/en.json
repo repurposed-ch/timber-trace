@@ -256,7 +256,7 @@
   "admin": {
     "title": "All entries",
     "only": "Only admins can see this page.",
-    "intro": "Every entry in this schema, from every user. Hidden entries are only visible here.",
+    "intro": "Every entry from every user, in every schema. Hidden entries are only visible here.",
     "empty": "No entries yet.",
     "hidden": "Hidden",
     "hiddenCount_one": "{{count}} hidden",

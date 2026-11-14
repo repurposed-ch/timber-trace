@@ -1,4 +1,3 @@
-import type { LoadedSchema } from "../schema/loader";
 import type { Entry, RecordSource } from "./source";
 
 export type SupabaseConfig = { url: string; key: string };
@@ -123,8 +122,8 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
 
 export type Hidden = { entryId: string; root: string; reason: string | null; hiddenAt: string };
 export type AdminSource = {
-  /** every entry of a schema, hidden ones included, newest first */
-  all(schema: LoadedSchema): Promise<Entry[]>;
+  /** every entry of every schema, hidden ones included, newest first */
+  all(): Promise<Entry[]>;
   /** user id → email */
   users(): Promise<Map<string, string>>;
   hidden(): Promise<Hidden[]>;
@@ -142,7 +141,7 @@ export function supabaseAdmin(cfg: SupabaseConfig, fetcher: Fetch = (url, init) 
     return t;
   };
   return {
-    all: async (schema) => select(cfg, fetcher, { schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "2000" }, await jwt()),
+    all: async () => select(cfg, fetcher, { order: "created_at.desc", limit: "2000" }, await jwt()),
     async users() {
       const rows = await rpc<{ id: string; email: string }[]>(cfg, "admin_users", {}, fetcher, await jwt());
       return new Map(rows.map((u) => [u.id, u.email]));

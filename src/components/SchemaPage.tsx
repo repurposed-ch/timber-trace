@@ -105,6 +105,13 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     setMode("view");
   };
 
+  // an entry from My entries / All entries: in place for this schema, else on its own schema's page
+  const openEntry = (f: { entry: { schema: string }; payload: string; data: any }) => {
+    if (f.entry.schema !== slug) return location.assign(`${schemaUrl(f.entry.schema)}${f.payload}`);
+    load({ payload: f.payload, data: f.data });
+    setTab("record");
+  };
+
   // keep the record link (/<slug>/<payload>) in the address bar, canonical lowercase slug; on Scan
   // and Schema only when a record was opened, so those pages don't show a made-up record's link
   useEffect(() => {
@@ -198,27 +205,11 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         </div>
       )}
       {tab === "mine" && (
-        <MyEntries
-          source={records}
-          onOpen={(f) => {
-            // an entry of another schema opens on that schema's page
-            if (f.entry.schema !== slug) return location.assign(`${schemaUrl(f.entry.schema)}${f.payload}`);
-            load({ payload: f.payload, data: f.data });
-            setTab("record");
-          }}
-        />
+        <MyEntries source={records} onOpen={openEntry} />
       )}
       {tab === "admin" && (
         <Suspense fallback={<p className="muted">{t("mine.loading", { ns: "ui" })}</p>}>
-        <AdminEntries
-          admin={adminSource}
-          schema={schema}
-          labels={labels}
-          onOpen={(f) => {
-            load({ payload: f.payload, data: f.data });
-            setTab("record");
-          }}
-        />
+        <AdminEntries admin={adminSource} onOpen={openEntry} />
         </Suspense>
       )}
       {tab === "schema" && (

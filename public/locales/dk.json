@@ -256,7 +256,7 @@
   "admin": {
     "title": "Alle poster",
     "only": "Kun administratorer kan se denne side.",
-    "intro": "Alle poster i dette skema fra alle brugere. Skjulte poster kan kun ses her.",
+    "intro": "Alle poster fra alle brugere i alle skemaer. Skjulte poster kan kun ses her.",
     "empty": "Ingen poster endnu.",
     "hidden": "Skjult",
     "hiddenCount_one": "{{count}} skjult",

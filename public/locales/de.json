@@ -256,7 +256,7 @@
   "admin": {
     "title": "Alle Einträge",
     "only": "Nur Admins können diese Seite sehen.",
-    "intro": "Alle Einträge dieses Schemas, von allen Nutzern. Ausgeblendete Einträge sind nur hier sichtbar.",
+    "intro": "Alle Einträge aller Nutzer, in allen Schemas. Ausgeblendete Einträge sind nur hier sichtbar.",
     "empty": "Noch keine Einträge.",
     "hidden": "Ausgeblendet",
     "hiddenCount_one": "{{count}} ausgeblendet",
