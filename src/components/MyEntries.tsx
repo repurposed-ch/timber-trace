@@ -7,14 +7,12 @@ import { branchStatus, branches, type Branch } from "../records/mine";
 import { relativeDate } from "../records/relative";
 import type { Entry, RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
-import { makeLabels, type SchemaLabels } from "../schema/labels";
-import { loadSchema, type LoadedSchema } from "../schema/loader";
-import { read, type Labels } from "../state/useSchema";
+import type { LoadedSchema } from "../schema/loader";
+import { labelsBySlug, loadSchemaSet } from "../state/schemaSet";
 import { Avatar, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
 
 // entries of every schema; each branch is decoded and labelled with its own schema
 type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[]; schemas: Map<string, LoadedSchema> };
-const EMPTY: SchemaLabels = { fields: {}, options: {} };
 
 /** how much of each branch to show: a table of what's current, the key points, or everything */
 export const DETAILS = ["latest", "overview", "full"] as const;
@@ -82,10 +80,8 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
       const mine = await source.mine!(userId);
       const all = source.related && mine.length ? await source.related(mine) : mine;
       // every schema these entries use, and its labels, once
-      const slugs = [...new Set(all.map((e) => e.schema))];
-      const loaded = await Promise.all(slugs.map((slug) => loadSchema(slug, read).then((s) => [slug, s] as const, () => null)));
-      await i18n.loadNamespaces(slugs);
-      return { branches: branches(all, userId), schemas: new Map(loaded.filter((x) => x !== null)) };
+      const schemas = await loadSchemaSet([...new Set(all.map((e) => e.schema))], i18n);
+      return { branches: branches(all, userId), schemas };
     })()
       .then((r) => alive && setState({ s: "done", ...r }))
       .catch((e) => alive && setState({ s: "error", code: e?.code ?? "network" }));
@@ -109,17 +105,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
     );
 
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
-  const lng = i18n.resolvedLanguage ?? "en";
-  const labelCache = new Map<string, Labels>();
-  const labelsOf = (slug: string) => {
-    if (!labelCache.has(slug)) {
-      const raw = (i18n.getResourceBundle(lng, slug) as SchemaLabels | undefined) ?? EMPTY;
-      const fallback = (i18n.getResourceBundle("en", slug) as SchemaLabels | undefined) ?? EMPTY;
-      const countries = state.s === "done" ? (state.schemas.get(slug)?.meta.countryEnums ?? []) : [];
-      labelCache.set(slug, makeLabels(raw, fallback, lng, countries, t("form.unknown")));
-    }
-    return labelCache.get(slug)!;
-  };
+  const labelsOf = labelsBySlug(i18n, state.s === "done" ? state.schemas : undefined, t("form.unknown"));
   // the schema's name next to each branch, as soon as entries span more than one
   const manySchemas = state.s === "done" && new Set(state.branches.map(schemaOf)).size > 1;
   const tag = (b: Branch) => (manySchemas ? (labelsOf(schemaOf(b)).raw.title ?? schemaOf(b)) : null);
