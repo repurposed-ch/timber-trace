@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { makeLabels } from "../schema/labels";
-import { fullRecord, fullRecordV2, readPublic, unknownRecordV2 } from "../schema/testing";
+import { fullRecord, fullRecordV2, fullRecordV3, readPublic, unknownRecordV2 } from "../schema/testing";
 import { compareRecords, provenance } from "./revision";
 
 const at = (n: number, payload = `P${n}`) => ({ payload, data: { ...fullRecordV2, revision: { number: n, date: { status: "unknown" } } } });
@@ -28,7 +28,13 @@ describe("provenance line", async () => {
 
   test("revision, supplier and verifier with dates", () => {
     expect(provenance(fullRecordV2, labels, t, "en-GB")).toBe(
-      "Revision 3 · 10 Nov 2026 · Supplied: Dismantler #1042, 4 Sept 2026 · Verified: Structural engineer #77, 10 Nov 2026",
+      "Revision 3 · 10 Nov 2026 · Supplied: Dismantler #1042, 4 Sept 2026 · Verified: Structural engineer #77, 10 Nov 2026 (scope not stated)",
+    );
+  });
+
+  test("v3 says what the verification covered", () => {
+    expect(provenance(fullRecordV3, labels, t, "en-GB")).toBe(
+      "Revision 3 · 10 Nov 2026 · Supplied: Dismantler #1042, 4 Sept 2026 · Verified: Structural engineer #77, 10 Nov 2026 (Provenance, Condition)",
     );
   });
 

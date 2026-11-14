@@ -160,6 +160,7 @@
     "revision": "Revisione {{n}}",
     "supplied": "Fornito: {{who}}",
     "verified": "Verificato: {{who}}",
+    "noScope": "ambito non indicato",
     "supplierUnknown": "Fornitore sconosciuto",
     "notVerified": "Non verificato"
   },

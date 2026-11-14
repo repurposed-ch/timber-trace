@@ -160,6 +160,7 @@
     "revision": "Revision {{n}}",
     "supplied": "Leveret: {{who}}",
     "verified": "Verificeret: {{who}}",
+    "noScope": "omfang ikke angivet",
     "supplierUnknown": "Leverandør ukendt",
     "notVerified": "Ikke verificeret"
   },
