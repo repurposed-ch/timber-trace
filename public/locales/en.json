@@ -46,7 +46,8 @@
     "more": "More",
     "menu": "Menu",
     "newRecord": "New record",
-    "mine": "My entries"
+    "mine": "My entries",
+    "admin": "All entries"
   },
   "form": {
     "title": "Component record",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "The revision number must be higher than the saved one.",
       "duplicate": "This code (ID and revision) is already saved.",
       "network": "No connection to the database. Try again.",
-      "other": "Couldn't save ({{code}})."
+      "other": "Couldn't save ({{code}}).",
+      "not_admin": "Only admins can do this.",
+      "hidden": "This entry is hidden and can't be continued."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Split / joined"
     },
     "noneMatch": "Nothing matches this filter."
+  },
+  "admin": {
+    "title": "All entries",
+    "only": "Only admins can see this page.",
+    "intro": "Every entry in this schema, from every user. Hidden entries are only visible here.",
+    "empty": "No entries yet.",
+    "hidden": "Hidden",
+    "hiddenCount_one": "{{count}} hidden",
+    "hiddenCount_other": "{{count}} hidden",
+    "shape": {
+      "linear": "Single line",
+      "split": "Split",
+      "joined": "Joined"
+    },
+    "user": "User",
+    "allUsers_one": "All users ({{count}})",
+    "allUsers_other": "All users ({{count}})",
+    "showHidden": "Show hidden ({{count}})",
+    "hide": "Hide…",
+    "unhide": "Unhide",
+    "reason": "Hide this entry and everything that continues it? Optional reason:",
+    "hiddenDone_one": "{{count}} entry hidden.",
+    "hiddenDone_other": "{{count}} entries hidden.",
+    "unhidden_one": "{{count}} entry shown again.",
+    "unhidden_other": "{{count}} entries shown again."
   }
 }

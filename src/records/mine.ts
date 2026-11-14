@@ -35,8 +35,13 @@ export type Branch = {
 
 const time = (e: Entry) => (e.savedAt ? Date.parse(e.savedAt) : 0);
 
-/** groups the user's entries (with everything connected to them) into branches, most recent first */
-export function branches(entries: Entry[], userId: string): Branch[] {
+/**
+ * Groups entries into branches (connected parts of the graph), most recent first. Only branches with
+ * an entry in focus are kept; "your latest edit" is the newest entry in focus. `focus` is a user id
+ * (their entries) or any check, e.g. all entries for an admin.
+ */
+export function branches(entries: Entry[], focus: string | ((e: Entry) => boolean)): Branch[] {
+  const inFocus = typeof focus === "string" ? (e: Entry) => e.createdBy === focus : focus;
   const byId = new Map(entries.map((e) => [e.id!, e]));
   const succ = new Map<string, string[]>();
   for (const e of entries) for (const p of e.predecessors ?? []) if (byId.has(p)) succ.set(p, [...(succ.get(p) ?? []), e.id!]);
@@ -72,7 +77,7 @@ export function branches(entries: Entry[], userId: string): Branch[] {
   const out: Branch[] = [];
   for (let i = 0; i < n; i++) {
     const members = entries.filter((e) => part.get(e.id!) === i);
-    const mine = members.filter((e) => e.createdBy === userId);
+    const mine = members.filter(inFocus);
     if (!mine.length) continue;
     const yours = mine.reduce((a, b) => (time(b) > time(a) ? b : a));
     const before = walk(yours.id!, up);
@@ -145,4 +150,24 @@ export function lanes(entries: Entry[]): { cols: number[]; edges: [number, numbe
     if (!remaining.get(e.id!)) open[c] = null;
   });
   return { cols, edges, width: Math.max(1, ...cols.map((c) => c + 1)) };
+}
+
+/** the shape of a whole branch, for views without a "your edit" (an admin looking at everyone's) */
+export type OverallStatus = "linear" | "split" | "joined";
+export function overallStatus(b: Branch): OverallStatus {
+  if (b.all.some((r) => r.kind === "join")) return "joined";
+  if (b.all.some((r) => r.kind === "split")) return "split";
+  return "linear";
+}
+
+/** key points of a whole branch: first versions … latest; one row when they are the same */
+export function overallKeyRows(b: Branch): KeyRow[] {
+  const ids = new Set(b.all.map((r) => r.entry.id));
+  const first = b.all.filter((r) => !(r.entry.predecessors ?? []).some((p) => ids.has(p)) && !r.latest);
+  const last = b.all.filter((r) => r.latest);
+  const skipped = b.all.length - first.length - last.length;
+  const out: KeyRow[] = first.map((row) => ({ type: "row", row, role: "started" }));
+  if (skipped > 0) out.push({ type: "gap", count: skipped });
+  for (const row of last) out.push({ type: "row", row, role: "now" });
+  return out;
 }

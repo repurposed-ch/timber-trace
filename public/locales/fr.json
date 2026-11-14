@@ -46,7 +46,8 @@
     "more": "Plus",
     "menu": "Menu",
     "newRecord": "Nouvelle fiche",
-    "mine": "Mes entrées"
+    "mine": "Mes entrées",
+    "admin": "Toutes les entrées"
   },
   "form": {
     "title": "Fiche de l'élément",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Le numéro de révision doit être supérieur à celui enregistré.",
       "duplicate": "Ce code (ID et révision) est déjà enregistré.",
       "network": "Pas de connexion à la base de données. Réessayez.",
-      "other": "Échec de l'enregistrement ({{code}})."
+      "other": "Échec de l'enregistrement ({{code}}).",
+      "not_admin": "Seuls les admins peuvent faire cela.",
+      "hidden": "Cette entrée est masquée et ne peut pas être poursuivie."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Divisé / assemblé"
     },
     "noneMatch": "Rien ne correspond à ce filtre."
+  },
+  "admin": {
+    "title": "Toutes les entrées",
+    "only": "Seuls les admins peuvent voir cette page.",
+    "intro": "Toutes les entrées de ce schéma, de tous les utilisateurs. Les entrées masquées ne sont visibles qu'ici.",
+    "empty": "Aucune entrée pour l'instant.",
+    "hidden": "Masquée",
+    "hiddenCount_one": "{{count}} masquée",
+    "hiddenCount_other": "{{count}} masquées",
+    "shape": {
+      "linear": "Ligne simple",
+      "split": "Divisé",
+      "joined": "Assemblé"
+    },
+    "user": "Utilisateur",
+    "allUsers_one": "Tous ({{count}})",
+    "allUsers_other": "Tous ({{count}})",
+    "showHidden": "Afficher les masquées ({{count}})",
+    "hide": "Masquer…",
+    "unhide": "Réafficher",
+    "reason": "Masquer cette entrée et tout ce qui la poursuit ? Raison (facultative) :",
+    "hiddenDone_one": "{{count}} entrée masquée.",
+    "hiddenDone_other": "{{count}} entrées masquées.",
+    "unhidden_one": "{{count}} entrée réaffichée.",
+    "unhidden_other": "{{count}} entrées réaffichées."
   }
 }

@@ -46,7 +46,8 @@
     "more": "Altro",
     "menu": "Menu",
     "newRecord": "Nuova scheda",
-    "mine": "Le mie voci"
+    "mine": "Le mie voci",
+    "admin": "Tutte le voci"
   },
   "form": {
     "title": "Scheda dell'elemento",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Il numero di revisione deve essere più alto di quello salvato.",
       "duplicate": "Questo codice (ID e revisione) è già salvato.",
       "network": "Nessuna connessione al database. Riprova.",
-      "other": "Salvataggio non riuscito ({{code}})."
+      "other": "Salvataggio non riuscito ({{code}}).",
+      "not_admin": "Solo gli admin possono farlo.",
+      "hidden": "Questa voce è nascosta e non può essere proseguita."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Diviso / unito"
     },
     "noneMatch": "Niente corrisponde a questo filtro."
+  },
+  "admin": {
+    "title": "Tutte le voci",
+    "only": "Solo gli admin possono vedere questa pagina.",
+    "intro": "Tutte le voci di questo schema, di tutti gli utenti. Le voci nascoste sono visibili solo qui.",
+    "empty": "Ancora nessuna voce.",
+    "hidden": "Nascosta",
+    "hiddenCount_one": "{{count}} nascosta",
+    "hiddenCount_other": "{{count}} nascoste",
+    "shape": {
+      "linear": "Linea singola",
+      "split": "Diviso",
+      "joined": "Unito"
+    },
+    "user": "Utente",
+    "allUsers_one": "Tutti ({{count}})",
+    "allUsers_other": "Tutti ({{count}})",
+    "showHidden": "Mostra nascoste ({{count}})",
+    "hide": "Nascondi…",
+    "unhide": "Mostra",
+    "reason": "Nascondere questa voce e tutto ciò che la prosegue? Motivo (facoltativo):",
+    "hiddenDone_one": "{{count}} voce nascosta.",
+    "hiddenDone_other": "{{count}} voci nascoste.",
+    "unhidden_one": "{{count}} voce di nuovo visibile.",
+    "unhidden_other": "{{count}} voci di nuovo visibili."
   }
 }

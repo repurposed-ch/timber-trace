@@ -1,3 +1,4 @@
+import type { LoadedSchema } from "../schema/loader";
 import type { Entry, RecordSource } from "./source";
 
 export type SupabaseConfig = { url: string; key: string };
@@ -68,18 +69,19 @@ async function rpc<T>(cfg: SupabaseConfig, fn: string, args: unknown, fetcher: F
 // ids per request, so the address stays short
 const chunks = (ids: string[], size = 100) => Array.from({ length: Math.ceil(ids.length / size) }, (_, i) => ids.slice(i * size, (i + 1) * size));
 
-/** GET /rest/v1/entries with PostgREST filters */
-async function select(cfg: SupabaseConfig, fetcher: Fetch, filters: Record<string, string>): Promise<Entry[]> {
+/** GET /rest/v1/<table> with PostgREST filters; with a token the reader's rights apply (admins see hidden entries) */
+async function get<T>(cfg: SupabaseConfig, fetcher: Fetch, table: string, filters: Record<string, string>, token?: string | null): Promise<T[]> {
   const q = new URLSearchParams({ select: "*", ...filters });
   let res: Response;
   try {
-    res = await fetcher(`${cfg.url}/rest/v1/entries?${q}`, { method: "GET", headers: { apikey: cfg.key } });
+    res = await fetcher(`${cfg.url}/rest/v1/${table}?${q}`, { method: "GET", headers: { apikey: cfg.key, ...(token ? { Authorization: `Bearer ${token}` } : {}) } });
   } catch {
     throw new EntryError("network");
   }
   if (!res.ok) throw new EntryError(`http_${res.status}`);
-  return ((await res.json()) as Row[]).map(fromRow);
+  return (await res.json()) as T[];
 }
+const select = async (cfg: SupabaseConfig, fetcher: Fetch, filters: Record<string, string>, token?: string | null) => (await get<Row>(cfg, fetcher, "entries", filters, token)).map(fromRow);
 
 /**
  * Entries in the Supabase `entries` table over plain fetch (no client library in the main bundle).
@@ -116,5 +118,40 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
       }
       return [...known.values()];
     },
+  };
+}
+
+export type Hidden = { entryId: string; root: string; reason: string | null; hiddenAt: string };
+export type AdminSource = {
+  /** every entry of a schema, hidden ones included, newest first */
+  all(schema: LoadedSchema): Promise<Entry[]>;
+  /** user id → email */
+  users(): Promise<Map<string, string>>;
+  hidden(): Promise<Hidden[]>;
+  /** hides an entry with everything that continues it; returns how many */
+  hide(entryId: string, reason: string | null): Promise<number>;
+  /** shows again everything hidden together with this entry; returns how many */
+  unhide(entryId: string): Promise<number>;
+};
+
+/** the admin's calls; the database checks the admin role on each of them */
+export function supabaseAdmin(cfg: SupabaseConfig, fetcher: Fetch = (url, init) => fetch(url, init), token: () => Promise<string | null> = async () => null): AdminSource {
+  const jwt = async () => {
+    const t = await token();
+    if (!t) throw new EntryError("signed_out");
+    return t;
+  };
+  return {
+    all: async (schema) => select(cfg, fetcher, { schema: `eq.${schema.meta.slug}`, order: "created_at.desc", limit: "2000" }, await jwt()),
+    async users() {
+      const rows = await rpc<{ id: string; email: string }[]>(cfg, "admin_users", {}, fetcher, await jwt());
+      return new Map(rows.map((u) => [u.id, u.email]));
+    },
+    async hidden() {
+      const rows = await get<{ entry_id: string; root: string; reason: string | null; hidden_at: string }>(cfg, fetcher, "hidden_entries", { order: "hidden_at.desc" }, await jwt());
+      return rows.map((r) => ({ entryId: r.entry_id, root: r.root, reason: r.reason, hiddenAt: r.hidden_at }));
+    },
+    hide: async (entryId, reason) => rpc<number>(cfg, "admin_hide", { entry: entryId, reason }, fetcher, await jwt()),
+    unhide: async (entryId) => rpc<number>(cfg, "admin_unhide", { entry: entryId }, fetcher, await jwt()),
   };
 }

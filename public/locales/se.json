@@ -46,7 +46,8 @@
     "more": "Mer",
     "menu": "Meny",
     "newRecord": "Ny post",
-    "mine": "Mina poster"
+    "mine": "Mina poster",
+    "admin": "Alla poster"
   },
   "form": {
     "title": "Komponentpost",
@@ -191,7 +192,9 @@
       "revision_not_increasing": "Revisionsnumret måste vara högre än det sparade.",
       "duplicate": "Den här koden (ID och revision) är redan sparad.",
       "network": "Ingen anslutning till databasen. Försök igen.",
-      "other": "Kunde inte spara ({{code}})."
+      "other": "Kunde inte spara ({{code}}).",
+      "not_admin": "Bara administratörer kan göra detta.",
+      "hidden": "Den här posten är dold och kan inte fortsättas."
     }
   },
   "mine": {
@@ -247,5 +250,30 @@
       "split": "Delad / sammanfogad"
     },
     "noneMatch": "Inget matchar det här filtret."
+  },
+  "admin": {
+    "title": "Alla poster",
+    "only": "Bara administratörer kan se den här sidan.",
+    "intro": "Alla poster i det här schemat, från alla användare. Dolda poster syns bara här.",
+    "empty": "Inga poster än.",
+    "hidden": "Dold",
+    "hiddenCount_one": "{{count}} dold",
+    "hiddenCount_other": "{{count}} dolda",
+    "shape": {
+      "linear": "Enkel linje",
+      "split": "Delad",
+      "joined": "Sammanfogad"
+    },
+    "user": "Användare",
+    "allUsers_one": "Alla ({{count}})",
+    "allUsers_other": "Alla ({{count}})",
+    "showHidden": "Visa dolda ({{count}})",
+    "hide": "Dölj…",
+    "unhide": "Visa igen",
+    "reason": "Dölj den här posten och allt som fortsätter den? Anledning (valfri):",
+    "hiddenDone_one": "{{count}} post dold.",
+    "hiddenDone_other": "{{count}} poster dolda.",
+    "unhidden_one": "{{count}} post visas igen.",
+    "unhidden_other": "{{count}} poster visas igen."
   }
 }

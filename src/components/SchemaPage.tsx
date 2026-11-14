@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { fallbackSource, staticRecordSource } from "../records/source";
-import { supabaseConfig, supabaseRecordSource } from "../records/supabase";
+import { supabaseAdmin, supabaseConfig, supabaseRecordSource } from "../records/supabase";
 import { accessToken } from "../auth/client";
 import { sortHistory } from "../records/history";
 import { provenance } from "../records/revision";
@@ -33,6 +33,10 @@ import { UpdateBanner } from "./UpdateBanner";
 // the database when configured, the static files as fallback; the UI only sees RecordSource
 const db = supabaseConfig();
 const records = db ? fallbackSource(supabaseRecordSource(db, undefined, accessToken), staticRecordSource(read)) : staticRecordSource(read);
+// the admin page only loads for those who open it
+const AdminEntries = lazy(() => import("./AdminEntries").then((m) => ({ default: m.AdminEntries })));
+// admin calls; the database refuses them for anyone without the admin role
+const adminSource = db ? supabaseAdmin(db, undefined, accessToken) : null;
 type Loaded = { payload: string; data: any } | null;
 
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
@@ -203,6 +207,19 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             setTab("record");
           }}
         />
+      )}
+      {tab === "admin" && (
+        <Suspense fallback={<p className="muted">{t("mine.loading", { ns: "ui" })}</p>}>
+        <AdminEntries
+          admin={adminSource}
+          schema={schema}
+          labels={labels}
+          onOpen={(f) => {
+            load({ payload: f.payload, data: f.data });
+            setTab("record");
+          }}
+        />
+        </Suspense>
       )}
       {tab === "schema" && (
         <div className="card">
