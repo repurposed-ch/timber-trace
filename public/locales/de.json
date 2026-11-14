@@ -110,7 +110,9 @@
     "show": "Neueste anzeigen",
     "field": "Feld",
     "before": "Dieser Code",
-    "after": "Neueste"
+    "after": "Neueste",
+    "changes_one": "{{count}} geändertes Feld",
+    "changes_other": "{{count}} geänderte Felder"
   },
   "schema": {
     "version": "Version {{v}}",

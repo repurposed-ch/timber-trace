@@ -110,7 +110,9 @@
     "show": "Vis nyeste",
     "field": "Felt",
     "before": "Denne kode",
-    "after": "Nyeste"
+    "after": "Nyeste",
+    "changes_one": "{{count}} ændret felt",
+    "changes_other": "{{count}} ændrede felter"
   },
   "schema": {
     "version": "Version {{v}}",

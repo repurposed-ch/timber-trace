@@ -110,7 +110,9 @@
     "show": "Show latest",
     "field": "Field",
     "before": "This code",
-    "after": "Latest"
+    "after": "Latest",
+    "changes_one": "{{count}} changed field",
+    "changes_other": "{{count}} changed fields"
   },
   "schema": {
     "version": "Version {{v}}",

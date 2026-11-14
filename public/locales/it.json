@@ -110,7 +110,9 @@
     "show": "Mostra la più recente",
     "field": "Campo",
     "before": "Questo codice",
-    "after": "Più recente"
+    "after": "Più recente",
+    "changes_one": "{{count}} campo modificato",
+    "changes_other": "{{count}} campi modificati"
   },
   "schema": {
     "version": "Versione {{v}}",

@@ -490,3 +490,5 @@ button.link { border: 0; background: none; padding: 0; color: var(--accent); tex
   .admin-user select { max-width: 10rem; }
 }
 .bh-tag { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.banner summary { cursor: pointer; font-size: .9rem; padding: 2px 0; }
+.banner details table { margin-top: 6px; }

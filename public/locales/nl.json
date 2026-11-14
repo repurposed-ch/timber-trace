@@ -110,7 +110,9 @@
     "show": "Nieuwste tonen",
     "field": "Veld",
     "before": "Deze code",
-    "after": "Nieuwste"
+    "after": "Nieuwste",
+    "changes_one": "{{count}} gewijzigd veld",
+    "changes_other": "{{count}} gewijzigde velden"
   },
   "schema": {
     "version": "Versie {{v}}",

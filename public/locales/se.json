@@ -110,7 +110,9 @@
     "show": "Visa senaste",
     "field": "Fält",
     "before": "Denna kod",
-    "after": "Senaste"
+    "after": "Senaste",
+    "changes_one": "{{count}} ändrat fält",
+    "changes_other": "{{count}} ändrade fält"
   },
   "schema": {
     "version": "Version {{v}}",
