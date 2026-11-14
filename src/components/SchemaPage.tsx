@@ -61,6 +61,10 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   // `loaded` keeps the code as it was read, for the update check
   const lift = (data: any) => liftRecord(schema, data) ?? data;
   const [record, setRecord] = useState(() => (loaded ? lift(loaded.data) : newRecord()));
+  const asLatest = (data: any) => {
+    const lifted = liftRecord(schema, data);
+    return lifted ? { data: lifted, schema: latest } : { data, schema: schema.versions.get(data.version) ?? latest };
+  };
   // the record as first shown, to tell whether it was edited since
   const shown = useRef(record);
   const liftedFrom = loaded && loaded.data.version !== record.version ? loaded.data.version : null;
@@ -196,7 +200,11 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       className={tab === "record" ? (showQr ? "aside-qr" : "aside-3d") : undefined}
     >
       {tab === "record" && newer && loaded && (
-        <UpdateBanner current={loaded.data} currentSchema={schema.versions.get(loaded.data.version) ?? latest} newer={newer} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />
+        (() => {
+          // compared in the latest version where both lift, so a version step alone is no change
+          const [a, b] = [asLatest(loaded.data), asLatest(newer.data)];
+          return <UpdateBanner current={a.data} currentSchema={a.schema} newer={{ ...newer, ...b }} labels={labels} onShow={() => load({ payload: newer.payload, data: newer.data })} />;
+        })()
       )}
       {tab === "record" && lineage.status === "split" && (
         <SplitChoice parts={lineage.parts} labels={labels} onChoose={(p) => load({ payload: p.payload, data: p.data })} />
