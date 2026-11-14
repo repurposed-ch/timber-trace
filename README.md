@@ -41,7 +41,7 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
 - Share links use the same path in lowercase (`/hello-world/<PAYLOAD>`). Old `#` links and raw base45 payloads still decode.
 - Unknown values are an explicit `unknown` variant, never left out.
 - A recorded grade always includes its source and grading standard.
-- Records are edited and exported in the schema version they were made with; new records use the latest.
+- New records use the latest schema version. An older code is shown, edited and saved in the latest version when that version only adds fields (`liftRecord` in `src/schema/upgrade.ts`): every value is kept, the new fields are unknown, and a note says which version the code was read from. Otherwise (v1) a record stays in the version it was made with.
 
 ## hello-world schema v2
 
@@ -59,10 +59,10 @@ Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayName
 
 ## hello-world schema v3
 
-v2 plus two fields (4 bits more, only when the grade or the verification is recorded):
+v2 plus two fields (5 bits more, only when the grade or the verification is recorded), so v2 codes are shown as v3:
 
-- **Grade basis**: `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
-- **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. Older codes show "scope not stated".
+- **Grade basis**: `unknown`, `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
+- **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. None ticked (and v2 codes) shows "scope not stated".
 
 ## Database (Supabase)
 
