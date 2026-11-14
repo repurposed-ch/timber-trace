@@ -235,7 +235,9 @@
       "now": "Now",
       "yoursNow": "Your edit = now",
       "split": "Split part",
-      "join": "Joined"
+      "join": "Joined",
+      "code": "This code",
+      "codeNow": "This code = now"
     },
     "firstRecord": "first record",
     "gap_one": "+{{count}} entry",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Nothing matches this filter.",
     "schema": "Schema",
-    "allSchemas": "All schemas ({{count}})"
+    "allSchemas": "All schemas ({{count}})",
+    "componentHistory": "Saved revisions",
+    "codeStatus": {
+      "yours": "This code is the latest",
+      "continued_one": "{{count}} entry after this code",
+      "continued_other": "{{count}} entries after this code",
+      "split_one": "Split after this code",
+      "split_other": "Split into {{count}} after this code",
+      "joined": "Joined after this code"
+    }
   },
   "admin": {
     "title": "All entries",

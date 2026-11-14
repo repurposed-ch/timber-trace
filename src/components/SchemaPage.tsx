@@ -23,6 +23,7 @@ import { QrPanel } from "./QrPanel";
 import { RecordForm } from "./RecordForm";
 import { RecordEditor } from "./RecordEditor";
 import { RecordView } from "./RecordView";
+import { RecordHistory } from "./RecordHistory";
 import { editTabsFor } from "../schema/sections";
 import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
@@ -302,7 +303,10 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             )
           )}
           {mode === "view" ? (
-            <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={editSection} />
+            <>
+              <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={editSection} />
+              <RecordHistory source={records} schema={schema} labels={labels} lineage={lineage} loaded={loaded} onOpen={(f) => load({ payload: f.payload, data: f.data })} />
+            </>
           ) : (
             <RecordEditor
               formKey={`${record.version}:${record.id.join(".")}:${loaded?.payload ?? "new"}`}

@@ -235,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Din ändring = nu",
       "split": "Del",
-      "join": "Sammanfogad"
+      "join": "Sammanfogad",
+      "code": "Den här koden",
+      "codeNow": "Den här koden = nu"
     },
     "firstRecord": "första post",
     "gap_one": "+{{count}} post",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Inget matchar det här filtret.",
     "schema": "Schema",
-    "allSchemas": "Alla scheman ({{count}})"
+    "allSchemas": "Alla scheman ({{count}})",
+    "componentHistory": "Sparade revisioner",
+    "codeStatus": {
+      "yours": "Den här koden är den senaste",
+      "continued_one": "{{count}} post efter den här koden",
+      "continued_other": "{{count}} poster efter den här koden",
+      "split_one": "Delad efter den här koden",
+      "split_other": "Delad i {{count}} efter den här koden",
+      "joined": "Sammanfogad efter den här koden"
+    }
   },
   "admin": {
     "title": "Alla poster",

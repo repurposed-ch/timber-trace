@@ -235,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Din ændring = nu",
       "split": "Del",
-      "join": "Samlet"
+      "join": "Samlet",
+      "code": "Denne kode",
+      "codeNow": "Denne kode = nu"
     },
     "firstRecord": "første post",
     "gap_one": "+{{count}} post",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Intet matcher dette filter.",
     "schema": "Skema",
-    "allSchemas": "Alle skemaer ({{count}})"
+    "allSchemas": "Alle skemaer ({{count}})",
+    "componentHistory": "Gemte revisioner",
+    "codeStatus": {
+      "yours": "Denne kode er den nyeste",
+      "continued_one": "{{count}} post efter denne kode",
+      "continued_other": "{{count}} poster efter denne kode",
+      "split_one": "Delt efter denne kode",
+      "split_other": "Delt i {{count}} efter denne kode",
+      "joined": "Samlet efter denne kode"
+    }
   },
   "admin": {
     "title": "Alle poster",

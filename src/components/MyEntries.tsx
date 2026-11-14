@@ -18,7 +18,13 @@ type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; bran
 export const DETAILS = ["latest", "overview", "full"] as const;
 type Detail = (typeof DETAILS)[number];
 const DETAIL_KEY = "timber-trace.mine-detail";
-function storedDetail(): Detail {
+/** the detail level, shared by My entries and a record's history */
+export function rememberDetail(d: Detail) {
+  try {
+    localStorage.setItem(DETAIL_KEY, d);
+  } catch {}
+}
+export function storedDetail(): Detail {
   try {
     const v = localStorage.getItem(DETAIL_KEY);
     return (DETAILS as readonly string[]).includes(v ?? "") ? (v as Detail) : "overview";
@@ -59,9 +65,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
   const [schemaFilter, setSchemaFilter] = useState("");
   const setDetail = (d: Detail) => {
     setDetailState(d);
-    try {
-      localStorage.setItem(DETAIL_KEY, d);
-    } catch {}
+    rememberDetail(d);
   };
   const userId = session.status === "in" ? session.id : null;
   // decode each entry once; the views ask for the same entries many times

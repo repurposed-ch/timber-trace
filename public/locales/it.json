@@ -235,7 +235,9 @@
       "now": "Ora",
       "yoursNow": "La tua modifica = ora",
       "split": "Parte",
-      "join": "Unito"
+      "join": "Unito",
+      "code": "Questo codice",
+      "codeNow": "Questo codice = attuale"
     },
     "firstRecord": "prima voce",
     "gap_one": "+{{count}} voce",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Niente corrisponde a questo filtro.",
     "schema": "Schema",
-    "allSchemas": "Tutti gli schemi ({{count}})"
+    "allSchemas": "Tutti gli schemi ({{count}})",
+    "componentHistory": "Revisioni salvate",
+    "codeStatus": {
+      "yours": "Questo codice è il più recente",
+      "continued_one": "{{count}} voce dopo questo codice",
+      "continued_other": "{{count}} voci dopo questo codice",
+      "split_one": "Diviso dopo questo codice",
+      "split_other": "Diviso in {{count}} dopo questo codice",
+      "joined": "Unito dopo questo codice"
+    }
   },
   "admin": {
     "title": "Tutte le voci",

@@ -235,7 +235,9 @@
       "now": "Jetzt",
       "yoursNow": "Ihre Bearbeitung = jetzt",
       "split": "Teilstück",
-      "join": "Zusammengefügt"
+      "join": "Zusammengefügt",
+      "code": "Dieser Code",
+      "codeNow": "Dieser Code = aktuell"
     },
     "firstRecord": "erster Eintrag",
     "gap_one": "+{{count}} Eintrag",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Nichts passt zu diesem Filter.",
     "schema": "Schema",
-    "allSchemas": "Alle Schemas ({{count}})"
+    "allSchemas": "Alle Schemas ({{count}})",
+    "componentHistory": "Gespeicherte Revisionen",
+    "codeStatus": {
+      "yours": "Dieser Code ist der neueste",
+      "continued_one": "{{count}} Eintrag nach diesem Code",
+      "continued_other": "{{count}} Einträge nach diesem Code",
+      "split_one": "Nach diesem Code geteilt",
+      "split_other": "Nach diesem Code in {{count}} geteilt",
+      "joined": "Nach diesem Code zusammengeführt"
+    }
   },
   "admin": {
     "title": "Alle Einträge",

@@ -235,7 +235,9 @@
       "now": "Maintenant",
       "yoursNow": "Votre modification = maintenant",
       "split": "Partie",
-      "join": "Assemblé"
+      "join": "Assemblé",
+      "code": "Ce code",
+      "codeNow": "Ce code = actuel"
     },
     "firstRecord": "première entrée",
     "gap_one": "+{{count}} entrée",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Rien ne correspond à ce filtre.",
     "schema": "Schéma",
-    "allSchemas": "Tous les schémas ({{count}})"
+    "allSchemas": "Tous les schémas ({{count}})",
+    "componentHistory": "Révisions enregistrées",
+    "codeStatus": {
+      "yours": "Ce code est le plus récent",
+      "continued_one": "{{count}} entrée après ce code",
+      "continued_other": "{{count}} entrées après ce code",
+      "split_one": "Divisé après ce code",
+      "split_other": "Divisé en {{count}} après ce code",
+      "joined": "Fusionné après ce code"
+    }
   },
   "admin": {
     "title": "Toutes les entrées",

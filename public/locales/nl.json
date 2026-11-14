@@ -235,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Jouw bewerking = nu",
       "split": "Deel",
-      "join": "Samengevoegd"
+      "join": "Samengevoegd",
+      "code": "Deze code",
+      "codeNow": "Deze code = nu"
     },
     "firstRecord": "eerste invoer",
     "gap_one": "+{{count}} invoer",
@@ -255,7 +257,16 @@
     },
     "noneMatch": "Niets past bij dit filter.",
     "schema": "Schema",
-    "allSchemas": "Alle schema's ({{count}})"
+    "allSchemas": "Alle schema's ({{count}})",
+    "componentHistory": "Opgeslagen revisies",
+    "codeStatus": {
+      "yours": "Deze code is de nieuwste",
+      "continued_one": "{{count}} invoer na deze code",
+      "continued_other": "{{count}} invoeren na deze code",
+      "split_one": "Gesplitst na deze code",
+      "split_other": "Gesplitst in {{count}} na deze code",
+      "joined": "Samengevoegd na deze code"
+    }
   },
   "admin": {
     "title": "Alle invoer",
