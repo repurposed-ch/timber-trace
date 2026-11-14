@@ -50,6 +50,12 @@ function walk(field: DenseField, value: any, path: string, ctx: Ctx, out: Fact[]
       else walk(field.field, value, path, ctx, out, group);
       return;
     case "object":
+      // a set of checkboxes (e.g. what a verification covered): one row listing the ticked ones
+      if (field.fields.length > 0 && field.fields.every((f) => f.type === "bool")) {
+        const ticked = field.fields.filter((f) => value[f.name]).map((f) => ctx.labels.field(`${key}.${f.name}`));
+        out.push({ path, group, label, value: ticked.length ? ticked.join(", ") : ctx.none });
+        return;
+      }
       for (const f of field.fields) walk(f, value[f.name], `${path}.${f.name}`, ctx, out, label);
       return;
     case "union": {

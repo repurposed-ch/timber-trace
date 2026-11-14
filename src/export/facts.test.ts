@@ -69,6 +69,19 @@ describe("record facts, schema v2", async () => {
   });
 });
 
+describe("record facts, schema v3", async () => {
+  const { fullRecordV3 } = await import("../schema/testing");
+  const v3 = loaded.versions.get(3)!;
+
+  test("grade basis and what a verification covered", async () => {
+    const facts = recordFacts(v3, fullRecordV3, await labelsFor("en"));
+    expect(find(facts, "Basis", "Strength grade")).toBe("Later assessment");
+    expect(find(facts, "What was checked", "Verified by")).toBe("Provenance, Condition");
+    const none = { ...fullRecordV3, verified: { ...fullRecordV3.verified, checked: { provenance: false, condition: false, suitability: false } } };
+    expect(find(recordFacts(v3, none, await labelsFor("en")), "What was checked", "Verified by")).toBe("—");
+  });
+});
+
 describe("localised dates", async () => {
   const { fullRecordV2 } = await import("../schema/testing");
   const { formatDay, formatYear } = await import("../schema/dates");

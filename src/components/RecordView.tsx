@@ -96,7 +96,7 @@ function Summary({ record, labels, byPath, isUnknown, locale }: { record: any; l
   const dims = ["dimensions.length", "dimensions.width", "dimensions.height"];
   const tiles: { k: string; v: string; s?: string }[] = [];
   if (dims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: dims.map((d) => strip(val(d))).join(" × "), s: "mm" });
-  if (val("grade.class")) tiles.push({ k: labels.field("grade"), v: val("grade.class")!, s: [val("grade.source"), val("grade.standard")].filter(Boolean).join(" · ") });
+  if (val("grade.class")) tiles.push({ k: labels.field("grade"), v: val("grade.class")!, s: [val("grade.basis"), val("grade.source"), val("grade.standard")].filter(Boolean).join(" · ") });
   const from = val("origin.previousUse.country") ?? val("origin.harvest.country") ?? val("origin.country");
   if (from)
     tiles.push({

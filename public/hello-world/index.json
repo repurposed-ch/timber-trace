@@ -1,6 +1,6 @@
 {
   "slug": "hello-world",
-  "versions": [1, 2],
+  "versions": [1, 2, 3],
   "codeEnums": ["origin.country", "grade.class.value", "grade.standard"],
   "countryEnums": ["origin.country", "origin.harvest.country", "origin.previousUse.country"],
   "historyTiers": {

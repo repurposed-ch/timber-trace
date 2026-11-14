@@ -24,6 +24,7 @@
     "grade.class": "Class",
     "grade.class.value": "Class",
     "grade.class.text": "Class designation",
+    "grade.basis": "Basis",
     "grade.source": "Grading source",
     "grade.standard": "Grading standard",
     "assessments": "Assessments",
@@ -73,7 +74,11 @@
     "verified.role": "Role",
     "verified.party": "Party ID",
     "verified.date": "Date",
-    "verified.date.day": "Date"
+    "verified.date.day": "Date",
+    "verified.checked": "What was checked",
+    "verified.checked.provenance": "Provenance",
+    "verified.checked.condition": "Condition",
+    "verified.checked.suitability": "Suitability for use"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "From list",
       "custom": "Custom"
+    },
+    "grade.basis": {
+      "original": "Original documentation",
+      "reassessed": "Later assessment"
     },
     "grade.source": {
       "visual": "Visual grading",

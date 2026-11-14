@@ -24,6 +24,7 @@
     "grade.class": "Klasse",
     "grade.class.value": "Klasse",
     "grade.class.text": "Klassebetegnelse",
+    "grade.basis": "Grundlag",
     "grade.source": "Sorteringskilde",
     "grade.standard": "Sorteringsstandard",
     "assessments": "Vurderinger",
@@ -73,7 +74,11 @@
     "verified.role": "Rolle",
     "verified.party": "Parts-ID",
     "verified.date": "Dato",
-    "verified.date.day": "Dato"
+    "verified.date.day": "Dato",
+    "verified.checked": "Hvad blev kontrolleret",
+    "verified.checked.provenance": "Oprindelse",
+    "verified.checked.condition": "Tilstand",
+    "verified.checked.suitability": "Egnethed til brug"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "Fra liste",
       "custom": "Brugerdefineret"
+    },
+    "grade.basis": {
+      "original": "Oprindelig dokumentation",
+      "reassessed": "Senere vurdering"
     },
     "grade.source": {
       "visual": "Visuel sortering",

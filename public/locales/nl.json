@@ -160,6 +160,7 @@
     "revision": "Revisie {{n}}",
     "supplied": "Geleverd: {{who}}",
     "verified": "Geverifieerd: {{who}}",
+    "noScope": "reikwijdte niet vermeld",
     "supplierUnknown": "Leverancier onbekend",
     "notVerified": "Niet geverifieerd"
   },

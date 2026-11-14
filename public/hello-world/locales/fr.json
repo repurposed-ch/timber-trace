@@ -24,6 +24,7 @@
     "grade.class": "Classe",
     "grade.class.value": "Classe",
     "grade.class.text": "Désignation de la classe",
+    "grade.basis": "Base",
     "grade.source": "Source du classement",
     "grade.standard": "Norme de classement",
     "assessments": "Évaluations",
@@ -73,7 +74,11 @@
     "verified.role": "Rôle",
     "verified.party": "ID de l'intervenant",
     "verified.date": "Date",
-    "verified.date.day": "Date"
+    "verified.date.day": "Date",
+    "verified.checked": "Ce qui a été vérifié",
+    "verified.checked.provenance": "Provenance",
+    "verified.checked.condition": "État",
+    "verified.checked.suitability": "Aptitude à l'usage"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "Dans la liste",
       "custom": "Personnalisé"
+    },
+    "grade.basis": {
+      "original": "Documentation d'origine",
+      "reassessed": "Évaluation ultérieure"
     },
     "grade.source": {
       "visual": "Classement visuel",

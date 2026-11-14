@@ -24,6 +24,7 @@
     "grade.class": "Klasse",
     "grade.class.value": "Klasse",
     "grade.class.text": "Klassenbezeichnung",
+    "grade.basis": "Grundlage",
     "grade.source": "Sortierquelle",
     "grade.standard": "Sortiernorm",
     "assessments": "Beurteilungen",
@@ -73,7 +74,11 @@
     "verified.role": "Rolle",
     "verified.party": "Partei-ID",
     "verified.date": "Datum",
-    "verified.date.day": "Datum"
+    "verified.date.day": "Datum",
+    "verified.checked": "Was geprüft wurde",
+    "verified.checked.provenance": "Herkunft",
+    "verified.checked.condition": "Zustand",
+    "verified.checked.suitability": "Eignung für die Verwendung"
   },
   "options": {
     "origin.status": {
@@ -183,6 +188,10 @@
     "grade.class.kind": {
       "known": "Aus Liste",
       "custom": "Eigene Angabe"
+    },
+    "grade.basis": {
+      "original": "Originaldokumentation",
+      "reassessed": "Spätere Beurteilung"
     },
     "grade.source": {
       "visual": "Visuelle Sortierung",
