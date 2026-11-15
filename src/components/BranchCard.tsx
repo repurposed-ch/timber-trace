@@ -17,8 +17,8 @@ export type BranchContext = {
   locale: string;
   found: (r: MineRow) => Found | null;
   onOpen: (f: Found) => void;
-  /** "mine": relative to your latest edit (My entries); "all": the whole branch (admins) */
-  perspective?: "mine" | "all";
+  /** "mine": relative to your latest edit (My entries); "all": the whole branch (admins); "code": relative to the opened code (record page) */
+  perspective?: "mine" | "all" | "code";
   /** user id → email, for admins */
   emails?: Map<string, string>;
   /** entry ids an admin hid; shown greyed */
@@ -40,7 +40,7 @@ export function Avatar({ by, ctx, small }: { by?: string; ctx: BranchContext; sm
   const email = ctx.emails?.get(by);
   const letters = email ? email.slice(0, 2) : tag.slice(0, 2);
   return (
-    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 28% 46%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : (email ?? `#${tag} · ${by}`)}>
+    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 30% 34%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : (email ?? `#${tag} · ${by}`)}>
       {you ? t("mine.you").slice(0, 1).toUpperCase() : letters.toUpperCase()}
     </span>
   );
@@ -60,12 +60,23 @@ export function StatusPill({ branch, short, ctx }: { branch: Branch; short?: boo
     );
   }
   const status = branchStatus(branch);
+  const ns = ctx?.perspective === "code" ? "mine.codeStatus" : "mine.status";
   const cls = status === "yours" ? "st-ok" : status === "continued" ? "st-cont" : "st-split";
-  const text = status === "continued" ? t("mine.status.continued", { count: branch.after.length }) : status === "split" ? t("mine.status.split", { count: branch.latest.length }) : t(`mine.status.${status}`);
+  const text = status === "continued" ? t(`${ns}.continued`, { count: branch.after.length }) : status === "split" ? t(`${ns}.split`, { count: branch.latest.length }) : t(`${ns}.${status}`);
   return (
     <span className={`status ${cls}`} title={short ? text : undefined}>
       {text}
     </span>
+  );
+}
+
+/** the ▸/▾ in front of a table row: a real button, so the row unfolds with the keyboard too */
+export function UnfoldButton({ open, controls, name, onToggle }: { open: boolean; controls: string; name: string; onToggle: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <button type="button" className="caret" aria-expanded={open} aria-controls={controls} aria-label={t("mine.showKeyPoints", { name })} onClick={(e) => (e.stopPropagation(), onToggle())}>
+      <span aria-hidden>{open ? "▾" : "▸"}</span>
+    </button>
   );
 }
 
@@ -96,6 +107,8 @@ function Changes({ row, branch, ctx, max }: { row: MineRow; branch: Branch; ctx:
 }
 
 type Role = "started" | "yours" | "now" | "yoursNow" | "split" | "join" | null;
+/** on the record page the focus is the opened code, not your edit */
+const roleLabel = (role: NonNullable<Role>, ctx: BranchContext) => (ctx.perspective !== "code" ? role : role === "yours" ? "code" : role === "yoursNow" ? "codeNow" : role);
 
 /** one entry in the graph: when, revision, what it is and changed, who */
 function EntryLine({ row, role, branch, ctx, max }: { row: MineRow; role: Role; branch: Branch; ctx: BranchContext; max: number }) {
@@ -110,7 +123,7 @@ function EntryLine({ row, role, branch, ctx, max }: { row: MineRow; role: Role; 
       </span>
       {row.entry.revision !== null && <span className="rev">{t("mine.rev", { n: row.entry.revision })}</span>}
       <button type="button" className={`g-what link${role === "now" || role === "yoursNow" ? " g-now" : ""}`} disabled={!f} onClick={() => f && ctx.onOpen(f)} title={row.entry.componentId}>
-        {role && <b className={`g-role g-role-${role}`}>{t(`mine.role.${role}`)}</b>}
+        {role && <b className={`g-role g-role-${role}`}>{t(`mine.role.${roleLabel(role, ctx)}`)}</b>}
         {row.kind === "new" && role !== "started" && role !== "yoursNow" && <span className="muted">{t("mine.firstRecord")}</span>}
         <Changes row={row} branch={branch} ctx={ctx} max={max} />
       </button>

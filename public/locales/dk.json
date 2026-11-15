@@ -52,13 +52,10 @@
   "form": {
     "title": "Komponentpost",
     "unknown": "Ukendt",
-    "generate": "Generér",
     "add": "Tilføj",
     "remove": "Fjern",
     "charset": "Kun bogstaver og tal, maks. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex-tegn",
-    "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}.",
     "liftedVersion": "Læst fra en kode i version {{from}} og vist som version {{latest}}. Felter tilføjet siden er ikke angivet; ved at gemme skrives version {{latest}}.",
     "view": "Vis",
@@ -68,11 +65,12 @@
       "number": "Heltal fra {{min}} til {{max}}",
       "date": "Dato som ÅÅÅÅ-MM-DD",
       "dayOrYear": "Et år (1962) eller en dato (1962-05-03)",
-      "chars": "Kun bogstaver og tal, maks. {{max}}",
-      "id": "32 hex-tegn"
+      "chars": "Kun bogstaver og tal, maks. {{max}}"
     },
     "incomplete": "Ufuldstændig: forbliver ukendt, indtil alt er udfyldt",
-    "required": "Påkrævet her"
+    "required": "Påkrævet her",
+    "chipFrom": "fra v{{v}}",
+    "chipOlder": "ældre"
   },
   "viewer": {
     "title": "3D-visning",
@@ -110,7 +108,9 @@
     "show": "Vis nyeste",
     "field": "Felt",
     "before": "Denne kode",
-    "after": "Nyeste"
+    "after": "Nyeste",
+    "changes_one": "{{count}} ændret felt",
+    "changes_other": "{{count}} ændrede felter"
   },
   "schema": {
     "version": "Version {{v}}",
@@ -178,7 +178,9 @@
     "send": "Send login-link",
     "sent": "Vi har sendt et login-link til {{email}}. Åbn det på denne eller en anden enhed.",
     "error": "Linket kunne ikke sendes: {{message}}",
-    "close": "Luk"
+    "close": "Luk",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Gem",
@@ -233,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Din ændring = nu",
       "split": "Del",
-      "join": "Samlet"
+      "join": "Samlet",
+      "code": "Denne kode",
+      "codeNow": "Denne kode = nu"
     },
     "firstRecord": "første post",
     "gap_one": "+{{count}} post",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Intet matcher dette filter.",
     "schema": "Skema",
-    "allSchemas": "Alle skemaer ({{count}})"
+    "allSchemas": "Alle skemaer ({{count}})",
+    "componentHistory": "Gemte revisioner",
+    "codeStatus": {
+      "yours": "Denne kode er den nyeste",
+      "continued_one": "{{count}} post efter denne kode",
+      "continued_other": "{{count}} poster efter denne kode",
+      "split_one": "Delt efter denne kode",
+      "split_other": "Delt i {{count}} efter denne kode",
+      "joined": "Samlet efter denne kode"
+    },
+    "showKeyPoints": "Nøglepunkter for {{name}}"
   },
   "admin": {
     "title": "Alle poster",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} poster skjult.",
     "unhidden_one": "{{count}} post vises igen.",
     "unhidden_other": "{{count}} poster vises igen."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "System",
+    "light": "Lys",
+    "dark": "Mørk"
+  },
+  "actions": {
+    "title": "Handlinger for posten",
+    "unsaved": "Ikke-gemte ændringer",
+    "problems_one": "{{count}} fane kræver opmærksomhed",
+    "problems_other": "{{count}} faner kræver opmærksomhed",
+    "copy": "Lav en kopi",
+    "export": "Eksportér",
+    "done": "Færdig"
   }
 }

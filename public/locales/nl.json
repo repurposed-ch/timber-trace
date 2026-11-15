@@ -52,13 +52,10 @@
   "form": {
     "title": "Componentrecord",
     "unknown": "Onbekend",
-    "generate": "Genereren",
     "add": "Toevoegen",
     "remove": "Verwijderen",
     "charset": "Alleen letters en cijfers, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hexadecimale tekens",
-    "newRecord": "Nieuw record (v{{v}})",
     "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
     "liftedVersion": "Gelezen uit een code van versie {{from}} en getoond als versie {{latest}}. Velden die sindsdien zijn toegevoegd, zijn niet ingevuld; opslaan schrijft versie {{latest}}.",
     "view": "Bekijken",
@@ -68,11 +65,12 @@
       "number": "Geheel getal van {{min}} tot {{max}}",
       "date": "Datum als JJJJ-MM-DD",
       "dayOrYear": "Een jaar (1962) of een datum (1962-05-03)",
-      "chars": "Alleen letters en cijfers, max. {{max}}",
-      "id": "32 hexadecimale tekens"
+      "chars": "Alleen letters en cijfers, max. {{max}}"
     },
     "incomplete": "Onvolledig: blijft onbekend tot alles is ingevuld",
-    "required": "Hier verplicht"
+    "required": "Hier verplicht",
+    "chipFrom": "uit v{{v}}",
+    "chipOlder": "ouder"
   },
   "viewer": {
     "title": "3D-voorbeeld",
@@ -110,7 +108,9 @@
     "show": "Nieuwste tonen",
     "field": "Veld",
     "before": "Deze code",
-    "after": "Nieuwste"
+    "after": "Nieuwste",
+    "changes_one": "{{count}} gewijzigd veld",
+    "changes_other": "{{count}} gewijzigde velden"
   },
   "schema": {
     "version": "Versie {{v}}",
@@ -178,7 +178,9 @@
     "send": "Inloglink versturen",
     "sent": "We hebben een inloglink naar {{email}} gestuurd. Open hem op dit of een ander apparaat.",
     "error": "De link kon niet worden verstuurd: {{message}}",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "accountTitle": "Account",
+    "account": "Account: {{email}}"
   },
   "save": {
     "save": "Opslaan",
@@ -233,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Jouw bewerking = nu",
       "split": "Deel",
-      "join": "Samengevoegd"
+      "join": "Samengevoegd",
+      "code": "Deze code",
+      "codeNow": "Deze code = nu"
     },
     "firstRecord": "eerste invoer",
     "gap_one": "+{{count}} invoer",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Niets past bij dit filter.",
     "schema": "Schema",
-    "allSchemas": "Alle schema's ({{count}})"
+    "allSchemas": "Alle schema's ({{count}})",
+    "componentHistory": "Opgeslagen revisies",
+    "codeStatus": {
+      "yours": "Deze code is de nieuwste",
+      "continued_one": "{{count}} invoer na deze code",
+      "continued_other": "{{count}} invoeren na deze code",
+      "split_one": "Gesplitst na deze code",
+      "split_other": "Gesplitst in {{count}} na deze code",
+      "joined": "Samengevoegd na deze code"
+    },
+    "showKeyPoints": "Kernpunten van {{name}}"
   },
   "admin": {
     "title": "Alle invoer",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} invoeren verborgen.",
     "unhidden_one": "{{count}} invoer weer zichtbaar.",
     "unhidden_other": "{{count}} invoeren weer zichtbaar."
+  },
+  "theme": {
+    "title": "Thema",
+    "label": "Thema: {{theme}}",
+    "system": "Systeem",
+    "light": "Licht",
+    "dark": "Donker"
+  },
+  "actions": {
+    "title": "Acties voor het record",
+    "unsaved": "Niet-opgeslagen wijzigingen",
+    "problems_one": "{{count}} tabblad vraagt aandacht",
+    "problems_other": "{{count}} tabbladen vragen aandacht",
+    "copy": "Kopie maken",
+    "export": "Exporteren",
+    "done": "Klaar"
   }
 }

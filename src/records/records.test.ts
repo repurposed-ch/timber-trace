@@ -19,7 +19,7 @@ describe("changed facts", () => {
     after.revision = { number: 4, date: { status: "known", day: 20765 } };
     after.grade.class.value = "GL28h";
     const changes = changedFacts(fullRecordV2, v2, { data: after, schema: v2 }, labels);
-    expect(changes).toContainEqual({ path: "revision.date", label: "Revision · Revision date", before: "2026-11-10", after: "2026-11-08" });
+    expect(changes).toContainEqual({ path: "revision.date", label: "Revision date", before: "2026-11-10", after: "2026-11-08" });
     expect(changes).toContainEqual({ path: "grade.class", label: "Strength grade · Class", before: "GL24h", after: "GL28h" });
     // a v1 code and its v2 successor: fields only in one version show as added or removed
     const crossVersion = changedFacts(fullRecord, schema, { data: fullRecordV2, schema: v2 }, labels);

@@ -42,11 +42,9 @@ export function SaveButton({ source, slug, schema, record, lineage, history, onS
   };
 
   const title = blocked ? t("save.blocked") : invalid ? t("save.invalid") : undefined;
+  // the status comes first: in the action bar it sits left of the button
   return (
     <>
-      <button type="button" className="primary save" onClick={save} disabled={blocked || invalid || state.s === "saving" || session.status === "checking"} title={title}>
-        {session.status === "in" ? t("save.save") : t("save.signInToSave")}
-      </button>
       {state.s === "saved" && (
         <span className="save-status" role="status">
           {state.revision !== null ? t("save.saved", { n: state.revision }) : t("save.savedNoRevision")}
@@ -57,6 +55,9 @@ export function SaveButton({ source, slug, schema, record, lineage, history, onS
           {t(`save.errors.${state.code}`, { defaultValue: t("save.errors.other", { code: state.code }) })}
         </span>
       )}
+      <button type="button" className="primary save" onClick={save} disabled={blocked || invalid || state.s === "saving" || session.status === "checking"} title={title}>
+        {session.status === "in" ? t("save.save") : t("save.signInToSave")}
+      </button>
     </>
   );
 }

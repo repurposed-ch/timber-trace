@@ -52,13 +52,10 @@
   "form": {
     "title": "Component record",
     "unknown": "Unknown",
-    "generate": "Generate",
     "add": "Add",
     "remove": "Remove",
     "charset": "Letters and digits only, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex characters",
-    "newRecord": "New record (v{{v}})",
     "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}.",
     "liftedVersion": "Read from a version {{from}} code and shown as version {{latest}}. Fields added since are not stated; saving writes version {{latest}}.",
     "view": "View",
@@ -68,11 +65,12 @@
       "number": "Whole number from {{min}} to {{max}}",
       "date": "Date as YYYY-MM-DD",
       "dayOrYear": "A year (1962) or a date (1962-05-03)",
-      "chars": "Letters and digits only, max. {{max}}",
-      "id": "32 hex characters"
+      "chars": "Letters and digits only, max. {{max}}"
     },
     "incomplete": "Incomplete: still unknown until every part is filled in",
-    "required": "Required here"
+    "required": "Required here",
+    "chipFrom": "from v{{v}}",
+    "chipOlder": "older"
   },
   "viewer": {
     "title": "3D preview",
@@ -110,7 +108,9 @@
     "show": "Show latest",
     "field": "Field",
     "before": "This code",
-    "after": "Latest"
+    "after": "Latest",
+    "changes_one": "{{count}} changed field",
+    "changes_other": "{{count}} changed fields"
   },
   "schema": {
     "version": "Version {{v}}",
@@ -178,7 +178,9 @@
     "send": "Send sign-in link",
     "sent": "We sent a sign-in link to {{email}}. Open it on this device or any other.",
     "error": "Couldn't send the link: {{message}}",
-    "close": "Close"
+    "close": "Close",
+    "accountTitle": "Account",
+    "account": "Account: {{email}}"
   },
   "save": {
     "save": "Save",
@@ -233,7 +235,9 @@
       "now": "Now",
       "yoursNow": "Your edit = now",
       "split": "Split part",
-      "join": "Joined"
+      "join": "Joined",
+      "code": "This code",
+      "codeNow": "This code = now"
     },
     "firstRecord": "first record",
     "gap_one": "+{{count}} entry",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Nothing matches this filter.",
     "schema": "Schema",
-    "allSchemas": "All schemas ({{count}})"
+    "allSchemas": "All schemas ({{count}})",
+    "componentHistory": "Saved revisions",
+    "codeStatus": {
+      "yours": "This code is the latest",
+      "continued_one": "{{count}} entry after this code",
+      "continued_other": "{{count}} entries after this code",
+      "split_one": "Split after this code",
+      "split_other": "Split into {{count}} after this code",
+      "joined": "Joined after this code"
+    },
+    "showKeyPoints": "Key points of {{name}}"
   },
   "admin": {
     "title": "All entries",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} entries hidden.",
     "unhidden_one": "{{count}} entry shown again.",
     "unhidden_other": "{{count}} entries shown again."
+  },
+  "theme": {
+    "title": "Theme",
+    "label": "Theme: {{theme}}",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "actions": {
+    "title": "Record actions",
+    "unsaved": "Unsaved changes",
+    "problems_one": "{{count}} tab needs attention",
+    "problems_other": "{{count}} tabs need attention",
+    "copy": "Make a copy",
+    "export": "Export",
+    "done": "Done"
   }
 }

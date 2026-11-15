@@ -52,13 +52,10 @@
   "form": {
     "title": "Fiche de l'élément",
     "unknown": "Inconnu",
-    "generate": "Générer",
     "add": "Ajouter",
     "remove": "Supprimer",
     "charset": "Lettres et chiffres uniquement, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caractères hexadécimaux",
-    "newRecord": "Nouvelle fiche (v{{v}})",
     "olderVersion": "Créée avec la version {{v}} du schéma. Elle est affichée et exportée en version {{v}} ; les nouvelles fiches utilisent la version {{latest}}.",
     "liftedVersion": "Lu depuis un code de version {{from}} et affiché en version {{latest}}. Les champs ajoutés depuis ne sont pas renseignés ; l'enregistrement écrit la version {{latest}}.",
     "view": "Consulter",
@@ -68,11 +65,12 @@
       "number": "Nombre entier de {{min}} à {{max}}",
       "date": "Date au format AAAA-MM-JJ",
       "dayOrYear": "Une année (1962) ou une date (1962-05-03)",
-      "chars": "Lettres et chiffres uniquement, max. {{max}}",
-      "id": "32 caractères hexadécimaux"
+      "chars": "Lettres et chiffres uniquement, max. {{max}}"
     },
     "incomplete": "Incomplet : reste inconnu tant que tout n'est pas rempli",
-    "required": "Obligatoire ici"
+    "required": "Obligatoire ici",
+    "chipFrom": "depuis v{{v}}",
+    "chipOlder": "ancienne"
   },
   "viewer": {
     "title": "Aperçu 3D",
@@ -110,7 +108,9 @@
     "show": "Afficher la plus récente",
     "field": "Champ",
     "before": "Ce code",
-    "after": "Plus récente"
+    "after": "Plus récente",
+    "changes_one": "{{count}} champ modifié",
+    "changes_other": "{{count}} champs modifiés"
   },
   "schema": {
     "version": "Version {{v}}",
@@ -178,7 +178,9 @@
     "send": "Envoyer le lien de connexion",
     "sent": "Nous avons envoyé un lien de connexion à {{email}}. Ouvrez-le sur cet appareil ou un autre.",
     "error": "Impossible d'envoyer le lien : {{message}}",
-    "close": "Fermer"
+    "close": "Fermer",
+    "accountTitle": "Compte",
+    "account": "Compte : {{email}}"
   },
   "save": {
     "save": "Enregistrer",
@@ -233,7 +235,9 @@
       "now": "Maintenant",
       "yoursNow": "Votre modification = maintenant",
       "split": "Partie",
-      "join": "Assemblé"
+      "join": "Assemblé",
+      "code": "Ce code",
+      "codeNow": "Ce code = actuel"
     },
     "firstRecord": "première entrée",
     "gap_one": "+{{count}} entrée",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Rien ne correspond à ce filtre.",
     "schema": "Schéma",
-    "allSchemas": "Tous les schémas ({{count}})"
+    "allSchemas": "Tous les schémas ({{count}})",
+    "componentHistory": "Révisions enregistrées",
+    "codeStatus": {
+      "yours": "Ce code est le plus récent",
+      "continued_one": "{{count}} entrée après ce code",
+      "continued_other": "{{count}} entrées après ce code",
+      "split_one": "Divisé après ce code",
+      "split_other": "Divisé en {{count}} après ce code",
+      "joined": "Fusionné après ce code"
+    },
+    "showKeyPoints": "Points clés de {{name}}"
   },
   "admin": {
     "title": "Toutes les entrées",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} entrées masquées.",
     "unhidden_one": "{{count}} entrée réaffichée.",
     "unhidden_other": "{{count}} entrées réaffichées."
+  },
+  "theme": {
+    "title": "Thème",
+    "label": "Thème : {{theme}}",
+    "system": "Système",
+    "light": "Clair",
+    "dark": "Sombre"
+  },
+  "actions": {
+    "title": "Actions de la fiche",
+    "unsaved": "Modifications non enregistrées",
+    "problems_one": "{{count}} onglet à vérifier",
+    "problems_other": "{{count}} onglets à vérifier",
+    "copy": "Créer une copie",
+    "export": "Exporter",
+    "done": "Terminé"
   }
 }

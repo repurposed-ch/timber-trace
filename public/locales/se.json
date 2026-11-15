@@ -52,13 +52,10 @@
   "form": {
     "title": "Komponentpost",
     "unknown": "Okänd",
-    "generate": "Generera",
     "add": "Lägg till",
     "remove": "Ta bort",
     "charset": "Endast bokstäver och siffror, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hextecken",
-    "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}.",
     "liftedVersion": "Läst från en kod i version {{from}} och visad som version {{latest}}. Fält som lagts till sedan dess är inte angivna; att spara skriver version {{latest}}.",
     "view": "Visa",
@@ -68,11 +65,12 @@
       "number": "Heltal från {{min}} till {{max}}",
       "date": "Datum som ÅÅÅÅ-MM-DD",
       "dayOrYear": "Ett år (1962) eller ett datum (1962-05-03)",
-      "chars": "Endast bokstäver och siffror, max. {{max}}",
-      "id": "32 hextecken"
+      "chars": "Endast bokstäver och siffror, max. {{max}}"
     },
     "incomplete": "Ofullständig: förblir okänd tills allt är ifyllt",
-    "required": "Krävs här"
+    "required": "Krävs här",
+    "chipFrom": "från v{{v}}",
+    "chipOlder": "äldre"
   },
   "viewer": {
     "title": "3D-förhandsvisning",
@@ -110,7 +108,9 @@
     "show": "Visa senaste",
     "field": "Fält",
     "before": "Denna kod",
-    "after": "Senaste"
+    "after": "Senaste",
+    "changes_one": "{{count}} ändrat fält",
+    "changes_other": "{{count}} ändrade fält"
   },
   "schema": {
     "version": "Version {{v}}",
@@ -178,7 +178,9 @@
     "send": "Skicka inloggningslänk",
     "sent": "Vi har skickat en inloggningslänk till {{email}}. Öppna den på den här eller en annan enhet.",
     "error": "Länken kunde inte skickas: {{message}}",
-    "close": "Stäng"
+    "close": "Stäng",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Spara",
@@ -233,7 +235,9 @@
       "now": "Nu",
       "yoursNow": "Din ändring = nu",
       "split": "Del",
-      "join": "Sammanfogad"
+      "join": "Sammanfogad",
+      "code": "Den här koden",
+      "codeNow": "Den här koden = nu"
     },
     "firstRecord": "första post",
     "gap_one": "+{{count}} post",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Inget matchar det här filtret.",
     "schema": "Schema",
-    "allSchemas": "Alla scheman ({{count}})"
+    "allSchemas": "Alla scheman ({{count}})",
+    "componentHistory": "Sparade revisioner",
+    "codeStatus": {
+      "yours": "Den här koden är den senaste",
+      "continued_one": "{{count}} post efter den här koden",
+      "continued_other": "{{count}} poster efter den här koden",
+      "split_one": "Delad efter den här koden",
+      "split_other": "Delad i {{count}} efter den här koden",
+      "joined": "Sammanfogad efter den här koden"
+    },
+    "showKeyPoints": "Nyckelpunkter för {{name}}"
   },
   "admin": {
     "title": "Alla poster",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} poster dolda.",
     "unhidden_one": "{{count}} post visas igen.",
     "unhidden_other": "{{count}} poster visas igen."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "System",
+    "light": "Ljust",
+    "dark": "Mörkt"
+  },
+  "actions": {
+    "title": "Åtgärder för posten",
+    "unsaved": "Osparade ändringar",
+    "problems_one": "{{count}} flik behöver åtgärdas",
+    "problems_other": "{{count}} flikar behöver åtgärdas",
+    "copy": "Gör en kopia",
+    "export": "Exportera",
+    "done": "Klar"
   }
 }

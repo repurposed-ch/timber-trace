@@ -1,7 +1,7 @@
 import { validate, type DenseField, type DenseSchema } from "densing";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { hexToId, idToHex, randomId } from "../schema/codec";
+import { idToHex } from "../schema/codec";
 import { dayToIso, formatYear, isDayField, isYearField, yearToIso } from "../schema/dates";
 import { defaultFor, isCharText, isComplete, isDayOrYear, isEmptyish, isId128, unionValue, unknownable, variantFields } from "../schema/fields";
 import { intlLocale } from "../i18n-langs";
@@ -61,9 +61,9 @@ export function RecordForm({ schema, labels, value, onChange, overrides = {}, fi
         // a section that is one plain field group already says its title
         <div key={g.id || "all"} className={`form-sec${g.title && g.fields.length === 1 && !(g.fields[0] in overrides) ? " single" : ""}`}>
           {g.title && (
-            <h4 className="sec-h" id={`edit-sec-${g.id}`}>
+            <h3 className="sec-h" id={`edit-sec-${g.id}`}>
               <span>{g.title}</span>
-            </h4>
+            </h3>
           )}
           {g.fields.map(field)}
         </div>
@@ -181,7 +181,7 @@ export function Field(props: Props) {
   const wrap = (control: React.ReactNode, multi = false) => (bare ? control : <Row label={label} htmlFor={id} multi={multi}>{control}</Row>);
 
   if (path === "version" && field.type === "int") return null;
-  if (isId128(field)) return wrap(<IdInput id={id} value={value} onChange={onChange} />, true);
+  if (isId128(field)) return wrap(<IdInput id={id} value={value} />, true);
   if (field.type === "enum") return wrap(<EnumSelect field={field} value={value} onChange={onChange} id={id} label={label} allowEmpty={!!partial} path={path} labels={ctx.labels} />);
   if (isDayField(field) || isYearField(field) || isCharText(field) || field.type === "int" || field.type === "fixed" || field.type === "bool")
     return wrap(<Scalar field={field} value={value} onChange={onChange} id={id} label={label} allowEmpty={!!partial} />);
@@ -400,29 +400,11 @@ function ArrayField({ field, value, onChange, path, ctx }: Props & { field: Extr
   );
 }
 
-function IdInput({ id, value, onChange }: { id: string; value: number[]; onChange: (v: number[]) => void }) {
-  const { t } = useTranslation();
+/** the component's identity: shown, never edited (entries and revisions are matched by it) */
+function IdInput({ id, value }: { id: string; value: number[] }) {
   return (
-    <div className="id">
-      <DraftInput
-        id={id}
-        className="mono"
-        multiline
-        value={value}
-        format={(v) => (v ? idToHex(v) : "")}
-        parse={(s) => {
-          try {
-            return { ok: true, value: hexToId(s) };
-          } catch {
-            return { ok: false, error: { key: "form.err.id" } };
-          }
-        }}
-        onCommit={(v) => v && onChange(v)}
-        title={t("form.idInvalid")}
-      />
-      <button type="button" onClick={() => onChange(randomId())} aria-label={t("form.generate")}>
-        {t("form.generate")}
-      </button>
-    </div>
+    <output id={id} className="id mono">
+      {idToHex(value)}
+    </output>
   );
 }

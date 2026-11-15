@@ -77,14 +77,14 @@ export function RecordView({ schema, meta, record, labels, history, onEdit }: Pr
 function SectionHead({ title, onEdit }: { title: string; onEdit?: () => void }) {
   const { t } = useTranslation();
   return (
-    <h4 className="sec-h">
+    <h3 className="sec-h">
       <span>{title}</span>
       {onEdit && (
         <button type="button" className="sec-edit" onClick={onEdit} aria-label={`${t("form.edit")}: ${title}`} title={t("form.edit")}>
           ✎
         </button>
       )}
-    </h4>
+    </h3>
   );
 }
 
@@ -108,7 +108,7 @@ function Summary({ record, labels, byPath, isUnknown, locale }: { record: any; l
   const verified = record.verified?.status === "known";
   return (
     <div className="summary" id="view-sec-identity">
-      <h2>{beamName(record, labels)}</h2>
+      <h3>{beamName(record, labels)}</h3>
       <div className="summary-id mono">{idToHex(record.id)}</div>
       {tiles.length > 0 && (
         <div className="tiles">

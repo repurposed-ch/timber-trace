@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { makeLabels } from "../schema/labels";
 import { fullRecord, fullRecordV2, fullRecordV3, readPublic, unknownRecordV2 } from "../schema/testing";
-import { compareRecords, provenance } from "./revision";
+import { compareRecords, provenance, provenanceDiff, provenanceParts } from "./revision";
 
 const at = (n: number, payload = `P${n}`) => ({ payload, data: { ...fullRecordV2, revision: { number: n, date: { status: "unknown" } } } });
 
@@ -44,5 +44,13 @@ describe("provenance line", async () => {
 
   test("v1 records have no provenance", () => {
     expect(provenance(fullRecord, labels, t, "en-GB")).toBeNull();
+  });
+
+  test("parts, and only the parts that differ between two records", () => {
+    const parts = provenanceParts(fullRecordV2, labels, t, "en-GB")!;
+    expect(parts.supplied).toBe("Supplied: Dismantler #1042, 4 Sept 2026");
+    const newer = { ...fullRecordV2, revision: { number: 4, date: { status: "known", day: 20765 } } };
+    expect(provenanceDiff(fullRecordV2, newer, labels, t, "en-GB")).toEqual({ before: "Revision 3 · 10 Nov 2026", after: "Revision 4 · 8 Nov 2026" });
+    expect(provenanceDiff(fullRecordV2, structuredClone(fullRecordV2), labels, t, "en-GB")).toBeNull();
   });
 });

@@ -4,6 +4,13 @@ import type { Labels } from "../schema/labels";
 
 export type Change = { path: string; label: string; before?: string; after?: string };
 
+/** "Revision · Revision number" says the group twice: then the field label alone */
+export function factLabel(group: string | undefined, label: string): string {
+  if (!group) return label;
+  const last = group.trim().split(/\s+/).pop()!.toLowerCase();
+  return label.toLowerCase().startsWith(last) ? label : `${group} · ${label}`;
+}
+
 /** fact rows that differ between the scanned record and the latest one, possibly of different schema versions */
 export function changedFacts(current: any, currentSchema: DenseSchema, newer: { data: any; schema: DenseSchema }, labels: Pick<Labels, "field" | "option">): Change[] {
   const before = new Map(recordFacts(currentSchema, current, labels).map((f) => [f.path, f]));
@@ -13,7 +20,7 @@ export function changedFacts(current: any, currentSchema: DenseSchema, newer: { 
     .filter((p) => before.get(p)?.value !== after.get(p)?.value)
     .map((p) => {
       const f = after.get(p) ?? before.get(p)!;
-      return { path: p, label: f.group ? `${f.group} · ${f.label}` : f.label, before: before.get(p)?.value, after: after.get(p)?.value };
+      return { path: p, label: factLabel(f.group, f.label), before: before.get(p)?.value, after: after.get(p)?.value };
     });
 }
 

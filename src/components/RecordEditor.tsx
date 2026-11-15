@@ -16,6 +16,8 @@ type Props = {
   onTab: (tab: string) => void;
   /** remounts the drafts for another record */
   formKey: string;
+  /** the tabs that currently have a problem, for a count elsewhere (the action bar) */
+  onProblems?: (tabs: string[]) => void;
 };
 
 /**
@@ -23,7 +25,7 @@ type Props = {
  * drafts survive switching; a tab with an invalid draft, an incomplete group or a schema error
  * shows a badge.
  */
-export function RecordEditor({ schema, meta, record, onChange, labels, overrides, tab, onTab, formKey }: Props) {
+export function RecordEditor({ schema, meta, record, onChange, labels, overrides, tab, onTab, formKey, onProblems }: Props) {
   const tabs = editTabsFor(schema, meta);
   const current = tabs.some((t) => t.id === tab) ? tab : tabs[0].id;
   const panels = useRef<HTMLDivElement>(null);
@@ -49,6 +51,9 @@ export function RecordEditor({ schema, meta, record, onChange, labels, overrides
   }, []);
 
   const problem = (id: string) => domProblems[id] || tabs.find((t) => t.id === id)!.sections.some((s) => s.fields.some((f) => errorFields.has(f)));
+  const problemTabs = tabs.filter((t) => problem(t.id)).map((t) => t.id);
+  const problemKey = problemTabs.join(",");
+  useEffect(() => onProblems?.(problemKey ? problemKey.split(",") : []), [problemKey]); // eslint-disable-line react-hooks/exhaustive-deps
   return (
     <div className="editor">
       {tabs.length > 1 && (

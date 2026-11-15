@@ -52,13 +52,10 @@
   "form": {
     "title": "Scheda dell'elemento",
     "unknown": "Sconosciuto",
-    "generate": "Genera",
     "add": "Aggiungi",
     "remove": "Rimuovi",
     "charset": "Solo lettere e cifre, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caratteri esadecimali",
-    "newRecord": "Nuova scheda (v{{v}})",
     "olderVersion": "Creata con la versione {{v}} dello schema. Viene mostrata ed esportata come versione {{v}}; le nuove schede usano la versione {{latest}}.",
     "liftedVersion": "Letto da un codice della versione {{from}} e mostrato come versione {{latest}}. I campi aggiunti in seguito non sono indicati; il salvataggio scrive la versione {{latest}}.",
     "view": "Visualizza",
@@ -68,11 +65,12 @@
       "number": "Numero intero da {{min}} a {{max}}",
       "date": "Data nel formato AAAA-MM-GG",
       "dayOrYear": "Un anno (1962) o una data (1962-05-03)",
-      "chars": "Solo lettere e cifre, max. {{max}}",
-      "id": "32 caratteri esadecimali"
+      "chars": "Solo lettere e cifre, max. {{max}}"
     },
     "incomplete": "Incompleto: resta sconosciuto finché non è tutto compilato",
-    "required": "Obbligatorio qui"
+    "required": "Obbligatorio qui",
+    "chipFrom": "da v{{v}}",
+    "chipOlder": "precedente"
   },
   "viewer": {
     "title": "Anteprima 3D",
@@ -110,7 +108,9 @@
     "show": "Mostra la più recente",
     "field": "Campo",
     "before": "Questo codice",
-    "after": "Più recente"
+    "after": "Più recente",
+    "changes_one": "{{count}} campo modificato",
+    "changes_other": "{{count}} campi modificati"
   },
   "schema": {
     "version": "Versione {{v}}",
@@ -178,7 +178,9 @@
     "send": "Invia link di accesso",
     "sent": "Abbiamo inviato un link di accesso a {{email}}. Aprilo su questo o su un altro dispositivo.",
     "error": "Impossibile inviare il link: {{message}}",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "accountTitle": "Account",
+    "account": "Account: {{email}}"
   },
   "save": {
     "save": "Salva",
@@ -233,7 +235,9 @@
       "now": "Ora",
       "yoursNow": "La tua modifica = ora",
       "split": "Parte",
-      "join": "Unito"
+      "join": "Unito",
+      "code": "Questo codice",
+      "codeNow": "Questo codice = attuale"
     },
     "firstRecord": "prima voce",
     "gap_one": "+{{count}} voce",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Niente corrisponde a questo filtro.",
     "schema": "Schema",
-    "allSchemas": "Tutti gli schemi ({{count}})"
+    "allSchemas": "Tutti gli schemi ({{count}})",
+    "componentHistory": "Revisioni salvate",
+    "codeStatus": {
+      "yours": "Questo codice è il più recente",
+      "continued_one": "{{count}} voce dopo questo codice",
+      "continued_other": "{{count}} voci dopo questo codice",
+      "split_one": "Diviso dopo questo codice",
+      "split_other": "Diviso in {{count}} dopo questo codice",
+      "joined": "Unito dopo questo codice"
+    },
+    "showKeyPoints": "Punti chiave di {{name}}"
   },
   "admin": {
     "title": "Tutte le voci",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} voci nascoste.",
     "unhidden_one": "{{count}} voce di nuovo visibile.",
     "unhidden_other": "{{count}} voci di nuovo visibili."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "Sistema",
+    "light": "Chiaro",
+    "dark": "Scuro"
+  },
+  "actions": {
+    "title": "Azioni della scheda",
+    "unsaved": "Modifiche non salvate",
+    "problems_one": "{{count}} scheda da controllare",
+    "problems_other": "{{count}} schede da controllare",
+    "copy": "Crea una copia",
+    "export": "Esporta",
+    "done": "Fatto"
   }
 }

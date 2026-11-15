@@ -52,13 +52,10 @@
   "form": {
     "title": "Bauteildatensatz",
     "unknown": "Unbekannt",
-    "generate": "Erzeugen",
     "add": "Hinzufügen",
     "remove": "Entfernen",
     "charset": "Nur Buchstaben und Ziffern, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 Hex-Zeichen",
-    "newRecord": "Neuer Datensatz (v{{v}})",
     "olderVersion": "Mit Schemaversion {{v}} erstellt. Er wird als Version {{v}} angezeigt und exportiert; neue Datensätze verwenden Version {{latest}}.",
     "liftedVersion": "Aus einem Code der Version {{from}} gelesen und als Version {{latest}} angezeigt. Seither hinzugefügte Felder sind nicht angegeben; Speichern schreibt Version {{latest}}.",
     "view": "Ansicht",
@@ -68,11 +65,12 @@
       "number": "Ganze Zahl von {{min}} bis {{max}}",
       "date": "Datum als JJJJ-MM-TT",
       "dayOrYear": "Ein Jahr (1962) oder ein Datum (1962-05-03)",
-      "chars": "Nur Buchstaben und Ziffern, max. {{max}}",
-      "id": "32 Hex-Zeichen"
+      "chars": "Nur Buchstaben und Ziffern, max. {{max}}"
     },
     "incomplete": "Unvollständig: bleibt unbekannt, bis alles ausgefüllt ist",
-    "required": "Hier erforderlich"
+    "required": "Hier erforderlich",
+    "chipFrom": "aus v{{v}}",
+    "chipOlder": "älter"
   },
   "viewer": {
     "title": "3D-Vorschau",
@@ -110,7 +108,9 @@
     "show": "Neueste anzeigen",
     "field": "Feld",
     "before": "Dieser Code",
-    "after": "Neueste"
+    "after": "Neueste",
+    "changes_one": "{{count}} geändertes Feld",
+    "changes_other": "{{count}} geänderte Felder"
   },
   "schema": {
     "version": "Version {{v}}",
@@ -178,7 +178,9 @@
     "send": "Anmeldelink senden",
     "sent": "Wir haben einen Anmeldelink an {{email}} gesendet. Öffnen Sie ihn auf diesem oder einem anderen Gerät.",
     "error": "Link konnte nicht gesendet werden: {{message}}",
-    "close": "Schliessen"
+    "close": "Schliessen",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Speichern",
@@ -233,7 +235,9 @@
       "now": "Jetzt",
       "yoursNow": "Ihre Bearbeitung = jetzt",
       "split": "Teilstück",
-      "join": "Zusammengefügt"
+      "join": "Zusammengefügt",
+      "code": "Dieser Code",
+      "codeNow": "Dieser Code = aktuell"
     },
     "firstRecord": "erster Eintrag",
     "gap_one": "+{{count}} Eintrag",
@@ -253,7 +257,17 @@
     },
     "noneMatch": "Nichts passt zu diesem Filter.",
     "schema": "Schema",
-    "allSchemas": "Alle Schemas ({{count}})"
+    "allSchemas": "Alle Schemas ({{count}})",
+    "componentHistory": "Gespeicherte Revisionen",
+    "codeStatus": {
+      "yours": "Dieser Code ist der neueste",
+      "continued_one": "{{count}} Eintrag nach diesem Code",
+      "continued_other": "{{count}} Einträge nach diesem Code",
+      "split_one": "Nach diesem Code geteilt",
+      "split_other": "Nach diesem Code in {{count}} geteilt",
+      "joined": "Nach diesem Code zusammengeführt"
+    },
+    "showKeyPoints": "Eckpunkte von {{name}}"
   },
   "admin": {
     "title": "Alle Einträge",
@@ -279,5 +293,21 @@
     "hiddenDone_other": "{{count}} Einträge ausgeblendet.",
     "unhidden_one": "{{count}} Eintrag wieder sichtbar.",
     "unhidden_other": "{{count}} Einträge wieder sichtbar."
+  },
+  "theme": {
+    "title": "Darstellung",
+    "label": "Darstellung: {{theme}}",
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
+  },
+  "actions": {
+    "title": "Aktionen zum Datensatz",
+    "unsaved": "Ungespeicherte Änderungen",
+    "problems_one": "{{count}} Reiter braucht Aufmerksamkeit",
+    "problems_other": "{{count}} Reiter brauchen Aufmerksamkeit",
+    "copy": "Kopie erstellen",
+    "export": "Exportieren",
+    "done": "Fertig"
   }
 }
