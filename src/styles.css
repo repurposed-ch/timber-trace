@@ -203,7 +203,8 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .dev-actions { display: flex; gap: 6px; flex-wrap: wrap; }
 .ok { color: var(--ok); }
 .card-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.card-head h3 { margin: 0; }
+.card-head h2 { margin: 0; font-size: 1rem; }
+.card > h2 { font-size: 1rem; margin: 0 0 8px; }
 .viewer-card #viewer { margin-top: 8px; }
 @media (min-width: 600px) { .viewer { height: 360px; } }
 /* phones: labels above inputs, controls full width */
@@ -333,7 +334,7 @@ input::placeholder { color: var(--placeholder); font-size: .85em; font-style: it
 .record-view { display: grid; gap: 4px; }
 .record-view dl { margin: 0; display: grid; }
 .summary { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; margin-bottom: 4px; }
-.summary h2 { margin: 0; font-size: 1.25rem; line-height: 1.25; }
+.summary h3 { margin: 0; font-size: 1.25rem; line-height: 1.25; }
 .summary-id { font-size: .78rem; color: var(--muted); margin: 2px 0 12px; }
 .tiles { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; }
 .tile { background: var(--bg); border-radius: 8px; padding: 8px 10px; min-width: 0; }
@@ -403,7 +404,7 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 @media (max-width: 959px) {
   .aside-switch { display: inline-flex; margin-right: auto; }
   .phone-only { display: inline; }
-  .aside-pin .card-head h3, .aside-pane .card-head h3 { display: none; }
+  .aside-pin .card-head h2, .aside-pane .card-head h2 { display: none; }
   .aside-3d .aside-pane { display: none; }
   /* the 3D view keeps its size off-screen, so the PDF can still take its snapshot */
   .aside-qr .aside-pin { position: absolute; left: -10000px; top: 0; width: min(100vw, 600px); }
@@ -456,7 +457,7 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .signin form { display: grid; gap: 10px; }
 .signin label { display: grid; gap: 4px; }
 .signin input { font-size: 16px; padding: 8px; }
-.signin h3 { margin: 0 0 8px; }
+.signin h2 { margin: 0 0 8px; font-size: 1rem; }
 .signin-close { margin-top: 10px; }
 .save-status { font-size: .85rem; align-self: center; }
 /* my entries: compact boxes; overview steps share the width, stacked on phones */

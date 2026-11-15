@@ -167,7 +167,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const pinned = (
     <div className="card viewer-card">
       <div className="card-head">
-        <h3>{t("viewer.title", { ns: "ui" })}</h3>
+        <h2>{t("viewer.title", { ns: "ui" })}</h2>
         {asideSwitch}
         {hideButton("viewer")}
       </div>
@@ -181,7 +181,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   const scroll = (
     <div className={`card qr-card${showViewer ? "" : " collapsed"}`}>
       <div className="card-head">
-        <h3>{t("qr.title", { ns: "ui" })}</h3>
+        <h2>{t("qr.title", { ns: "ui" })}</h2>
         {asideSwitch}
         <span className="phone-only">{hideButton("qr")}</span>
       </div>
@@ -213,7 +213,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       )}
       {tab === "scan" && (
         <div className="card">
-          <h3>{t("scan.title", { ns: "ui" })}</h3>
+          <h2>{t("scan.title", { ns: "ui" })}</h2>
           <Scanner
             schema={schema}
             onDecoded={(r) => {
@@ -253,9 +253,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       {tab === "record" && (
         <div className="card record-card">
           <div className="card-head">
-            <h3>
+            <h2>
               {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
-            </h3>
+            </h2>
             <div className="card-actions">
               <div className="variants" role="radiogroup" aria-label={t("form.mode", { ns: "ui" })}>
                 {(["view", "edit"] as const).map((m) => (

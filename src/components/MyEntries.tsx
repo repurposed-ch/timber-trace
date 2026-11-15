@@ -98,7 +98,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
   if (session.status !== "in")
     return (
       <div className="card">
-        <h3>{t("nav.mine")}</h3>
+        <h2>{t("nav.mine")}</h2>
         <p>{t("mine.signedOut")}</p>
         {session.status === "out" && (
           <button type="button" className="primary" onClick={() => setSignInOpen(true)}>
@@ -203,7 +203,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
   return (
     <div className="card mine">
       <div className="card-head">
-        <h3>{t("nav.mine")}</h3>
+        <h2>{t("nav.mine")}</h2>
         <div className="variants" role="radiogroup" aria-label={t("mine.detail")}>
           {DETAILS.map((d) => (
             <button key={d} type="button" role="radio" aria-checked={detail === d} className={detail === d ? "on" : ""} onClick={() => setDetail(d)}>

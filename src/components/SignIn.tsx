@@ -38,7 +38,7 @@ export function SignIn() {
 
   return (
     <dialog ref={dialog} className="signin" onClose={() => setSignInOpen(false)} aria-labelledby="signin-title">
-      <h3 id="signin-title">{t("auth.signIn")}</h3>
+      <h2 id="signin-title">{t("auth.signIn")}</h2>
       {step.s === "sent" ? (
         <p role="status">{t("auth.sent", { email: step.email })}</p>
       ) : (

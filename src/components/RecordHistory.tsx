@@ -65,7 +65,7 @@ export function RecordHistory({ source, schema, labels, lineage, loaded, onOpen 
   return (
     <section className="card record-history" aria-labelledby="record-history-title">
       <div className="card-head">
-        <h3 id="record-history-title">{t("mine.componentHistory")}</h3>
+        <h2 id="record-history-title">{t("mine.componentHistory")}</h2>
         <div className="variants" role="radiogroup" aria-label={t("mine.detail")}>
           {(["overview", "full"] as const).map((d) => (
             <button key={d} type="button" role="radio" aria-checked={detail === d} className={detail === d ? "on" : ""} onClick={() => setDetail(d)}>

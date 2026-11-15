@@ -61,9 +61,9 @@ export function RecordForm({ schema, labels, value, onChange, overrides = {}, fi
         // a section that is one plain field group already says its title
         <div key={g.id || "all"} className={`form-sec${g.title && g.fields.length === 1 && !(g.fields[0] in overrides) ? " single" : ""}`}>
           {g.title && (
-            <h4 className="sec-h" id={`edit-sec-${g.id}`}>
+            <h3 className="sec-h" id={`edit-sec-${g.id}`}>
               <span>{g.title}</span>
-            </h4>
+            </h3>
           )}
           {g.fields.map(field)}
         </div>

@@ -86,7 +86,7 @@ export function AdminEntries({ admin, onOpen }: { admin: AdminSource | null; onO
   if (!isAdmin || !admin)
     return (
       <div className="card">
-        <h3>{t("admin.title")}</h3>
+        <h2>{t("admin.title")}</h2>
         <p>{t("admin.only")}</p>
       </div>
     );
@@ -214,7 +214,7 @@ export function AdminEntries({ admin, onOpen }: { admin: AdminSource | null; onO
   return (
     <div className="card mine admin">
       <div className="card-head">
-        <h3>{t("admin.title")}</h3>
+        <h2>{t("admin.title")}</h2>
         <div className="variants" role="radiogroup" aria-label={t("mine.detail")}>
           {DETAILS.map((d) => (
             <button key={d} type="button" role="radio" aria-checked={detail === d} className={detail === d ? "on" : ""} onClick={() => setDetail(d)}>
