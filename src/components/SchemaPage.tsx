@@ -29,6 +29,8 @@ import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { MyEntries } from "./MyEntries";
 import { SaveButton } from "./SaveButton";
+import { ActionBar } from "./ActionBar";
+import { copyRecord } from "../records/copy";
 import { SplitChoice } from "./SplitChoice";
 import { UpdateBanner } from "./UpdateBanner";
 
@@ -67,7 +69,8 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
     return lifted ? { data: lifted, schema: latest } : { data, schema: schema.versions.get(data.version) ?? latest };
   };
   // the record as first shown, to tell whether it was edited since
-  const shown = useRef(record);
+  const shown = useRef<any>(record);
+  const [problems, setProblems] = useState<string[]>([]);
   const liftedFrom = loaded && loaded.data.version !== record.version ? loaded.data.version : null;
   // otherwise a record is edited and exported in the schema version it was made with
   const dense = schema.versions.get(record.version) ?? latest;
@@ -190,6 +193,17 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
       </div>
     </div>
   );
+  // the schema version, and where it came from: an older code shown in the latest version, or an older version kept
+  const chipText = liftedFrom !== null ? t("form.liftedVersion", { ns: "ui", from: liftedFrom, latest: record.version }) : record.version !== schema.latest ? t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest }) : t("schema.version", { ns: "ui", v: record.version });
+  const VersionChip = () => (
+    <span className={`chip${liftedFrom !== null || record.version !== schema.latest ? " chip-note" : ""}`} title={chipText}>
+      <span aria-hidden>
+        v{record.version}
+        {liftedFrom !== null ? ` · ${t("form.chipFrom", { ns: "ui", v: liftedFrom })}` : record.version !== schema.latest ? ` · ${t("form.chipOlder", { ns: "ui" })}` : ""}
+      </span>
+      <span className="sr-only">{chipText}</span>
+    </span>
+  );
   return (
     <Shell
       crumbs={[
@@ -254,7 +268,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         <div className="card record-card">
           <div className="card-head">
             <h2>
-              {t("form.title", { ns: "ui" })} <span className="chip" title={t("schema.version", { ns: "ui", v: record.version })}>v{record.version}</span>
+              {t("form.title", { ns: "ui" })} <VersionChip />
             </h2>
             <div className="card-actions">
               <div className="variants" role="radiogroup" aria-label={t("form.mode", { ns: "ui" })}>
@@ -264,27 +278,6 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                   </button>
                 ))}
               </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setLoaded(null);
-                  setRecord(newRecord());
-                  setHistState(historyState(null, tiers!));
-                  setMode("edit");
-                }}
-              >
-                {t("form.newRecord", { ns: "ui", v: schema.latest })}
-              </button>
-              <SaveButton
-                source={records}
-                slug={slug}
-                schema={dense}
-                record={record}
-                lineage={lineage}
-                history={hist.status === "known" ? hist.full : null}
-                onSaved={(data) => load({ payload: encodeRecord(dense, data, URL_SAFE), data })}
-              />
-              <ExportButtons slug={slug} schema={dense} record={record} labels={labels} />
             </div>
           </div>
           {mode === "edit" &&
@@ -292,17 +285,6 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
               const line = provenance(record, labels, (k, o) => t(k, { ns: "ui", ...o }), intlLocale(i18n.resolvedLanguage ?? "en"));
               return line && <p className="provenance" data-testid="provenance">{line}</p>;
             })()}
-          {liftedFrom !== null ? (
-            <p className="note" role="note">
-              {t("form.liftedVersion", { ns: "ui", from: liftedFrom, latest: record.version })}
-            </p>
-          ) : (
-            record.version !== schema.latest && (
-              <p className="note" role="note">
-                {t("form.olderVersion", { ns: "ui", v: record.version, latest: schema.latest })}
-              </p>
-            )
-          )}
           {mode === "view" ? (
             <>
               <RecordView schema={dense} meta={schema.meta} record={record} labels={labels} history={hist} onEdit={editSection} />
@@ -321,6 +303,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                 setEditTab(id);
                 setFocusSection(null);
               }}
+              onProblems={setProblems}
               overrides={
                 tiers && historyField
                   ? { history: <HistoryEditor schema={dense} field={historyField} labels={labels} tiers={tiers} value={hist} onChange={setHist} /> }
@@ -329,6 +312,34 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
             />
           )}
         </div>
+      )}
+      {tab === "record" && (
+        <ActionBar
+          mode={mode}
+          unsaved={record !== shown.current}
+          problems={problems.length}
+          onDone={() => setMode("view")}
+          onCopy={() => {
+            // a new component with this content: no predecessors, so no update banner or history
+            const copy = copyRecord(dense, record);
+            setLoaded(null);
+            shown.current = null;
+            setRecord(copy);
+            setMode("edit");
+          }}
+          exports={<ExportButtons slug={slug} schema={dense} record={record} labels={labels} />}
+          save={
+            <SaveButton
+              source={records}
+              slug={slug}
+              schema={dense}
+              record={record}
+              lineage={lineage}
+              history={hist.status === "known" ? hist.full : null}
+              onSaved={(data) => load({ payload: encodeRecord(dense, data, URL_SAFE), data })}
+            />
+          }
+        />
       )}
     </Shell>
   );

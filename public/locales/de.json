@@ -56,7 +56,6 @@
     "remove": "Entfernen",
     "charset": "Nur Buchstaben und Ziffern, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "Neuer Datensatz (v{{v}})",
     "olderVersion": "Mit Schemaversion {{v}} erstellt. Er wird als Version {{v}} angezeigt und exportiert; neue Datensätze verwenden Version {{latest}}.",
     "liftedVersion": "Aus einem Code der Version {{from}} gelesen und als Version {{latest}} angezeigt. Seither hinzugefügte Felder sind nicht angegeben; Speichern schreibt Version {{latest}}.",
     "view": "Ansicht",
@@ -69,7 +68,9 @@
       "chars": "Nur Buchstaben und Ziffern, max. {{max}}"
     },
     "incomplete": "Unvollständig: bleibt unbekannt, bis alles ausgefüllt ist",
-    "required": "Hier erforderlich"
+    "required": "Hier erforderlich",
+    "chipFrom": "aus v{{v}}",
+    "chipOlder": "älter"
   },
   "viewer": {
     "title": "3D-Vorschau",
@@ -297,5 +298,14 @@
     "system": "System",
     "light": "Hell",
     "dark": "Dunkel"
+  },
+  "actions": {
+    "title": "Aktionen zum Datensatz",
+    "unsaved": "Ungespeicherte Änderungen",
+    "problems_one": "{{count}} Reiter braucht Aufmerksamkeit",
+    "problems_other": "{{count}} Reiter brauchen Aufmerksamkeit",
+    "copy": "Kopie erstellen",
+    "export": "Exportieren",
+    "done": "Fertig"
   }
 }

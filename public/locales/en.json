@@ -56,7 +56,6 @@
     "remove": "Remove",
     "charset": "Letters and digits only, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "New record (v{{v}})",
     "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}.",
     "liftedVersion": "Read from a version {{from}} code and shown as version {{latest}}. Fields added since are not stated; saving writes version {{latest}}.",
     "view": "View",
@@ -69,7 +68,9 @@
       "chars": "Letters and digits only, max. {{max}}"
     },
     "incomplete": "Incomplete: still unknown until every part is filled in",
-    "required": "Required here"
+    "required": "Required here",
+    "chipFrom": "from v{{v}}",
+    "chipOlder": "older"
   },
   "viewer": {
     "title": "3D preview",
@@ -297,5 +298,14 @@
     "system": "System",
     "light": "Light",
     "dark": "Dark"
+  },
+  "actions": {
+    "title": "Record actions",
+    "unsaved": "Unsaved changes",
+    "problems_one": "{{count}} tab needs attention",
+    "problems_other": "{{count}} tabs need attention",
+    "copy": "Make a copy",
+    "export": "Export",
+    "done": "Done"
   }
 }

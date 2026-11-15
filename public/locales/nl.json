@@ -56,7 +56,6 @@
     "remove": "Verwijderen",
     "charset": "Alleen letters en cijfers, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "Nieuw record (v{{v}})",
     "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
     "liftedVersion": "Gelezen uit een code van versie {{from}} en getoond als versie {{latest}}. Velden die sindsdien zijn toegevoegd, zijn niet ingevuld; opslaan schrijft versie {{latest}}.",
     "view": "Bekijken",
@@ -69,7 +68,9 @@
       "chars": "Alleen letters en cijfers, max. {{max}}"
     },
     "incomplete": "Onvolledig: blijft onbekend tot alles is ingevuld",
-    "required": "Hier verplicht"
+    "required": "Hier verplicht",
+    "chipFrom": "uit v{{v}}",
+    "chipOlder": "ouder"
   },
   "viewer": {
     "title": "3D-voorbeeld",
@@ -297,5 +298,14 @@
     "system": "Systeem",
     "light": "Licht",
     "dark": "Donker"
+  },
+  "actions": {
+    "title": "Acties voor het record",
+    "unsaved": "Niet-opgeslagen wijzigingen",
+    "problems_one": "{{count}} tabblad vraagt aandacht",
+    "problems_other": "{{count}} tabbladen vragen aandacht",
+    "copy": "Kopie maken",
+    "export": "Exporteren",
+    "done": "Klaar"
   }
 }

@@ -56,7 +56,6 @@
     "remove": "Fjern",
     "charset": "Kun bogstaver og tal, maks. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}.",
     "liftedVersion": "Læst fra en kode i version {{from}} og vist som version {{latest}}. Felter tilføjet siden er ikke angivet; ved at gemme skrives version {{latest}}.",
     "view": "Vis",
@@ -69,7 +68,9 @@
       "chars": "Kun bogstaver og tal, maks. {{max}}"
     },
     "incomplete": "Ufuldstændig: forbliver ukendt, indtil alt er udfyldt",
-    "required": "Påkrævet her"
+    "required": "Påkrævet her",
+    "chipFrom": "fra v{{v}}",
+    "chipOlder": "ældre"
   },
   "viewer": {
     "title": "3D-visning",
@@ -297,5 +298,14 @@
     "system": "System",
     "light": "Lys",
     "dark": "Mørk"
+  },
+  "actions": {
+    "title": "Handlinger for posten",
+    "unsaved": "Ikke-gemte ændringer",
+    "problems_one": "{{count}} fane kræver opmærksomhed",
+    "problems_other": "{{count}} faner kræver opmærksomhed",
+    "copy": "Lav en kopi",
+    "export": "Eksportér",
+    "done": "Færdig"
   }
 }

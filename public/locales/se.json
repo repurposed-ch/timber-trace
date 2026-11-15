@@ -56,7 +56,6 @@
     "remove": "Ta bort",
     "charset": "Endast bokstäver och siffror, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Skapad med schemaversion {{v}}. Den visas och exporteras som version {{v}}; nya poster använder version {{latest}}.",
     "liftedVersion": "Läst från en kod i version {{from}} och visad som version {{latest}}. Fält som lagts till sedan dess är inte angivna; att spara skriver version {{latest}}.",
     "view": "Visa",
@@ -69,7 +68,9 @@
       "chars": "Endast bokstäver och siffror, max. {{max}}"
     },
     "incomplete": "Ofullständig: förblir okänd tills allt är ifyllt",
-    "required": "Krävs här"
+    "required": "Krävs här",
+    "chipFrom": "från v{{v}}",
+    "chipOlder": "äldre"
   },
   "viewer": {
     "title": "3D-förhandsvisning",
@@ -297,5 +298,14 @@
     "system": "System",
     "light": "Ljust",
     "dark": "Mörkt"
+  },
+  "actions": {
+    "title": "Åtgärder för posten",
+    "unsaved": "Osparade ändringar",
+    "problems_one": "{{count}} flik behöver åtgärdas",
+    "problems_other": "{{count}} flikar behöver åtgärdas",
+    "copy": "Gör en kopia",
+    "export": "Exportera",
+    "done": "Klar"
   }
 }

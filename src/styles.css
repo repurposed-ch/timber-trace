@@ -610,3 +610,21 @@ button.link { border: 0; background: none; padding: 0; color: var(--accent); tex
 .hn-themes button { display: inline-flex; align-items: center; gap: 6px; }
 .hn-theme { padding: 3px 7px; }
 output.id { display: block; padding: 4px 0; overflow-wrap: anywhere; user-select: all; }
+/* the record's actions: always at the bottom of the page (desktop: of the scrolling main pane) */
+.action-bar { position: sticky; bottom: 0; z-index: 5; display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; margin-top: 12px; padding: 6px 12px; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 -4px 16px var(--shadow); }
+.ab-status { display: flex; gap: 10px; align-items: center; font-size: .85rem; color: var(--muted); min-width: 0; }
+.ab-problems { color: var(--error); }
+.ab-buttons { display: flex; gap: 6px; align-items: center; flex-wrap: nowrap; }
+.ab-exports-menu { display: none; position: relative; }
+.ab-exports-menu > summary { list-style: none; cursor: pointer; border: 1px solid var(--line); border-radius: 6px; padding: 4px 10px; background: var(--card); }
+.ab-exports-menu > summary::-webkit-details-marker { display: none; }
+.ab-exports-menu > summary::after { content: " ▾"; font-size: .75em; }
+.ab-menu { position: absolute; right: 0; bottom: calc(100% + 6px); background: var(--card); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 8px 24px var(--shadow); padding: 6px; }
+.ab-menu .exports { display: grid; gap: 4px; min-width: 9ch; }
+@media (max-width: 520px) {
+  .action-bar { padding: 6px 8px; border-radius: 10px 10px 0 0; margin-left: -8px; margin-right: -8px; }
+  .ab-exports-wide { display: none; }
+  .ab-exports-menu { display: block; }
+  .ab-status { font-size: .8rem; }
+}
+.chip-note { color: var(--warn-fg); border-color: var(--warn-line); background: var(--warn-bg); }

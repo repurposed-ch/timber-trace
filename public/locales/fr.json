@@ -56,7 +56,6 @@
     "remove": "Supprimer",
     "charset": "Lettres et chiffres uniquement, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "newRecord": "Nouvelle fiche (v{{v}})",
     "olderVersion": "Créée avec la version {{v}} du schéma. Elle est affichée et exportée en version {{v}} ; les nouvelles fiches utilisent la version {{latest}}.",
     "liftedVersion": "Lu depuis un code de version {{from}} et affiché en version {{latest}}. Les champs ajoutés depuis ne sont pas renseignés ; l'enregistrement écrit la version {{latest}}.",
     "view": "Consulter",
@@ -69,7 +68,9 @@
       "chars": "Lettres et chiffres uniquement, max. {{max}}"
     },
     "incomplete": "Incomplet : reste inconnu tant que tout n'est pas rempli",
-    "required": "Obligatoire ici"
+    "required": "Obligatoire ici",
+    "chipFrom": "depuis v{{v}}",
+    "chipOlder": "ancienne"
   },
   "viewer": {
     "title": "Aperçu 3D",
@@ -297,5 +298,14 @@
     "system": "Système",
     "light": "Clair",
     "dark": "Sombre"
+  },
+  "actions": {
+    "title": "Actions de la fiche",
+    "unsaved": "Modifications non enregistrées",
+    "problems_one": "{{count}} onglet à vérifier",
+    "problems_other": "{{count}} onglets à vérifier",
+    "copy": "Créer une copie",
+    "export": "Exporter",
+    "done": "Terminé"
   }
 }
