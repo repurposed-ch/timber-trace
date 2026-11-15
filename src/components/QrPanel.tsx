@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { URL_SAFE, encodeRecord } from "../schema/codec";
 import { recordLink } from "../schema/links";
+import { markPrinted } from "../state/records";
 
 const base = import.meta.env.BASE_URL;
 
@@ -41,6 +42,7 @@ export function QrPanel({ slug, schema, record }: { slug: string; schema: DenseS
   if ("error" in encoded) return <p className="error">{encoded.error}</p>;
 
   const copy = async () => {
+    markPrinted(record);
     await navigator.clipboard?.writeText(encoded.link);
     setCopied(true);
     setTimeout(() => setCopied(false), 1200);

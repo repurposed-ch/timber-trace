@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} poster dolda.",
     "unhidden_one": "{{count}} post visas igen.",
     "unhidden_other": "{{count}} poster visas igen."
+  },
+  "sync": {
+    "pending_one": "{{count}} väntar på att skickas",
+    "pending_other": "{{count}} väntar på att skickas",
+    "offline_one": "Offline · {{count}} sparad på den här enheten",
+    "offline_other": "Offline · {{count}} sparade på den här enheten",
+    "sending": "Skickar…",
+    "sendNow": "Skicka nu",
+    "conflicts_one": "{{count}} inte skickad",
+    "conflicts_other": "{{count}} inte skickade",
+    "printed": "En nyare post har sparats någon annanstans, och etiketten för den här koden är redan utskriven eller delad.",
+    "retry": "Försök igen",
+    "retryHint": "Skickar igen. Finns en nyare post blir detta nästa revision; en utskriven etikett måste skrivas ut igen.",
+    "discard": "Kasta",
+    "discardConfirm": "Kasta den här posten och det som sparats efter den på den här enheten?",
+    "state": {
+      "pending": "Inte skickad än",
+      "conflict": "Inte skickad"
+    }
   }
 }

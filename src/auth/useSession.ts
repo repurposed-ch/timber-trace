@@ -16,6 +16,9 @@ const set = (next: Session) => {
 // decide what to show, the database checks it again for everything an admin does
 const signedIn = (u: { id: string; email?: string; app_metadata?: Record<string, unknown> }): Session => ({ status: "in", id: u.id, email: u.email ?? "", admin: u.app_metadata?.role === "admin" });
 
+/** the signed-in user's id, outside React (saving on this device, sending) */
+export const currentUserId = () => (state.status === "in" ? state.id : null);
+
 let watching = false;
 /** starts following the session (sign-in from the email link, sign-out, token refresh) */
 export function watchSession(): Promise<void> {

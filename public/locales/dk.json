@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} poster skjult.",
     "unhidden_one": "{{count}} post vises igen.",
     "unhidden_other": "{{count}} poster vises igen."
+  },
+  "sync": {
+    "pending_one": "{{count}} venter på at blive sendt",
+    "pending_other": "{{count}} venter på at blive sendt",
+    "offline_one": "Offline · {{count}} gemt på denne enhed",
+    "offline_other": "Offline · {{count}} gemt på denne enhed",
+    "sending": "Sender…",
+    "sendNow": "Send nu",
+    "conflicts_one": "{{count}} ikke sendt",
+    "conflicts_other": "{{count}} ikke sendt",
+    "printed": "En nyere post er gemt et andet sted, og etiketten for denne kode er allerede printet eller delt.",
+    "retry": "Prøv igen",
+    "retryHint": "Sender igen. Findes der en nyere post, bliver dette den næste revision; en printet etiket skal printes igen.",
+    "discard": "Kassér",
+    "discardConfirm": "Kassér denne post og det, der er gemt efter den på denne enhed?",
+    "state": {
+      "pending": "Ikke sendt endnu",
+      "conflict": "Ikke sendt"
+    }
   }
 }

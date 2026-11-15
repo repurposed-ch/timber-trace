@@ -490,3 +490,11 @@ button.link { border: 0; background: none; padding: 0; color: var(--accent); tex
   .admin-user select { max-width: 10rem; }
 }
 .bh-tag { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+/* saved on this device, not on the server yet */
+.sync { display: inline-flex; gap: 6px; align-items: center; flex-wrap: wrap; position: relative; }
+.sync button.status { border: 0; cursor: pointer; }
+.st-pending { background: var(--cont-soft); color: var(--cont); }
+.st-conflict { background: #f3e3e3; color: #8a2b2b; }
+.sync-conflicts { list-style: none; margin: 4px 0 0; padding: 8px 10px; flex-basis: 100%; display: grid; gap: 6px; font-size: .82rem; border: 1px solid var(--line-soft); border-radius: 8px; }
+.sync-conflicts li { display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.sync-acts { display: inline-flex; gap: 10px; margin-left: auto; }

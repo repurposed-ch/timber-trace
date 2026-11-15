@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useEffect, useMemo, useState, type ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { signOut } from "../auth/client";
 import { setSignInOpen, useSession } from "../auth/useSession";
@@ -49,7 +49,7 @@ const currentOf = (b: Branch) => (b.latest.length ? b.latest[b.latest.length - 1
 const schemaOf = (b: Branch) => b.yourLatest.entry.schema;
 
 /** the signed-in user's entries across all schemas, grouped into branches, at the chosen detail level */
-export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f: Found) => void }) {
+export function MyEntries({ source, onOpen, refreshKey = "", status }: { source: RecordSource; onOpen: (f: Found) => void; refreshKey?: string; status?: ReactNode }) {
   const { t, i18n } = useTranslation();
   const session = useSession();
   const [state, setState] = useState<State>({ s: "loading" });
@@ -88,7 +88,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
     return () => {
       alive = false;
     };
-  }, [source, userId]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [source, userId, refreshKey]); // eslint-disable-line react-hooks/exhaustive-deps
 
   if (session.status === "checking") return <p className="muted">{t("mine.loading")}</p>;
   if (session.status !== "in")
@@ -202,6 +202,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
     <div className="card mine">
       <div className="card-head">
         <h3>{t("nav.mine")}</h3>
+        {status}
         <div className="variants" role="radiogroup" aria-label={t("mine.detail")}>
           {DETAILS.map((d) => (
             <button key={d} type="button" role="radio" aria-checked={detail === d} className={detail === d ? "on" : ""} onClick={() => setDetail(d)}>

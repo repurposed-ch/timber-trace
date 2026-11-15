@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} Einträge ausgeblendet.",
     "unhidden_one": "{{count}} Eintrag wieder sichtbar.",
     "unhidden_other": "{{count}} Einträge wieder sichtbar."
+  },
+  "sync": {
+    "pending_one": "{{count}} wartet auf Senden",
+    "pending_other": "{{count}} warten auf Senden",
+    "offline_one": "Offline · {{count}} auf diesem Gerät gespeichert",
+    "offline_other": "Offline · {{count}} auf diesem Gerät gespeichert",
+    "sending": "Wird gesendet…",
+    "sendNow": "Jetzt senden",
+    "conflicts_one": "{{count}} nicht gesendet",
+    "conflicts_other": "{{count}} nicht gesendet",
+    "printed": "Anderswo wurde ein neuerer Eintrag gespeichert, und das Etikett dieses Codes ist bereits gedruckt oder geteilt.",
+    "retry": "Erneut versuchen",
+    "retryHint": "Sendet erneut. Gibt es einen neueren Eintrag, wird dies die nächste Revision; ein gedrucktes Etikett muss neu gedruckt werden.",
+    "discard": "Verwerfen",
+    "discardConfirm": "Diesen Eintrag und was danach auf diesem Gerät gespeichert wurde verwerfen?",
+    "state": {
+      "pending": "Noch nicht gesendet",
+      "conflict": "Nicht gesendet"
+    }
   }
 }

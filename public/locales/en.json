@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} entries hidden.",
     "unhidden_one": "{{count}} entry shown again.",
     "unhidden_other": "{{count}} entries shown again."
+  },
+  "sync": {
+    "pending_one": "{{count}} waiting to be sent",
+    "pending_other": "{{count}} waiting to be sent",
+    "offline_one": "Offline · {{count}} saved on this device",
+    "offline_other": "Offline · {{count}} saved on this device",
+    "sending": "Sending…",
+    "sendNow": "Send now",
+    "conflicts_one": "{{count}} not sent",
+    "conflicts_other": "{{count}} not sent",
+    "printed": "A newer entry was saved elsewhere, and this code's label is already printed or shared.",
+    "retry": "Try again",
+    "retryHint": "Sends it again. If a newer entry exists, it becomes the next revision, and a printed label must be reprinted.",
+    "discard": "Discard",
+    "discardConfirm": "Discard this entry and what was saved after it on this device?",
+    "state": {
+      "pending": "Not sent yet",
+      "conflict": "Not sent"
+    }
   }
 }

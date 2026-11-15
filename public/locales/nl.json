@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} invoeren verborgen.",
     "unhidden_one": "{{count}} invoer weer zichtbaar.",
     "unhidden_other": "{{count}} invoeren weer zichtbaar."
+  },
+  "sync": {
+    "pending_one": "{{count}} wacht op verzenden",
+    "pending_other": "{{count}} wachten op verzenden",
+    "offline_one": "Offline · {{count}} op dit apparaat opgeslagen",
+    "offline_other": "Offline · {{count}} op dit apparaat opgeslagen",
+    "sending": "Verzenden…",
+    "sendNow": "Nu verzenden",
+    "conflicts_one": "{{count}} niet verzonden",
+    "conflicts_other": "{{count}} niet verzonden",
+    "printed": "Elders is een nieuwere invoer opgeslagen, en het label van deze code is al geprint of gedeeld.",
+    "retry": "Opnieuw proberen",
+    "retryHint": "Verzendt opnieuw. Bestaat er een nieuwere invoer, dan wordt dit de volgende revisie; een geprint label moet opnieuw geprint worden.",
+    "discard": "Weggooien",
+    "discardConfirm": "Deze invoer en wat daarna op dit apparaat is opgeslagen weggooien?",
+    "state": {
+      "pending": "Nog niet verzonden",
+      "conflict": "Niet verzonden"
+    }
   }
 }

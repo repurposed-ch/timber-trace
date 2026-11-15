@@ -1,8 +1,6 @@
 import { Suspense, lazy, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { fallbackSource, staticRecordSource } from "../records/source";
-import { supabaseAdmin, supabaseConfig, supabaseRecordSource } from "../records/supabase";
-import { accessToken } from "../auth/client";
+import { adminSource, local, records } from "../state/records";
 import { sortHistory } from "../records/history";
 import { provenance } from "../records/revision";
 import { useLatest } from "../records/useLatest";
@@ -14,7 +12,7 @@ import { defaultRecord } from "../schema/fields";
 import { liftRecord } from "../schema/upgrade";
 import type { LoadedSchema } from "../schema/loader";
 import { intlLocale } from "../i18n-langs";
-import { read, useLabels } from "../state/useSchema";
+import { useLabels } from "../state/useSchema";
 import { BeamViewer } from "./BeamViewer";
 import { Shell } from "./Shell";
 import { HistoryEditor, historyFromState, historyState, type HistoryState } from "./HistoryEditor";
@@ -28,16 +26,13 @@ import { SchemaInspector } from "./SchemaInspector";
 import { Scanner } from "./Scanner";
 import { MyEntries } from "./MyEntries";
 import { SaveButton } from "./SaveButton";
+import { SyncStatus } from "./SyncStatus";
+import { useSyncStatus } from "../local/app";
 import { SplitChoice } from "./SplitChoice";
 import { UpdateBanner } from "./UpdateBanner";
 
-// the database when configured, the static files as fallback; the UI only sees RecordSource
-const db = supabaseConfig();
-const records = db ? fallbackSource(supabaseRecordSource(db, undefined, accessToken), staticRecordSource(read)) : staticRecordSource(read);
 // the admin page only loads for those who open it
 const AdminEntries = lazy(() => import("./AdminEntries").then((m) => ({ default: m.AdminEntries })));
-// admin calls; the database refuses them for anyone without the admin role
-const adminSource = db ? supabaseAdmin(db, undefined, accessToken) : null;
 type Loaded = { payload: string; data: any } | null;
 
 export function SchemaPage({ slug, schema: served }: { slug: string; schema: LoadedSchema }) {
@@ -67,6 +62,9 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
   // otherwise a record is edited and exported in the schema version it was made with
   const dense = schema.versions.get(record.version) ?? latest;
   const lineage = useLatest(records, schema, loaded);
+  // My entries loads again when something was sent or refused
+  const sync = useSyncStatus(local);
+  const syncKey = sync ? `${sync.pending}:${sync.conflicts.length}` : "";
   const newer = lineage.status === "newer" ? lineage.newer : null;
   const tiers = schema.meta.historyTiers;
   const historyField = dense.fields.find((f) => f.name === "history");
@@ -214,7 +212,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         </div>
       )}
       {tab === "mine" && (
-        <MyEntries source={records} onOpen={openEntry} />
+        <MyEntries source={records} onOpen={openEntry} refreshKey={syncKey} status={<SyncStatus local={local} />} />
       )}
       {tab === "admin" && (
         <Suspense fallback={<p className="muted">{t("mine.loading", { ns: "ui" })}</p>}>
@@ -274,6 +272,7 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
                 history={hist.status === "known" ? hist.full : null}
                 onSaved={(data) => load({ payload: encodeRecord(dense, data, URL_SAFE), data })}
               />
+              <SyncStatus local={local} />
               <ExportButtons slug={slug} schema={dense} record={record} labels={labels} />
             </div>
           </div>

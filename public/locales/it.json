@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} voci nascoste.",
     "unhidden_one": "{{count}} voce di nuovo visibile.",
     "unhidden_other": "{{count}} voci di nuovo visibili."
+  },
+  "sync": {
+    "pending_one": "{{count}} in attesa di invio",
+    "pending_other": "{{count}} in attesa di invio",
+    "offline_one": "Offline · {{count}} salvata su questo dispositivo",
+    "offline_other": "Offline · {{count}} salvate su questo dispositivo",
+    "sending": "Invio…",
+    "sendNow": "Invia ora",
+    "conflicts_one": "{{count}} non inviata",
+    "conflicts_other": "{{count}} non inviate",
+    "printed": "Altrove è stata salvata una voce più recente e l'etichetta di questo codice è già stampata o condivisa.",
+    "retry": "Riprova",
+    "retryHint": "La invia di nuovo. Se esiste una voce più recente, diventa la revisione successiva; un'etichetta stampata va ristampata.",
+    "discard": "Scarta",
+    "discardConfirm": "Scartare questa voce e ciò che è stato salvato dopo su questo dispositivo?",
+    "state": {
+      "pending": "Non ancora inviata",
+      "conflict": "Non inviata"
+    }
   }
 }

@@ -280,5 +280,24 @@
     "hiddenDone_other": "{{count}} entrées masquées.",
     "unhidden_one": "{{count}} entrée réaffichée.",
     "unhidden_other": "{{count}} entrées réaffichées."
+  },
+  "sync": {
+    "pending_one": "{{count}} en attente d'envoi",
+    "pending_other": "{{count}} en attente d'envoi",
+    "offline_one": "Hors ligne · {{count}} enregistrée sur cet appareil",
+    "offline_other": "Hors ligne · {{count}} enregistrées sur cet appareil",
+    "sending": "Envoi…",
+    "sendNow": "Envoyer maintenant",
+    "conflicts_one": "{{count}} non envoyée",
+    "conflicts_other": "{{count}} non envoyées",
+    "printed": "Une entrée plus récente a été enregistrée ailleurs, et l'étiquette de ce code est déjà imprimée ou partagée.",
+    "retry": "Réessayer",
+    "retryHint": "Renvoie l'entrée. S'il existe une entrée plus récente, elle devient la révision suivante ; une étiquette imprimée doit être réimprimée.",
+    "discard": "Supprimer",
+    "discardConfirm": "Supprimer cette entrée et ce qui a été enregistré après elle sur cet appareil ?",
+    "state": {
+      "pending": "Pas encore envoyée",
+      "conflict": "Non envoyée"
+    }
   }
 }

@@ -6,6 +6,7 @@ import { downloadFactSheet, downloadIfc, fileBase, saveFile } from "../export/do
 import { URL_SAFE, encodeRecord } from "../schema/codec";
 import type { Labels } from "../schema/labels";
 import { shareLink } from "./QrPanel";
+import { markPrinted } from "../state/records";
 
 /** PNG (the QR code), PDF fact sheet and IFC of a record; short labels, the full name as tooltip */
 export function ExportButtons({ slug, schema, record, labels }: { slug: string; schema: DenseSchema; record: any; labels: Labels }) {
@@ -19,11 +20,13 @@ export function ExportButtons({ slug, schema, record, labels }: { slug: string; 
   }
   const qr = shareLink(slug, payload, true);
   const png = async () => {
+    markPrinted(record);
     // drawn here, so it works whether or not the QR card is on screen
     const url = await QRCode.toDataURL([{ data: qr, mode: "alphanumeric" }], { errorCorrectionLevel: "Q", margin: 2, width: 960 });
     saveFile(`${fileBase(slug, record)}.png`, await (await fetch(url)).blob());
   };
   const pdf = async () => {
+    markPrinted(record);
     setBusy(true);
     try {
       await downloadFactSheet({ slug, schema, record, labels, qrContent: qr, link: shareLink(slug, payload), lng: i18n.resolvedLanguage ?? "en", t });
@@ -39,7 +42,10 @@ export function ExportButtons({ slug, schema, record, labels }: { slug: string; 
       <button type="button" onClick={pdf} disabled={busy} title={t("qr.pdf")} aria-label={busy ? t("qr.pdfBusy") : t("qr.pdf")}>
         {busy ? "…" : "PDF"}
       </button>
-      <button type="button" onClick={() => downloadIfc(slug, schema, record, labels)} title={t("qr.ifc")} aria-label={t("qr.ifc")}>
+      <button type="button" onClick={() => {
+          markPrinted(record);
+          downloadIfc(slug, schema, record, labels);
+        }} title={t("qr.ifc")} aria-label={t("qr.ifc")}>
         IFC
       </button>
     </div>

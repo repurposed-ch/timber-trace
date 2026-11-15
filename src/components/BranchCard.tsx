@@ -115,6 +115,7 @@ function EntryLine({ row, role, branch, ctx, max }: { row: MineRow; role: Role; 
         <Changes row={row} branch={branch} ctx={ctx} max={max} />
       </button>
       {ctx.hidden?.has(row.entry.id!) && <span className="status st-hidden">{t("admin.hidden")}</span>}
+      {row.entry.sync && <span className={`status st-${row.entry.sync}`}>{t(`sync.state.${row.entry.sync}`)}</span>}
       {ctx.actions?.(row)}
       <Avatar by={row.entry.createdBy} ctx={ctx} small />
     </>
