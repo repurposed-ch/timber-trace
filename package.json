@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:prod": "vite --mode prod-db",
     "build": "tsc --noEmit && vite build && bun scripts/emit-schema-pages.ts",
     "preview": "vite preview",
     "test": "bun test",
