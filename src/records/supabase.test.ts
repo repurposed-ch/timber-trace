@@ -139,9 +139,43 @@ describe("append", () => {
     expect((call!.init.headers as any).Authorization).toBe("Bearer jwt");
     const body = JSON.parse(call!.init.body as string);
     expect(body.predecessors).toEqual(["prev"]);
-    expect(body.entries[0]).toEqual({ schema: "hello-world", component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: null });
+    expect(body.entries[0]).toEqual({ id: e.id, schema: "hello-world", component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: null });
     const out = await supabaseRecordSource(cfg, fake, async () => null).append!([], [e]).then(() => null, (err: EntryError) => err.code);
     expect(out).toBe("signed_out");
+  });
+
+  // fails the first `drops` calls as if the connection broke, then answers with the sent ids
+  const flaky = (drops: number) => {
+    const bodies: any[] = [];
+    const fetcher = (async (_url: string, init: RequestInit) => {
+      bodies.push(JSON.parse(init.body as string));
+      if (bodies.length <= drops) throw new TypeError("Failed to fetch");
+      return new Response(JSON.stringify(bodies.at(-1).entries.map((x: any) => x.id ?? "server-id")));
+    }) as Fetch;
+    return { bodies, source: supabaseRecordSource(cfg, fetcher, async () => "jwt") };
+  };
+
+  test("a lost answer is asked again once, with the same ids", async () => {
+    const { bodies, source } = flaky(1);
+    const e = entry(scanned);
+    expect(await source.append!(["prev"], [e])).toEqual([e.id!]);
+    expect(bodies).toHaveLength(2);
+    expect(bodies[1]).toEqual(bodies[0]);
+  });
+
+  test("only once, and not without ids (a repeat could then save twice)", async () => {
+    const twice = flaky(2);
+    expect(await twice.source.append!([], [entry(scanned)]).then(() => null, (err: EntryError) => err.code)).toBe("network");
+    expect(twice.bodies).toHaveLength(2);
+    const noId = flaky(1);
+    expect(await noId.source.append!([], [entry(scanned, { id: undefined })]).then(() => null, (err: EntryError) => err.code)).toBe("network");
+    expect(noId.bodies).toHaveLength(1);
+    expect(noId.bodies[0].entries[0]).not.toHaveProperty("id");
+  });
+
+  test("an id saved with other content comes back as id_conflict", async () => {
+    const fake = (async () => new Response(JSON.stringify({ code: "P0001", message: "id_conflict" }), { status: 400 })) as unknown as Fetch;
+    expect(await supabaseRecordSource(cfg, fake, async () => "jwt").append!([], [entry(scanned)]).then(() => null, (err: EntryError) => err.code)).toBe("id_conflict");
   });
 });
 
@@ -154,6 +188,13 @@ describe("what Save writes", () => {
     expect(next.entry.revision).toBe(scanned.revision.number + 1);
     expect(next.data.revision.date).toEqual({ status: "known", day });
     expect(next.entry.componentId).toBe(idToHex(scanned.id));
+  });
+  test("each save gets its own entry id, unless one is given (to repeat a save)", () => {
+    const a = nextEntry("hello-world", v2, scanned, { status: "unknown" }, null, day)!;
+    const b = nextEntry("hello-world", v2, scanned, { status: "unknown" }, null, day)!;
+    expect(a.entry.id).toMatch(/^[0-9a-f-]{36}$/);
+    expect(a.entry.id).not.toBe(b.entry.id);
+    expect(nextEntry("hello-world", v2, scanned, { status: "unknown" }, null, day, a.entry.id)!.entry.id).toBe(a.entry.id);
   });
   test("a record the database doesn't know becomes a root, as it stands", () => {
     const next = nextEntry("hello-world", v2, scanned, { status: "unknown" }, null, day)!;

@@ -8,7 +8,7 @@ import type { FullEvent } from "./history";
  * join: several become one).
  */
 export type Entry = {
-  /** database id; static records have none */
+  /** database id, made by the app before saving; static records have none */
   id?: string;
   /** schema slug that decodes the payload */
   schema: string;
@@ -29,7 +29,7 @@ export type Entry = {
 export interface RecordSource {
   /** the latest entries for a code: none = unknown, one = continue with it, several = it was split */
   latest(schema: LoadedSchema, componentId: string, revision: number | null): Promise<Entry[]>;
-  /** adds entries after the given leaves (several entries = a split) and returns their ids */
+  /** adds entries after the given leaves (several entries = a split) and returns their ids; repeating it with the same entry ids is harmless */
   append?(predecessors: string[], entries: Entry[]): Promise<string[]>;
   /** every entry a user saved, in any schema, newest first */
   mine?(userId: string): Promise<Entry[]>;

@@ -7,14 +7,16 @@ import type { Lineage } from "./useLatest";
 /**
  * What Save writes: a new entry after the opened one when it is saved and nothing continues it
  * (next revision number, today's date), otherwise a first entry (a root) as the record stands.
- * Returns null when the record can't be continued here (something newer exists).
+ * Returns null when the record can't be continued here (something newer exists). The entry id is
+ * made here, so repeating a save whose answer got lost is harmless (pass the same id again).
  */
-export function nextEntry(slug: string, schema: DenseSchema, record: any, lineage: Lineage, history: Entry["history"], today = todayDay()) {
+export function nextEntry(slug: string, schema: DenseSchema, record: any, lineage: Lineage, history: Entry["history"], today = todayDay(), id: string = crypto.randomUUID()) {
   if (lineage.status === "newer" || lineage.status === "split") return null;
   const after = lineage.status === "latest" && lineage.self.entry.id ? lineage.self.entry : null;
   const data = structuredClone(record);
   if (after && data.revision) data.revision = { number: Math.max(data.revision.number, after.revision ?? 0) + 1, date: { status: "known", day: today } };
   const entry: Entry = {
+    id,
     schema: slug,
     componentId: idToHex(data.id),
     revision: data.revision?.number ?? null,

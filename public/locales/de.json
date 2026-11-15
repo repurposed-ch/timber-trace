@@ -191,6 +191,7 @@
       "signed_out": "Zum Speichern erneut anmelden.",
       "not_owner": "Dieses Bauteil wurde von einem anderen Konto gespeichert.",
       "not_latest": "Inzwischen wurde ein neuerer Eintrag gespeichert. Neu laden, um ihn zu sehen.",
+      "id_conflict": "Dieser Eintrag wurde bereits mit anderem Inhalt gespeichert. Neu laden, um ihn zu sehen.",
       "revision_not_increasing": "Die Revisionsnummer muss höher sein als die gespeicherte.",
       "duplicate": "Dieser Code (ID und Revision) ist bereits gespeichert.",
       "network": "Keine Verbindung zur Datenbank. Bitte erneut versuchen.",

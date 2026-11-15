@@ -191,6 +191,7 @@
       "signed_out": "Reconnectez-vous pour enregistrer.",
       "not_owner": "Ce composant a été enregistré par un autre compte.",
       "not_latest": "Une entrée plus récente a été enregistrée entre-temps. Rechargez pour la voir.",
+      "id_conflict": "Cette entrée a déjà été enregistrée avec un autre contenu. Rechargez pour la voir.",
       "revision_not_increasing": "Le numéro de révision doit être supérieur à celui enregistré.",
       "duplicate": "Ce code (ID et révision) est déjà enregistré.",
       "network": "Pas de connexion à la base de données. Réessayez.",

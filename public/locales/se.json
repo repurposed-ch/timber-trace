@@ -191,6 +191,7 @@
       "signed_out": "Logga in igen för att spara.",
       "not_owner": "Den här komponenten sparades av ett annat konto.",
       "not_latest": "En nyare post har sparats under tiden. Ladda om för att se den.",
+      "id_conflict": "Den här posten har redan sparats med annat innehåll. Ladda om för att se den.",
       "revision_not_increasing": "Revisionsnumret måste vara högre än det sparade.",
       "duplicate": "Den här koden (ID och revision) är redan sparad.",
       "network": "Ingen anslutning till databasen. Försök igen.",

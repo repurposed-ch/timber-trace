@@ -191,6 +191,7 @@
       "signed_out": "Accedi di nuovo per salvare.",
       "not_owner": "Questo componente è stato salvato da un altro account.",
       "not_latest": "Nel frattempo è stata salvata una voce più recente. Ricarica per vederla.",
+      "id_conflict": "Questa voce è già stata salvata con un contenuto diverso. Ricarica per vederla.",
       "revision_not_increasing": "Il numero di revisione deve essere più alto di quello salvato.",
       "duplicate": "Questo codice (ID e revisione) è già salvato.",
       "network": "Nessuna connessione al database. Riprova.",

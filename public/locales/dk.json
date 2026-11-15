@@ -191,6 +191,7 @@
       "signed_out": "Log ind igen for at gemme.",
       "not_owner": "Denne komponent er gemt af en anden konto.",
       "not_latest": "En nyere post er gemt i mellemtiden. Genindlæs for at se den.",
+      "id_conflict": "Denne post er allerede gemt med andet indhold. Genindlæs for at se den.",
       "revision_not_increasing": "Revisionsnummeret skal være højere end det gemte.",
       "duplicate": "Denne kode (ID og revision) er allerede gemt.",
       "network": "Ingen forbindelse til databasen. Prøv igen.",

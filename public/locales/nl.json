@@ -191,6 +191,7 @@
       "signed_out": "Log opnieuw in om op te slaan.",
       "not_owner": "Dit onderdeel is door een ander account opgeslagen.",
       "not_latest": "Er is intussen een nieuwere invoer opgeslagen. Herlaad om die te zien.",
+      "id_conflict": "Deze invoer is al met andere inhoud opgeslagen. Herlaad om die te zien.",
       "revision_not_increasing": "Het revisienummer moet hoger zijn dan het opgeslagen nummer.",
       "duplicate": "Deze code (ID en revisie) is al opgeslagen.",
       "network": "Geen verbinding met de database. Probeer het opnieuw.",

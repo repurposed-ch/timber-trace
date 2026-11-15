@@ -95,8 +95,15 @@ export function supabaseRecordSource(cfg: SupabaseConfig, fetcher: Fetch = (url,
     async append(predecessors, entries) {
       const jwt = await token();
       if (!jwt) throw new EntryError("signed_out");
-      const rows = entries.map((e) => ({ schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
-      return rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
+      const rows = entries.map((e) => ({ ...(e.id ? { id: e.id } : {}), schema: e.schema, component_id: e.componentId, revision: e.revision, payload: toHex(e.payload), history: e.history ?? null }));
+      const call = () => rpc<string[]>(cfg, "append_entries", { predecessors, entries: rows }, fetcher, jwt);
+      try {
+        return await call();
+      } catch (e) {
+        // with ids, the database treats a repeated call as the same save, so a lost answer can be asked again
+        if (!(e instanceof EntryError && e.code === "network" && entries.every((x) => x.id))) throw e;
+        return call();
+      }
     },
     mine: (userId) => select(cfg, fetcher, { created_by: `eq.${userId}`, order: "created_at.desc", limit: "500" }),
     async related(entries) {

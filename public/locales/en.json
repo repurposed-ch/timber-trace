@@ -191,6 +191,7 @@
       "signed_out": "Sign in again to save.",
       "not_owner": "This component was saved by another account.",
       "not_latest": "Someone saved a newer entry in the meantime. Reload to see it.",
+      "id_conflict": "This entry was already saved with different content. Reload to see it.",
       "revision_not_increasing": "The revision number must be higher than the saved one.",
       "duplicate": "This code (ID and revision) is already saved.",
       "network": "No connection to the database. Try again.",
