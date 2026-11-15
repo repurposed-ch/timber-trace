@@ -40,7 +40,7 @@ export function Avatar({ by, ctx, small }: { by?: string; ctx: BranchContext; sm
   const email = ctx.emails?.get(by);
   const letters = email ? email.slice(0, 2) : tag.slice(0, 2);
   return (
-    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 28% 46%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : (email ?? `#${tag} · ${by}`)}>
+    <span className={`av${you ? " av-you" : ""}${small ? " av-sm" : ""}`} style={you ? undefined : { background: `hsl(${hue(tag)} 30% 34%)` }} title={you ? `${t("mine.you")} · ${ctx.email}` : (email ?? `#${tag} · ${by}`)}>
       {you ? t("mine.you").slice(0, 1).toUpperCase() : letters.toUpperCase()}
     </span>
   );
