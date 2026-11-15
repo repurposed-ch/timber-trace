@@ -12,13 +12,13 @@ function SchemaRoute({ slug }: { slug: string }) {
   const state = useSchema(slug);
   if (state.status === "loading")
     return (
-      <Shell crumbs={[{ label: slug }]}>
+      <Shell crumbs={[{ label: slug }]} title={slug}>
         <p className="muted">{t("loading")}</p>
       </Shell>
     );
   if (state.status === "error")
     return (
-      <Shell crumbs={[{ label: slug }]}>
+      <Shell crumbs={[{ label: slug }]} title={slug}>
         <p className="error">
           {t("error.load")}: {state.error}
         </p>

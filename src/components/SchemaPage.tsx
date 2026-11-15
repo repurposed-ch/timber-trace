@@ -197,7 +197,8 @@ export function SchemaPage({ slug, schema: served }: { slug: string; schema: Loa
         { label: t(`nav.${tab}`, { ns: "ui" }) },
       ]}
       // Scan and Schema aren't views of the record: no 3D view or QR next to them
-      aside={tab === "record" ? { pinned, scroll } : undefined}
+      aside={tab === "record" ? { pinned, scroll, labels: { pinned: t("viewer.title", { ns: "ui" }), scroll: t("qr.title", { ns: "ui" }) } } : undefined}
+      title={`${labels.raw.title ?? slug} · ${t(`nav.${tab}`, { ns: "ui" })}`}
       className={tab === "record" ? (showQr ? "aside-qr" : "aside-3d") : undefined}
     >
       {tab === "record" && newer && loaded && (
