@@ -27,6 +27,19 @@
     "grade.basis": "Base",
     "grade.source": "Source du classement",
     "grade.standard": "Norme de classement",
+    "alsoGraded": "Autres classements",
+    "alsoGraded[].class": "Classe",
+    "alsoGraded[].class.value": "Classe",
+    "alsoGraded[].class.text": "Désignation de la classe",
+    "alsoGraded[].basis": "Base",
+    "alsoGraded[].source": "Source du classement",
+    "alsoGraded[].standard": "Norme de classement",
+    "purity": "Propreté",
+    "purity.metal": "Métal (clous, vis)",
+    "purity.coating": "Revêtement",
+    "purity.preservative": "Produit de préservation",
+    "moisture": "Humidité",
+    "moisture.percent": "Humidité du bois (%)",
     "assessments": "Évaluations",
     "assessments[].kind": "Type",
     "assessments[].ref": "Référence",
@@ -200,6 +213,47 @@
       "document": "Document",
       "label": "Marquage / étiquette"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Dans la liste",
+      "custom": "Personnalisé"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Inconnu",
+      "original": "Documentation d'origine",
+      "reassessed": "Évaluation ultérieure"
+    },
+    "alsoGraded[].source": {
+      "visual": "Classement visuel",
+      "machine": "Classement par machine",
+      "document": "Document",
+      "label": "Marquage / étiquette"
+    },
+    "purity.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "purity.metal": {
+      "unknown": "Inconnu",
+      "none": "Aucun",
+      "removed": "Retiré",
+      "present": "Encore présent"
+    },
+    "purity.coating": {
+      "unknown": "Inconnu",
+      "none": "Aucun",
+      "non_halogenated": "Peinture / colle, sans halogènes",
+      "halogenated": "Halogéné (p. ex. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Inconnu",
+      "none": "Aucun",
+      "treated": "Traité",
+      "tar_oil": "Huile de goudron (soupçon)"
+    },
+    "moisture.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
     "assessments[].kind": {
       "visual": "Inspection visuelle",
       "moisture": "Humidité du bois",
@@ -345,6 +399,7 @@
     "identity": "Identité",
     "origin": "Origine & dates",
     "material": "Matériau & classe",
+    "condition": "État",
     "assessments": "Évaluations",
     "provenance": "Provenance",
     "history": "Historique",

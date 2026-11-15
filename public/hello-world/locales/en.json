@@ -27,6 +27,19 @@
     "grade.basis": "Basis",
     "grade.source": "Grading source",
     "grade.standard": "Grading standard",
+    "alsoGraded": "Further grades",
+    "alsoGraded[].class": "Class",
+    "alsoGraded[].class.value": "Class",
+    "alsoGraded[].class.text": "Class designation",
+    "alsoGraded[].basis": "Basis",
+    "alsoGraded[].source": "Grading source",
+    "alsoGraded[].standard": "Grading standard",
+    "purity": "Cleanliness",
+    "purity.metal": "Metal (nails, screws)",
+    "purity.coating": "Coating",
+    "purity.preservative": "Wood preservative",
+    "moisture": "Moisture content",
+    "moisture.percent": "Moisture content (%)",
     "assessments": "Assessments",
     "assessments[].kind": "Kind",
     "assessments[].ref": "Reference",
@@ -200,6 +213,47 @@
       "document": "Document",
       "label": "Stamp / label"
     },
+    "alsoGraded[].class.kind": {
+      "known": "From list",
+      "custom": "Custom"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Unknown",
+      "original": "Original documentation",
+      "reassessed": "Later assessment"
+    },
+    "alsoGraded[].source": {
+      "visual": "Visual grading",
+      "machine": "Machine grading",
+      "document": "Document",
+      "label": "Stamp / label"
+    },
+    "purity.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "purity.metal": {
+      "unknown": "Unknown",
+      "none": "None",
+      "removed": "Removed",
+      "present": "Still present"
+    },
+    "purity.coating": {
+      "unknown": "Unknown",
+      "none": "None",
+      "non_halogenated": "Paint / glue, no halogens",
+      "halogenated": "Halogenated (e.g. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Unknown",
+      "none": "None",
+      "treated": "Treated",
+      "tar_oil": "Tar oil (suspected)"
+    },
+    "moisture.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
     "assessments[].kind": {
       "visual": "Visual inspection",
       "moisture": "Moisture content",
@@ -345,6 +399,7 @@
     "identity": "Identity",
     "origin": "Origin & dates",
     "material": "Material & grade",
+    "condition": "Condition",
     "assessments": "Assessments",
     "provenance": "Provenance",
     "history": "History",

@@ -100,3 +100,18 @@ export const fullRecordV3 = {
 };
 
 export const unknownRecordV3 = { ...unknownRecordV2, version: 3, id: [0, 0, 0, 3] };
+
+/** v4: further grades under other standards, cleanliness and moisture */
+export const fullRecordV4 = {
+  ...fullRecordV3,
+  version: 4,
+  id: [0x12345678, 0x9abcdef0, 0x0fedcba9, 0x87654324],
+  species: "spruce",
+  product: { kind: "known", value: "solid_sawn" },
+  grade: { status: "recorded", class: { kind: "known", value: "R18" }, basis: "reassessed", source: "visual", standard: "NS3691-3" },
+  alsoGraded: [{ class: { kind: "known", value: "S10" }, basis: "original", source: "label", standard: "DIN4074-1" }],
+  purity: { status: "known", metal: "removed", coating: "none", preservative: "none" },
+  moisture: { status: "known", percent: 14 },
+};
+
+export const unknownRecordV4 = { ...unknownRecordV3, version: 4, id: [0, 0, 0, 4], alsoGraded: [], purity: { status: "unknown" }, moisture: { status: "unknown" } };

@@ -27,6 +27,19 @@
     "grade.basis": "Grundlage",
     "grade.source": "Sortierquelle",
     "grade.standard": "Sortiernorm",
+    "alsoGraded": "Weitere Sortierungen",
+    "alsoGraded[].class": "Klasse",
+    "alsoGraded[].class.value": "Klasse",
+    "alsoGraded[].class.text": "Klassenbezeichnung",
+    "alsoGraded[].basis": "Grundlage",
+    "alsoGraded[].source": "Sortierquelle",
+    "alsoGraded[].standard": "Sortiernorm",
+    "purity": "Reinheit",
+    "purity.metal": "Metall (Nägel, Schrauben)",
+    "purity.coating": "Beschichtung",
+    "purity.preservative": "Holzschutzmittel",
+    "moisture": "Holzfeuchte",
+    "moisture.percent": "Holzfeuchte (%)",
     "assessments": "Beurteilungen",
     "assessments[].kind": "Art",
     "assessments[].ref": "Referenz",
@@ -200,6 +213,47 @@
       "document": "Dokument",
       "label": "Stempel / Etikett"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Aus Liste",
+      "custom": "Eigene Angabe"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Unbekannt",
+      "original": "Originaldokumentation",
+      "reassessed": "Spätere Beurteilung"
+    },
+    "alsoGraded[].source": {
+      "visual": "Visuelle Sortierung",
+      "machine": "Maschinelle Sortierung",
+      "document": "Dokument",
+      "label": "Stempel / Etikett"
+    },
+    "purity.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "purity.metal": {
+      "unknown": "Unbekannt",
+      "none": "Keines",
+      "removed": "Entfernt",
+      "present": "Noch vorhanden"
+    },
+    "purity.coating": {
+      "unknown": "Unbekannt",
+      "none": "Keine",
+      "non_halogenated": "Farbe / Leim, halogenfrei",
+      "halogenated": "Halogenhaltig (z. B. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Unbekannt",
+      "none": "Keines",
+      "treated": "Behandelt",
+      "tar_oil": "Teeröl (Verdacht)"
+    },
+    "moisture.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
     "assessments[].kind": {
       "visual": "Sichtprüfung",
       "moisture": "Holzfeuchte",
@@ -345,6 +399,7 @@
     "identity": "Identität",
     "origin": "Herkunft & Daten",
     "material": "Material & Festigkeit",
+    "condition": "Zustand",
     "assessments": "Beurteilungen",
     "provenance": "Nachweis",
     "history": "Verlauf",

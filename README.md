@@ -66,6 +66,15 @@ v2 plus two fields (5 bits more, only when the grade or the verification is reco
 - **Grade basis**: `unknown`, `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
 - **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. None ticked (and v2 codes) shows "scope not stated".
 
+## hello-world schema v4
+
+v3 plus fields for comparing grades across standards, so v2 and v3 codes are shown as v4:
+
+- **Grade classes and standards**: national visual grades used for reclaimed timber (INSTA 142 `T0`–`T3`, NS 3691-3 `R14`/`R18`/`R24`, BS 4978 `SS`/`GS`, BS 5756 `TH1`/`TH2`/`THA`/`THB`, NF B52-001 `ST-I`–`ST-IV`) and their standards (`INSTA142`, `NS3691-3`, `NEN5499`, `BS4978`, `BS5756`, `NF-B52-001`). The class keeps its 6 bits.
+- **Further grades** (`alsoGraded`, up to 2): the same piece graded under other standards, e.g. the original DIN 4074-1 grade next to an NS 3691-3 reassessment. `grade` stays the governing one. Grades are stored as assigned, never converted.
+- **Cleanliness** (`purity`): metal (none, removed, still present), coating (none, without halogens, halogenated), wood preservative (none, treated, tar oil suspected). Observations only; classes such as the AltholzV category are derived from them.
+- **Moisture content** in %.
+
 ## Database (Supabase)
 
 Every saved state of a component is an **entry** in one table, `public.entries`. Entries are never changed. A new state is a new entry that lists the entries it continues as `predecessors`, so entries form a DAG; successors aren't stored but derived.

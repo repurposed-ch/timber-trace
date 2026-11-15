@@ -1,7 +1,7 @@
 {
   "slug": "hello-world",
-  "versions": [1, 2, 3],
-  "codeEnums": ["origin.country", "grade.class.value", "grade.standard"],
+  "versions": [1, 2, 3, 4],
+  "codeEnums": ["origin.country", "grade.class.value", "grade.standard", "alsoGraded[].class.value", "alsoGraded[].standard"],
   "countryEnums": ["origin.country", "origin.harvest.country", "origin.previousUse.country"],
   "historyTiers": {
     "structural": ["modification", "exposure", "repair"],
@@ -20,7 +20,11 @@
     },
     {
       "id": "material",
-      "fields": ["species", "product", "dimensions", "grade"]
+      "fields": ["species", "product", "dimensions", "grade", "alsoGraded"]
+    },
+    {
+      "id": "condition",
+      "fields": ["purity", "moisture"]
     },
     {
       "id": "assessments",
@@ -38,7 +42,7 @@
   "editTabs": [
     {
       "id": "overview",
-      "sections": ["identity", "origin", "material", "assessments"]
+      "sections": ["identity", "origin", "material", "condition", "assessments"]
     },
     {
       "id": "history",

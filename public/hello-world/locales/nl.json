@@ -27,6 +27,19 @@
     "grade.basis": "Basis",
     "grade.source": "Bron van de sortering",
     "grade.standard": "Sorteringsnorm",
+    "alsoGraded": "Andere sorteringen",
+    "alsoGraded[].class": "Klasse",
+    "alsoGraded[].class.value": "Klasse",
+    "alsoGraded[].class.text": "Klasseaanduiding",
+    "alsoGraded[].basis": "Basis",
+    "alsoGraded[].source": "Bron van de sortering",
+    "alsoGraded[].standard": "Sorteringsnorm",
+    "purity": "Zuiverheid",
+    "purity.metal": "Metaal (spijkers, schroeven)",
+    "purity.coating": "Coating",
+    "purity.preservative": "Houtverduurzaming",
+    "moisture": "Vochtgehalte",
+    "moisture.percent": "Houtvochtgehalte (%)",
     "assessments": "Beoordelingen",
     "assessments[].kind": "Soort",
     "assessments[].ref": "Referentie",
@@ -200,6 +213,47 @@
       "document": "Document",
       "label": "Stempel / etiket"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Uit lijst",
+      "custom": "Aangepast"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Onbekend",
+      "original": "Oorspronkelijke documentatie",
+      "reassessed": "Latere beoordeling"
+    },
+    "alsoGraded[].source": {
+      "visual": "Visuele sortering",
+      "machine": "Machinale sortering",
+      "document": "Document",
+      "label": "Stempel / etiket"
+    },
+    "purity.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "purity.metal": {
+      "unknown": "Onbekend",
+      "none": "Geen",
+      "removed": "Verwijderd",
+      "present": "Nog aanwezig"
+    },
+    "purity.coating": {
+      "unknown": "Onbekend",
+      "none": "Geen",
+      "non_halogenated": "Verf / lijm, halogeenvrij",
+      "halogenated": "Gehalogeneerd (bv. pvc)"
+    },
+    "purity.preservative": {
+      "unknown": "Onbekend",
+      "none": "Geen",
+      "treated": "Behandeld",
+      "tar_oil": "Teerolie (vermoed)"
+    },
+    "moisture.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
     "assessments[].kind": {
       "visual": "Visuele inspectie",
       "moisture": "Vochtgehalte",
@@ -345,6 +399,7 @@
     "identity": "Identiteit",
     "origin": "Herkomst & data",
     "material": "Materiaal & klasse",
+    "condition": "Toestand",
     "assessments": "Beoordelingen",
     "provenance": "Herkomstbewijs",
     "history": "Geschiedenis",

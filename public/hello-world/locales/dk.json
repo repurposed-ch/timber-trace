@@ -27,6 +27,19 @@
     "grade.basis": "Grundlag",
     "grade.source": "Sorteringskilde",
     "grade.standard": "Sorteringsstandard",
+    "alsoGraded": "Andre sorteringer",
+    "alsoGraded[].class": "Klasse",
+    "alsoGraded[].class.value": "Klasse",
+    "alsoGraded[].class.text": "Klassebetegnelse",
+    "alsoGraded[].basis": "Grundlag",
+    "alsoGraded[].source": "Sorteringskilde",
+    "alsoGraded[].standard": "Sorteringsstandard",
+    "purity": "Renhed",
+    "purity.metal": "Metal (søm, skruer)",
+    "purity.coating": "Overfladebehandling",
+    "purity.preservative": "Træbeskyttelse",
+    "moisture": "Fugtindhold",
+    "moisture.percent": "Træfugt (%)",
     "assessments": "Vurderinger",
     "assessments[].kind": "Type",
     "assessments[].ref": "Reference",
@@ -200,6 +213,47 @@
       "document": "Dokument",
       "label": "Stempel / mærkat"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Fra liste",
+      "custom": "Brugerdefineret"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Ukendt",
+      "original": "Oprindelig dokumentation",
+      "reassessed": "Senere vurdering"
+    },
+    "alsoGraded[].source": {
+      "visual": "Visuel sortering",
+      "machine": "Maskinsortering",
+      "document": "Dokument",
+      "label": "Stempel / mærkat"
+    },
+    "purity.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "purity.metal": {
+      "unknown": "Ukendt",
+      "none": "Intet",
+      "removed": "Fjernet",
+      "present": "Stadig til stede"
+    },
+    "purity.coating": {
+      "unknown": "Ukendt",
+      "none": "Ingen",
+      "non_halogenated": "Maling / lim, uden halogener",
+      "halogenated": "Halogenholdig (f.eks. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Ukendt",
+      "none": "Ingen",
+      "treated": "Behandlet",
+      "tar_oil": "Tjæreolie (mistanke)"
+    },
+    "moisture.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
     "assessments[].kind": {
       "visual": "Visuel inspektion",
       "moisture": "Fugtindhold",
@@ -345,6 +399,7 @@
     "identity": "Identitet",
     "origin": "Oprindelse & datoer",
     "material": "Materiale & klasse",
+    "condition": "Tilstand",
     "assessments": "Vurderinger",
     "provenance": "Proveniens",
     "history": "Historik",

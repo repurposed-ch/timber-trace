@@ -27,6 +27,19 @@
     "grade.basis": "Base",
     "grade.source": "Fonte della classificazione",
     "grade.standard": "Norma di classificazione",
+    "alsoGraded": "Altre classificazioni",
+    "alsoGraded[].class": "Classe",
+    "alsoGraded[].class.value": "Classe",
+    "alsoGraded[].class.text": "Denominazione della classe",
+    "alsoGraded[].basis": "Base",
+    "alsoGraded[].source": "Fonte della classificazione",
+    "alsoGraded[].standard": "Norma di classificazione",
+    "purity": "Pulizia",
+    "purity.metal": "Metallo (chiodi, viti)",
+    "purity.coating": "Rivestimento",
+    "purity.preservative": "Preservante del legno",
+    "moisture": "Umidità",
+    "moisture.percent": "Umidità del legno (%)",
     "assessments": "Valutazioni",
     "assessments[].kind": "Tipo",
     "assessments[].ref": "Riferimento",
@@ -200,6 +213,47 @@
       "document": "Documento",
       "label": "Marcatura / etichetta"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Da elenco",
+      "custom": "Personalizzato"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Sconosciuto",
+      "original": "Documentazione originale",
+      "reassessed": "Valutazione successiva"
+    },
+    "alsoGraded[].source": {
+      "visual": "Classificazione a vista",
+      "machine": "Classificazione a macchina",
+      "document": "Documento",
+      "label": "Marcatura / etichetta"
+    },
+    "purity.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "purity.metal": {
+      "unknown": "Sconosciuto",
+      "none": "Nessuno",
+      "removed": "Rimosso",
+      "present": "Ancora presente"
+    },
+    "purity.coating": {
+      "unknown": "Sconosciuto",
+      "none": "Nessuno",
+      "non_halogenated": "Vernice / colla, senza alogeni",
+      "halogenated": "Alogenato (p. es. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Sconosciuto",
+      "none": "Nessuno",
+      "treated": "Trattato",
+      "tar_oil": "Olio di catrame (sospetto)"
+    },
+    "moisture.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
     "assessments[].kind": {
       "visual": "Ispezione visiva",
       "moisture": "Umidità del legno",
@@ -345,6 +399,7 @@
     "identity": "Identità",
     "origin": "Origine e date",
     "material": "Materiale e classe",
+    "condition": "Stato",
     "assessments": "Valutazioni",
     "provenance": "Provenienza",
     "history": "Cronologia",

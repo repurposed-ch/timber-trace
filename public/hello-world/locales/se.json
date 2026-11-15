@@ -27,6 +27,19 @@
     "grade.basis": "Underlag",
     "grade.source": "Sorteringskälla",
     "grade.standard": "Sorteringsstandard",
+    "alsoGraded": "Andra sorteringar",
+    "alsoGraded[].class": "Klass",
+    "alsoGraded[].class.value": "Klass",
+    "alsoGraded[].class.text": "Klassbeteckning",
+    "alsoGraded[].basis": "Underlag",
+    "alsoGraded[].source": "Sorteringskälla",
+    "alsoGraded[].standard": "Sorteringsstandard",
+    "purity": "Renhet",
+    "purity.metal": "Metall (spik, skruv)",
+    "purity.coating": "Ytbehandling",
+    "purity.preservative": "Träskyddsmedel",
+    "moisture": "Fuktkvot",
+    "moisture.percent": "Fuktkvot (%)",
     "assessments": "Bedömningar",
     "assessments[].kind": "Typ",
     "assessments[].ref": "Referens",
@@ -200,6 +213,47 @@
       "document": "Dokument",
       "label": "Stämpel / etikett"
     },
+    "alsoGraded[].class.kind": {
+      "known": "Från lista",
+      "custom": "Anpassad"
+    },
+    "alsoGraded[].basis": {
+      "unknown": "Okänd",
+      "original": "Ursprunglig dokumentation",
+      "reassessed": "Senare bedömning"
+    },
+    "alsoGraded[].source": {
+      "visual": "Visuell sortering",
+      "machine": "Maskinell sortering",
+      "document": "Dokument",
+      "label": "Stämpel / etikett"
+    },
+    "purity.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "purity.metal": {
+      "unknown": "Okänd",
+      "none": "Ingen",
+      "removed": "Borttagen",
+      "present": "Finns kvar"
+    },
+    "purity.coating": {
+      "unknown": "Okänd",
+      "none": "Ingen",
+      "non_halogenated": "Färg / lim, halogenfri",
+      "halogenated": "Halogenerad (t.ex. PVC)"
+    },
+    "purity.preservative": {
+      "unknown": "Okänd",
+      "none": "Inget",
+      "treated": "Behandlad",
+      "tar_oil": "Kreosot / tjärolja (misstänkt)"
+    },
+    "moisture.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
     "assessments[].kind": {
       "visual": "Visuell besiktning",
       "moisture": "Fuktkvot",
@@ -345,6 +399,7 @@
     "identity": "Identitet",
     "origin": "Ursprung & datum",
     "material": "Material & klass",
+    "condition": "Skick",
     "assessments": "Bedömningar",
     "provenance": "Proveniens",
     "history": "Historik",
