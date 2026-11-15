@@ -6,6 +6,7 @@ import { signOut } from "../auth/client";
 import { setSignInOpen, useSession } from "../auth/useSession";
 import { useSchemaSlugs } from "../state/useSchema";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { ThemeOptions, ThemeSwitch } from "./ThemeSwitch";
 
 const REPO = "https://github.com/repurposed-ch/timber-trace";
 
@@ -94,6 +95,9 @@ export function HeaderNav() {
         )
       )}
       <span className="hn-wide">
+        <ThemeSwitch />
+      </span>
+      <span className="hn-wide">
         <LanguageSwitcher />
       </span>
       <button type="button" className="hn-btn hn-burger" aria-expanded={open} aria-label={t("nav.menu")} onClick={() => setOpen(!open)}>
@@ -132,6 +136,7 @@ export function HeaderNav() {
               </button>
             ))}
           </div>
+          <ThemeOptions onPick={() => setOpen(false)} />
           {session.status === "in" && target && (
             <a role="menuitem" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)}>
               {t("nav.mine")}

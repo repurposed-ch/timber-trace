@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} poster dolda.",
     "unhidden_one": "{{count}} post visas igen.",
     "unhidden_other": "{{count}} poster visas igen."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "System",
+    "light": "Ljust",
+    "dark": "Mörkt"
   }
 }

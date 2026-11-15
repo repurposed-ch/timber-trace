@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} poster skjult.",
     "unhidden_one": "{{count}} post vises igen.",
     "unhidden_other": "{{count}} poster vises igen."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "System",
+    "light": "Lys",
+    "dark": "Mørk"
   }
 }

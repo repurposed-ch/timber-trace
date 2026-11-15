@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} Einträge ausgeblendet.",
     "unhidden_one": "{{count}} Eintrag wieder sichtbar.",
     "unhidden_other": "{{count}} Einträge wieder sichtbar."
+  },
+  "theme": {
+    "title": "Darstellung",
+    "label": "Darstellung: {{theme}}",
+    "system": "System",
+    "light": "Hell",
+    "dark": "Dunkel"
   }
 }

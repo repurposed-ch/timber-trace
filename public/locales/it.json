@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} voci nascoste.",
     "unhidden_one": "{{count}} voce di nuovo visibile.",
     "unhidden_other": "{{count}} voci di nuovo visibili."
+  },
+  "theme": {
+    "title": "Tema",
+    "label": "Tema: {{theme}}",
+    "system": "Sistema",
+    "light": "Chiaro",
+    "dark": "Scuro"
   }
 }

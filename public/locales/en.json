@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} entries hidden.",
     "unhidden_one": "{{count}} entry shown again.",
     "unhidden_other": "{{count}} entries shown again."
+  },
+  "theme": {
+    "title": "Theme",
+    "label": "Theme: {{theme}}",
+    "system": "System",
+    "light": "Light",
+    "dark": "Dark"
   }
 }

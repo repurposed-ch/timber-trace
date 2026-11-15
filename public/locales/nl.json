@@ -292,5 +292,12 @@
     "hiddenDone_other": "{{count}} invoeren verborgen.",
     "unhidden_one": "{{count}} invoer weer zichtbaar.",
     "unhidden_other": "{{count}} invoeren weer zichtbaar."
+  },
+  "theme": {
+    "title": "Thema",
+    "label": "Thema: {{theme}}",
+    "system": "Systeem",
+    "light": "Licht",
+    "dark": "Donker"
   }
 }
