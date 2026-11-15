@@ -266,7 +266,8 @@
       "split_one": "Nach diesem Code geteilt",
       "split_other": "Nach diesem Code in {{count}} geteilt",
       "joined": "Nach diesem Code zusammengeführt"
-    }
+    },
+    "showKeyPoints": "Eckpunkte von {{name}}"
   },
   "admin": {
     "title": "Alle Einträge",

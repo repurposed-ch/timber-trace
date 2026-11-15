@@ -266,7 +266,8 @@
       "split_one": "Gesplitst na deze code",
       "split_other": "Gesplitst in {{count}} na deze code",
       "joined": "Samengevoegd na deze code"
-    }
+    },
+    "showKeyPoints": "Kernpunten van {{name}}"
   },
   "admin": {
     "title": "Alle invoer",

@@ -266,7 +266,8 @@
       "split_one": "Delt efter denne kode",
       "split_other": "Delt i {{count}} efter denne kode",
       "joined": "Samlet efter denne kode"
-    }
+    },
+    "showKeyPoints": "Nøglepunkter for {{name}}"
   },
   "admin": {
     "title": "Alle poster",

@@ -70,6 +70,16 @@ export function StatusPill({ branch, short, ctx }: { branch: Branch; short?: boo
   );
 }
 
+/** the ▸/▾ in front of a table row: a real button, so the row unfolds with the keyboard too */
+export function UnfoldButton({ open, controls, name, onToggle }: { open: boolean; controls: string; name: string; onToggle: () => void }) {
+  const { t } = useTranslation();
+  return (
+    <button type="button" className="caret" aria-expanded={open} aria-controls={controls} aria-label={t("mine.showKeyPoints", { name })} onClick={(e) => (e.stopPropagation(), onToggle())}>
+      <span aria-hidden>{open ? "▾" : "▸"}</span>
+    </button>
+  );
+}
+
 export const shortId = (id: string) => `${id.slice(0, 8)}…${id.slice(-4)}`;
 export const branchName = (b: Branch, ctx: BranchContext, unreadable: string) => {
   const f = ctx.found(b.latest.length === 1 ? b.latest[0] : b.yourLatest);

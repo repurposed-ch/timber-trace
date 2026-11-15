@@ -266,7 +266,8 @@
       "split_one": "Diviso dopo questo codice",
       "split_other": "Diviso in {{count}} dopo questo codice",
       "joined": "Unito dopo questo codice"
-    }
+    },
+    "showKeyPoints": "Punti chiave di {{name}}"
   },
   "admin": {
     "title": "Tutte le voci",

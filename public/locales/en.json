@@ -266,7 +266,8 @@
       "split_one": "Split after this code",
       "split_other": "Split into {{count}} after this code",
       "joined": "Joined after this code"
-    }
+    },
+    "showKeyPoints": "Key points of {{name}}"
   },
   "admin": {
     "title": "All entries",

@@ -266,7 +266,8 @@
       "split_one": "Divisé après ce code",
       "split_other": "Divisé en {{count}} après ce code",
       "joined": "Fusionné après ce code"
-    }
+    },
+    "showKeyPoints": "Points clés de {{name}}"
   },
   "admin": {
     "title": "Toutes les entrées",

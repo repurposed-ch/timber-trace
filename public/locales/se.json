@@ -266,7 +266,8 @@
       "split_one": "Delad efter den här koden",
       "split_other": "Delad i {{count}} efter den här koden",
       "joined": "Sammanfogad efter den här koden"
-    }
+    },
+    "showKeyPoints": "Nyckelpunkter för {{name}}"
   },
   "admin": {
     "title": "Alla poster",

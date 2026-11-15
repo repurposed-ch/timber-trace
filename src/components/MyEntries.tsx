@@ -9,7 +9,7 @@ import type { Entry, RecordSource } from "../records/source";
 import { decodeEntry, type Found } from "../records/useLatest";
 import type { LoadedSchema } from "../schema/loader";
 import { labelsBySlug, loadSchemaSet } from "../state/schemaSet";
-import { Avatar, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
+import { Avatar, UnfoldButton, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
 
 // entries of every schema; each branch is decoded and labelled with its own schema
 type State = { s: "loading" } | { s: "error"; code: string } | { s: "done"; branches: Branch[]; schemas: Map<string, LoadedSchema> };
@@ -156,12 +156,10 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
                 const when = cur.entry.savedAt;
                 return (
                   <Fragment key={key(b)}>
-                    <tr className={open ? "open" : undefined} onClick={() => toggle(b)} aria-expanded={open}>
+                    <tr className={open ? "open" : undefined} onClick={() => toggle(b)}>
                       <td className="c-name">
                         <span className="row1">
-                          <span className="caret" aria-hidden>
-                            {open ? "▾" : "▸"}
-                          </span>
+                          <UnfoldButton open={open} controls={`unfold-${key(b)}`} name={branchName(b, ctx, t("mine.unreadable"))} onToggle={() => toggle(b)} />
                           <button type="button" className="link nm" disabled={!f} onClick={(e) => (e.stopPropagation(), f && onOpen(f))} title={cur.entry.componentId}>
                             <span>{branchName(b, ctx, t("mine.unreadable"))}</span>
                           </button>
@@ -186,7 +184,7 @@ export function MyEntries({ source, onOpen }: { source: RecordSource; onOpen: (f
                       </td>
                     </tr>
                     {open && (
-                      <tr className="unfold">
+                      <tr className="unfold" id={`unfold-${key(b)}`}>
                         <td colSpan={5}>
                           <BranchBody branch={b} ctx={ctx} detail="key" />
                         </td>

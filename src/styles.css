@@ -469,7 +469,8 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .mine-table tr.grp td { background: var(--row-soft); font-size: .68rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; color: var(--muted); padding: 5px 8px; cursor: default; }
 .mine-table tr.open td, .mine-table tr.unfold td { background: var(--row-soft); }
 .mine-table tr.unfold td { padding: 2px 8px 10px 26px; white-space: normal; cursor: default; }
-.mine-table .caret { display: inline-block; width: 14px; color: var(--muted); font-size: .7rem; }
+.mine-table .caret { display: inline-grid; place-items: center; width: 22px; height: 22px; padding: 0; border: 0; background: none; color: var(--muted); font-size: .75rem; border-radius: 4px; }
+.mine-table .caret:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
 .mine-table .row1 { display: flex; align-items: center; min-width: 0; }
 .mine-table .caret { flex: none; }
 .mine-table .nm { flex: 0 1 auto; min-width: 0; color: var(--fg); text-decoration: none; font-weight: 600; text-align: left; }

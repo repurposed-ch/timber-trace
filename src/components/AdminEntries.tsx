@@ -9,7 +9,7 @@ import { EntryError, type AdminSource, type Hidden } from "../records/supabase";
 import { decodeEntry, type Found } from "../records/useLatest";
 import type { LoadedSchema } from "../schema/loader";
 import { labelsBySlug, loadSchemaSet } from "../state/schemaSet";
-import { Avatar, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
+import { Avatar, UnfoldButton, BranchBody, BranchCard, StatusPill, branchName, shortId, type BranchContext } from "./BranchCard";
 import { DETAILS } from "./MyEntries";
 
 type Detail = (typeof DETAILS)[number];
@@ -165,12 +165,10 @@ export function AdminEntries({ admin, onOpen }: { admin: AdminSource | null; onO
               });
             return (
               <Fragment key={key(b)}>
-                <tr className={[open ? "open" : "", hidden.has(cur.entry.id!) ? "is-hidden" : ""].join(" ").trim() || undefined} onClick={toggle} aria-expanded={open}>
+                <tr className={[open ? "open" : "", hidden.has(cur.entry.id!) ? "is-hidden" : ""].join(" ").trim() || undefined} onClick={toggle}>
                   <td className="c-name">
                     <span className="row1">
-                      <span className="caret" aria-hidden>
-                        {open ? "▾" : "▸"}
-                      </span>
+                      <UnfoldButton open={open} controls={`unfold-${key(b)}`} name={branchName(b, ctx, t("mine.unreadable"))} onToggle={toggle} />
                       <button type="button" className="link nm" disabled={!f} onClick={(e) => (e.stopPropagation(), f && onOpen(f))} title={cur.entry.componentId}>
                         <span>{branchName(b, ctx, t("mine.unreadable"))}</span>
                       </button>
@@ -199,7 +197,7 @@ export function AdminEntries({ admin, onOpen }: { admin: AdminSource | null; onO
                   </td>
                 </tr>
                 {open && (
-                  <tr className="unfold">
+                  <tr className="unfold" id={`unfold-${key(b)}`}>
                     <td colSpan={5}>
                       <BranchBody branch={b} ctx={ctx} detail="key" />
                     </td>
