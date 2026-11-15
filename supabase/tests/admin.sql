@@ -7,6 +7,8 @@ declare
   x uuid := gen_random_uuid();
   c1 uuid := gen_random_uuid();
   r1 uuid; r2 uuid; r3 uuid; r4 uuid;
+  k uuid := gen_random_uuid();
+  ids uuid[];
   n int;
   latest uuid[];
   passed int := 0;
@@ -110,6 +112,13 @@ begin
   -- hidden_entries can't be written directly, not even by admins
   perform pg_temp.act(x, true);
   perform pg_temp.fails(format('insert into public.hidden_entries (entry_id, root) values (%L, %L)', r1, r1), 'permission denied');
+  passed := passed + 1;
+
+  -- an admin's repeated append on someone else's leaf returns the same id and adds nothing
+  ids := public.append_entries(array[r4], jsonb_build_array(pg_temp.e(c1, 6, '06') || jsonb_build_object('id', k)));
+  ids := public.append_entries(array[r4], jsonb_build_array(pg_temp.e(c1, 6, '06') || jsonb_build_object('id', k)));
+  if ids is distinct from array[k] then raise exception 'repeated admin append should return K, got %', ids; end if;
+  if (select count(*) from public.entries where predecessors = array[r4]) <> 1 then raise exception 'repeated admin append added a row'; end if;
   passed := passed + 1;
 
   raise exception 'admin: all checks passed (% groups)', passed;

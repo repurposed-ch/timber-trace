@@ -9,6 +9,12 @@ declare
   c2 uuid := gen_random_uuid();
   c3 uuid := gen_random_uuid();
   r uuid; r2 uuid; p uuid; q uuid; j uuid;
+  c4 uuid := gen_random_uuid();
+  k1 uuid := gen_random_uuid();
+  k2 uuid := gen_random_uuid();
+  k3 uuid := gen_random_uuid();
+  k4 uuid := gen_random_uuid();
+  call text;
   ids uuid[];
   latest uuid[];
   passed int := 0;
@@ -29,6 +35,9 @@ begin
   end $f$;
   create function pg_temp.e(component uuid, rev int, bytes text) returns jsonb language sql as $f$
     select jsonb_build_object('schema', 'hello-world', 'component_id', component, 'revision', rev, 'payload', '\x' || bytes, 'history', '[]'::jsonb)
+  $f$;
+  create function pg_temp.ei(id uuid, component uuid, rev int, bytes text) returns jsonb language sql as $f$
+    select pg_temp.e(component, rev, bytes) || jsonb_build_object('id', id)
   $f$;
   create function pg_temp.fails(sql text, expect text) returns void language plpgsql as $f$
   declare
@@ -111,6 +120,44 @@ begin
   perform pg_temp.fails(format('delete from public.entries where id = %L', j), 'permission denied');
   perform pg_temp.act(null);
   perform pg_temp.fails(format('delete from public.entries where id = %L', j), 'permission denied');
+  passed := passed + 1;
+
+  -- entries may bring their own ids (made offline); a repeated call returns them and adds nothing
+  perform pg_temp.act(a);
+  ids := public.append_entries('{}', jsonb_build_array(pg_temp.ei(k1, c4, 1, '11')));
+  if ids is distinct from array[k1] then raise exception 'client id should be kept, got %', ids; end if;
+  ids := public.append_entries('{}', jsonb_build_array(pg_temp.ei(k1, c4, 1, '11')));
+  if ids is distinct from array[k1] then raise exception 'repeated root should return K1, got %', ids; end if;
+  if (select count(*) from public.entries where component_id = c4) <> 1 then raise exception 'repeated root added a row'; end if;
+  passed := passed + 1;
+
+  -- repeating a revision works although its predecessor is no longer a leaf (the first call made it so)
+  ids := public.append_entries(array[k1], jsonb_build_array(pg_temp.ei(k2, c4, 2, '12')));
+  ids := public.append_entries(array[k1], jsonb_build_array(pg_temp.ei(k2, c4, 2, '12')));
+  if ids is distinct from array[k2] then raise exception 'repeated revision should return K2, got %', ids; end if;
+  if (select count(*) from public.entries where component_id = c4) <> 2 then raise exception 'repeated revision added a row'; end if;
+  passed := passed + 1;
+
+  -- an id that exists with anything else is a conflict: other payload, predecessors, revision, creator
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k1], jsonb_build_array(pg_temp.ei(k2, c4, 2, '13'))), 'id_conflict');
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', '{}', jsonb_build_array(pg_temp.ei(k2, c4, 2, '12'))), 'id_conflict');
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k1], jsonb_build_array(pg_temp.ei(k2, c4, 3, '12'))), 'id_conflict');
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k2], jsonb_build_array(pg_temp.ei(k1, c4, 3, '14'))), 'id_conflict');
+  perform pg_temp.act(b);
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k1], jsonb_build_array(pg_temp.ei(k2, c4, 2, '12'))), 'id_conflict');
+  perform pg_temp.act(a);
+  passed := passed + 1;
+
+  -- a repeated split returns both ids; a split where only some ids exist, or one has none, conflicts
+  call := format('select public.append_entries(%L, %L)', array[k2], jsonb_build_array(pg_temp.ei(k3, gen_random_uuid(), 1, '15'), pg_temp.ei(k4, gen_random_uuid(), 1, '16')));
+  execute call into ids;
+  execute call into ids;
+  if ids is distinct from array[k3, k4] then raise exception 'repeated split should return {K3, K4}, got %', ids; end if;
+  if (select count(*) from public.entries where predecessors = array[k2]) <> 2 then raise exception 'repeated split added rows'; end if;
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k2], jsonb_build_array(pg_temp.ei(k3, gen_random_uuid(), 1, '15'), pg_temp.ei(gen_random_uuid(), gen_random_uuid(), 1, '17'))), 'id_conflict');
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k2], jsonb_build_array(pg_temp.ei(k3, gen_random_uuid(), 1, '15'), pg_temp.e(gen_random_uuid(), 1, '17'))), 'id_conflict');
+  -- the same id twice in one call is malformed
+  perform pg_temp.fails(format('select public.append_entries(%L, %L)', array[k3], jsonb_build_array(pg_temp.ei(k1, gen_random_uuid(), 1, '18'), pg_temp.ei(k1, gen_random_uuid(), 1, '19'))), 'bad_shape');
   passed := passed + 1;
 
   raise exception 'entries: all checks passed (% groups)', passed;
