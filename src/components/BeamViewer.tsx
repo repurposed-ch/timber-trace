@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import * as THREE from "three";
 import { createWoodMaterial, updateWoodMaterial } from "../materials/wood";
 import { beamDims } from "../schema/beam";
+import { useThemeColors } from "../theme";
 
 export function beamShape(record: any) {
   const { size, known } = beamDims(record);
@@ -18,7 +19,7 @@ export function beamShape(record: any) {
   };
 }
 
-function Beam({ record }: { record: any }) {
+function Beam({ record, edge, edgeUnknown }: { record: any; edge: string; edgeUnknown: string }) {
   const shape = beamShape(record);
   const [l, h, w] = shape.size;
   const round = shape.product === "round";
@@ -35,7 +36,7 @@ function Beam({ record }: { record: any }) {
   useEffect(() => () => material.dispose(), [material]);
   return (
     <mesh geometry={geometry} material={material}>
-      <Edges threshold={20} color={shape.allKnown ? "#5b4632" : "#8a5a2b"} lineWidth={shape.allKnown ? 1 : 1.5} />
+      <Edges threshold={20} color={shape.allKnown ? edge : edgeUnknown} lineWidth={shape.allKnown ? 1 : 1.5} />
     </mesh>
   );
 }
@@ -44,12 +45,13 @@ export function BeamViewer({ record }: { record: any }) {
   const { t } = useTranslation();
   const shape = beamShape(record);
   const fitKey = shape.size.join("x");
+  const colors = useThemeColors({ bg: "--viewer-bg", edge: "--edge", edgeUnknown: "--edge-unknown" });
   return (
     <div className="viewer">
       <Canvas camera={{ position: [1.6, 1.1, 2.4], fov: 35, near: 0.01, far: 200 }} gl={{ preserveDrawingBuffer: true, antialias: true }} dpr={[1, 2]}>
-        <color attach="background" args={["#efece6"]} />
+        <color attach="background" args={[colors.bg || "#efece6"]} />
         <Bounds key={fitKey} fit clip margin={0.75}>
-          <Beam record={record} />
+          <Beam record={record} edge={colors.edge || "#5b4632"} edgeUnknown={colors.edgeUnknown || "#8a5a2b"} />
         </Bounds>
         <OrbitControls makeDefault enableDamping />
       </Canvas>
