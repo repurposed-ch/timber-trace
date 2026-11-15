@@ -14,7 +14,8 @@ Served at [timber-trace.repurposed.ch](https://timber-trace.repurposed.ch/), one
 
 ```bash
 bun install
-bun run dev    # http://localhost:5173/hello-world/
+bun run db:start  # local Supabase in Docker (see "Local backend")
+bun run dev       # http://localhost:5173/hello-world/, against the local database
 bun test
 bun run build  # dist/, with dist/<slug>/index.html per schema and a 404.html fallback
 ```
@@ -28,8 +29,9 @@ bun run build  # dist/, with dist/<slug>/index.html per schema and a 404.html fa
 | `public/<slug>/schema/<version>.json` | densing schema (JSON string); `version` (8 bit) is always the first field |
 | `public/<slug>/locales/<lng>.json` | field and option labels, fetched at runtime |
 | `public/<slug>/records/<id>.json` | latest payload per 128-bit id; offline fallback for the database |
-| `supabase/` | the database: `config.toml` (auth URLs), `migrations/` (table, access rules, functions), `tests/entries.sql` |
-| `.env` | Supabase URL and publishable key (public values; without them the app uses the static files only) |
+| `supabase/` | the database: `config.toml` (auth URLs, local ports), `migrations/` (table, access rules, functions), `seed.sql` (local data, generated), `tests/` |
+| `.env` | production Supabase URL and publishable key (public values; without them the app uses the static files only) |
+| `.env.development` | the local Supabase, used by `bun run dev` |
 | `public/locales/<lng>.json` | UI strings, fetched at runtime |
 
 Languages: en, de, fr, it, dk, nl, se. Country names come from `Intl.DisplayNames`.
@@ -90,8 +92,25 @@ Every saved state of a component is an **entry** in one table, `public.entries`.
 - **Writing** needs a sign-in (email link) and only goes through `append_entries(predecessors, entries)`. It only extends leaves you created, with the shapes above. Nobody can insert, update or delete rows directly.
 - **Admins** are users with `"role": "admin"` in their app metadata (set it in the Supabase dashboard under Authentication → Users; it takes effect at the next sign-in). They get **All entries** (`?tab=admin`): every user's branches in every schema with emails, filters by schema, shape and user, and **Hide… / Unhide**. Hiding an entry hides it and everything that continues it from everyone else (reversible, entries stay immutable; `hidden_entries`, `admin_hide`, `admin_unhide`). Admins may also continue anyone's latest entry. The database checks the role for all of this (`is_admin()` reads the token); `supabase/tests/admin.sql` covers it.
 - **Bytes**: densing writes them directly through a 256-character alphabet (`BYTES` in `src/schema/codec.ts`); they travel as `\x…` hex over PostgREST.
-- **Changes** go in a new file in `supabase/migrations/`; never edit an applied one. Apply with `supabase link --project-ref rvlnynwkxjguaakhzalj` and `supabase db push`. `supabase/tests/entries.sql` checks the graph and access rules; it always rolls back.
+- **Changes** go in a new file in `supabase/migrations/`; never edit an applied one. Try it locally with `bun run db:reset` and `bun run db:test`, then apply with `supabase link --project-ref rvlnynwkxjguaakhzalj` and `supabase db push`. `supabase/tests/entries.sql` checks the graph and access rules; it always rolls back.
 - **Auth URLs** (site and redirect) are in `supabase/config.toml`; apply with `supabase config push`.
+
+## Local backend
+
+`bun run dev` uses a local Supabase built from `supabase/migrations/`, so nothing you save while developing reaches production. It needs Docker; the Supabase CLI comes with `bun install`.
+
+```bash
+bun run db:start  # starts Postgres, auth, API and Mailpit; applies migrations and seed on first start
+bun run db:reset  # rebuilds the database from migrations + supabase/seed.sql
+bun run db:test   # runs supabase/tests/*.sql
+bun run db:stop
+```
+
+- **Sign in** as `admin@timber-trace.test` (admin) or `user@timber-trace.test`, or any other address (it creates a user). The email link arrives in Mailpit at http://127.0.0.1:54324. Studio, if started, is at http://127.0.0.1:54323.
+- **Seed**: `supabase/seed.sql` holds the two users and one entry per static record in `public/<slug>/records/`. It is generated: run `bun run db:seed` after changing those files.
+- **Without Docker** `bun run dev` still opens records from the static files; sign-in and saving fail.
+- **Production**: `bun run dev:prod` runs the dev server against the production database (`.env` only). Use it on purpose.
+- **Other devices**: put `VITE_SUPABASE_URL=http://<your LAN IP>:54321` in `.env.development.local` (not committed) and run `bun run dev --host`. The camera needs HTTPS there; paste links instead.
 
 ## Deploy
 
