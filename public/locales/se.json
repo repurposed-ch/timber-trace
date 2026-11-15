@@ -178,7 +178,9 @@
     "send": "Skicka inloggningslänk",
     "sent": "Vi har skickat en inloggningslänk till {{email}}. Öppna den på den här eller en annan enhet.",
     "error": "Länken kunde inte skickas: {{message}}",
-    "close": "Stäng"
+    "close": "Stäng",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Spara",

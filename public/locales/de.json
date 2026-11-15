@@ -178,7 +178,9 @@
     "send": "Anmeldelink senden",
     "sent": "Wir haben einen Anmeldelink an {{email}} gesendet. Öffnen Sie ihn auf diesem oder einem anderen Gerät.",
     "error": "Link konnte nicht gesendet werden: {{message}}",
-    "close": "Schliessen"
+    "close": "Schliessen",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Speichern",

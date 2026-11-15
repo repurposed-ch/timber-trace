@@ -178,7 +178,9 @@
     "send": "Invia link di accesso",
     "sent": "Abbiamo inviato un link di accesso a {{email}}. Aprilo su questo o su un altro dispositivo.",
     "error": "Impossibile inviare il link: {{message}}",
-    "close": "Chiudi"
+    "close": "Chiudi",
+    "accountTitle": "Account",
+    "account": "Account: {{email}}"
   },
   "save": {
     "save": "Salva",

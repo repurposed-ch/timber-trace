@@ -427,8 +427,8 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .hn-scan { background: var(--accent); border-color: var(--accent); color: var(--accent-fg); }
 .hn-burger { display: none; font-size: 1.05rem; padding: 2px 9px; }
 .hn-menu { position: absolute; right: 0; top: calc(100% + 6px); z-index: 30; background: var(--card); border: 1px solid var(--line); border-radius: 10px; box-shadow: 0 8px 24px var(--shadow); padding: 6px; min-width: 220px; display: grid; gap: 2px; }
-.hn-menu > a { padding: 8px 10px; border-radius: 6px; color: var(--fg); text-decoration: none; }
-.hn-menu > a:hover { background: var(--bg); }
+.hn-menu > a, .hn-section > a { padding: 8px 10px; border-radius: 6px; color: var(--fg); text-decoration: none; }
+.hn-menu > a:hover, .hn-section > a:hover { background: var(--bg); }
 .hn-langs { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 6px 0; margin: 4px 0; }
 .hn-langs button { border: 0; background: none; text-align: left; padding: 6px 8px; border-radius: 6px; font-size: .9rem; }
 .hn-langs button.on { background: var(--bg); font-weight: 600; }
@@ -449,9 +449,8 @@ input[type="date"]::-webkit-date-and-time-value { text-align: left; }
 .split-parts button { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: baseline; width: 100%; text-align: left; }
 .split-name { font-weight: 600; }
 .split-id { font-size: .8rem; }
-.hn-account { cursor: pointer; }
-.hn-menu > .hn-menu-account { text-align: left; padding: 8px 10px; border: 0; border-radius: 6px; background: none; color: var(--fg); font: inherit; cursor: pointer; }
-.hn-menu > .hn-menu-account:hover { background: var(--bg); }
+.hn-menu > .hn-menu-account, .hn-section > .hn-menu-account, .account-menu > button { text-align: left; padding: 8px 10px; border: 0; border-radius: 6px; background: none; color: var(--fg); font: inherit; cursor: pointer; }
+.hn-menu > .hn-menu-account:hover, .hn-section > .hn-menu-account:hover, .account-menu > button:hover { background: var(--bg); }
 .signin { border: 1px solid var(--line); border-radius: 12px; padding: 18px; width: min(420px, calc(100vw - 32px)); background: var(--card); color: var(--fg); }
 .signin::backdrop { background: var(--backdrop); }
 .signin form { display: grid; gap: 10px; }
@@ -636,3 +635,10 @@ output.id { display: block; padding: 4px 0; overflow-wrap: anywhere; user-select
   .viewer-card .card-head button, .viewer-card .variants button { padding: 2px 8px; }
   .viewer-card #viewer { margin-top: 6px; }
 }
+.account { position: relative; }
+.account-btn { width: 30px; height: 30px; padding: 0; border-radius: 50%; background: var(--accent); color: var(--accent-fg); border-color: var(--accent); font: 700 .72rem var(--mono); }
+.account-menu { min-width: 200px; }
+.account-email { padding: 4px 8px 6px; border-bottom: 1px solid var(--line); margin-bottom: 4px; overflow-wrap: anywhere; }
+.hn-section { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 6px; margin-top: 4px; }
+.hn-heading { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); padding: 2px 8px; }
+.hn-email { padding: 0 8px 2px; overflow-wrap: anywhere; }

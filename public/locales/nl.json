@@ -178,7 +178,9 @@
     "send": "Inloglink versturen",
     "sent": "We hebben een inloglink naar {{email}} gestuurd. Open hem op dit of een ander apparaat.",
     "error": "De link kon niet worden verstuurd: {{message}}",
-    "close": "Sluiten"
+    "close": "Sluiten",
+    "accountTitle": "Account",
+    "account": "Account: {{email}}"
   },
   "save": {
     "save": "Opslaan",

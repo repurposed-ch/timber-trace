@@ -7,6 +7,7 @@ import { setSignInOpen, useSession } from "../auth/useSession";
 import { useSchemaSlugs } from "../state/useSchema";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeOptions, ThemeSwitch } from "./ThemeSwitch";
+import { AccountMenu } from "./AccountMenu";
 
 const REPO = "https://github.com/repurposed-ch/timber-trace";
 
@@ -18,9 +19,9 @@ const CameraIcon = () => (
 );
 
 /**
- * The header's right side. Wide screens: Scan, Schema, language. Phones: Scan stays one tap
- * away (it's the main thing to do at a beam); Schema, examples, new record and the language move
- * into the ☰ menu.
+ * The header's right side. Wide screens: Scan, Schema, theme, language, account. Phones: Scan stays
+ * one tap away (it's the main thing to do at a beam); everything else moves into the ☰ menu, the
+ * account items as their own section.
  */
 export function HeaderNav() {
   const { t, i18n } = useTranslation();
@@ -77,28 +78,17 @@ export function HeaderNav() {
           {t("nav.schema")}
         </a>
       )}
-      {/* signed in, the account spot leads to your entries (sign out is there); otherwise it signs in */}
-      {session.status === "in" && session.admin && target && (
-        <a className="hn-btn hn-wide hn-admin" href={`${schemaUrl(target)}?tab=admin`} onClick={inPlace("admin", target)}>
-          {t("nav.admin")}
-        </a>
-      )}
-      {session.status === "in" && target ? (
-        <a className="hn-btn hn-wide hn-account" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)} title={t("auth.signedInAs", { email: session.email })}>
-          {t("nav.mine")}
-        </a>
-      ) : (
-        session.status !== "off" && (
-          <button type="button" className="hn-btn hn-wide hn-account" onClick={account} disabled={session.status === "checking"}>
-            {accountLabel}
-          </button>
-        )
-      )}
       <span className="hn-wide">
         <ThemeSwitch />
       </span>
       <span className="hn-wide">
         <LanguageSwitcher />
+      </span>
+      <span className="hn-wide">
+        <AccountMenu
+          mine={target ? { href: `${schemaUrl(target)}?tab=mine`, onClick: inPlace("mine", target) } : undefined}
+          admin={target ? { href: `${schemaUrl(target)}?tab=admin`, onClick: inPlace("admin", target) } : undefined}
+        />
       </span>
       <button type="button" className="hn-btn hn-burger" aria-expanded={open} aria-label={t("nav.menu")} onClick={() => setOpen(!open)}>
         <span aria-hidden>☰</span>
@@ -119,6 +109,25 @@ export function HeaderNav() {
           <a role="menuitem" href={`${base}#examples`} onClick={() => setOpen(false)}>
             {t("home.examplesTitle")}
           </a>
+          {session.status !== "off" && (
+            <div className="hn-section" role="group" aria-label={t("auth.accountTitle")}>
+              <div className="hn-heading">{t("auth.accountTitle")}</div>
+              {session.status === "in" && <div className="muted small hn-email">{session.email}</div>}
+              {session.status === "in" && target && (
+                <a role="menuitem" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)}>
+                  {t("nav.mine")}
+                </a>
+              )}
+              {session.status === "in" && session.admin && target && (
+                <a role="menuitem" href={`${schemaUrl(target)}?tab=admin`} onClick={inPlace("admin", target)}>
+                  {t("nav.admin")}
+                </a>
+              )}
+              <button type="button" role="menuitem" className="hn-menu-account" onClick={account} disabled={session.status === "checking"}>
+                {accountLabel}
+              </button>
+            </div>
+          )}
           <div className="hn-langs" role="group" aria-label={t("lang.label")}>
             {LANGS.map((l) => (
               <button
@@ -137,22 +146,6 @@ export function HeaderNav() {
             ))}
           </div>
           <ThemeOptions onPick={() => setOpen(false)} />
-          {session.status === "in" && target && (
-            <a role="menuitem" href={`${schemaUrl(target)}?tab=mine`} onClick={inPlace("mine", target)}>
-              {t("nav.mine")}
-            </a>
-          )}
-          {session.status === "in" && session.admin && target && (
-            <a role="menuitem" href={`${schemaUrl(target)}?tab=admin`} onClick={inPlace("admin", target)}>
-              {t("nav.admin")}
-            </a>
-          )}
-          {session.status !== "off" && (
-            <button type="button" role="menuitem" className="hn-menu-account" onClick={account} disabled={session.status === "checking"}>
-              {accountLabel}
-              {session.status === "in" && <span className="muted small"> · {session.email}</span>}
-            </button>
-          )}
           <a role="menuitem" href={REPO} className="muted small">
             {t("home.source")}
           </a>

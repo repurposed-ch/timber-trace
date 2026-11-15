@@ -178,7 +178,9 @@
     "send": "Envoyer le lien de connexion",
     "sent": "Nous avons envoyé un lien de connexion à {{email}}. Ouvrez-le sur cet appareil ou un autre.",
     "error": "Impossible d'envoyer le lien : {{message}}",
-    "close": "Fermer"
+    "close": "Fermer",
+    "accountTitle": "Compte",
+    "account": "Compte : {{email}}"
   },
   "save": {
     "save": "Enregistrer",

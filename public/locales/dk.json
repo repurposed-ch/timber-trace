@@ -178,7 +178,9 @@
     "send": "Send login-link",
     "sent": "Vi har sendt et login-link til {{email}}. Åbn det på denne eller en anden enhed.",
     "error": "Linket kunne ikke sendes: {{message}}",
-    "close": "Luk"
+    "close": "Luk",
+    "accountTitle": "Konto",
+    "account": "Konto: {{email}}"
   },
   "save": {
     "save": "Gem",
