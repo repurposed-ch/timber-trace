@@ -5,9 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:prod": "vite --mode prod-db",
     "build": "tsc --noEmit && vite build && bun scripts/emit-schema-pages.ts",
     "preview": "vite preview",
-    "test": "bun test"
+    "test": "bun test",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:seed": "bun scripts/build-seed.ts",
+    "db:test": "bun scripts/db-test.ts"
   },
   "dependencies": {
     "@react-pdf/renderer": "^4.3.2",
@@ -31,6 +37,7 @@
     "@types/react-dom": "^19.2.3",
     "@types/three": "^0.180.0",
     "@vitejs/plugin-react": "^4.3.4",
+    "supabase": "^3.1.0",
     "typescript": "^5.9.2",
     "vite": "^5.4.0",
     "web-ifc": "^0.0.78"
