@@ -52,12 +52,10 @@
   "form": {
     "title": "Component record",
     "unknown": "Unknown",
-    "generate": "Generate",
     "add": "Add",
     "remove": "Remove",
     "charset": "Letters and digits only, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex characters",
     "newRecord": "New record (v{{v}})",
     "olderVersion": "Made with schema version {{v}}. It is shown and exported as version {{v}}; new records use version {{latest}}.",
     "liftedVersion": "Read from a version {{from}} code and shown as version {{latest}}. Fields added since are not stated; saving writes version {{latest}}.",
@@ -68,8 +66,7 @@
       "number": "Whole number from {{min}} to {{max}}",
       "date": "Date as YYYY-MM-DD",
       "dayOrYear": "A year (1962) or a date (1962-05-03)",
-      "chars": "Letters and digits only, max. {{max}}",
-      "id": "32 hex characters"
+      "chars": "Letters and digits only, max. {{max}}"
     },
     "incomplete": "Incomplete: still unknown until every part is filled in",
     "required": "Required here"

@@ -52,12 +52,10 @@
   "form": {
     "title": "Componentrecord",
     "unknown": "Onbekend",
-    "generate": "Genereren",
     "add": "Toevoegen",
     "remove": "Verwijderen",
     "charset": "Alleen letters en cijfers, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hexadecimale tekens",
     "newRecord": "Nieuw record (v{{v}})",
     "olderVersion": "Gemaakt met schemaversie {{v}}. Het wordt getoond en geëxporteerd als versie {{v}}; nieuwe records gebruiken versie {{latest}}.",
     "liftedVersion": "Gelezen uit een code van versie {{from}} en getoond als versie {{latest}}. Velden die sindsdien zijn toegevoegd, zijn niet ingevuld; opslaan schrijft versie {{latest}}.",
@@ -68,8 +66,7 @@
       "number": "Geheel getal van {{min}} tot {{max}}",
       "date": "Datum als JJJJ-MM-DD",
       "dayOrYear": "Een jaar (1962) of een datum (1962-05-03)",
-      "chars": "Alleen letters en cijfers, max. {{max}}",
-      "id": "32 hexadecimale tekens"
+      "chars": "Alleen letters en cijfers, max. {{max}}"
     },
     "incomplete": "Onvolledig: blijft onbekend tot alles is ingevuld",
     "required": "Hier verplicht"

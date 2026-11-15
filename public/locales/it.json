@@ -52,12 +52,10 @@
   "form": {
     "title": "Scheda dell'elemento",
     "unknown": "Sconosciuto",
-    "generate": "Genera",
     "add": "Aggiungi",
     "remove": "Rimuovi",
     "charset": "Solo lettere e cifre, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caratteri esadecimali",
     "newRecord": "Nuova scheda (v{{v}})",
     "olderVersion": "Creata con la versione {{v}} dello schema. Viene mostrata ed esportata come versione {{v}}; le nuove schede usano la versione {{latest}}.",
     "liftedVersion": "Letto da un codice della versione {{from}} e mostrato come versione {{latest}}. I campi aggiunti in seguito non sono indicati; il salvataggio scrive la versione {{latest}}.",
@@ -68,8 +66,7 @@
       "number": "Numero intero da {{min}} a {{max}}",
       "date": "Data nel formato AAAA-MM-GG",
       "dayOrYear": "Un anno (1962) o una data (1962-05-03)",
-      "chars": "Solo lettere e cifre, max. {{max}}",
-      "id": "32 caratteri esadecimali"
+      "chars": "Solo lettere e cifre, max. {{max}}"
     },
     "incomplete": "Incompleto: resta sconosciuto finché non è tutto compilato",
     "required": "Obbligatorio qui"

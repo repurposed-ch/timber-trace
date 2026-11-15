@@ -52,12 +52,10 @@
   "form": {
     "title": "Komponentpost",
     "unknown": "Ukendt",
-    "generate": "Generér",
     "add": "Tilføj",
     "remove": "Fjern",
     "charset": "Kun bogstaver og tal, maks. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 hex-tegn",
     "newRecord": "Ny post (v{{v}})",
     "olderVersion": "Oprettet med skemaversion {{v}}. Den vises og eksporteres som version {{v}}; nye poster bruger version {{latest}}.",
     "liftedVersion": "Læst fra en kode i version {{from}} og vist som version {{latest}}. Felter tilføjet siden er ikke angivet; ved at gemme skrives version {{latest}}.",
@@ -68,8 +66,7 @@
       "number": "Heltal fra {{min}} til {{max}}",
       "date": "Dato som ÅÅÅÅ-MM-DD",
       "dayOrYear": "Et år (1962) eller en dato (1962-05-03)",
-      "chars": "Kun bogstaver og tal, maks. {{max}}",
-      "id": "32 hex-tegn"
+      "chars": "Kun bogstaver og tal, maks. {{max}}"
     },
     "incomplete": "Ufuldstændig: forbliver ukendt, indtil alt er udfyldt",
     "required": "Påkrævet her"

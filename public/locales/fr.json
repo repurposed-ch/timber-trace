@@ -52,12 +52,10 @@
   "form": {
     "title": "Fiche de l'élément",
     "unknown": "Inconnu",
-    "generate": "Générer",
     "add": "Ajouter",
     "remove": "Supprimer",
     "charset": "Lettres et chiffres uniquement, max. {{max}}",
     "range": "{{min}}–{{max}}",
-    "idInvalid": "32 caractères hexadécimaux",
     "newRecord": "Nouvelle fiche (v{{v}})",
     "olderVersion": "Créée avec la version {{v}} du schéma. Elle est affichée et exportée en version {{v}} ; les nouvelles fiches utilisent la version {{latest}}.",
     "liftedVersion": "Lu depuis un code de version {{from}} et affiché en version {{latest}}. Les champs ajoutés depuis ne sont pas renseignés ; l'enregistrement écrit la version {{latest}}.",
@@ -68,8 +66,7 @@
       "number": "Nombre entier de {{min}} à {{max}}",
       "date": "Date au format AAAA-MM-JJ",
       "dayOrYear": "Une année (1962) ou une date (1962-05-03)",
-      "chars": "Lettres et chiffres uniquement, max. {{max}}",
-      "id": "32 caractères hexadécimaux"
+      "chars": "Lettres et chiffres uniquement, max. {{max}}"
     },
     "incomplete": "Incomplet : reste inconnu tant que tout n'est pas rempli",
     "required": "Obligatoire ici"
