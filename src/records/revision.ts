@@ -18,14 +18,11 @@ type T = (key: string, opts?: Record<string, unknown>) => string;
 
 const knownDay = (d: any) => (d?.status === "known" ? (d.day as number) : null);
 
-/** "Revision 5 · 8 Nov 2026 · Supplied: Dismantler #1042, 4 Sep 2026 · Verified: Structural engineer #77, 8 Nov 2026 (Provenance, Condition)" */
-export function provenance(record: any, labels: Pick<Labels, "option" | "field">, t: T, locale: string): string | null {
+export type ProvenanceParts = { revision: string | null; supplied: string | null; verified: string | null };
+
+/** the three parts of the provenance line, each null when the record's schema has no such field */
+export function provenanceParts(record: any, labels: Pick<Labels, "option" | "field">, t: T, locale: string): ProvenanceParts | null {
   if (!record?.revision && !record?.supplied && !record?.verified) return null;
-  const parts: string[] = [];
-  if (record.revision) {
-    const day = knownDay(record.revision.date);
-    parts.push(t("prov.revision", { n: record.revision.number }) + (day !== null ? ` · ${formatDay(day, locale)}` : ""));
-  }
   const who = (p: any, path: string) => {
     const day = knownDay(p.date);
     return `${labels.option(`${path}.role`, p.role)} #${p.party}` + (day !== null ? `, ${formatDay(day, locale)}` : "");
@@ -35,7 +32,29 @@ export function provenance(record: any, labels: Pick<Labels, "option" | "field">
     const ticked = Object.entries(p.checked ?? {}).filter(([, v]) => v).map(([k]) => labels.field(`verified.checked.${k}`));
     return ticked.length ? ticked.join(", ") : t("prov.noScope");
   };
-  if (record.supplied) parts.push(record.supplied.status === "known" ? t("prov.supplied", { who: who(record.supplied, "supplied") }) : t("prov.supplierUnknown"));
-  if (record.verified) parts.push(record.verified.status === "known" ? t("prov.verified", { who: who(record.verified, "verified") }) + ` (${scope(record.verified)})` : t("prov.notVerified"));
-  return parts.join(" · ");
+  const revisionDay = record.revision ? knownDay(record.revision.date) : null;
+  return {
+    revision: record.revision ? t("prov.revision", { n: record.revision.number }) + (revisionDay !== null ? ` · ${formatDay(revisionDay, locale)}` : "") : null,
+    supplied: record.supplied ? (record.supplied.status === "known" ? t("prov.supplied", { who: who(record.supplied, "supplied") }) : t("prov.supplierUnknown")) : null,
+    verified: record.verified ? (record.verified.status === "known" ? t("prov.verified", { who: who(record.verified, "verified") }) + ` (${scope(record.verified)})` : t("prov.notVerified")) : null,
+  };
+}
+
+const join = (p: ProvenanceParts) => [p.revision, p.supplied, p.verified].filter(Boolean).join(" · ");
+
+/** "Revision 5 · 8 Nov 2026 · Supplied: Dismantler #1042, 4 Sep 2026 · Verified: Structural engineer #77, 8 Nov 2026 (Provenance, Condition)" */
+export function provenance(record: any, labels: Pick<Labels, "option" | "field">, t: T, locale: string): string | null {
+  const parts = provenanceParts(record, labels, t, locale);
+  return parts && join(parts);
+}
+
+/** two records' provenance with the parts they share left out; null when nothing differs */
+export function provenanceDiff(a: any, b: any, labels: Pick<Labels, "option" | "field">, t: T, locale: string): { before: string; after: string } | null {
+  const [pa, pb] = [provenanceParts(a, labels, t, locale), provenanceParts(b, labels, t, locale)];
+  if (!pa && !pb) return null;
+  const keys = ["revision", "supplied", "verified"] as const;
+  const differing = keys.filter((k) => pa?.[k] !== pb?.[k]);
+  if (!differing.length) return null;
+  const only = (p: ProvenanceParts | null) => differing.map((k) => p?.[k] ?? "—").join(" · ");
+  return { before: only(pa), after: only(pb) };
 }

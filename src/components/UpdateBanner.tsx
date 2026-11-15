@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { changedFacts } from "../records/changes";
 import { intlLocale } from "../i18n";
-import { provenance } from "../records/revision";
+import { provenanceDiff } from "../records/revision";
 import type { Found as Newer } from "../records/useLatest";
 import type { Labels } from "../state/useSchema";
 
@@ -15,8 +15,8 @@ export function UpdateBanner({ current, currentSchema, newer, labels, onShow }: 
   const changes = changedFacts(current, currentSchema, newer, labels);
   const date = newer.updatedAt ? new Date(newer.updatedAt).toLocaleDateString(locale, { timeZone: "UTC", dateStyle: "medium" }) : null;
   const [open, setOpen] = useState(storedOpen);
-  const provBefore = provenance(current, labels, t, locale);
-  const provAfter = provenance(newer.data, labels, t, locale);
+  // only the parts that differ: the supplier is usually the same on both
+  const prov = provenanceDiff(current, newer.data, labels, t, locale);
   return (
     <section className="banner" aria-labelledby="update-title">
       <div>
@@ -25,12 +25,12 @@ export function UpdateBanner({ current, currentSchema, newer, labels, onShow }: 
         </strong>
         {date && <span className="muted"> · {t("update.updated", { date })}</span>}
       </div>
-      {(provBefore || provAfter) && (
+      {prov && (
         <dl className="prov-compare">
           <dt>{t("update.before")}</dt>
-          <dd data-testid="prov-before">{provBefore ?? "—"}</dd>
+          <dd data-testid="prov-before">{prov.before}</dd>
           <dt>{t("update.after")}</dt>
-          <dd data-testid="prov-after">{provAfter ?? "—"}</dd>
+          <dd data-testid="prov-after">{prov.after}</dd>
         </dl>
       )}
       {changes.length > 0 && (
