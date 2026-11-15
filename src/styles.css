@@ -1,42 +1,42 @@
 :root {
   /* colours: every colour in this file is one of these tokens */
-  --bg: #f6f4f0;
-  --fg: #1d1b18;
-  --muted: #6b665e;
-  --line: #d8d3ca;
-  --line-soft: #eee8df;
-  --row-soft: #faf8f4;
+  --bg: #f4f6f4;
+  --fg: #15191a;
+  --muted: #58625d;
+  --line: #d6dcd8;
+  --line-soft: #e7ebe8;
+  --row-soft: #f2f5f3;
   --card: #ffffff;
-  --accent: #8a5a2b;
+  --accent: #2d6a4f;
   --accent-fg: #ffffff;
   --on-color: #ffffff;
-  --warn-bg: #fff4d6;
-  --warn-line: #e0b84c;
-  --warn-fg: #8a6d1d;
-  --error: #b00020;
+  --warn-bg: #fdf3d3;
+  --warn-line: #d9b24a;
+  --warn-fg: #7a5c12;
+  --error: #b3261e;
   --del: #a33333;
-  --placeholder: #a7a196;
-  --empty: #8f897f;
-  --ok: #2f6b3a;
-  --ok-soft: #e4f1e6;
-  --cont: #8a5a00;
-  --cont-soft: #fff4d6;
+  --placeholder: #66706b;
+  --empty: #66706b;
+  --ok: #2d6a4f;
+  --ok-soft: #e2f0e8;
+  --cont: #7a5000;
+  --cont-soft: #fdf3d3;
   --split: #2b5a8a;
   --split-soft: #e3edf8;
   --other: #4f7a8c;
   --hidden-bg: #f3e3e3;
   --hidden-fg: #8a2b2b;
-  --tier-structural-bg: #f1d9c0;
+  --tier-structural-bg: #f3e1cc;
   --tier-structural-fg: #6b3f16;
   --tier-condition-bg: #dde8f0;
   --tier-condition-fg: #24506e;
-  --tier-routine-bg: #e8e6e1;
+  --tier-routine-bg: #e6e9e7;
   --shadow: rgba(0, 0, 0, .1);
   --backdrop: rgba(0, 0, 0, .35);
   --camera-bg: #000000;
-  --viewer-bg: #efece6;
+  --viewer-bg: #e9ece9;
   --edge: #5b4632;
-  --edge-unknown: #8a5a2b;
+  --edge-unknown: #2d6a4f;
   --qr-bg: #ffffff;
   color-scheme: light;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -185,7 +185,7 @@ h3 { font-size: 1rem; margin: 0 0 8px; }
 .group > legend { padding: 0; margin: 0; font-size: .9rem; }
 .group .group { margin-top: 2px; }
 .chip { display: inline-block; font-size: .7rem; font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 10px; padding: 0 6px; vertical-align: middle; }
-input::placeholder { color: var(--placeholder); font-size: .85em; }
+input::placeholder { color: var(--placeholder); font-size: .85em; font-style: italic; }
 @media (max-width: 520px) {
   .card { padding: 10px; }
   /* keep label | control | unknown on one line; wide controls may wrap inside their cell */
@@ -289,8 +289,8 @@ input::placeholder { color: var(--placeholder); font-size: .85em; }
 .control .incomplete, .group > .incomplete { color: var(--warn-fg); font-size: .75rem; flex-basis: 100%; }
 .row.multi .control { flex-wrap: wrap; }
 .row.multi .control > :not(.incomplete) { flex: 1 1 0; }
-select.is-empty { color: var(--empty); }
-select.is-empty option { color: var(--fg); }
+select.is-empty { color: var(--empty); font-style: italic; }
+select.is-empty option { color: var(--fg); font-style: normal; }
 .row.multi .control > .variants { flex: none; }
 .variants button { white-space: nowrap; }
 /* edit tabs */
