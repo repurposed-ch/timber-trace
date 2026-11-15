@@ -24,6 +24,8 @@ export type Entry = {
   createdBy?: string;
   /** ISO date */
   savedAt?: string;
+  /** only on this device: waiting to be sent, or refused by the server (see src/local) */
+  sync?: "pending" | "conflict";
 };
 
 export interface RecordSource {
