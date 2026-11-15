@@ -628,3 +628,11 @@ output.id { display: block; padding: 4px 0; overflow-wrap: anywhere; user-select
   .ab-status { font-size: .8rem; }
 }
 .chip-note { color: var(--warn-fg); border-color: var(--warn-line); background: var(--warn-bg); }
+/* phones: a smaller 3D view, so the record's name and key figures are on the first screen */
+@media (max-width: 520px) {
+  .viewer { height: 150px; }
+  .viewer-card { padding: 8px; }
+  .viewer-card .card-head { margin-bottom: 0; }
+  .viewer-card .card-head button, .viewer-card .variants button { padding: 2px 8px; }
+  .viewer-card #viewer { margin-top: 6px; }
+}
