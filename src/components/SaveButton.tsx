@@ -1,8 +1,8 @@
 import type { DenseSchema } from "densing";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { setSignInOpen, useSession } from "../auth/useSession";
-import { EntryError } from "../records/supabase";
+import { EntryError, toHex } from "../records/supabase";
 import type { Entry, RecordSource } from "../records/source";
 import type { Lineage } from "../records/useLatest";
 import { nextEntry } from "../records/save";
@@ -22,6 +22,9 @@ type Props = {
 export function SaveButton({ source, slug, schema, record, lineage, history, onSaved }: Props) {
   const { t } = useTranslation();
   const session = useSession();
+  // the attempt that failed: pressing Save again with the same content sends the same entry id,
+  // so a save whose answer got lost isn't written twice
+  const failed = useRef<{ key: string; id: string } | null>(null);
   const [state, setState] = useState<{ s: "idle" } | { s: "saving" } | { s: "saved"; revision: number | null } | { s: "error"; code: string }>({ s: "idle" });
   if (session.status === "off" || !source.append) return null;
   const blocked = lineage.status === "newer" || lineage.status === "split";
@@ -31,12 +34,16 @@ export function SaveButton({ source, slug, schema, record, lineage, history, onS
     if (session.status !== "in") return setSignInOpen(true);
     const next = nextEntry(slug, schema, record, lineage, history);
     if (!next) return;
+    const key = `${next.predecessors.join(",")}|${toHex(next.entry.payload)}|${JSON.stringify(history ?? null)}`;
+    if (failed.current?.key === key) next.entry.id = failed.current.id;
     setState({ s: "saving" });
     try {
       await source.append!(next.predecessors, [next.entry]);
+      failed.current = null;
       setState({ s: "saved", revision: next.entry.revision });
       onSaved(next.data);
     } catch (e) {
+      failed.current = { key, id: next.entry.id! };
       setState({ s: "error", code: e instanceof EntryError ? e.code : "network" });
     }
   };
