@@ -41,6 +41,10 @@ export const PRESETS = {
   yellowTropical: P("#c99b4a", "#9a7433", 110, 0.3, 0, 0.2, 0.5),
   darkTropical: P("#5e4030", "#3c271c", 110, 0.4, 0, 0.3, 0.4),
   wenge: P("#4a3428", "#24170f", 140, 0.8, 0, 0.4, 0.2),
+  // only the group is known: muted, so the 3D view doesn't claim a species
+  softwood: P("#ddc7a2", "#bb9a6e", 260, 0.6, 0.45),
+  hardwood: P("#c4a47c", "#9a7a55", 150, 0.45, 0.1, 0.4),
+  tropical: P("#a9714e", "#7d4f34", 110, 0.35, 0, 0.2, 0.4),
 } satisfies Record<string, WoodPreset>;
 
 export type PresetName = keyof typeof PRESETS;
@@ -102,6 +106,14 @@ export const SPECIES_PRESET: Record<string, PresetName> = {
   ipe: "darkTropical",
   azobe: "darkTropical",
   wenge: "wenge",
+  softwood: "softwood",
+  hardwood: "hardwood",
+  tropical_hardwood: "tropical",
+  basralocus: "redTropical",
+  keruing: "redTropical",
+  greenheart: "darkTropical",
+  framire: "yellowTropical",
+  acacia: "robinia",
 };
 
 export const presetFor = (species: string): WoodPreset => PRESETS[SPECIES_PRESET[species] ?? "unknown"];
