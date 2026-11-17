@@ -116,7 +116,7 @@ export const lotRecordV4 = {
   species: "hardwood",
   origin: { ...fullRecordV3.origin, previousUse: { status: "known", country: "NL", context: { kind: "railway" } } },
   dimensions: { length: { status: "unknown" }, width: { status: "known", value: 150 }, height: { status: "known", value: 250 } },
-  quantity: { kind: "lot", count: 66, length: { status: "known", min: 2500, max: 2700 }, volume: { status: "known", dm3: 6188 } },
+  quantity: { kind: "lot", count: { status: "known", value: 66 }, length: { status: "known", min: 2500, max: 2700 }, volume: { status: "known", dm3: 6188 } },
 };
 
 export const unknownRecordV4 = { ...unknownRecordV3, version: 4, id: [0, 0, 0, 4], quantity: { kind: "single" } };

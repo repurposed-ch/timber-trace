@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Byggnadsdel",
     "quantity": "Mängd",
     "quantity.count": "Antal",
+    "quantity.count.value": "Antal",
     "quantity.length": "Längdintervall",
     "quantity.length.min": "Kortaste (mm)",
     "quantity.length.max": "Längsta (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Enstaka del",
       "lot": "Parti"
+    },
+    "quantity.count.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
     },
     "quantity.length.status": {
       "unknown": "Okänd",

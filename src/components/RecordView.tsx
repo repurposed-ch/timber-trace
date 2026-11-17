@@ -112,7 +112,7 @@ function Summary({ record, labels, byPath, isUnknown, locale }: { record: any; l
   const dims = ["dimensions.length", "dimensions.width", "dimensions.height"];
   const tiles: { k: string; v: string; s?: string }[] = [];
   const lot = lotOf(record);
-  if (lot) tiles.push({ k: labels.field("quantity"), v: String(lot.count), s: lot.length ? `${lot.length.min}–${lot.length.max} mm` : undefined });
+  if (lot) tiles.push({ k: labels.field("quantity"), v: lot.count === null ? "?" : String(lot.count), s: lot.length ? `${lot.length.min}–${lot.length.max} mm` : undefined });
   const shownDims = lot ? dims.slice(1) : dims;
   if (shownDims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: shownDims.map((d) => strip(val(d))).join(" × "), s: "mm" });
   if (val("grade.class")) tiles.push({ k: labels.field("grade"), v: val("grade.class")!, s: [val("grade.basis"), val("grade.source"), val("grade.standard")].filter(Boolean).join(" · ") });

@@ -475,14 +475,29 @@
     },
     {
       "type": "object",
-      "name": "lot",
+      "name": "countKnown",
       "fields": [
         {
           "type": "int",
-          "name": "count",
+          "name": "value",
           "min": 2,
           "max": 4095,
           "defaultValue": 10
+        }
+      ]
+    },
+    {
+      "type": "object",
+      "name": "lot",
+      "fields": [
+        {
+          "type": "union",
+          "name": "count",
+          "discriminator": "status",
+          "variants": {
+            "unknown": 0,
+            "known": 26
+          }
         },
         {
           "type": "union",
@@ -659,7 +674,7 @@
       "discriminator": "kind",
       "variants": {
         "single": 0,
-        "lot": 26
+        "lot": 27
       },
       "defaultVariant": "single"
     },

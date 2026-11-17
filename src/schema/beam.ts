@@ -4,8 +4,8 @@ import type { Labels } from "./labels";
 export const DEFAULT_DIMS = { length: 4000, width: 120, height: 240 };
 
 /** a lot (v4 `quantity`): several pieces sharing a cross-section, lengths as a range */
-export const lotOf = (record: any): { count: number; length: { min: number; max: number } | null } | null =>
-  record?.quantity?.kind === "lot" ? { count: record.quantity.count, length: record.quantity.length?.status === "known" ? { min: record.quantity.length.min, max: record.quantity.length.max } : null } : null;
+export const lotOf = (record: any): { count: number | null; length: { min: number; max: number } | null } | null =>
+  record?.quantity?.kind === "lot" ? { count: record.quantity.count?.status === "known" ? record.quantity.count.value : null, length: record.quantity.length?.status === "known" ? { min: record.quantity.length.min, max: record.quantity.length.max } : null } : null;
 
 /** what a lot can't state: a single length, or a range that runs backwards; field name + UI message key */
 export function lotProblems(record: any): { field: string; key: string }[] {
@@ -33,10 +33,11 @@ export function beamDims(record: any) {
   };
 }
 
-/** "Norway spruce · Glulam", a lot "66 × Norway spruce · Glulam"; unknown parts stay in as "Unknown" */
+/** "Norway spruce · Glulam", a lot "66 × Norway spruce · Glulam" ("Lot · …" without a count); unknown parts stay in as "Unknown" */
 export function beamName(record: any, labels: Pick<Labels, "option">) {
   const species = labels.option("species", record.species);
   const product = record.product?.kind === "known" ? labels.option("product.value", record.product.value) : (record.product?.text ?? []).join("");
   const lot = lotOf(record);
-  return `${lot ? `${lot.count} × ` : ""}${species} · ${product}`;
+  const prefix = !lot ? "" : lot.count !== null ? `${lot.count} × ` : `${labels.option("quantity.kind", "lot")} · `;
+  return `${prefix}${species} · ${product}`;
 }

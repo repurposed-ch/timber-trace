@@ -9,6 +9,7 @@ describe("lots", () => {
   test("a lot is named with its count and sized by its longest piece", () => {
     expect(beamName(lotRecordV4, labels)).toBe("66 × hardwood · glulam");
     expect(beamName(fullRecordV4, labels)).toBe("spruce · glulam");
+    expect(beamName({ ...lotRecordV4, quantity: { ...lotRecordV4.quantity, count: { status: "unknown" } } }, labels)).toBe("lot · hardwood · glulam");
     expect(beamDims(lotRecordV4)).toEqual({ size: { length: 2700, width: 150, height: 250 }, known: true });
   });
 

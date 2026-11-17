@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Building part",
     "quantity": "Quantity",
     "quantity.count": "Pieces",
+    "quantity.count.value": "Pieces",
     "quantity.length": "Length range",
     "quantity.length.min": "Shortest (mm)",
     "quantity.length.max": "Longest (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Single piece",
       "lot": "Lot"
+    },
+    "quantity.count.status": {
+      "unknown": "Unknown",
+      "known": "Known"
     },
     "quantity.length.status": {
       "unknown": "Unknown",

@@ -34,8 +34,8 @@ describe("schema v4", () => {
     }
   });
 
-  test("a lot with nothing but a count round-trips", () => {
-    const record = { ...unknownRecordV4, quantity: { kind: "lot", count: 2, length: { status: "unknown" }, volume: { status: "unknown" } } };
+  test("a lot with nothing known round-trips", () => {
+    const record = { ...unknownRecordV4, quantity: { kind: "lot", count: { status: "unknown" }, length: { status: "unknown" }, volume: { status: "unknown" } } };
     expect(decodeRecord(loaded, encodeRecord(v4, record)).data).toEqual(record);
   });
 

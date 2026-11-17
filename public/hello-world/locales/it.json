@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Parte dell'edificio",
     "quantity": "Quantità",
     "quantity.count": "Pezzi",
+    "quantity.count.value": "Pezzi",
     "quantity.length": "Intervallo di lunghezze",
     "quantity.length.min": "Più corta (mm)",
     "quantity.length.max": "Più lunga (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Pezzo singolo",
       "lot": "Lotto"
+    },
+    "quantity.count.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
     },
     "quantity.length.status": {
       "unknown": "Sconosciuto",

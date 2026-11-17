@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Partie d'ouvrage",
     "quantity": "Quantité",
     "quantity.count": "Pièces",
+    "quantity.count.value": "Pièces",
     "quantity.length": "Plage de longueurs",
     "quantity.length.min": "Plus courte (mm)",
     "quantity.length.max": "Plus longue (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Pièce unique",
       "lot": "Lot"
+    },
+    "quantity.count.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
     },
     "quantity.length.status": {
       "unknown": "Inconnu",

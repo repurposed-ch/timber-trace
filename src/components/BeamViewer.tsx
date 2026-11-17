@@ -24,7 +24,8 @@ export function lotLayout(record: any): { length: number; at: [number, number, n
   const lot = lotOf(record);
   const [l, h, w] = beamShape(record).size;
   if (!lot) return [{ length: l, at: [0, 0, 0] }];
-  const n = Math.min(lot.count, 9);
+  // an unknown count is drawn as a small stack
+  const n = Math.min(lot.count ?? 3, 9);
   const cols = Math.ceil(Math.sqrt(n));
   const rows = Math.ceil(n / cols);
   const min = lot.length && lot.length.max > 0 ? lot.length.min / lot.length.max : 1;

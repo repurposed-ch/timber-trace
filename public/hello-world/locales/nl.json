@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Bouwdeel",
     "quantity": "Hoeveelheid",
     "quantity.count": "Stuks",
+    "quantity.count.value": "Stuks",
     "quantity.length": "Lengtebereik",
     "quantity.length.min": "Kortste (mm)",
     "quantity.length.max": "Langste (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Los stuk",
       "lot": "Partij"
+    },
+    "quantity.count.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
     },
     "quantity.length.status": {
       "unknown": "Onbekend",

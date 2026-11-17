@@ -83,6 +83,7 @@
     "origin.previousUse.context.element": "Bygningsdel",
     "quantity": "Mængde",
     "quantity.count": "Stk.",
+    "quantity.count.value": "Stk.",
     "quantity.length": "Længdeinterval",
     "quantity.length.min": "Korteste (mm)",
     "quantity.length.max": "Længste (mm)",
@@ -381,6 +382,10 @@
     "quantity.kind": {
       "single": "Enkelt emne",
       "lot": "Parti"
+    },
+    "quantity.count.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
     },
     "quantity.length.status": {
       "unknown": "Ukendt",
