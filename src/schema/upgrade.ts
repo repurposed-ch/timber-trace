@@ -1,7 +1,7 @@
 import type { DenseField, DenseSchema } from "densing";
 import { validateRecord } from "./codec";
 import { defaultFor, variantFields } from "./fields";
-import type { LoadedSchema } from "./loader";
+import type { LiftRule, LoadedSchema } from "./loader";
 
 class NotAdditive extends Error {}
 const fail = (): never => {
@@ -47,15 +47,39 @@ function carry(field: DenseField, value: any, schema: DenseSchema): any {
   }
 }
 
+const parentOf = (data: any, path: string) => {
+  const keys = path.split(".");
+  const last = keys.pop()!;
+  return { obj: keys.reduce((o, k) => (o && typeof o === "object" ? o[k] : undefined), data), last };
+};
+
+/** the declared renames for versions after the record's own (`lift` in index.json); a value without a translation fails */
+function applyLift(rules: LiftRule[], data: any): any {
+  const out = structuredClone(data);
+  for (const rule of rules.filter((r) => r.version > data.version).sort((a, b) => a.version - b.version)) {
+    const from = parentOf(out, rule.path);
+    if (!from.obj || typeof from.obj !== "object" || !(from.last in from.obj)) continue;
+    const value = from.obj[from.last];
+    if (!(String(value) in rule.values)) fail();
+    delete from.obj[from.last];
+    const to = parentOf(out, rule.to);
+    if (!to.obj || typeof to.obj !== "object") fail();
+    to.obj[to.last] = structuredClone(rule.values[String(value)]);
+  }
+  return out;
+}
+
 /**
  * A record from an older version, shown in the latest one: possible when the newer version only adds
- * fields (or options). Every value is kept as it is, the new fields get their defaults ("unknown",
- * unticked). Null when anything would be lost or reinterpreted, e.g. a field that changed shape.
+ * fields (or options), or when a changed field has a declared rename (`lift` in index.json). Every
+ * value is kept or translated, the new fields get their defaults ("unknown", unticked). Null when
+ * anything would be lost or reinterpreted, e.g. a field that changed shape without a rename.
  */
 export function liftRecord(loaded: LoadedSchema, data: any): any | null {
   if (data?.version === undefined || data.version >= loaded.latest) return null;
   const schema = loaded.versions.get(loaded.latest)!;
   try {
+    data = applyLift(loaded.meta.lift ?? [], data);
     keysKept(data, schema.fields.map((f) => f.name));
     const out: any = Object.fromEntries(schema.fields.map((f) => [f.name, carry(f, data[f.name], schema)]));
     out.version = loaded.latest;

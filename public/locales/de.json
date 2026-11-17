@@ -65,7 +65,9 @@
       "number": "Ganze Zahl von {{min}} bis {{max}}",
       "date": "Datum als JJJJ-MM-TT",
       "dayOrYear": "Ein Jahr (1962) oder ein Datum (1962-05-03)",
-      "chars": "Nur Buchstaben und Ziffern, max. {{max}}"
+      "chars": "Nur Buchstaben und Ziffern, max. {{max}}",
+      "lotLength": "Ein Posten hat keine einzelne Länge: Länge leer lassen und den Längenbereich unter Menge angeben.",
+      "lotRange": "Die kürzeste Länge ist länger als die längste."
     },
     "incomplete": "Unvollständig: bleibt unbekannt, bis alles ausgefüllt ist",
     "required": "Hier erforderlich",

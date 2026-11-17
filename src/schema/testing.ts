@@ -100,3 +100,23 @@ export const fullRecordV3 = {
 };
 
 export const unknownRecordV3 = { ...unknownRecordV2, version: 3, id: [0, 0, 0, 3] };
+
+/** v4: previous use names its context, a record can be a lot */
+export const fullRecordV4 = {
+  ...fullRecordV3,
+  version: 4,
+  id: [0x12345678, 0x9abcdef0, 0x0fedcba9, 0x87654324],
+  origin: { ...fullRecordV3.origin, previousUse: { status: "known", country: "CH", context: { kind: "building", element: "roof" } } },
+  quantity: { kind: "single" },
+};
+
+export const lotRecordV4 = {
+  ...fullRecordV4,
+  id: [0x12345678, 0x9abcdef0, 0x0fedcba9, 0x87654325],
+  species: "hardwood",
+  origin: { ...fullRecordV3.origin, previousUse: { status: "known", country: "NL", context: { kind: "railway" } } },
+  dimensions: { length: { status: "unknown" }, width: { status: "known", value: 150 }, height: { status: "known", value: 250 } },
+  quantity: { kind: "lot", count: { status: "known", value: 66 }, length: { status: "known", min: 2500, max: 2700 }, volume: { status: "known", dm3: 6188 } },
+};
+
+export const unknownRecordV4 = { ...unknownRecordV3, version: 4, id: [0, 0, 0, 4], quantity: { kind: "single" } };

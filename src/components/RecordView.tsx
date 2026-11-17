@@ -4,11 +4,12 @@ import { recordFacts, type DateFormat, type Fact } from "../export/facts";
 import { intlLocale } from "../i18n-langs";
 import { selectForQr, tierOf, type FullEvent } from "../records/history";
 import { provenance } from "../records/revision";
-import { beamName } from "../schema/beam";
+import { beamName, lotOf } from "../schema/beam";
 import { idToHex } from "../schema/codec";
 import { formatDay, formatYear } from "../schema/dates";
 import type { SchemaMeta } from "../schema/loader";
 import { sectionsFor } from "../schema/sections";
+import { derivedFacts } from "../schema/taxonomy";
 import type { Labels } from "../state/useSchema";
 import type { HistoryState } from "./HistoryEditor";
 import { Timeline } from "./Timeline";
@@ -23,6 +24,18 @@ type Props = {
   onEdit?: (sectionId: string) => void;
 };
 
+/** derived rows go right after the fact they follow from ("species.group" after "species") */
+function withDerived(facts: Fact[], derived: Fact[]): Fact[] {
+  const out = [...facts];
+  for (const d of derived) {
+    const parent = d.path.split(".").slice(0, -1).join(".");
+    let at = -1;
+    out.forEach((f, i) => (f.path === parent || f.path.startsWith(parent + ".")) && (at = i));
+    out.splice(at < 0 ? out.length : at + 1, 0, d);
+  }
+  return out;
+}
+
 /** the top-level field a fact belongs to: "origin.harvest.country" -> "origin" */
 const topOf = (f: Fact) => f.path.split(/[.[]/)[0];
 
@@ -32,7 +45,7 @@ export function RecordView({ schema, meta, record, labels, history, onEdit }: Pr
   const locale = intlLocale(i18n.resolvedLanguage ?? "en");
   const dates: DateFormat = { day: (d) => formatDay(d, locale), year: (y) => formatYear(y, locale) };
   const unknown = t("form.unknown");
-  const facts = recordFacts(schema, record, labels, "—", dates);
+  const facts = withDerived(recordFacts(schema, record, labels, "—", dates), derivedFacts(meta.taxonomy, record, labels));
   const byPath = new Map(facts.map((f) => [f.path, f.value]));
   const isUnknown = (v?: string) => v === undefined || v === unknown;
   const sectionTitle = (id: string) => labels.raw.sections?.[id] ?? id;
@@ -46,7 +59,7 @@ export function RecordView({ schema, meta, record, labels, history, onEdit }: Pr
         .filter((s) => s.id !== "identity")
         .map((s) => {
           if (s.fields.includes("history")) return <HistorySection key={s.id} id={s.id} title={sectionTitle(s.id)} schema={schema} meta={meta} record={record} labels={labels} history={history} dates={dates} onEdit={onEdit} />;
-          const rows = facts.filter((f) => s.fields.includes(topOf(f)) && !f.path.endsWith(".kind"));
+          const rows = facts.filter((f) => s.fields.includes(topOf(f)));
           const known = rows.filter((f) => !isUnknown(f.value));
           const missing = rows.filter((f) => isUnknown(f.value));
           return (
@@ -55,9 +68,12 @@ export function RecordView({ schema, meta, record, labels, history, onEdit }: Pr
               {known.length > 0 && (
                 <dl>
                   {known.map((f) => (
-                    <div key={f.path} className="view-row">
+                    <div key={f.path} className={`view-row${f.derived ? " derived" : ""}`}>
                       <dt>{f.label}</dt>
-                      <dd>{f.value}</dd>
+                      <dd>
+                        {f.value}
+                        {f.derived && <small className="muted"> ({labels.raw.hints?.note ?? "typical"})</small>}
+                      </dd>
                     </div>
                   ))}
                 </dl>
@@ -95,13 +111,16 @@ function Summary({ record, labels, byPath, isUnknown, locale }: { record: any; l
   const strip = (v: string | null) => v?.replace(/\s*mm$/, "") ?? "?";
   const dims = ["dimensions.length", "dimensions.width", "dimensions.height"];
   const tiles: { k: string; v: string; s?: string }[] = [];
-  if (dims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: dims.map((d) => strip(val(d))).join(" × "), s: "mm" });
+  const lot = lotOf(record);
+  if (lot) tiles.push({ k: labels.field("quantity"), v: lot.count === null ? "?" : String(lot.count), s: lot.length ? `${lot.length.min}–${lot.length.max} mm` : undefined });
+  const shownDims = lot ? dims.slice(1) : dims;
+  if (shownDims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: shownDims.map((d) => strip(val(d))).join(" × "), s: "mm" });
   if (val("grade.class")) tiles.push({ k: labels.field("grade"), v: val("grade.class")!, s: [val("grade.basis"), val("grade.source"), val("grade.standard")].filter(Boolean).join(" · ") });
   const from = val("origin.previousUse.country") ?? val("origin.harvest.country") ?? val("origin.country");
   if (from)
     tiles.push({
       k: labels.field("origin"),
-      v: [from, val("origin.previousUse.use")].filter(Boolean).join(" · "),
+      v: [from, val("origin.previousUse.use") ?? val("origin.previousUse.context") ?? val("origin.previousUse.context.kind"), val("origin.previousUse.context.element")].filter(Boolean).join(" · "),
       s: [val("origin.harvest.certification"), val("origin.provenance")].filter(Boolean).join(" · ") || undefined,
     });
   const prov = provenance(record, labels, (k, o) => t(k, o), locale);

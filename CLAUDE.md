@@ -14,6 +14,7 @@ Static GitHub Pages app (React + Vite + R3F) at `timber-trace.repurposed.ch`, se
 - Form: an empty field means unknown (`unknownable` unions in `src/schema/fields.ts`). Groups stay unknown until complete (`isComplete`), and show "incomplete" in between; History keeps an explicit select because unknown ≠ nothing recorded. Parsers live in `src/schema/inputs.ts`. Form controls stay ≥ 16px on touch devices (iOS zoom).
 - Sections: `sections` and `editTabs` in `public/<slug>/index.json` (titles in the schema locales under `sections` / `tabs`) drive both the view and the edit tabs; unlisted fields fall into "other".
 - Dates: `day` (days since 1970, 17 bits from 1830-08-25) and `year` (12 bits, to 2189) templates; helpers in `src/schema/dates.ts`, always UTC. Use the type the field needs; `dayOrYear` only where both are realistic.
+- Derived knowledge (species groups, previous-use hints) lives in `public/<slug>/taxonomy.json` (`src/schema/taxonomy.ts`), never in the schema. A changed field gets a `lift` rename in `index.json` so older codes still lift.
 - History: never put a full history in the code. `historyTiers` in `index.json` decides the selection; keep `omitted` honest.
 - Schemas and translations are static JSON in `public/`, fetched at runtime. Never import them into the bundle.
 - Adding a schema: add the slug to `public/schemas.json` and create `public/<slug>/{index.json,schema/1.json,locales/*.json}`. Don't change a published schema version; add a new version file instead.

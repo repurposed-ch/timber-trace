@@ -78,7 +78,18 @@
     "verified.checked": "Ce qui a été vérifié",
     "verified.checked.provenance": "Provenance",
     "verified.checked.condition": "État",
-    "verified.checked.suitability": "Aptitude à l'usage"
+    "verified.checked.suitability": "Aptitude à l'usage",
+    "origin.previousUse.context": "Utilisé dans",
+    "origin.previousUse.context.element": "Partie d'ouvrage",
+    "quantity": "Quantité",
+    "quantity.count": "Pièces",
+    "quantity.count.value": "Pièces",
+    "quantity.length": "Plage de longueurs",
+    "quantity.length.min": "Plus courte (mm)",
+    "quantity.length.max": "Plus longue (mm)",
+    "quantity.volume": "Volume total",
+    "quantity.volume.dm3": "Volume (dm³)",
+    "species.group": "Type de bois"
   },
   "options": {
     "origin.status": {
@@ -150,7 +161,15 @@
       "afzelia": "Doussié",
       "jatoba": "Jatoba",
       "padauk": "Padouk",
-      "wenge": "Wengé"
+      "wenge": "Wengé",
+      "softwood": "Résineux (essence inconnue)",
+      "hardwood": "Feuillu (essence inconnue)",
+      "tropical_hardwood": "Bois tropical (essence inconnue)",
+      "basralocus": "Angélique",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Acacia"
     },
     "product.kind": {
       "known": "Dans la liste",
@@ -339,6 +358,42 @@
     "verified.date.status": {
       "unknown": "Inconnu",
       "known": "Connu"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Inconnu",
+      "building": "Bâtiment",
+      "bridge": "Pont",
+      "marine": "Ouvrage maritime / hydraulique",
+      "railway": "Chemin de fer",
+      "scaffold": "Échafaudage",
+      "packaging": "Emballage / palettes",
+      "agricultural": "Agricole",
+      "interior": "Mobilier / aménagement intérieur",
+      "other": "Autre"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Inconnu",
+      "roof": "Toiture",
+      "floor": "Plancher",
+      "wall": "Mur",
+      "frame": "Ossature",
+      "other": "Autre"
+    },
+    "quantity.kind": {
+      "single": "Pièce unique",
+      "lot": "Lot"
+    },
+    "quantity.count.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "quantity.length.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
+    },
+    "quantity.volume.status": {
+      "unknown": "Inconnu",
+      "known": "Connu"
     }
   },
   "sections": {
@@ -354,5 +409,26 @@
     "overview": "Aperçu",
     "history": "Historique",
     "provenance": "Provenance"
+  },
+  "hints": {
+    "useClass": "Classe d'emploi typique (EN 335)",
+    "check": "À vérifier",
+    "note": "typique de cet usage, pas un constat sur cette pièce",
+    "creosote": "créosote / huile de goudron",
+    "preservative": "produits de préservation",
+    "salt": "sel",
+    "shipworm": "taret (galeries)",
+    "metal": "clous, boulons et autres métaux",
+    "paint": "peintures et revêtements",
+    "stamp": "marquage de traitement (HT / MB)",
+    "wear": "usure et chocs",
+    "manure": "exposition à l'ammoniac et au fumier",
+    "insects": "attaque d'insectes",
+    "moisture": "humidité et pourriture"
+  },
+  "groups": {
+    "softwood": "Résineux",
+    "hardwood": "Feuillu",
+    "tropical_hardwood": "Bois tropical"
   }
 }

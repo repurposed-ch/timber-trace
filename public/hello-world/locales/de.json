@@ -78,7 +78,18 @@
     "verified.checked": "Was geprüft wurde",
     "verified.checked.provenance": "Herkunft",
     "verified.checked.condition": "Zustand",
-    "verified.checked.suitability": "Eignung für die Verwendung"
+    "verified.checked.suitability": "Eignung für die Verwendung",
+    "origin.previousUse.context": "Verwendet in",
+    "origin.previousUse.context.element": "Bauteil",
+    "quantity": "Menge",
+    "quantity.count": "Stück",
+    "quantity.count.value": "Stück",
+    "quantity.length": "Längenbereich",
+    "quantity.length.min": "Kürzeste (mm)",
+    "quantity.length.max": "Längste (mm)",
+    "quantity.volume": "Gesamtvolumen",
+    "quantity.volume.dm3": "Volumen (dm³)",
+    "species.group": "Holzart-Gruppe"
   },
   "options": {
     "origin.status": {
@@ -150,7 +161,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatoba",
       "padauk": "Padouk",
-      "wenge": "Wenge"
+      "wenge": "Wenge",
+      "softwood": "Nadelholz (Art unbekannt)",
+      "hardwood": "Laubholz (Art unbekannt)",
+      "tropical_hardwood": "Tropenholz (Art unbekannt)",
+      "basralocus": "Basralocus (Angélique)",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Akazie"
     },
     "product.kind": {
       "known": "Aus Liste",
@@ -339,6 +358,42 @@
     "verified.date.status": {
       "unknown": "Unbekannt",
       "known": "Bekannt"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Unbekannt",
+      "building": "Gebäude",
+      "bridge": "Brücke",
+      "marine": "Wasserbau",
+      "railway": "Bahn",
+      "scaffold": "Gerüst",
+      "packaging": "Verpackung / Paletten",
+      "agricultural": "Landwirtschaft",
+      "interior": "Möbel / Innenausbau",
+      "other": "Andere"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Unbekannt",
+      "roof": "Dach",
+      "floor": "Decke",
+      "wall": "Wand",
+      "frame": "Tragwerk",
+      "other": "Andere"
+    },
+    "quantity.kind": {
+      "single": "Einzelstück",
+      "lot": "Posten"
+    },
+    "quantity.count.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "quantity.length.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
+    },
+    "quantity.volume.status": {
+      "unknown": "Unbekannt",
+      "known": "Bekannt"
     }
   },
   "sections": {
@@ -354,5 +409,26 @@
     "overview": "Übersicht",
     "history": "Verlauf",
     "provenance": "Nachweis"
+  },
+  "hints": {
+    "useClass": "Typische Gebrauchsklasse (EN 335)",
+    "check": "Prüfen auf",
+    "note": "typisch für diese Verwendung, kein Befund an diesem Stück",
+    "creosote": "Kreosot / Teeröl",
+    "preservative": "Holzschutzmittel",
+    "salt": "Salz",
+    "shipworm": "Schiffsbohrwurm (Bohrlöcher)",
+    "metal": "Nägel, Bolzen und anderes Metall",
+    "paint": "Farbe und Beschichtungen",
+    "stamp": "Behandlungsstempel (HT / MB)",
+    "wear": "Abnutzung und Schlagschäden",
+    "manure": "Ammoniak- und Mistbelastung",
+    "insects": "Insektenbefall",
+    "moisture": "Feuchte und Fäulnis"
+  },
+  "groups": {
+    "softwood": "Nadelholz",
+    "hardwood": "Laubholz",
+    "tropical_hardwood": "Tropenholz"
   }
 }

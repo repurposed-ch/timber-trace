@@ -78,7 +78,18 @@
     "verified.checked": "Wat is gecontroleerd",
     "verified.checked.provenance": "Herkomst",
     "verified.checked.condition": "Staat",
-    "verified.checked.suitability": "Geschiktheid voor gebruik"
+    "verified.checked.suitability": "Geschiktheid voor gebruik",
+    "origin.previousUse.context": "Gebruikt in",
+    "origin.previousUse.context.element": "Bouwdeel",
+    "quantity": "Hoeveelheid",
+    "quantity.count": "Stuks",
+    "quantity.count.value": "Stuks",
+    "quantity.length": "Lengtebereik",
+    "quantity.length.min": "Kortste (mm)",
+    "quantity.length.max": "Langste (mm)",
+    "quantity.volume": "Totaal volume",
+    "quantity.volume.dm3": "Volume (dm³)",
+    "species.group": "Houtsoortgroep"
   },
   "options": {
     "origin.status": {
@@ -150,7 +161,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatoba",
       "padauk": "Padoek",
-      "wenge": "Wengé"
+      "wenge": "Wengé",
+      "softwood": "Naaldhout (soort onbekend)",
+      "hardwood": "Loofhout (soort onbekend)",
+      "tropical_hardwood": "Tropisch hardhout (soort onbekend)",
+      "basralocus": "Basralocus",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Acacia"
     },
     "product.kind": {
       "known": "Uit lijst",
@@ -339,6 +358,42 @@
     "verified.date.status": {
       "unknown": "Onbekend",
       "known": "Bekend"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Onbekend",
+      "building": "Gebouw",
+      "bridge": "Brug",
+      "marine": "Waterbouw",
+      "railway": "Spoorweg",
+      "scaffold": "Steiger",
+      "packaging": "Verpakking / pallets",
+      "agricultural": "Landbouw",
+      "interior": "Meubels / interieur",
+      "other": "Overig"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Onbekend",
+      "roof": "Dak",
+      "floor": "Vloer",
+      "wall": "Wand",
+      "frame": "Draagconstructie",
+      "other": "Overig"
+    },
+    "quantity.kind": {
+      "single": "Los stuk",
+      "lot": "Partij"
+    },
+    "quantity.count.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "quantity.length.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
+    },
+    "quantity.volume.status": {
+      "unknown": "Onbekend",
+      "known": "Bekend"
     }
   },
   "sections": {
@@ -354,5 +409,26 @@
     "overview": "Overzicht",
     "history": "Geschiedenis",
     "provenance": "Herkomstbewijs"
+  },
+  "hints": {
+    "useClass": "Typische gebruiksklasse (EN 335)",
+    "check": "Controleren op",
+    "note": "typisch voor dit gebruik, geen bevinding aan dit stuk",
+    "creosote": "creosoot / teerolie",
+    "preservative": "houtverduurzamingsmiddelen",
+    "salt": "zout",
+    "shipworm": "paalworm (boorgangen)",
+    "metal": "spijkers, bouten en ander metaal",
+    "paint": "verf en coatings",
+    "stamp": "behandelingsstempel (HT / MB)",
+    "wear": "slijtage en stootschade",
+    "manure": "blootstelling aan ammoniak en mest",
+    "insects": "insectenaantasting",
+    "moisture": "vocht en rot"
+  },
+  "groups": {
+    "softwood": "Naaldhout",
+    "hardwood": "Loofhout",
+    "tropical_hardwood": "Tropisch hardhout"
   }
 }

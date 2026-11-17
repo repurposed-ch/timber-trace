@@ -1,12 +1,14 @@
 import { validate, type DenseField, type DenseSchema } from "densing";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { lotOf, lotProblems } from "../schema/beam";
 import { idToHex } from "../schema/codec";
 import { dayToIso, formatYear, isDayField, isYearField, yearToIso } from "../schema/dates";
 import { defaultFor, isCharText, isComplete, isDayOrYear, isEmptyish, isId128, unionValue, unknownable, variantFields } from "../schema/fields";
 import { intlLocale } from "../i18n-langs";
 import { parseChars, parseDay, parseDayOrYear, parseInt as parseInteger, type Parsed } from "../schema/inputs";
 import { labelKey } from "../schema/labels";
+import { groupedSpecies, type Taxonomy } from "../schema/taxonomy";
 import type { Labels } from "../state/useSchema";
 import { DraftInput } from "./DraftInput";
 
@@ -14,7 +16,7 @@ import { DraftInput } from "./DraftInput";
 // A group (e.g. Harvest, Supplied by, a recorded grade) is unknown while it is empty, becomes known
 // once every required part is filled in, and says "incomplete" in between.
 
-export type Ctx = { schema: DenseSchema; labels: Labels };
+export type Ctx = { schema: DenseSchema; labels: Labels; taxonomy?: Taxonomy };
 type Props = {
   field: DenseField;
   value: any;
@@ -37,18 +39,25 @@ type FormProps = {
   fields?: string[];
   /** titled groups of top-level fields (a tab of the form); overrides `fields` */
   sections?: { id: string; title: string; fields: string[] }[];
+  /** groups the species select */
+  taxonomy?: Taxonomy;
 };
 
-export function RecordForm({ schema, labels, value, onChange, overrides = {}, fields, sections }: FormProps) {
+export function RecordForm({ schema, labels, value, onChange, overrides = {}, fields, sections, taxonomy }: FormProps) {
   const { t } = useTranslation();
-  const ctx = { schema, labels };
+  const ctx = { schema, labels, taxonomy };
   const groups = sections ?? [{ id: "", title: "", fields: fields ?? schema.fields.map((f) => f.name) }];
   const shownNames = groups.flatMap((g) => g.fields);
   // only the errors of the fields on this tab; other tabs show a badge instead
-  const errors = useMemo(() => validate(schema, value).errors.filter((e) => shownNames.includes(e.path.split(/[.[]/)[0])), [schema, value, shownNames.join()]);
+  const errors = useMemo(
+    () => [...validate(schema, value).errors, ...lotProblems(value).map((p) => ({ path: p.field, message: t(p.key) }))].filter((e) => shownNames.includes(e.path.split(/[.[]/)[0])),
+    [schema, value, shownNames.join(), t],
+  );
   const field = (name: string) => {
-    const f = schema.fields.find((x) => x.name === name);
+    let f = schema.fields.find((x) => x.name === name);
     if (!f) return null;
+    // a lot states its lengths as a range (quantity); its single length stays unknown and is only shown while it is set
+    if (f.type === "object" && f.name === "dimensions" && lotOf(value) && value.dimensions?.length?.status !== "known") f = { ...f, fields: f.fields.filter((c) => c.name !== "length") };
     return f.name in overrides ? (
       <div key={f.name}>{overrides[f.name]}</div>
     ) : (
@@ -149,9 +158,9 @@ function Scalar({ field, value, onChange, id, label, allowEmpty }: { field: Dens
 }
 
 /** select; "unknown" (own option or an added empty one) always comes first */
-type EnumProps = { field: Extract<DenseField, { type: "enum" }>; value: any; onChange: (v: any) => void; id: string; label: string; allowEmpty: boolean; path: string; labels: Labels };
+type EnumProps = { field: Extract<DenseField, { type: "enum" }>; value: any; onChange: (v: any) => void; id: string; label: string; allowEmpty: boolean; path: string; labels: Labels; taxonomy?: Taxonomy };
 
-function EnumSelect({ field, value, onChange, id, label, allowEmpty, path, labels }: EnumProps) {
+function EnumSelect({ field, value, onChange, id, label, allowEmpty, path, labels, taxonomy }: EnumProps) {
   const { t } = useTranslation();
   const key = labelKey(path);
   const opts = field.options.map((o) => ({ o, l: labels.option(key, o) }));
@@ -161,6 +170,29 @@ function EnumSelect({ field, value, onChange, id, label, allowEmpty, path, label
   const ordered = [...pinned.filter((x) => x.o === "unknown"), ...rest, ...pinned.filter((x) => x.o === "other")];
   const hasUnknown = field.options.includes("unknown");
   const empty = allowEmpty && !hasUnknown;
+  // species: one group per wood type, its "species unknown" option first
+  const groups = path === "species" ? groupedSpecies(taxonomy, field.options) : null;
+  if (groups) {
+    const grouped = new Set(groups.flatMap((g) => g.options));
+    const byLabel = (a: string, b: string) => labels.option(key, a).localeCompare(labels.option(key, b));
+    const item = (o: string) => (
+      <option key={o} value={o}>
+        {o === "unknown" ? `— ${labels.option(key, o).toLowerCase()} —` : labels.option(key, o)}
+      </option>
+    );
+    return (
+      <select id={id} aria-label={label} value={value ?? ""} className={value === undefined || value === "unknown" ? "is-empty" : ""} onChange={(e) => onChange(e.target.value === "" ? null : e.target.value)}>
+        {empty && <option value="">— {t("form.unknown").toLowerCase()} —</option>}
+        {field.options.filter((o) => o === "unknown").map(item)}
+        {groups.map((g) => (
+          <optgroup key={g.id} label={labels.raw.groups?.[g.id] ?? g.id}>
+            {[g.id, ...g.options.filter((o) => o !== g.id).sort(byLabel)].filter((o) => g.options.includes(o)).map(item)}
+          </optgroup>
+        ))}
+        {field.options.filter((o) => o !== "unknown" && !grouped.has(o)).map(item)}
+      </select>
+    );
+  }
   return (
     <select id={id} aria-label={label} value={value ?? ""} className={value === undefined || value === "unknown" ? "is-empty" : ""} onChange={(e) => onChange(e.target.value === "" ? null : e.target.value)}>
       {empty && <option value="">— {t("form.unknown").toLowerCase()} —</option>}
@@ -182,7 +214,7 @@ export function Field(props: Props) {
 
   if (path === "version" && field.type === "int") return null;
   if (isId128(field)) return wrap(<IdInput id={id} value={value} />, true);
-  if (field.type === "enum") return wrap(<EnumSelect field={field} value={value} onChange={onChange} id={id} label={label} allowEmpty={!!partial} path={path} labels={ctx.labels} />);
+  if (field.type === "enum") return wrap(<EnumSelect field={field} value={value} onChange={onChange} id={id} label={label} allowEmpty={!!partial} path={path} labels={ctx.labels} taxonomy={ctx.taxonomy} />);
   if (isDayField(field) || isYearField(field) || isCharText(field) || field.type === "int" || field.type === "fixed" || field.type === "bool")
     return wrap(<Scalar field={field} value={value} onChange={onChange} id={id} label={label} allowEmpty={!!partial} />);
 
