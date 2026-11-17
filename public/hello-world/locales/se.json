@@ -78,7 +78,17 @@
     "verified.checked": "Vad som kontrollerades",
     "verified.checked.provenance": "Ursprung",
     "verified.checked.condition": "Skick",
-    "verified.checked.suitability": "Lämplighet för användning"
+    "verified.checked.suitability": "Lämplighet för användning",
+    "origin.previousUse.context": "Använd i",
+    "origin.previousUse.context.element": "Byggnadsdel",
+    "quantity": "Mängd",
+    "quantity.count": "Antal",
+    "quantity.length": "Längdintervall",
+    "quantity.length.min": "Kortaste (mm)",
+    "quantity.length.max": "Längsta (mm)",
+    "quantity.volume": "Total volym",
+    "quantity.volume.dm3": "Volym (dm³)",
+    "species.group": "Träslagsgrupp"
   },
   "options": {
     "origin.status": {
@@ -150,7 +160,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatoba",
       "padauk": "Padauk",
-      "wenge": "Wenge"
+      "wenge": "Wenge",
+      "softwood": "Barrträ (art okänd)",
+      "hardwood": "Lövträ (art okänd)",
+      "tropical_hardwood": "Tropiskt träslag (art okänd)",
+      "basralocus": "Basralocus",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Akacia"
     },
     "product.kind": {
       "known": "Från lista",
@@ -339,6 +357,38 @@
     "verified.date.status": {
       "unknown": "Okänd",
       "known": "Känd"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Okänd",
+      "building": "Byggnad",
+      "bridge": "Bro",
+      "marine": "Vattenbyggnad",
+      "railway": "Järnväg",
+      "scaffold": "Byggnadsställning",
+      "packaging": "Emballage / pallar",
+      "agricultural": "Jordbruk",
+      "interior": "Möbler / inredning",
+      "other": "Annat"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Okänd",
+      "roof": "Tak",
+      "floor": "Bjälklag",
+      "wall": "Vägg",
+      "frame": "Stomme",
+      "other": "Annat"
+    },
+    "quantity.kind": {
+      "single": "Enstaka del",
+      "lot": "Parti"
+    },
+    "quantity.length.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
+    },
+    "quantity.volume.status": {
+      "unknown": "Okänd",
+      "known": "Känd"
     }
   },
   "sections": {
@@ -354,5 +404,21 @@
     "overview": "Översikt",
     "history": "Historik",
     "provenance": "Proveniens"
+  },
+  "hints": {
+    "useClass": "Typisk användningsklass (EN 335)",
+    "check": "Kontrollera",
+    "note": "typiskt för denna användning, inte ett fynd på denna del",
+    "creosote": "kreosot / tjärolja",
+    "preservative": "träskyddsmedel",
+    "salt": "salt",
+    "shipworm": "skeppsmask (borrhål)",
+    "metal": "spik, bultar och annan metall",
+    "paint": "färg och beläggningar",
+    "stamp": "behandlingsstämpel (HT / MB)",
+    "wear": "slitage och slagskador",
+    "manure": "exponering för ammoniak och gödsel",
+    "insects": "insektsangrepp",
+    "moisture": "fukt och röta"
   }
 }

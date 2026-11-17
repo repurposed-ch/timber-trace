@@ -1,6 +1,6 @@
 {
   "slug": "hello-world",
-  "versions": [1, 2, 3],
+  "versions": [1, 2, 3, 4],
   "codeEnums": ["origin.country", "grade.class.value", "grade.standard"],
   "countryEnums": ["origin.country", "origin.harvest.country", "origin.previousUse.country"],
   "historyTiers": {
@@ -9,6 +9,22 @@
     "routine": ["routine"],
     "structuralMax": 4
   },
+  "lift": [
+    {
+      "version": 4,
+      "path": "origin.previousUse.use",
+      "to": "origin.previousUse.context",
+      "values": {
+        "unknown": { "kind": "unknown" },
+        "roof": { "kind": "building", "element": "roof" },
+        "floor": { "kind": "building", "element": "floor" },
+        "wall": { "kind": "building", "element": "wall" },
+        "frame": { "kind": "building", "element": "frame" },
+        "bridge": { "kind": "bridge" },
+        "other": { "kind": "other" }
+      }
+    }
+  ],
   "sections": [
     {
       "id": "identity",
@@ -20,7 +36,7 @@
     },
     {
       "id": "material",
-      "fields": ["species", "product", "dimensions", "grade"]
+      "fields": ["species", "product", "dimensions", "quantity", "grade"]
     },
     {
       "id": "assessments",

@@ -78,7 +78,17 @@
     "verified.checked": "Cosa è stato verificato",
     "verified.checked.provenance": "Provenienza",
     "verified.checked.condition": "Stato",
-    "verified.checked.suitability": "Idoneità all'uso"
+    "verified.checked.suitability": "Idoneità all'uso",
+    "origin.previousUse.context": "Usato in",
+    "origin.previousUse.context.element": "Parte dell'edificio",
+    "quantity": "Quantità",
+    "quantity.count": "Pezzi",
+    "quantity.length": "Intervallo di lunghezze",
+    "quantity.length.min": "Più corta (mm)",
+    "quantity.length.max": "Più lunga (mm)",
+    "quantity.volume": "Volume totale",
+    "quantity.volume.dm3": "Volume (dm³)",
+    "species.group": "Tipo di legno"
   },
   "options": {
     "origin.status": {
@@ -150,7 +160,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatoba",
       "padauk": "Padouk",
-      "wenge": "Wengé"
+      "wenge": "Wengé",
+      "softwood": "Conifera (specie sconosciuta)",
+      "hardwood": "Latifoglia (specie sconosciuta)",
+      "tropical_hardwood": "Legno tropicale (specie sconosciuta)",
+      "basralocus": "Angelique",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Acacia"
     },
     "product.kind": {
       "known": "Da elenco",
@@ -339,6 +357,38 @@
     "verified.date.status": {
       "unknown": "Sconosciuto",
       "known": "Noto"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Sconosciuto",
+      "building": "Edificio",
+      "bridge": "Ponte",
+      "marine": "Opere marittime / idrauliche",
+      "railway": "Ferrovia",
+      "scaffold": "Ponteggio",
+      "packaging": "Imballaggi / pallet",
+      "agricultural": "Agricolo",
+      "interior": "Arredo / interni",
+      "other": "Altro"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Sconosciuto",
+      "roof": "Tetto",
+      "floor": "Solaio",
+      "wall": "Parete",
+      "frame": "Telaio",
+      "other": "Altro"
+    },
+    "quantity.kind": {
+      "single": "Pezzo singolo",
+      "lot": "Lotto"
+    },
+    "quantity.length.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
+    },
+    "quantity.volume.status": {
+      "unknown": "Sconosciuto",
+      "known": "Noto"
     }
   },
   "sections": {
@@ -354,5 +404,21 @@
     "overview": "Panoramica",
     "history": "Cronologia",
     "provenance": "Provenienza"
+  },
+  "hints": {
+    "useClass": "Classe d'uso tipica (EN 335)",
+    "check": "Da verificare",
+    "note": "tipico di questo uso, non un riscontro su questo pezzo",
+    "creosote": "creosoto / olio di catrame",
+    "preservative": "preservanti del legno",
+    "salt": "sale",
+    "shipworm": "teredine (fori)",
+    "metal": "chiodi, bulloni e altro metallo",
+    "paint": "vernici e rivestimenti",
+    "stamp": "marchio di trattamento (HT / MB)",
+    "wear": "usura e urti",
+    "manure": "esposizione ad ammoniaca e letame",
+    "insects": "attacco di insetti",
+    "moisture": "umidità e marciume"
   }
 }

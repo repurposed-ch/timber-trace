@@ -13,7 +13,12 @@ export type SchemaMeta = {
   sections?: Section[];
   /** edit mode: tabs, each a list of section ids */
   editTabs?: { id: string; sections: string[] }[];
+  /** renames applied when an older record is lifted into the latest version (see src/schema/upgrade.ts) */
+  lift?: LiftRule[];
 };
+
+/** from `version` on, the value at `path` lives at `to`, translated by `values` */
+export type LiftRule = { version: number; path: string; to: string; values: Record<string, unknown> };
 
 export type Section = { id: string; fields: string[] };
 

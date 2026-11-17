@@ -7,10 +7,6 @@ const v2 = loaded.versions.get(2)!;
 const v3 = loaded.versions.get(3)!;
 
 describe("schema v3", () => {
-  test("is the latest version", () => {
-    expect(loaded.latest).toBe(3);
-  });
-
   for (const [name, base] of [["base45", BASE45], ["url-safe", URL_SAFE]] as const) {
     test(`round-trips a full and an all-unknown record (${name})`, () => {
       expect(decodeRecord(loaded, encodeRecord(v3, fullRecordV3, base), base)).toEqual({ version: 3, schema: v3, data: fullRecordV3 });

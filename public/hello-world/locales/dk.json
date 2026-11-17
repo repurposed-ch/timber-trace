@@ -78,7 +78,17 @@
     "verified.checked": "Hvad blev kontrolleret",
     "verified.checked.provenance": "Oprindelse",
     "verified.checked.condition": "Tilstand",
-    "verified.checked.suitability": "Egnethed til brug"
+    "verified.checked.suitability": "Egnethed til brug",
+    "origin.previousUse.context": "Anvendt i",
+    "origin.previousUse.context.element": "Bygningsdel",
+    "quantity": "Mængde",
+    "quantity.count": "Stk.",
+    "quantity.length": "Længdeinterval",
+    "quantity.length.min": "Korteste (mm)",
+    "quantity.length.max": "Længste (mm)",
+    "quantity.volume": "Samlet volumen",
+    "quantity.volume.dm3": "Volumen (dm³)",
+    "species.group": "Træsort-gruppe"
   },
   "options": {
     "origin.status": {
@@ -150,7 +160,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatoba",
       "padauk": "Padouk",
-      "wenge": "Wenge"
+      "wenge": "Wenge",
+      "softwood": "Nåletræ (art ukendt)",
+      "hardwood": "Løvtræ (art ukendt)",
+      "tropical_hardwood": "Tropisk træ (art ukendt)",
+      "basralocus": "Basralocus",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Akacie"
     },
     "product.kind": {
       "known": "Fra liste",
@@ -339,6 +357,38 @@
     "verified.date.status": {
       "unknown": "Ukendt",
       "known": "Kendt"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Ukendt",
+      "building": "Bygning",
+      "bridge": "Bro",
+      "marine": "Havne- og vandbygning",
+      "railway": "Jernbane",
+      "scaffold": "Stillads",
+      "packaging": "Emballage / paller",
+      "agricultural": "Landbrug",
+      "interior": "Møbler / indretning",
+      "other": "Andet"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Ukendt",
+      "roof": "Tag",
+      "floor": "Etageadskillelse",
+      "wall": "Væg",
+      "frame": "Rammeværk",
+      "other": "Andet"
+    },
+    "quantity.kind": {
+      "single": "Enkelt emne",
+      "lot": "Parti"
+    },
+    "quantity.length.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
+    },
+    "quantity.volume.status": {
+      "unknown": "Ukendt",
+      "known": "Kendt"
     }
   },
   "sections": {
@@ -354,5 +404,21 @@
     "overview": "Oversigt",
     "history": "Historik",
     "provenance": "Proveniens"
+  },
+  "hints": {
+    "useClass": "Typisk anvendelsesklasse (EN 335)",
+    "check": "Kontrollér for",
+    "note": "typisk for denne anvendelse, ikke et fund på dette emne",
+    "creosote": "kreosot / tjæreolie",
+    "preservative": "træbeskyttelsesmidler",
+    "salt": "salt",
+    "shipworm": "pæleorm (borehuller)",
+    "metal": "søm, bolte og andet metal",
+    "paint": "maling og belægninger",
+    "stamp": "behandlingsstempel (HT / MB)",
+    "wear": "slid og slagskader",
+    "manure": "påvirkning af ammoniak og gødning",
+    "insects": "insektangreb",
+    "moisture": "fugt og råd"
   }
 }

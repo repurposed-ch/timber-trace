@@ -78,7 +78,17 @@
     "verified.checked": "What was checked",
     "verified.checked.provenance": "Provenance",
     "verified.checked.condition": "Condition",
-    "verified.checked.suitability": "Suitability for use"
+    "verified.checked.suitability": "Suitability for use",
+    "origin.previousUse.context": "Used in",
+    "origin.previousUse.context.element": "Building part",
+    "quantity": "Quantity",
+    "quantity.count": "Pieces",
+    "quantity.length": "Length range",
+    "quantity.length.min": "Shortest (mm)",
+    "quantity.length.max": "Longest (mm)",
+    "quantity.volume": "Total volume",
+    "quantity.volume.dm3": "Volume (dm³)",
+    "species.group": "Wood type"
   },
   "options": {
     "origin.status": {
@@ -150,7 +160,15 @@
       "afzelia": "Afzelia",
       "jatoba": "Jatobá",
       "padauk": "Padauk",
-      "wenge": "Wengé"
+      "wenge": "Wengé",
+      "softwood": "Softwood (species unknown)",
+      "hardwood": "Hardwood (species unknown)",
+      "tropical_hardwood": "Tropical hardwood (species unknown)",
+      "basralocus": "Basralocus (angelique)",
+      "greenheart": "Greenheart",
+      "framire": "Framiré",
+      "keruing": "Keruing",
+      "acacia": "Acacia"
     },
     "product.kind": {
       "known": "From list",
@@ -339,6 +357,38 @@
     "verified.date.status": {
       "unknown": "Unknown",
       "known": "Known"
+    },
+    "origin.previousUse.context.kind": {
+      "unknown": "Unknown",
+      "building": "Building",
+      "bridge": "Bridge",
+      "marine": "Marine / hydraulic",
+      "railway": "Railway",
+      "scaffold": "Scaffolding",
+      "packaging": "Packaging / pallets",
+      "agricultural": "Agricultural",
+      "interior": "Furniture / interior",
+      "other": "Other"
+    },
+    "origin.previousUse.context.element": {
+      "unknown": "Unknown",
+      "roof": "Roof",
+      "floor": "Floor",
+      "wall": "Wall",
+      "frame": "Frame",
+      "other": "Other"
+    },
+    "quantity.kind": {
+      "single": "Single piece",
+      "lot": "Lot"
+    },
+    "quantity.length.status": {
+      "unknown": "Unknown",
+      "known": "Known"
+    },
+    "quantity.volume.status": {
+      "unknown": "Unknown",
+      "known": "Known"
     }
   },
   "sections": {
@@ -354,5 +404,21 @@
     "overview": "Overview",
     "history": "History",
     "provenance": "Provenance"
+  },
+  "hints": {
+    "useClass": "Typical use class (EN 335)",
+    "check": "Check for",
+    "note": "typical for this use, not a finding on this piece",
+    "creosote": "creosote / tar oil",
+    "preservative": "wood preservatives",
+    "salt": "salt",
+    "shipworm": "shipworm (boreholes)",
+    "metal": "nails, bolts and other metal",
+    "paint": "paint and coatings",
+    "stamp": "treatment stamp (HT / MB)",
+    "wear": "wear and impact damage",
+    "manure": "ammonia and manure exposure",
+    "insects": "insect attack",
+    "moisture": "moisture and rot"
   }
 }
