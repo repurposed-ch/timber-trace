@@ -3,6 +3,7 @@
 //
 //   bun scripts/import-dealers.ts build <rows.json> <entries.json>   map, encode, check; writes the entries and a report
 //   bun scripts/import-dealers.ts post <entries.json>                append each entry not yet posted (resumable)
+//   bun scripts/import-dealers.ts sql <entries.json> <out.sql>       the same entries as SQL for the dashboard's SQL Editor
 //
 // `post` uses VITE_SUPABASE_URL / VITE_SUPABASE_PUBLISHABLE_KEY (from .env, or the environment) and
 // the user's access token in SUPABASE_ACCESS_TOKEN; without it the request carries a placeholder
@@ -263,12 +264,52 @@ async function post(path: string) {
   console.log(`posted; ${data.entries.filter((e) => e.entryId).length} of ${data.entries.length} entries are in the database`);
 }
 
+/**
+ * One transaction that inserts every entry as the user with the email in its first line, for the
+ * Supabase SQL Editor (which runs as the database owner, so no access token is needed). An unknown
+ * email stops it; a second run fails on the unique (component_id, revision) and adds nothing.
+ */
+function sql(path: string, outPath: string) {
+  const data: { schema: string; entries: Out[] } = JSON.parse(readFileSync(path, "utf8"));
+  const str = (s: string) => `'${s.replace(/'/g, "''")}'`;
+  const rows = data.entries.map(
+    (e) => `  (${str(data.schema)}, ${str(e.componentId)}::uuid, ${e.revision}, decode(${str(e.payload)}, 'hex'), ${e.history ? `${str(JSON.stringify(e.history))}::jsonb` : "null"})`,
+  );
+  const out = [
+    `-- ${data.entries.length} dealer listings as ${data.schema} entries (scripts/import-dealers.ts).`,
+    "-- Put your sign-in email in place of YOUR-EMAIL@EXAMPLE.COM (twice), then run all of it in Supabase: SQL Editor -> New query -> Run.",
+  ];
+  out.push(
+    "begin;",
+    "",
+    "do $$",
+    "begin",
+    "  if not exists (select 1 from auth.users where email = 'YOUR-EMAIL@EXAMPLE.COM') then",
+    "    raise exception 'no user with that email: put your sign-in email in both places';",
+    "  end if;",
+    "end $$;",
+    "",
+    "insert into public.entries (schema, component_id, revision, payload, history, created_by)",
+    "select v.schema, v.component_id, v.revision, v.payload, v.history, u.id",
+    "from (values",
+    rows.join(",\n"),
+    ") as v (schema, component_id, revision, payload, history)",
+    "cross join (select id from auth.users where email = 'YOUR-EMAIL@EXAMPLE.COM') as u;",
+    "",
+    "commit;",
+    "",
+  );
+  writeFileSync(outPath, out.join("\n"));
+  console.log(`${data.entries.length} entries -> ${outPath}`);
+}
+
 if (import.meta.main) {
   const [cmd, a, b] = process.argv.slice(2);
   if (cmd === "build" && a && b) await build(a, b);
   else if (cmd === "post" && a) await post(a);
+  else if (cmd === "sql" && a && b) sql(a, b);
   else {
-    console.error("usage: bun scripts/import-dealers.ts build <rows.json> <entries.json> | post <entries.json>");
+    console.error("usage: bun scripts/import-dealers.ts build <rows.json> <entries.json> | post <entries.json> | sql <entries.json> <out.sql>");
     process.exit(1);
   }
 }
