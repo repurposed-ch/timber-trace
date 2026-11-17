@@ -25,7 +25,8 @@ bun run build  # dist/, with dist/<slug>/index.html per schema and a 404.html fa
 | Path | What |
 | --- | --- |
 | `public/schemas.json` | schema slugs, each served at `/<slug>/` |
-| `public/<slug>/index.json` | versions, code enums, country enums |
+| `public/<slug>/index.json` | versions, code enums, country enums, sections, `lift` renames for older codes |
+| `public/<slug>/taxonomy.json` | derived knowledge, never in a code: species groups, previous-use hints (optional) |
 | `public/<slug>/schema/<version>.json` | densing schema (JSON string); `version` (8 bit) is always the first field |
 | `public/<slug>/locales/<lng>.json` | field and option labels, fetched at runtime |
 | `public/<slug>/records/<id>.json` | latest payload per 128-bit id; offline fallback for the database |
@@ -65,6 +66,16 @@ v2 plus two fields (5 bits more, only when the grade or the verification is reco
 
 - **Grade basis**: `unknown`, `original` (the documented class from production) or `reassessed` (a later assessment); `source` still says how (document, stamp, visual or machine grading).
 - **What a verification covered**: `verified.checked` = provenance, condition and/or suitability for use. None ticked (and v2 codes) shows "scope not stated".
+
+## hello-world schema v4
+
+v3 codes are shown as v4 (`liftRecord`, with the `lift` renames in `index.json`):
+
+- **Species**: generic `softwood`, `hardwood`, `tropical_hardwood` for when only the group is known, plus basralocus, greenheart, framiré, keruing and acacia. 64 options: the 6-bit enum is full, another species costs every code a bit.
+- **Previous use**: `context` = unknown, building (with the building part: roof, floor, wall, frame, other), bridge, marine, railway, scaffold, packaging, agricultural, interior or other. v3 `use` maps onto it (roof → building · roof, bridge → bridge).
+- **Quantity**: `single`, or a `lot` with a piece count (2–4095), a length range and a total volume (dm³), each unknown or known. A lot's width and height are the shared cross-section; its single length stays unknown. Taking pieces out of a lot is a split in the entries DAG. Lots have no IFC export.
+- **Dimensions**: width is the smaller side of the cross-section, height the larger (a board of 20 × 200 mm: width 20, height 200).
+- **Derived** (`taxonomy.json`): the species group ("Wood type") and, per previous-use context, the typical use class (EN 335) and what to check for (creosote, salt, nails …), shown as typical, not as findings.
 
 ## Database (Supabase)
 
