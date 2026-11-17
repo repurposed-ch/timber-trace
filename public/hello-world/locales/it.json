@@ -420,5 +420,10 @@
     "manure": "esposizione ad ammoniaca e letame",
     "insects": "attacco di insetti",
     "moisture": "umidità e marciume"
+  },
+  "groups": {
+    "softwood": "Conifere",
+    "hardwood": "Latifoglie",
+    "tropical_hardwood": "Legno tropicale"
   }
 }

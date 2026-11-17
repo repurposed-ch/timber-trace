@@ -420,5 +420,10 @@
     "manure": "påvirkning af ammoniak og gødning",
     "insects": "insektangreb",
     "moisture": "fugt og råd"
+  },
+  "groups": {
+    "softwood": "Nåletræ",
+    "hardwood": "Løvtræ",
+    "tropical_hardwood": "Tropisk træ"
   }
 }

@@ -11,6 +11,9 @@ export type SchemaLabels = {
   /** section and edit-tab titles, by id */
   sections?: Record<string, string>;
   tabs?: Record<string, string>;
+  /** derived labels (taxonomy.json): species groups and previous-use hints */
+  groups?: Record<string, string>;
+  hints?: Record<string, string>;
 };
 
 /** "assessments[].assessment.kind" -> "assessments[].kind": array item wrappers carry no label */

@@ -420,5 +420,10 @@
     "manure": "exponering för ammoniak och gödsel",
     "insects": "insektsangrepp",
     "moisture": "fukt och röta"
+  },
+  "groups": {
+    "softwood": "Barrträ",
+    "hardwood": "Lövträ",
+    "tropical_hardwood": "Tropiskt träslag"
   }
 }

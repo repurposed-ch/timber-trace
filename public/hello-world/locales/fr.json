@@ -420,5 +420,10 @@
     "manure": "exposition à l'ammoniac et au fumier",
     "insects": "attaque d'insectes",
     "moisture": "humidité et pourriture"
+  },
+  "groups": {
+    "softwood": "Résineux",
+    "hardwood": "Feuillu",
+    "tropical_hardwood": "Bois tropical"
   }
 }

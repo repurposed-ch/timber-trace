@@ -1,0 +1,27 @@
+{
+  "speciesGroups": [
+    {
+      "id": "softwood",
+      "species": ["softwood", "spruce", "silver_fir", "scots_pine", "black_pine", "maritime_pine", "swiss_stone_pine", "weymouth_pine", "larch", "douglas_fir", "yew", "atlas_cedar", "sitka_spruce", "western_hemlock", "western_red_cedar", "southern_yellow_pine", "radiata_pine"]
+    },
+    {
+      "id": "hardwood",
+      "species": ["hardwood", "european_oak", "red_oak", "white_oak", "beech", "ash", "sweet_chestnut", "maple", "sycamore", "birch", "alder", "poplar", "lime", "elm", "walnut", "cherry", "robinia", "acacia", "hornbeam", "plane", "eucalyptus"]
+    },
+    {
+      "id": "tropical_hardwood",
+      "parent": "hardwood",
+      "species": ["tropical_hardwood", "teak", "iroko", "sapele", "sipo", "meranti", "azobe", "bangkirai", "ipe", "merbau", "okoume", "mahogany", "afzelia", "bilinga", "cumaru", "garapa", "jatoba", "massaranduba", "padauk", "wenge", "basralocus", "greenheart", "framire", "keruing"]
+    }
+  ],
+  "previousUse": {
+    "building": { "useClass": "1–2", "check": ["metal", "paint", "insects"] },
+    "bridge": { "useClass": "3–4", "check": ["moisture", "preservative", "metal"] },
+    "marine": { "useClass": "4–5", "check": ["salt", "shipworm", "moisture", "metal"] },
+    "railway": { "useClass": "4", "check": ["creosote", "metal"] },
+    "scaffold": { "useClass": "3", "check": ["paint", "wear", "metal"] },
+    "packaging": { "useClass": "1–2", "check": ["stamp", "metal"] },
+    "agricultural": { "useClass": "2–3", "check": ["manure", "insects", "metal"] },
+    "interior": { "useClass": "1", "check": ["paint", "metal"] }
+  }
+}

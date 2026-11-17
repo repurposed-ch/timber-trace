@@ -5,7 +5,7 @@ import { isCharText, isId128, variantFields } from "../schema/fields";
 import { labelKey, type Labels } from "../schema/labels";
 
 /** one line of a fact sheet: "Strength grade · Grading standard: SIA265" */
-export type Fact = { path: string; group?: string; label: string; value: string };
+export type Fact = { path: string; group?: string; label: string; value: string; /** follows from other facts (taxonomy.json), typical rather than found */ derived?: boolean };
 
 /** how days and years are written; ISO by default (IFC, PDF), localised for reading on screen */
 export type DateFormat = { day: (day: number) => string; year: (year: number) => string };

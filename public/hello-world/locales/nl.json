@@ -420,5 +420,10 @@
     "manure": "blootstelling aan ammoniak en mest",
     "insects": "insectenaantasting",
     "moisture": "vocht en rot"
+  },
+  "groups": {
+    "softwood": "Naaldhout",
+    "hardwood": "Loofhout",
+    "tropical_hardwood": "Tropisch hardhout"
   }
 }

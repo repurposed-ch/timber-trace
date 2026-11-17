@@ -420,5 +420,10 @@
     "manure": "ammonia and manure exposure",
     "insects": "insect attack",
     "moisture": "moisture and rot"
+  },
+  "groups": {
+    "softwood": "Softwood",
+    "hardwood": "Hardwood",
+    "tropical_hardwood": "Tropical hardwood"
   }
 }

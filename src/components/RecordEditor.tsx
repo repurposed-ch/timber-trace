@@ -80,6 +80,7 @@ export function RecordEditor({ schema, meta, record, onChange, labels, overrides
               value={record}
               onChange={onChange}
               overrides={overrides}
+              taxonomy={meta.taxonomy}
               sections={t.sections.map((s) => ({ id: s.id, title: labels.raw.sections?.[s.id] ?? s.id, fields: s.fields }))}
             />
           </div>

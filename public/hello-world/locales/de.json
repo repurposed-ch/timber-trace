@@ -420,5 +420,10 @@
     "manure": "Ammoniak- und Mistbelastung",
     "insects": "Insektenbefall",
     "moisture": "Feuchte und Fäulnis"
+  },
+  "groups": {
+    "softwood": "Nadelholz",
+    "hardwood": "Laubholz",
+    "tropical_hardwood": "Tropenholz"
   }
 }

@@ -1,4 +1,5 @@
 import { schemaFromJson, type DenseSchema } from "densing";
+import type { Taxonomy } from "./taxonomy";
 
 export type SchemaMeta = {
   slug: string;
@@ -15,6 +16,8 @@ export type SchemaMeta = {
   editTabs?: { id: string; sections: string[] }[];
   /** renames applied when an older record is lifted into the latest version (see src/schema/upgrade.ts) */
   lift?: LiftRule[];
+  /** derived knowledge (species groups, previous-use hints) from <slug>/taxonomy.json, if there is one */
+  taxonomy?: Taxonomy;
 };
 
 /** from `version` on, the value at `path` lives at `to`, translated by `values` */
@@ -53,6 +56,9 @@ export const fetchText =
 
 export async function loadSchema(slug: string, read: ReadText): Promise<LoadedSchema> {
   const meta = JSON.parse(await read(`${slug}/index.json`)) as SchemaMeta;
+  meta.taxonomy = await read(`${slug}/taxonomy.json`)
+    .then((t) => JSON.parse(t) as Taxonomy)
+    .catch(() => undefined);
   const versions = new Map<number, DenseSchema>();
   const sources = new Map<number, string>();
   for (const v of meta.versions) {
