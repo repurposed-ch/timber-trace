@@ -1,6 +1,7 @@
 import { validate, type DenseField, type DenseSchema } from "densing";
 import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { lotOf, lotProblems } from "../schema/beam";
 import { idToHex } from "../schema/codec";
 import { dayToIso, formatYear, isDayField, isYearField, yearToIso } from "../schema/dates";
 import { defaultFor, isCharText, isComplete, isDayOrYear, isEmptyish, isId128, unionValue, unknownable, variantFields } from "../schema/fields";
@@ -48,10 +49,15 @@ export function RecordForm({ schema, labels, value, onChange, overrides = {}, fi
   const groups = sections ?? [{ id: "", title: "", fields: fields ?? schema.fields.map((f) => f.name) }];
   const shownNames = groups.flatMap((g) => g.fields);
   // only the errors of the fields on this tab; other tabs show a badge instead
-  const errors = useMemo(() => validate(schema, value).errors.filter((e) => shownNames.includes(e.path.split(/[.[]/)[0])), [schema, value, shownNames.join()]);
+  const errors = useMemo(
+    () => [...validate(schema, value).errors, ...lotProblems(value).map((p) => ({ path: p.field, message: t(p.key) }))].filter((e) => shownNames.includes(e.path.split(/[.[]/)[0])),
+    [schema, value, shownNames.join(), t],
+  );
   const field = (name: string) => {
-    const f = schema.fields.find((x) => x.name === name);
+    let f = schema.fields.find((x) => x.name === name);
     if (!f) return null;
+    // a lot states its lengths as a range (quantity); its single length stays unknown and is only shown while it is set
+    if (f.type === "object" && f.name === "dimensions" && lotOf(value) && value.dimensions?.length?.status !== "known") f = { ...f, fields: f.fields.filter((c) => c.name !== "length") };
     return f.name in overrides ? (
       <div key={f.name}>{overrides[f.name]}</div>
     ) : (

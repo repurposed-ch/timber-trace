@@ -4,7 +4,7 @@ import { recordFacts, type DateFormat, type Fact } from "../export/facts";
 import { intlLocale } from "../i18n-langs";
 import { selectForQr, tierOf, type FullEvent } from "../records/history";
 import { provenance } from "../records/revision";
-import { beamName } from "../schema/beam";
+import { beamName, lotOf } from "../schema/beam";
 import { idToHex } from "../schema/codec";
 import { formatDay, formatYear } from "../schema/dates";
 import type { SchemaMeta } from "../schema/loader";
@@ -111,7 +111,10 @@ function Summary({ record, labels, byPath, isUnknown, locale }: { record: any; l
   const strip = (v: string | null) => v?.replace(/\s*mm$/, "") ?? "?";
   const dims = ["dimensions.length", "dimensions.width", "dimensions.height"];
   const tiles: { k: string; v: string; s?: string }[] = [];
-  if (dims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: dims.map((d) => strip(val(d))).join(" × "), s: "mm" });
+  const lot = lotOf(record);
+  if (lot) tiles.push({ k: labels.field("quantity"), v: String(lot.count), s: lot.length ? `${lot.length.min}–${lot.length.max} mm` : undefined });
+  const shownDims = lot ? dims.slice(1) : dims;
+  if (shownDims.some((d) => val(d))) tiles.push({ k: labels.field("dimensions"), v: shownDims.map((d) => strip(val(d))).join(" × "), s: "mm" });
   if (val("grade.class")) tiles.push({ k: labels.field("grade"), v: val("grade.class")!, s: [val("grade.basis"), val("grade.source"), val("grade.standard")].filter(Boolean).join(" · ") });
   const from = val("origin.previousUse.country") ?? val("origin.harvest.country") ?? val("origin.country");
   if (from)

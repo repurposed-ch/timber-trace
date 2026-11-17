@@ -65,7 +65,9 @@
       "number": "Heltal fra {{min}} til {{max}}",
       "date": "Dato som ÅÅÅÅ-MM-DD",
       "dayOrYear": "Et år (1962) eller en dato (1962-05-03)",
-      "chars": "Kun bogstaver og tal, maks. {{max}}"
+      "chars": "Kun bogstaver og tal, maks. {{max}}",
+      "lotLength": "Et parti har ingen enkelt længde: lad Længde stå tom og angiv længdeintervallet under Mængde.",
+      "lotRange": "Den korteste længde er længere end den længste."
     },
     "incomplete": "Ufuldstændig: forbliver ukendt, indtil alt er udfyldt",
     "required": "Påkrævet her",

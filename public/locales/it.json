@@ -65,7 +65,9 @@
       "number": "Numero intero da {{min}} a {{max}}",
       "date": "Data nel formato AAAA-MM-GG",
       "dayOrYear": "Un anno (1962) o una data (1962-05-03)",
-      "chars": "Solo lettere e cifre, max. {{max}}"
+      "chars": "Solo lettere e cifre, max. {{max}}",
+      "lotLength": "Un lotto non ha una lunghezza unica: lasciare vuota la Lunghezza e indicare l'intervallo in Quantità.",
+      "lotRange": "La lunghezza minima supera quella massima."
     },
     "incomplete": "Incompleto: resta sconosciuto finché non è tutto compilato",
     "required": "Obbligatorio qui",

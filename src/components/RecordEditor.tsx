@@ -1,6 +1,7 @@
 import { validate, type DenseSchema } from "densing";
 import { useEffect, useRef, useState } from "react";
 import type { SchemaMeta } from "../schema/loader";
+import { lotProblems } from "../schema/beam";
 import { editTabsFor } from "../schema/sections";
 import type { Labels } from "../state/useSchema";
 import { RecordForm } from "./RecordForm";
@@ -30,7 +31,7 @@ export function RecordEditor({ schema, meta, record, onChange, labels, overrides
   const current = tabs.some((t) => t.id === tab) ? tab : tabs[0].id;
   const panels = useRef<HTMLDivElement>(null);
   const [domProblems, setDomProblems] = useState<Record<string, boolean>>({});
-  const errorFields = new Set(validate(schema, record).errors.map((e) => e.path.split(/[.[]/)[0]));
+  const errorFields = new Set([...validate(schema, record).errors.map((e) => e.path.split(/[.[]/)[0]), ...lotProblems(record).map((p) => p.field)]);
 
   // invalid drafts and incomplete groups live in the DOM of each (possibly hidden) panel; they can
   // change without this component rendering (a draft fixed back to its committed value), so watch

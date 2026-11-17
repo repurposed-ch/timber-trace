@@ -65,7 +65,9 @@
       "number": "Nombre entier de {{min}} à {{max}}",
       "date": "Date au format AAAA-MM-JJ",
       "dayOrYear": "Une année (1962) ou une date (1962-05-03)",
-      "chars": "Lettres et chiffres uniquement, max. {{max}}"
+      "chars": "Lettres et chiffres uniquement, max. {{max}}",
+      "lotLength": "Un lot n'a pas de longueur unique : laisser Longueur vide et indiquer la plage sous Quantité.",
+      "lotRange": "La longueur la plus courte dépasse la plus longue."
     },
     "incomplete": "Incomplet : reste inconnu tant que tout n'est pas rempli",
     "required": "Obligatoire ici",

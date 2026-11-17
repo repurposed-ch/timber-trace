@@ -3,6 +3,7 @@ import QRCode from "qrcode";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { downloadFactSheet, downloadIfc, fileBase, saveFile } from "../export/download";
+import { lotOf } from "../schema/beam";
 import { URL_SAFE, encodeRecord } from "../schema/codec";
 import type { Labels } from "../schema/labels";
 import { shareLink } from "./QrPanel";
@@ -39,9 +40,12 @@ export function ExportButtons({ slug, schema, record, labels }: { slug: string; 
       <button type="button" onClick={pdf} disabled={busy} title={t("qr.pdf")} aria-label={busy ? t("qr.pdfBusy") : t("qr.pdf")}>
         {busy ? "…" : "PDF"}
       </button>
-      <button type="button" onClick={() => downloadIfc(slug, schema, record, labels)} title={t("qr.ifc")} aria-label={t("qr.ifc")}>
-        IFC
-      </button>
+      {/* an IFC file holds one beam; a lot has no single geometry */}
+      {!lotOf(record) && (
+        <button type="button" onClick={() => downloadIfc(slug, schema, record, labels)} title={t("qr.ifc")} aria-label={t("qr.ifc")}>
+          IFC
+        </button>
+      )}
     </div>
   );
 }
